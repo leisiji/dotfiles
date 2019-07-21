@@ -1,4 +1,5 @@
 set number
+set scrolloff=10
 set tags=./.tags;,.tags
 let g:gen_tags#gtags_default_map=1
 
@@ -8,6 +9,8 @@ noremap <C-p> :Leaderf --fuzzy file<CR>
 noremap <F7> :Leaderf --fuzzy tag<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"Remove all trailing whitespace by pressing F5
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 call plug#begin('~/.vim/plugged')
 
@@ -15,7 +18,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/seoul256.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-Plug 'Yggdroot/indentLine'
 Plug 'itchyny/lightline.vim'
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
