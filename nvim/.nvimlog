@@ -1,0 +1,28 @@
+INFO  2019-07-21T07:30:30.067 25523 on_process_exit:395: exited: pid=25525 status=0 stoptime=0
+INFO  2019-07-21T07:30:30.070 25523 channel_create_event:199: new channel 3 (function <SNR>34_on_warmup[7]..<SNR>34_try_rnotify[2]..yarp#core#try_notify[1]..yarp#core#jobstart[2]..yarp#pyx#init[7]..<SNR>37_py3exe[8]..provider#python3#Call[9]..remote#host#Require[10]..provider#pythonx#Require[13]..provider#Poll:3) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2019-07-21T07:30:30.125 25523 channel_create_event:199: new channel 4 (function <SNR>34_on_warmup[7]..<SNR>34_try_rnotify[2]..yarp#core#try_notify[1]..yarp#core#jobstart[2]..yarp#pyx#init[20]..yarp#core#jobstart:16) : {"id": 4, "mode": "bytes", "stream": "job"}
+INFO  2019-07-21T07:30:30.126 25523 main:565: starting main loop
+INFO  2019-07-21T07:30:30.179 25523 channel_create_event:199: new channel 5 (/tmp/nvimaXTIAP/0) : {"id": 5, "client": {}, "mode": "rpc", "stream": "socket"}
+INFO  2019-07-21T07:30:30.196 25523 channel_create_event:199: new channel 6 (function ncm2#_warmup_sources[18]..ncm2_bufword#on_warmup[1]..yarp#core#jobstart[2]..yarp#pyx#init[20]..yarp#core#jobstart:16) : {"id": 6, "mode": "bytes", "stream": "job"}
+INFO  2019-07-21T07:30:30.247 25523 channel_create_event:199: new channel 7 (/tmp/nvimaXTIAP/0) : {"id": 7, "client": {}, "mode": "rpc", "stream": "socket"}
+INFO  2019-07-21T07:32:00.365 25523 os_proc_tree_kill:96: sending SIGTERM to process group: -25526
+INFO  2019-07-21T07:32:00.365 25523 os_proc_tree_kill:96: sending SIGTERM to process group: -25527
+INFO  2019-07-21T07:32:00.365 25523 os_proc_tree_kill:96: sending SIGTERM to process group: -25530
+INFO  2019-07-21T07:32:00.382 25523 on_process_exit:395: exited: pid=25526 status=0 stoptime=1967455599290
+INFO  2019-07-21T07:32:00.383 25523 on_process_exit:395: exited: pid=25527 status=0 stoptime=1967455636603
+INFO  2019-07-21T07:32:00.385 25523 on_process_exit:395: exited: pid=25530 status=0 stoptime=1967455647391
+INFO  2019-07-21T07:32:00.385 25523 mch_exit:99: Nvim exit: 0
+INFO  2019-07-21T07:32:03.158 25569 on_process_exit:395: exited: pid=25571 status=0 stoptime=0
+INFO  2019-07-21T07:32:03.160 25569 channel_create_event:199: new channel 3 (function <SNR>34_on_warmup[7]..<SNR>34_try_rnotify[2]..yarp#core#try_notify[1]..yarp#core#jobstart[2]..yarp#pyx#init[7]..<SNR>37_py3exe[8]..provider#python3#Call[9]..remote#host#Require[10]..provider#pythonx#Require[13]..provider#Poll:3) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2019-07-21T07:32:03.217 25569 channel_create_event:199: new channel 4 (function <SNR>34_on_warmup[7]..<SNR>34_try_rnotify[2]..yarp#core#try_notify[1]..yarp#core#jobstart[2]..yarp#pyx#init[20]..yarp#core#jobstart:16) : {"id": 4, "mode": "bytes", "stream": "job"}
+INFO  2019-07-21T07:32:03.218 25569 main:565: starting main loop
+INFO  2019-07-21T07:32:03.271 25569 channel_create_event:199: new channel 5 (/tmp/nvim66Q4Yn/0) : {"id": 5, "client": {}, "mode": "rpc", "stream": "socket"}
+INFO  2019-07-21T07:32:03.287 25569 channel_create_event:199: new channel 6 (function ncm2#_warmup_sources[18]..ncm2_bufword#on_warmup[1]..yarp#core#jobstart[2]..yarp#pyx#init[20]..yarp#core#jobstart:16) : {"id": 6, "mode": "bytes", "stream": "job"}
+INFO  2019-07-21T07:32:03.336 25569 channel_create_event:199: new channel 7 (/tmp/nvim66Q4Yn/0) : {"id": 7, "client": {}, "mode": "rpc", "stream": "socket"}
+INFO  2019-07-21T07:32:25.614 25569 os_proc_tree_kill:96: sending SIGTERM to process group: -25572
+INFO  2019-07-21T07:32:25.614 25569 os_proc_tree_kill:96: sending SIGTERM to process group: -25573
+INFO  2019-07-21T07:32:25.614 25569 os_proc_tree_kill:96: sending SIGTERM to process group: -25576
+INFO  2019-07-21T07:32:25.633 25569 on_process_exit:395: exited: pid=25572 status=0 stoptime=1992704702978
+INFO  2019-07-21T07:32:25.633 25569 on_process_exit:395: exited: pid=25576 status=0 stoptime=1992704749545
+INFO  2019-07-21T07:32:25.634 25569 on_process_exit:395: exited: pid=25573 status=0 stoptime=1992704738172
+INFO  2019-07-21T07:32:25.634 25569 mch_exit:99: Nvim exit: 0
