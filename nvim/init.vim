@@ -77,7 +77,7 @@ call defx#custom#option('_', {
       \ 'resume': 1
       \ })
 
-nnoremap <F2> :Defx<CR>
+nnoremap <F2> :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
   IndentLinesDisable
