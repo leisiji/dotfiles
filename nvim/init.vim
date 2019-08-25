@@ -78,6 +78,7 @@ call defx#custom#option('_', {
       \ })
 
 nnoremap <F2> :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
+nnoremap <F3> :Defx<CR>
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
   IndentLinesDisable
