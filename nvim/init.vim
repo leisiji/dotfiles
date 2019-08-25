@@ -3,7 +3,6 @@ set scrolloff=10
 set autoread
 set list lcs=tab:\|\ 
 let mapleader=" "
-au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
 noremap <leader>q :q<CR>
 noremap <leader>s :w<CR>
@@ -19,7 +18,7 @@ inoremap <C-l> <Right>
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
 inoremap <C-d> <Delete>
-inoremap jj <Esc>
+inoremap <C-c> <Esc>
 nnoremap H ^
 nnoremap L $
 "Remove all trailing whitespace by pressing F5
@@ -47,6 +46,8 @@ Plug 'Shougo/defx.nvim' , { 'do': ':UpdateRemotePlugins' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mileszs/ack.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'farmergreg/vim-lastplace'
 call plug#end()
 
 autocmd BufEnter * call ncm2#enable_for_buffer()
@@ -110,10 +111,16 @@ nnoremap <Leader>a :Ack! <C-R>=expand("<cword>")<CR><CR>
 noremap <C-r> :Leaderf --fuzzy function<CR>
 noremap <C-p> :Leaderf --fuzzy file<CR>
 noremap <C-f> :Leaderf --fuzzy line<CR>
+
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:UltiSnipsRemoveSelectModeMappings=0
+let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
+let g:UltiSnipsRemoveSelectModeMappings = 0
+
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
 
