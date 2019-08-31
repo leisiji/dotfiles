@@ -40,7 +40,7 @@ Plug 'honza/vim-snippets'
 Plug 'jsfaint/gen_tags.vim'
 Plug 'lfv89/vim-interestingwords'
 Plug 'Yggdroot/indentLine'
-Plug 'Lokaltog/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 "Plug 'liuchengxu/vista.vim'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'Shougo/defx.nvim' , { 'do': ':UpdateRemotePlugins' }
