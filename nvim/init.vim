@@ -1,7 +1,7 @@
 set number
 set scrolloff=10
 set autoread
-set list lcs=tab:\|\ 
+set list lcs=tab:→\ ,trail:·,extends:↷,precedes:↶
 let mapleader=" "
 
 noremap <leader>q :q<CR>
