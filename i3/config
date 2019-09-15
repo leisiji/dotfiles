@@ -16,7 +16,6 @@ set $mod Mod4
 font pango:monospace 10
 
 exec_always --no-startup-id killall redshift && redshift
-exec_always xrandr --output HDMI-2 --auto --primary --output eDP-1 --off
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -126,7 +125,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # start applicatoin
-bindsym $mod+F2 exec google-chrome
+bindsym $mod+F2 exec google-chrome-stable
 bindsym	$mod+F3 exec pcmanfm
 
 
@@ -195,3 +194,4 @@ bar {
         urgent_workspace #2f343a #900000 #ffffff
     }
 }
+exec_always --no-startup-id xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'

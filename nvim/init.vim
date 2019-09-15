@@ -57,6 +57,7 @@ set completeopt=noinsert,menuone,noselect
 set background=dark
 color seoul256
 
+let g:cpp_member_variable_highlight = 1
 let g:gen_tags#gtags_default_map=1
 let g:indentLine_leadingSpaceEnabled=1
 let g:indentLine_leadingSpaceChar='·'
@@ -107,11 +108,11 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> R defx#do_action('redraw')
 endfunction
 
-cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack! <C-R>=expand("<cword>")<CR><CR>
 noremap <C-r> :Leaderf --fuzzy function<CR>
 noremap <C-p> :Leaderf --fuzzy file<CR>
-noremap <C-f> :Leaderf --fuzzy line<CR>
+"noremap <C-f> :Leaderf --fuzzy line<CR>
+noremap <C-f> :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -e %s ", expand("<cword>"))<CR>
+noremap <leader>a :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
