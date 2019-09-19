@@ -15,8 +15,6 @@ set $mod Mod4
 # is used in the bar {} block below.
 font pango:monospace 10
 
-exec_always --no-startup-id killall redshift && redshift
-
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
@@ -140,7 +138,7 @@ bindsym XF86MonBrightnessDown exec light -U 5
 
 set $mode_system System (l) lock, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3lock, mode "default"
+    bindsym l exec --no-startup-id i3lock && systemctl suspend, mode "default"
     bindsym r exec reboot, mode "default"
     bindsym Shift+s exec shutdown -h now, mode "default"
 
