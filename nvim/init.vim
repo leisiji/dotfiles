@@ -22,12 +22,13 @@ inoremap <C-c> <Esc>
 nnoremap H ^
 nnoremap L $
 nnoremap <C-m> %
+nnoremap <C-Y> <C-r>
 "Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/seoul256.vim'
-Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'itchyny/lightline.vim'
 Plug 'ncm2/ncm2'
@@ -41,14 +42,14 @@ Plug 'jsfaint/gen_tags.vim'
 Plug 'lfv89/vim-interestingwords'
 Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
-"Plug 'liuchengxu/vista.vim'
-Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'liuchengxu/vista.vim'
 Plug 'Shougo/defx.nvim' , { 'do': ':UpdateRemotePlugins' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
-Plug 'mileszs/ack.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'farmergreg/vim-lastplace'
+Plug 'mg979/vim-visual-multi'
+Plug 'lilydjwg/fcitx.vim'
 call plug#end()
 
 autocmd BufEnter * call ncm2#enable_for_buffer()
@@ -68,7 +69,21 @@ let g:Lf_WildIgnore = {
 let g:lightline = {
       \ 'colorscheme': 'seoul256',
       \ }
-let g:ackprg = 'ag --vimgrep'
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+set statusline+=%{NearestMethodOrFunction()}
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+let g:lightline = {
+      \ 'colorscheme': 'seoul256',
+      \ 'active': {
+      \   'right': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'modified', 'method' ] ]
+      \ },
+      \ 'component_function': {
+      \   'method': 'NearestMethodOrFunction'
+      \ },
+      \ }
 
 call defx#custom#option('_', {
       \ 'winwidth': 30,
@@ -110,8 +125,9 @@ endfunction
 
 noremap <C-r> :Leaderf --fuzzy function<CR>
 noremap <C-p> :Leaderf --fuzzy file<CR>
-"noremap <C-f> :Leaderf --fuzzy line<CR>
-noremap <C-f> :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -e %s ", expand("<cword>"))<CR>
+noremap <C-f> :Leaderf --fuzzy line<CR>
+noremap <leader>b :Leaderf --fuzzy buffer<CR>
+noremap <leader>f :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -e %s ", expand("<cword>"))<CR><CR>
 noremap <leader>a :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -120,9 +136,4 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
 let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
 let g:UltiSnipsRemoveSelectModeMappings = 0
-
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
 
