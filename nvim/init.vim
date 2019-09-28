@@ -1,7 +1,11 @@
 set number
 set scrolloff=10
 set autoread
+set autowrite
 set list lcs=tab:→\ ,trail:·,extends:↷,precedes:↶
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 let mapleader=" "
 
 noremap <leader>q :q<CR>
@@ -23,13 +27,14 @@ nnoremap H ^
 nnoremap L $
 nnoremap <C-m> %
 nnoremap <C-Y> <C-r>
+vnoremap Y :w !xclip -i -sel c<CR>
 "Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/seoul256.vim'
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh', 'on' : 'Leaderf'}
 Plug 'itchyny/lightline.vim'
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
@@ -38,7 +43,12 @@ Plug 'ncm2/ncm2-gtags'
 Plug 'ncm2/ncm2-ultisnips'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'jsfaint/gen_tags.vim'
+"Plug 'jsfaint/gen_tags.vim'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
+Plug 'skywind3000/vim-preview'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc-sources'
 Plug 'lfv89/vim-interestingwords'
 Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
@@ -52,39 +62,66 @@ Plug 'mg979/vim-visual-multi'
 Plug 'lilydjwg/fcitx.vim'
 call plug#end()
 
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
-
 set background=dark
 color seoul256
 
-let g:cpp_member_variable_highlight = 1
-let g:gen_tags#gtags_default_map=1
 let g:indentLine_leadingSpaceEnabled=1
 let g:indentLine_leadingSpaceChar='·'
-let g:Lf_WildIgnore = {
-	\ 'dir': ['.svn','.git','.hg'],
-	\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
-	\}
-let g:lightline = {
-      \ 'colorscheme': 'seoul256',
-      \ }
+
+let g:cpp_member_variable_highlight = 1
+
+" gen_tags.vim
+"let g:gen_tags#gtags_default_map=1
+
+"vista.vim
+map <F4> :Vista<CR>
 function! NearestMethodOrFunction() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
+	return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
 set statusline+=%{NearestMethodOrFunction()}
 autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 let g:lightline = {
-      \ 'colorscheme': 'seoul256',
-      \ 'active': {
-      \   'right': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'modified', 'method' ] ]
-      \ },
-      \ 'component_function': {
-      \   'method': 'NearestMethodOrFunction'
-      \ },
-      \ }
+	\ 'colorscheme': 'seoul256',
+	\ 'active': {
+	\   'left': [ [ 'mode', 'paste' ],
+	\             [ 'readonly', 'filename', 'modified', 'method' ] ]
+	\ },
+	\ 'component_function': {
+	\   'method': 'NearestMethodOrFunction'
+	\ },
+	\ }
 
+"gutentags
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
+let g:gutentags_ctags_tagfile = '.tags'
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+
+" gutentags plus
+let g:gutentags_plus_auto_close_list = 1
+let g:gutentags_plus_switch = 1
+let g:gutentags_plus_nomap = 1
+noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
+noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
+noremap <silent> <leader>gc :GscopeFind c <C-R><C-W><cr>
+noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
+noremap <silent> <leader>ge :GscopeFind e <C-R><C-W><cr>
+noremap <silent> <leader>gf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
+noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
+
+" vim-preview
+autocmd FileType qf nnoremap p :PreviewQuickfix<cr>
+autocmd FileType qf nnoremap P :PreviewClose<cr>
+
+" defx
+nnoremap tt :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
+nnoremap <leader>t :Defx<CR>
 call defx#custom#option('_', {
       \ 'winwidth': 30,
       \ 'split': 'vertical',
@@ -94,9 +131,6 @@ call defx#custom#option('_', {
       \ 'toggle': 1,
       \ 'resume': 1
       \ })
-
-nnoremap <F2> :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
-nnoremap <F3> :Defx<CR>
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
   IndentLinesDisable
@@ -123,16 +157,35 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> R defx#do_action('redraw')
 endfunction
 
+"leaderf
 noremap <C-r> :Leaderf --fuzzy function<CR>
 noremap <C-p> :Leaderf --fuzzy file<CR>
 noremap <C-f> :Leaderf --fuzzy line<CR>
-noremap <leader>b :Leaderf --fuzzy buffer<CR>
+noremap <leader>b :Leaderf! --fuzzy buffer<CR>
 noremap <leader>f :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -e %s ", expand("<cword>"))<CR><CR>
 noremap <leader>a :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+let g:Lf_WildIgnore = {
+	\ 'dir': ['.svn','.git','.hg'],
+	\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+	\}
 
+"coc.vim
+"inoremap <silent><expr> <TAB>
+      "\ pumvisible() ? "\<C-n>" :
+      "\ <SID>check_back_space() ? "\<TAB>" :
+      "\ coc#refresh()
+"function! s:check_back_space() abort
+  "let col = col('.') - 1
+  "return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
+
+" ncm2
+set shortmess+=c
+set completeopt=noinsert,menuone,noselect
+let g:ncm2#complete_length=[[1,2],[7,2]]
+autocmd BufEnter * call ncm2#enable_for_buffer()
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
 inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
 let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
 let g:UltiSnipsRemoveSelectModeMappings = 0
