@@ -27,6 +27,14 @@ format_swap = "{SUp}%"
 [[block]]
 block = "cpu"
 interval = 1
+format = "{utilization}% {frequency}GHz"
+
+[[block]]
+block = "temperature"
+collapsed = false
+interval = 10
+format = "{max}° max"
+chip = "*-isa-*"
 
 [[block]]
 block = "battery"

@@ -27,7 +27,6 @@ nnoremap H ^
 nnoremap L $
 nnoremap <C-m> %
 nnoremap <C-Y> <C-r>
-vnoremap Y :w !xclip -i -sel c<CR>
 "Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
@@ -74,6 +73,7 @@ let g:cpp_member_variable_highlight = 1
 "let g:gen_tags#gtags_default_map=1
 
 "vista.vim
+let g:vista_close_on_jump=1
 map <F4> :Vista<CR>
 function! NearestMethodOrFunction() abort
 	return get(b:, 'vista_nearest_method_or_function', '')
