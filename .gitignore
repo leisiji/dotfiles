@@ -3,5 +3,6 @@
 !/alacritty
 !/i3
 !/i3status-rs
-!redshift.conf
+!/redshift
 !/tmux
+!/zathura

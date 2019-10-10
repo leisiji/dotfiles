@@ -15,6 +15,10 @@ set $mod Mod4
 # is used in the bar {} block below.
 font pango:monospace 10
 
+# windows         Border    Background    Text     Indicator
+client.focused    #1793d1   #1793d1       #ffffff
+client.unfocused  #2f343f   #2f343f       #ffffff
+
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
@@ -43,10 +47,10 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -67,7 +71,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+Shift+h split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -91,6 +95,8 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
+
+bindsym $mod+Tab workspace next
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -174,7 +180,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-new_window 1pixel
+default_border 1pixel
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
