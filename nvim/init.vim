@@ -122,10 +122,13 @@ noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
 " vim-preview
 autocmd FileType qf nnoremap p :PreviewQuickfix<cr>
 autocmd FileType qf nnoremap P :PreviewClose<cr>
+nnoremap <leader>p :PreviewTag<cr>
+nnoremap <m-u> :PreviewScroll -1<cr>
+nnoremap <m-d> :PreviewScroll +1<cr>
 
 " defx
-nnoremap tt :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
-nnoremap <leader>t :Defx<CR>
+nnoremap <leader>tr :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
+nnoremap <leader>tt :Defx<CR>
 call defx#custom#option('_', {
 	\ 'winwidth': 30,
 	\ 'split': 'vertical',
