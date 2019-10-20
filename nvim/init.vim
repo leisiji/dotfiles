@@ -1,3 +1,6 @@
+set hidden
+set nobackup
+set nowritebackup
 set number
 set scrolloff=10
 set autoread
@@ -25,6 +28,8 @@ inoremap <C-d> <Delete>
 inoremap <C-c> <Esc>
 nnoremap H ^
 nnoremap L $
+vnoremap H ^
+vnoremap L $
 nnoremap <C-j> 5j
 nnoremap <C-k> 5k
 vnoremap <C-j> 5j
@@ -39,25 +44,29 @@ Plug 'junegunn/seoul256.vim'
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh', 'on' : 'Leaderf'}
 Plug 'itchyny/lightline.vim'
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-gtags'
-Plug 'ncm2/ncm2-ultisnips'
-Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+
+"Plug 'ncm2/ncm2'
+"Plug 'roxma/nvim-yarp'
+"Plug 'ncm2/ncm2-bufword'
+"Plug 'ncm2/ncm2-gtags'
+"Plug 'ncm2/ncm2-ultisnips'
+"Plug 'SirVer/ultisnips'
 "Plug 'jsfaint/gen_tags.vim'
+
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
 Plug 'skywind3000/vim-preview'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'neoclide/coc-sources'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-sources'
+
 Plug 'lfv89/vim-interestingwords'
 Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
 Plug 'liuchengxu/vista.vim'
 Plug 'Shougo/defx.nvim' , { 'do': ':UpdateRemotePlugins' }
-Plug 'jiangmiao/auto-pairs'
+"Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'farmergreg/vim-lastplace'
@@ -177,23 +186,36 @@ let g:Lf_WildIgnore = {
 	\}
 
 "coc.vim
-"inoremap <silent><expr> <TAB>
-      "\ pumvisible() ? "\<C-n>" :
-      "\ <SID>check_back_space() ? "\<TAB>" :
-      "\ coc#refresh()
-"function! s:check_back_space() abort
-  "let col = col('.') - 1
-  "return !col || getline('.')[col - 1]  =~# '\s'
-"endfunction
+set shortmess+=c
+set signcolumn=yes
+autocmd CursorHold * silent call CocActionAsync('highlight')
+let g:coc_global_extensions=['coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank']
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"let g:coc_snippet_next = '<tab>'
+nmap <leader>rn <Plug>(coc-rename)
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+
+highlight Pmenu       ctermfg=245 ctermbg=235
+highlight PmenuSel    ctermfg=236 ctermbg=248
+highlight PmenuSbar   ctermbg=235
+highlight PmenuThumb  ctermbg=238
 
 " ncm2
-set shortmess+=c
-set completeopt=noinsert,menuone,noselect
-let g:ncm2#complete_length=[[1,2],[7,2]]
-autocmd BufEnter * call ncm2#enable_for_buffer()
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
-let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
-let g:UltiSnipsRemoveSelectModeMappings = 0
+"set shortmess+=c
+"set completeopt=noinsert,menuone,noselect
+"let g:ncm2#complete_length=[[1,2],[7,2]]
+"autocmd BufEnter * call ncm2#enable_for_buffer()
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+"let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
+"let g:UltiSnipsRemoveSelectModeMappings = 0
 
