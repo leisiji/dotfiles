@@ -53,10 +53,10 @@ Plug 'honza/vim-snippets'
 "Plug 'ncm2/ncm2-ultisnips'
 "Plug 'SirVer/ultisnips'
 "Plug 'jsfaint/gen_tags.vim'
+"Plug 'jiangmiao/auto-pairs'
 
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'skywind3000/gutentags_plus'
-Plug 'skywind3000/vim-preview'
+Plug 'skywind3000/gutentags_plus', {'on' : 'GscopeFind'} | Plug 'skywind3000/vim-preview', {'on' : ['PreviewQuickfix', 'PreviewTag']}
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc-sources'
@@ -64,14 +64,14 @@ Plug 'neoclide/coc-sources'
 Plug 'lfv89/vim-interestingwords'
 Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
-Plug 'liuchengxu/vista.vim'
-Plug 'Shougo/defx.nvim' , { 'do': ':UpdateRemotePlugins' }
-"Plug 'jiangmiao/auto-pairs'
+Plug 'liuchengxu/vista.vim', {'on' : 'Vista'}
+Plug 'Shougo/defx.nvim' , { 'do': ':UpdateRemotePlugins'}
 Plug 'scrooloose/nerdcommenter'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'farmergreg/vim-lastplace'
 Plug 'mg979/vim-visual-multi'
 Plug 'lilydjwg/fcitx.vim'
+Plug 'tpope/vim-surround'
+Plug 'plasticboy/vim-markdown', {'for' : ['md']}
 call plug#end()
 
 set background=dark
@@ -88,21 +88,6 @@ let g:cpp_member_variable_highlight = 1
 "vista.vim
 let g:vista_close_on_jump=1
 map <F4> :Vista<CR>
-function! NearestMethodOrFunction() abort
-	return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
-set statusline+=%{NearestMethodOrFunction()}
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-let g:lightline = {
-	\ 'colorscheme': 'seoul256',
-	\ 'active': {
-	\   'left': [ [ 'mode', 'paste' ],
-	\             [ 'readonly', 'filename', 'modified', 'method' ] ]
-	\ },
-	\ 'component_function': {
-	\   'method': 'NearestMethodOrFunction'
-	\ },
-	\ }
 
 "gutentags
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
@@ -147,12 +132,27 @@ call defx#custom#option('_', {
 	\ 'toggle': 1,
 	\ 'resume': 1
 	\ })
-autocmd FileType defx call s:defx_my_settings()
-function! s:defx_my_settings() abort
-	IndentLinesDisable
-	setl nospell
-	setl signcolumn=no
-	setl nonumber
+augroup user_plugin_defx
+	autocmd!
+	autocmd TabLeave * if &filetype == 'defx' | wincmd w | endif
+	autocmd TabClosed * call s:defx_close_tab(expand('<afile>'))
+	autocmd FileType defx call s:defx_mappings()
+augroup END
+function! s:defx_close_tab(tabnr)
+	" When a tab is closed, find and delete any associated defx buffers
+	for l:nr in range(1, bufnr('$'))
+		let l:defx = getbufvar(l:nr, 'defx')
+		if empty(l:defx)
+			continue
+		endif
+		let l:context = get(l:defx, 'context', {})
+		if get(l:context, 'buffer_name', '') ==# 'tab' . a:tabnr
+			silent! execute 'bdelete '.l:nr
+			break
+		endif
+	endfor
+endfunction
+function! s:defx_mappings() abort
 	nnoremap <silent><buffer><expr> <CR>
 	\ defx#is_directory() ?
 	\ defx#do_action('open_or_close_tree') :
@@ -199,8 +199,11 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-"let g:coc_snippet_next = '<tab>'
+let g:coc_snippet_next = '<C-n>'
 nmap <leader>rn <Plug>(coc-rename)
+nmap <M-j> <Plug>(coc-definition)
+nmap <M-r> <Plug>(coc-reference)
+nn <silent> <M-k> :call CocActionAsync('doHover')<cr>
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 
 highlight Pmenu       ctermfg=245 ctermbg=235
@@ -218,4 +221,9 @@ highlight PmenuThumb  ctermbg=238
 "inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
 "let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
 "let g:UltiSnipsRemoveSelectModeMappings = 0
+
+" vim-markdown
+let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
 
