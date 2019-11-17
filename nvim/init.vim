@@ -195,6 +195,7 @@ let g:Lf_WildIgnore = {
 	\}
 let g:Lf_PreviewInPopup = 1
 let g:Lf_PreviewHorizontalPosition = 'center'
+let g:Lf_PreviewPopupWidth=70
 "leaderf tags
 let g:Lf_GtagsAutoGenerate = 1
 let g:Lf_Gtagslabel = 'pygments'
