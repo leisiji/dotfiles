@@ -18,6 +18,8 @@ nnoremap <M-2> 2gt
 nnoremap <M-3> 3gt
 nnoremap <M-4> 4gt
 nnoremap <M-5> 5gt
+noremap <C-L> <Esc>:tabnext<CR>
+noremap <C-H> <Esc>:tabprevious<CR>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-h> <Left>
@@ -185,7 +187,7 @@ noremap <C-p> :Leaderf --fuzzy file<CR>
 noremap <C-f> :Leaderf --fuzzy line<CR>
 noremap <leader>b :Leaderf! --fuzzy buffer<CR>
 noremap <leader>m :Leaderf! --fuzzy mru<CR>
-noremap <leader>f :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -e %s ", expand("<cword>"))<CR><CR>
+noremap <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -e %s ", expand("<cword>"))<CR><CR>
 noremap <leader>a :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 let g:Lf_WildIgnore = {
 	\ 'dir': ['.svn','.git','.hg'],
