@@ -25,7 +25,6 @@ inoremap <C-l> <Right>
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
 inoremap <C-d> <Delete>
-inoremap <C-c> <Esc>
 nnoremap H ^
 nnoremap L $
 vnoremap H ^
@@ -42,7 +41,7 @@ nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/seoul256.vim'
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh', 'on' : 'Leaderf'}
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh'}
 Plug 'itchyny/lightline.vim'
 Plug 'honza/vim-snippets'
 
@@ -52,12 +51,12 @@ Plug 'honza/vim-snippets'
 "Plug 'ncm2/ncm2-gtags'
 "Plug 'ncm2/ncm2-ultisnips'
 "Plug 'SirVer/ultisnips'
-"Plug 'jsfaint/gen_tags.vim'
 "Plug 'jiangmiao/auto-pairs'
 
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'skywind3000/gutentags_plus', {'on' : 'GscopeFind'} | Plug 'skywind3000/vim-preview', {'on' : ['PreviewQuickfix', 'PreviewTag']}
+"Plug 'ludovicchabant/vim-gutentags'
+"Plug 'skywind3000/gutentags_plus', {'on' : 'GscopeFind'} | Plug 'skywind3000/vim-preview', {'on' : ['PreviewQuickfix', 'PreviewTag']}
 
+Plug 'jsfaint/gen_tags.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc-sources'
 
@@ -77,10 +76,17 @@ call plug#end()
 set background=dark
 color seoul256
 
+highlight Pmenu       ctermfg=245 ctermbg=235
+highlight PmenuSel    ctermfg=236 ctermbg=248
+highlight PmenuSbar   ctermbg=235
+highlight PmenuThumb  ctermbg=238
+
 let g:indentLine_leadingSpaceEnabled=1
 let g:indentLine_leadingSpaceChar='·'
 
+" cpp-reference
 let g:cpp_member_variable_highlight = 1
+let g:cpp_posix_standard = 1
 
 " gen_tags.vim
 "let g:gen_tags#gtags_default_map=1
@@ -90,35 +96,35 @@ let g:vista_close_on_jump=1
 map <F4> :Vista<CR>
 
 "gutentags
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
-let g:gutentags_ctags_tagfile = '.tags'
-let g:gutentags_cache_dir = expand('~/.cache/tags')
-let g:gutentags_modules = ['ctags', 'gtags_cscope']
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+"let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
+"let g:gutentags_ctags_tagfile = '.tags'
+"let g:gutentags_cache_dir = expand('~/.cache/tags')
+"let g:gutentags_modules = ['ctags', 'gtags_cscope']
+"let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+"let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+"let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+"let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
 " gutentags plus
-let g:gutentags_plus_auto_close_list = 1
-let g:gutentags_plus_switch = 1
-let g:gutentags_plus_nomap = 1
-noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
-noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
-noremap <silent> <leader>gc :GscopeFind c <C-R><C-W><cr>
-noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
-noremap <silent> <leader>ge :GscopeFind e <C-R><C-W><cr>
-noremap <silent> <leader>gf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
-noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
-noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
-noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
+"let g:gutentags_plus_auto_close_list = 1
+"let g:gutentags_plus_switch = 1
+"let g:gutentags_plus_nomap = 1
+"noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
+"noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
+"noremap <silent> <leader>gc :GscopeFind c <C-R><C-W><cr>
+"noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
+"noremap <silent> <leader>ge :GscopeFind e <C-R><C-W><cr>
+"noremap <silent> <leader>gf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+"noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+"noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
+"noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
 
 " vim-preview
-autocmd FileType qf nnoremap p :PreviewQuickfix<cr>
-autocmd FileType qf nnoremap P :PreviewClose<cr>
-nnoremap <leader>p :PreviewTag<cr>
-nnoremap <m-u> :PreviewScroll -1<cr>
-nnoremap <m-d> :PreviewScroll +1<cr>
+"autocmd FileType qf nnoremap p :PreviewQuickfix<cr>
+"autocmd FileType qf nnoremap P :PreviewClose<cr>
+"nnoremap <leader>p :PreviewTag<cr>
+"nnoremap <m-u> :PreviewScroll -1<cr>
+"nnoremap <m-d> :PreviewScroll +1<cr>
 
 " defx
 nnoremap <leader>tr :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
@@ -178,12 +184,23 @@ noremap <C-r> :Leaderf --fuzzy function<CR>
 noremap <C-p> :Leaderf --fuzzy file<CR>
 noremap <C-f> :Leaderf --fuzzy line<CR>
 noremap <leader>b :Leaderf! --fuzzy buffer<CR>
+noremap <leader>m :Leaderf! --fuzzy mru<CR>
 noremap <leader>f :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -e %s ", expand("<cword>"))<CR><CR>
 noremap <leader>a :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 let g:Lf_WildIgnore = {
 	\ 'dir': ['.svn','.git','.hg'],
 	\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
 	\}
+let g:Lf_PreviewInPopup = 1
+let g:Lf_PreviewHorizontalPosition = 'center'
+"leaderf tags
+let g:Lf_GtagsAutoGenerate = 1
+let g:Lf_Gtagslabel = 'pygments'
+noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
+noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
 
 "coc.vim
 set shortmess+=c
@@ -200,16 +217,12 @@ function! s:check_back_space() abort
 endfunction
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 let g:coc_snippet_next = '<C-n>'
+
 nmap <leader>rn <Plug>(coc-rename)
 nmap <M-j> <Plug>(coc-definition)
 nmap <M-r> <Plug>(coc-reference)
 nn <silent> <M-k> :call CocActionAsync('doHover')<cr>
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
-
-highlight Pmenu       ctermfg=245 ctermbg=235
-highlight PmenuSel    ctermfg=236 ctermbg=248
-highlight PmenuSbar   ctermbg=235
-highlight PmenuThumb  ctermbg=238
 
 " ncm2
 "set shortmess+=c
