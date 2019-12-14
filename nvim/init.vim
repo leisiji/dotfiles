@@ -9,6 +9,7 @@ set list lcs=tab:→\ ,trail:·,extends:↷,precedes:↶
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+set t_Co=256
 "set showtabline=2
 let mapleader=" "
 
@@ -42,7 +43,7 @@ nnoremap <M-w> 5w
 nnoremap <C-Y> <C-r>
 "Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-tnoremap <Esc> <C-\><C-n>
+"tnoremap <Esc> <C-\><C-n>
 nnoremap <C-t> :tabnew<CR>
 
 call plug#begin('~/.vim/plugged')
@@ -57,12 +58,13 @@ call plug#begin('~/.vim/plugged')
 "Plug 'ludovicchabant/vim-gutentags'
 "Plug 'skywind3000/gutentags_plus', {'on' : 'GscopeFind'} | Plug 'skywind3000/vim-preview', {'on' : ['PreviewQuickfix', 'PreviewTag']}
 "Plug 'Shougo/defx.nvim' , { 'do': ':UpdateRemotePlugins'}
+"Plug 'junegunn/seoul256.vim'
 
 if executable('fcitx')
 	Plug 'lilydjwg/fcitx.vim', { 'on': [] } | au InsertEnter * call plug#load('fcitx.vim')
 endif
 
-Plug 'junegunn/seoul256.vim'
+Plug 'srcery-colors/srcery-vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh', 'on' : 'Leaderf'}
 Plug 'itchyny/lightline.vim'
 Plug 'honza/vim-snippets'
@@ -80,7 +82,7 @@ Plug 'mg979/vim-visual-multi'
 Plug 'tpope/vim-surround'
 Plug 'plasticboy/vim-markdown', {'for' : ['md']}
 Plug 'sbdchd/neoformat', {'on' : 'Neoformat'}
-Plug 'voldikss/vim-floaterm', {'on' : 'FloatermNew'}
+Plug 'voldikss/vim-floaterm', {'on' : 'FloatermToggle'}
 Plug 'easymotion/vim-easymotion'
 "Plug 'justinmk/vim-sneak'
 
@@ -158,14 +160,16 @@ call plug#end()
 	"nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select')
 	"nnoremap <silent><buffer><expr> R defx#do_action('redraw')
 "endfunction
+" gen_tags.vim
+"let g:gen_tags#gtags_default_map=1
+"let g:seoul256_background = 236
+"highlight Pmenu       ctermfg=245 ctermbg=235
+"highlight PmenuSel    ctermfg=236 ctermbg=248
+"highlight PmenuSbar   ctermbg=235
+"highlight PmenuThumb  ctermbg=238
 
-let g:seoul256_background = 236
-color seoul256
-
-highlight Pmenu       ctermfg=245 ctermbg=235
-highlight PmenuSel    ctermfg=236 ctermbg=248
-highlight PmenuSbar   ctermbg=235
-highlight PmenuThumb  ctermbg=238
+let g:srcery_italic = 1
+colorscheme srcery
 
 let g:indentLine_leadingSpaceEnabled=1
 let g:indentLine_leadingSpaceChar='·'
@@ -173,9 +177,6 @@ let g:indentLine_leadingSpaceChar='·'
 " cpp-reference
 let g:cpp_member_variable_highlight = 1
 let g:cpp_posix_standard = 1
-
-" gen_tags.vim
-"let g:gen_tags#gtags_default_map=1
 
 "vista.vim
 let g:vista_close_on_jump=1
@@ -231,7 +232,7 @@ set shortmess+=c
 set signcolumn=yes
 let g:coc_global_extensions=[
 	\ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver', 'coc-explorer',
-	\ 'coc-python'
+	\ 'coc-python', 'coc-emmet', 'coc-vimlsp'
 	\ ]
 
 inoremap <silent><expr> <TAB>
@@ -266,9 +267,14 @@ endfunction
 nnoremap <leader>tr :call ToggleCocExplorer()<CR>
 
 " floaterm
-nnoremap <leader>tt :FloatermNew<CR>
+nnoremap <leader>tt :FloatermToggle<CR>
+let g:floaterm_type='floating'
 let g:floaterm_position='center'
 let g:floaterm_background='#000000'
+function! s:floatermSettings()
+	setlocal number
+	tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
+endfunction
 
 augroup user_plugin
 	autocmd!
@@ -279,8 +285,9 @@ augroup user_plugin
 
 	" coc-explorer
 	autocmd FileType coc-explorer setlocal signcolumn=no
-	autocmd BufEnter * if (winnr("$") == 1 && &filetype ==# 'coc-explorer') | q | endif
-	autocmd FileType terminal nnoremap q :FloatermToggle<CR>
+
+	" floaterm
+	autocmd FileType terminal call s:floatermSettings()
 augroup END
 
 
