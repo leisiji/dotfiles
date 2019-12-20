@@ -87,7 +87,7 @@ Plug 'voldikss/vim-floaterm', {'on' : 'FloatermToggle'}
 Plug 'easymotion/vim-easymotion'
 "Plug 'justinmk/vim-sneak'
 
-Plug 'luochen1990/rainbow'
+"Plug 'luochen1990/rainbow'
 Plug 'neoclide/vim-jsx-improve', {'for' : ['js', 'html']}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
 call plug#end()
@@ -259,7 +259,7 @@ let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
 
-let g:rainbow_active = 1
+"let g:rainbow_active = 1
 
 " coc-explorer
 function ToggleCocExplorer()
