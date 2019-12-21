@@ -39,8 +39,11 @@ nnoremap <C-k> 5k
 vnoremap <C-j> 5j
 vnoremap <C-k> 5k
 nnoremap <M-e> 5e
-nnoremap <M-b> 5b
+nnoremap <C-b> 5b
 nnoremap <M-w> 5w
+vnoremap <M-e> 5e
+vnoremap <C-b> 5b
+vnoremap <M-w> 5w
 nnoremap <C-Y> <C-r>
 "Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
@@ -291,4 +294,6 @@ augroup user_plugin
 	autocmd FileType terminal call s:floatermSettings()
 augroup END
 
+" repo setting, different repo jumping
+"let g:Lf_RootMarkers=['.root']
 
