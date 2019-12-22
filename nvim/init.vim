@@ -13,6 +13,12 @@ set t_Co=256
 set termguicolors
 "set showtabline=2
 let mapleader=" "
+set undofile
+set undodir=$HOME/.cache/vim/undo
+syntax enable
+set smartindent
+set ignorecase
+set smartcase
 
 noremap <leader>q :q<CR>
 noremap <leader>s :w<CR>
@@ -39,16 +45,19 @@ nnoremap <C-k> 5k
 vnoremap <C-j> 5j
 vnoremap <C-k> 5k
 nnoremap <M-e> 5e
-nnoremap <C-b> 5b
+nnoremap <M-b> 5b
 nnoremap <M-w> 5w
 vnoremap <M-e> 5e
-vnoremap <C-b> 5b
+vnoremap <M-b> 5b
 vnoremap <M-w> 5w
 nnoremap <C-Y> <C-r>
 "Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 "tnoremap <Esc> <C-\><C-n>
 nnoremap <C-t> :tabnew<CR>
+inoremap <m-h> <c-left>
+inoremap <m-l> <c-right>
+noremap <m-y> d$
 
 call plug#begin('~/.vim/plugged')
 "Plug 'ncm2/ncm2'
@@ -87,12 +96,14 @@ Plug 'tpope/vim-surround'
 Plug 'plasticboy/vim-markdown', {'for' : ['md']}
 Plug 'sbdchd/neoformat', {'on' : 'Neoformat'}
 Plug 'voldikss/vim-floaterm', {'on' : 'FloatermToggle'}
+Plug 'AndrewRadev/inline_edit.vim', {'on' : 'InlineEdit' }
 Plug 'easymotion/vim-easymotion'
 "Plug 'justinmk/vim-sneak'
 
 "Plug 'luochen1990/rainbow'
 Plug 'neoclide/vim-jsx-improve', {'for' : ['js', 'html']}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
+"Plug 'mhinz/vim-startify'
 call plug#end()
 
 "gutentags
@@ -136,33 +147,33 @@ call plug#end()
 " defx
 "nnoremap <silent> <leader>tr :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
 "call defx#custom#option('_', {
-	"\ 'winwidth': 30,
-	"\ 'split': 'vertical',
-	"\ 'direction': 'topleft',
-	"\ 'show_ignored_files': 0,
-	"\ 'buffer_name': '',
-	"\ 'toggle': 1,
-	"\ 'resume': 1
-	"\ })
+			"\ 'winwidth': 30,
+			"\ 'split': 'vertical',
+			"\ 'direction': 'topleft',
+			"\ 'show_ignored_files': 0,
+			"\ 'buffer_name': '',
+			"\ 'toggle': 1,
+			"\ 'resume': 1
+			"\ })
 "function! s:defx_mappings() abort
-	"nnoremap <silent><buffer><expr> <CR>
-	"\ defx#is_directory() ?
-	"\ defx#do_action('open_or_close_tree') :
-	"\ defx#do_action('drop',)
-	"nnoremap <silent><buffer><expr> s defx#do_action('drop', 'split')
-	"nnoremap <silent><buffer><expr> v defx#do_action('drop', 'vsplit')
-	"nnoremap <silent><buffer><expr> t defx#do_action('drop', 'tabe')
-	"nnoremap <silent><buffer><expr> o defx#do_action('open_tree')
-	"nnoremap <silent><buffer><expr> O defx#do_action('open_tree_recursive')
-	"nnoremap <silent><buffer><expr> C defx#do_action('copy')
-	"nnoremap <silent><buffer><expr> P defx#do_action('paste')
-	"nnoremap <silent><buffer><expr> M defx#do_action('rename')
-	"nnoremap <silent><buffer><expr> D defx#do_action('remove_trash')
-	"nnoremap <silent><buffer><expr> A defx#do_action('new_multiple_files')
-	"nnoremap <silent><buffer><expr> U defx#do_action('cd', ['..'])
-	"nnoremap <silent><buffer><expr> . defx#do_action('toggle_ignored_files')
-	"nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select')
-	"nnoremap <silent><buffer><expr> R defx#do_action('redraw')
+"nnoremap <silent><buffer><expr> <CR>
+			"\ defx#is_directory() ?
+			"\ defx#do_action('open_or_close_tree') :
+			"\ defx#do_action('drop',)
+"nnoremap <silent><buffer><expr> s defx#do_action('drop', 'split')
+"nnoremap <silent><buffer><expr> v defx#do_action('drop', 'vsplit')
+"nnoremap <silent><buffer><expr> t defx#do_action('drop', 'tabe')
+"nnoremap <silent><buffer><expr> o defx#do_action('open_tree')
+"nnoremap <silent><buffer><expr> O defx#do_action('open_tree_recursive')
+"nnoremap <silent><buffer><expr> C defx#do_action('copy')
+"nnoremap <silent><buffer><expr> P defx#do_action('paste')
+"nnoremap <silent><buffer><expr> M defx#do_action('rename')
+"nnoremap <silent><buffer><expr> D defx#do_action('remove_trash')
+"nnoremap <silent><buffer><expr> A defx#do_action('new_multiple_files')
+"nnoremap <silent><buffer><expr> U defx#do_action('cd', ['..'])
+"nnoremap <silent><buffer><expr> . defx#do_action('toggle_ignored_files')
+"nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select')
+"nnoremap <silent><buffer><expr> R defx#do_action('redraw')
 "endfunction
 " gen_tags.vim
 "let g:gen_tags#gtags_default_map=1
@@ -191,15 +202,15 @@ function! NearestMethodOrFunction() abort
 	return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
 let g:lightline = {
-	\ 'colorscheme': 'wombat',
-	\ 'active': {
-	\   'left': [ [ 'mode', 'paste' ],
-	\             [ 'readonly', 'filename', 'modified', 'method' ] ]
-	\ },
-	\ 'component_function': {
-	\   'method': 'NearestMethodOrFunction'
-	\ },
-	\ }
+			\ 'colorscheme': 'wombat',
+			\ 'active': {
+			\   'left': [ [ 'mode', 'paste' ],
+			\             [ 'readonly', 'filename', 'modified', 'method' ] ]
+			\ },
+			\ 'component_function': {
+			\   'method': 'NearestMethodOrFunction'
+			\ },
+			\ }
 let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
 let g:lightline.tabline_subseparator = { 'left': "\ue0bb", 'right': "\ue0bb" }
 let s:palette = g:lightline#colorscheme#wombat#palette
@@ -215,9 +226,9 @@ noremap <leader>m :Leaderf! --fuzzy mru<CR>
 noremap <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -e %s ", expand("<cword>"))<CR><CR>
 noremap <leader>a :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 let g:Lf_WildIgnore = {
-	\ 'dir': ['.svn','.git','.hg'],
-	\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
-	\}
+			\ 'dir': ['.svn','.git','.hg'],
+			\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+			\}
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
 let g:Lf_PreviewHorizontalPosition = 'center'
@@ -225,24 +236,33 @@ let g:Lf_PreviewPopupWidth=70
 "leaderf tags
 let g:Lf_GtagsAutoGenerate = 1
 let g:Lf_Gtagslabel = 'pygments'
+let g:Lf_NormalMap = {
+			\ "File":[["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+			\ "Buffer":[["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+			\ "Mru":[["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+			\ "Gtags":[["<ESC>", ':exec g:Lf_py "gtagsExplManager.quit()"<CR>']],
+			\ "Rg":[["<ESC>", ':exec g:Lf_py "rgExplManager.quit()"<CR>']],
+			\ "Line":[["<ESC>", ':exec g:Lf_py "lineExplManager.quit()"<CR>']],
+			\}
 noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
 noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
 noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
 noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
+nnoremap <F7> :Leaderf gtags --all --result ctags-x<CR>
 
 "coc.vim
 set shortmess+=c
 set signcolumn=yes
 let g:coc_global_extensions=[
-	\ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver', 'coc-explorer',
-	\ 'coc-python', 'coc-emmet', 'coc-vimlsp'
-	\ ]
+			\ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver', 'coc-explorer',
+			\ 'coc-python', 'coc-emmet', 'coc-vimlsp'
+			\ ]
 
 inoremap <silent><expr> <TAB>
-	\ pumvisible() ? "\<C-n>" :
-	\ <SID>check_back_space() ? "\<TAB>" :
-	\ coc#refresh()
+			\ pumvisible() ? "\<C-n>" :
+			\ <SID>check_back_space() ? "\<TAB>" :
+			\ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 function! s:check_back_space() abort
 	let col = col('.') - 1
@@ -272,9 +292,10 @@ nnoremap <leader>tr :call ToggleCocExplorer()<CR>
 
 " floaterm
 nnoremap <leader>tt :FloatermToggle<CR>
+tnoremap <M-q> <C-\><C-n>
 let g:floaterm_type='floating'
 let g:floaterm_position='center'
-let g:floaterm_background='#000000'
+let g:floaterm_background='#3a3a3a'
 function! s:floatermSettings()
 	setlocal number
 	tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
@@ -294,6 +315,17 @@ augroup user_plugin
 	autocmd FileType terminal call s:floatermSettings()
 augroup END
 
+" vim-interestingwords
+let g:interestingWordsGUIColors = ['#8CCBEA', '#A4E57E', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
+
 " repo setting, different repo jumping
 "let g:Lf_RootMarkers=['.root']
+
+" vim-startify
+"let g:startify_session_dir = '~/.vim/sessions'
+
+" inline_edit
+nnoremap <leader>e :<C-u>InlineEdit<CR>
+vnoremap <leader>e :InlineEdit<CR>
+let g:inline_edit_new_buffer_command = "tabedit"
 
