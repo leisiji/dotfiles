@@ -9,7 +9,12 @@
 					"directory": "/tmp/ccls"
 				}
 			}
-		}
+		},
+        "bash": {
+            "command": "bash-language-server",
+            "filetypes": ["sh"],
+            "args": ["start"]
+        }
 	},
 	"suggest.timeout": 500,
 	"coc.source.file.shortcut": "F",
@@ -33,6 +38,12 @@
 		"<Up>": "prompt:previous",
 		"<C-v>": "prompt:paste"
 	},
+	"explorer.file.columns":[
+		"selection",
+		"indent",
+		"icon",
+		"filename"
+	],
 	"explorer.quitOnOpen": true,
 	"explorer.icon.enableNerdfont": true,
 	"explorer.keyMappings": {
@@ -48,7 +59,6 @@
 		"gh": "collapseRecursive",
 		"o": "expandOrCollapse",
 		"<cr>": "open",
-		"e": "open",
 		"v": "openInVsplit",
 		"t": "openInTab",
 		"<bs>": "gotoParent",

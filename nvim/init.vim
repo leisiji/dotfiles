@@ -98,6 +98,7 @@ Plug 'sbdchd/neoformat', {'on' : 'Neoformat'}
 Plug 'voldikss/vim-floaterm', {'on' : 'FloatermToggle'}
 Plug 'AndrewRadev/inline_edit.vim', {'on' : 'InlineEdit' }
 Plug 'easymotion/vim-easymotion'
+"Plug 'andymass/vim-matchup'
 "Plug 'justinmk/vim-sneak'
 
 "Plug 'luochen1990/rainbow'
@@ -221,8 +222,8 @@ unlet s:palette
 noremap <C-r> :Leaderf --fuzzy function<CR>
 noremap <C-p> :Leaderf --fuzzy file<CR>
 noremap <C-f> :Leaderf --fuzzy line<CR>
+noremap <leader>m :Leaderf --fuzzy mru<CR>
 noremap <leader>b :Leaderf! --fuzzy buffer<CR>
-noremap <leader>m :Leaderf! --fuzzy mru<CR>
 noremap <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -e %s ", expand("<cword>"))<CR><CR>
 noremap <leader>a :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 let g:Lf_WildIgnore = {
@@ -285,10 +286,16 @@ let g:vim_markdown_conceal_code_blocks = 0
 "let g:rainbow_active = 1
 
 " coc-explorer
-function ToggleCocExplorer()
-	execute 'CocCommand explorer --toggle --width=35 --sources=buffer+,file+'
+let g:indentLine_fileTypeExclude = ['coc-explorer']
+let s:CocExplorerCommand = 'CocCommand explorer --toggle --width=35 --sources=buffer+,file+'
+function ToggleCocExplorerPrj()
+	execute s:CocExplorerCommand.' .'
 endfunction
-nnoremap <leader>tr :call ToggleCocExplorer()<CR>
+function ToggleCocExplorerFile()
+	execute s:CocExplorerCommand
+endfunction
+nnoremap <leader>tj :call ToggleCocExplorerPrj()<CR>
+nnoremap <leader>tr :call ToggleCocExplorerFile()<CR>
 
 " floaterm
 nnoremap <leader>tt :FloatermToggle<CR>
@@ -328,4 +335,30 @@ let g:interestingWordsGUIColors = ['#8CCBEA', '#A4E57E', '#FFDB72', '#FF7272', '
 nnoremap <leader>e :<C-u>InlineEdit<CR>
 vnoremap <leader>e :InlineEdit<CR>
 let g:inline_edit_new_buffer_command = "tabedit"
+
+nnoremap <expr> <CR> NormalMapForEnter() . "\<Esc>"
+function! NormalMapForEnter()
+	if &filetype ==# 'quickfix'
+		return "\<CR>"
+	elseif index([
+		\ 'c',
+		\ 'cpp',
+		\ 'cs',
+		\ 'css',
+		\ 'java',
+		\ 'rust',
+		\ 'scss',
+		\ 'typescript',
+		\ 'typescript.tsx'
+	\ ],&filetype) >= 0
+		let l:line = getline('.')
+		if l:line != '' && l:line !~ '^\s\+$' && index([';', '{', '(', '\'], l:line[-1:]) < 0
+			return "A;"
+		else
+			return ""
+		endif
+	else
+		return ""
+	endif
+endfunction
 
