@@ -61,7 +61,7 @@ inoremap <m-h> <c-left>
 inoremap <m-l> <c-right>
 vmap <leader>y "+y
 nnoremap <leader>p "+p
-nnoremap <leader>rt :%retab!<CR>
+nnoremap <leader>rt :<C-U>%retab!<CR>
 
 call plug#begin('~/.vim/plugged')
 
@@ -94,6 +94,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'neoclide/vim-jsx-improve', {'for' : ['js', 'html']}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
 Plug 'junegunn/vim-easy-align', {'on' : '<Plug>(EasyAlign)'}
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 let g:srcery_italic = 1
@@ -108,7 +109,7 @@ let g:cpp_posix_standard = 1
 
 "vista.vim
 let g:vista_close_on_jump=1
-map <F4> :Vista<CR>
+nnoremap <F4> :<C-U>Vista<CR>
 
 " lightline
 function! NearestMethodOrFunction() abort
@@ -138,7 +139,7 @@ noremap <leader>m :Leaderf --fuzzy mru<CR>
 noremap <leader>b :Leaderf! --fuzzy buffer<CR>
 noremap <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -e %s ", expand("<cword>"))<CR><CR>
 noremap <leader>a :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
-noremap <leader>d :<C-U><C-R>=printf("Leaderf! rg -e %s %s", expand("<cword>"), expand("%:p:h"))<CR><CR>
+noremap <leader>d :<C-U><C-R>=printf("Leaderf! rg -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":~:."))<CR><CR>
 noremap <leader>o :<C-U>LeaderfRgRecall<CR>
 xnoremap <leader>a :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
 let g:Lf_FollowLinks = 1
@@ -149,8 +150,7 @@ let g:Lf_WildIgnore = {
 			\}
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
-let g:Lf_PreviewHorizontalPosition = 'center'
-let g:Lf_PreviewPopupWidth=70
+"let g:Lf_PopupPosition = [29, 0]
 "leaderf tags
 let g:Lf_GtagsAutoGenerate = 1
 let g:Lf_NormalMap = {
@@ -167,7 +167,7 @@ noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
 noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
 nnoremap <F7> :Leaderf gtags --all --result ctags-x<CR>
-" repo setting, different repo jumping
+" repo setting, different git jumping
 "let g:Lf_RootMarkers=['.root']
 
 "coc.vim
@@ -175,7 +175,7 @@ set shortmess+=c
 set signcolumn=yes
 let g:coc_global_extensions=[
 			\ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver', 'coc-explorer',
-			\ 'coc-python', 'coc-emmet', 'coc-vimlsp', 'coc-git'
+			\ 'coc-python', 'coc-emmet', 'coc-vimlsp', 'coc-git', 'coc-powershell'
 			\ ]
 
 inoremap <silent><expr> <TAB>
@@ -229,10 +229,7 @@ tnoremap <M-q> <C-\><C-n>
 let g:floaterm_type='floating'
 let g:floaterm_position='center'
 "let g:floaterm_background='#3a3a3a'
-function! s:floatermSettings()
-	setlocal number
-	tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
-endfunction
+tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
 
 augroup user_plugin
 	autocmd!
@@ -243,9 +240,6 @@ augroup user_plugin
 
 	" coc-explorer
 	autocmd FileType coc-explorer setlocal signcolumn=no
-
-	" floaterm
-	autocmd FileType terminal call s:floatermSettings()
 augroup END
 
 " vim-interestingwords
@@ -262,6 +256,8 @@ let g:inline_edit_new_buffer_command = "tabedit"
 " easy-align
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+
+let g:polyglot_disabled = [ 'c', 'cpp', 'markdown', 'javascript' ]
 
 nnoremap <expr> <CR> NormalMapForEnter() . "\<Esc>"
 function! NormalMapForEnter()
