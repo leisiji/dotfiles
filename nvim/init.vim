@@ -9,6 +9,8 @@ set list lcs=tab:→\ ,trail:·,extends:↷,precedes:↶
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+set smarttab
+set smartindent
 set t_Co=256
 set termguicolors
 "set showtabline=2
@@ -16,9 +18,11 @@ let mapleader=" "
 set undofile
 set undodir=$HOME/.cache/vim/undo
 syntax enable
-set smartindent
 set ignorecase
 set smartcase
+set incsearch
+set noswapfile
+set cul
 
 noremap <leader>q :q<CR>
 noremap <leader>s :w<CR>
@@ -89,12 +93,14 @@ Plug 'plasticboy/vim-markdown', {'for' : ['md']}
 Plug 'sbdchd/neoformat', {'on' : 'Neoformat'}
 Plug 'voldikss/vim-floaterm', {'on' : 'FloatermToggle'}
 Plug 'AndrewRadev/inline_edit.vim', {'on' : 'InlineEdit' }
-Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion', {'on' : '<Plug>(easymotion-overwin-f2)'}
 
 Plug 'neoclide/vim-jsx-improve', {'for' : ['js', 'html']}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
 Plug 'junegunn/vim-easy-align', {'on' : '<Plug>(EasyAlign)'}
 Plug 'sheerun/vim-polyglot'
+Plug 'skywind3000/asyncrun.vim', {'on':'AsyncRun'}
+Plug 'simnalamburt/vim-mundo', {'on' : 'MundoToggle'}
 call plug#end()
 
 let g:srcery_italic = 1
@@ -152,6 +158,7 @@ let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
 "let g:Lf_PopupPosition = [29, 0]
 "leaderf tags
+let g:Lf_Gtagslabel = 'native-pygments'
 let g:Lf_GtagsAutoGenerate = 1
 let g:Lf_NormalMap = {
 			\ "File":[["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
@@ -175,7 +182,7 @@ set shortmess+=c
 set signcolumn=yes
 let g:coc_global_extensions=[
 			\ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver', 'coc-explorer',
-			\ 'coc-python', 'coc-emmet', 'coc-vimlsp', 'coc-git', 'coc-powershell'
+			\ 'coc-python', 'coc-emmet', 'coc-vimlsp', 'coc-git', 'coc-powershell', 'coc-css', 'coc-emmet'
 			\ ]
 
 inoremap <silent><expr> <TAB>
@@ -200,6 +207,8 @@ nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
+let g:tex_conceal = ""
+let g:vim_markdown_math = 1
 
 " coc-explorer
 let g:indentLine_fileTypeExclude = ['coc-explorer']
@@ -258,6 +267,10 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 let g:polyglot_disabled = [ 'c', 'cpp', 'markdown', 'javascript' ]
+
+nmap f <Plug>(easymotion-overwin-f2)
+
+nmap <leader>u :MundoToggle<CR>
 
 nnoremap <expr> <CR> NormalMapForEnter() . "\<Esc>"
 function! NormalMapForEnter()
