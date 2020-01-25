@@ -10,11 +10,11 @@
 				}
 			}
 		},
-        "bash": {
-            "command": "bash-language-server",
-            "filetypes": ["sh"],
-            "args": ["start"]
-        }
+		"bash": {
+			"command": "bash-language-server",
+			"filetypes": ["sh"],
+			"args": ["start"]
+		}
 	},
 	"suggest.timeout": 500,
 	"coc.source.file.shortcut": "F",

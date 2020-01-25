@@ -13,7 +13,7 @@ set smarttab
 set smartindent
 set t_Co=256
 set termguicolors
-"set showtabline=2
+set showtabline=2
 let mapleader=" "
 set undofile
 set undodir=$HOME/.cache/vim/undo
@@ -43,7 +43,7 @@ inoremap <C-d> <Delete>
 nnoremap H ^
 nnoremap L $
 vnoremap H ^
-vnoremap L $
+vnoremap L g_
 nnoremap <C-j> 5j
 nnoremap <C-k> 5k
 vnoremap <C-j> 5j
