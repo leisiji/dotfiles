@@ -1,0 +1,42 @@
+# My dotfiles
+
+My dotfiles for Arch linux.
+
+## Installation
+
+Link config file to home dir:
+```bash
+ln -s  ~/.config/zsh/zshrc.zsh ~/.zshrc
+ln -s  ~/.config/git/.gitconfig ~/.gitconfig
+ln -s ~/.config/tmux/.tmux.conf ~/.tmux.conf
+```
+
+Software dependencies:
+```bash
+# yay installation
+git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+
+# desktop basic
+sudo pacman -S zathura zathura-pdf-mupdf i3 alacritty \
+				adobe-source-code-pro-fonts
+yay -S vnote i3status-rust nerd-fonts-complete
+
+# shell related, lua is for z.lua
+sudo pacman -S zsh exa fzf ranger tmux diff-so-fancy bat lua
+
+# neovim related, nodejs is for coc-nvim
+sudo pacman -S neovim ripgrep nodejs
+pip3 install --user pynvim
+yay -S ccls
+```
+
+Plugin Manager:
+```bash
+# vim-plug
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# zplugin
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+```
+

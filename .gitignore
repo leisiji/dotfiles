@@ -8,3 +8,8 @@
 !/tmux
 !/zathura
 !/zsh
+!README.md
+!/git
+!/vnote
+/vnote/*
+!/vnote/vnote.ini

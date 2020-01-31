@@ -101,6 +101,7 @@ Plug 'junegunn/vim-easy-align', {'on' : '<Plug>(EasyAlign)'}
 Plug 'sheerun/vim-polyglot'
 Plug 'skywind3000/asyncrun.vim', {'on':'AsyncRun'}
 Plug 'simnalamburt/vim-mundo', {'on' : 'MundoToggle'}
+Plug 'puremourning/vimspector'
 call plug#end()
 
 let g:srcery_italic = 1
@@ -174,8 +175,9 @@ noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
 noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
 nnoremap <F7> :Leaderf gtags --all --result ctags-x<CR>
-" repo setting, different git jumping
+" repo setting
 "let g:Lf_RootMarkers=['.root']
+"let g:Lf_UseVersionControlTool=0
 
 "coc.vim
 set shortmess+=c
@@ -271,6 +273,8 @@ let g:polyglot_disabled = [ 'c', 'cpp', 'markdown', 'javascript' ]
 nmap f <Plug>(easymotion-overwin-f2)
 
 nmap <leader>u :MundoToggle<CR>
+
+let g:vimspector_enable_mappings = 'HUMAN'
 
 nnoremap <expr> <CR> NormalMapForEnter() . "\<Esc>"
 function! NormalMapForEnter()

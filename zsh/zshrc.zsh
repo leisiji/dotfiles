@@ -2,7 +2,7 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 ### Added by Zinit's installer
@@ -26,12 +26,12 @@ export TERM_ITALICS=true
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=999999999
 export SAVEHIST=$HISTSIZE
+export MANPAGER='nvim +Man!'
 
 # key-bindings 放在前面，防止后面的快捷键被覆盖
 zplugin snippet OMZ::lib/key-bindings.zsh
 zplugin snippet OMZ::lib/completion.zsh
 zplugin ice wait'0' lucid; zplugin snippet OMZ::plugins/extract/extract.plugin.zsh
-zplugin ice wait'0' lucid; zplugin snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 zplugin ice wait'0' lucid; zplugin snippet OMZ::plugins/fzf/fzf.plugin.zsh
 zplugin ice wait'0' lucid; zplugin snippet OMZ::plugins/sudo/sudo.plugin.zsh
 zplugin ice wait'0' lucid; zplugin snippet OMZ::plugins/git/git.plugin.zsh
@@ -52,3 +52,4 @@ bindkey '^[,' autosuggest-accept
 
 # 初始化补全
 zpcompinit; zpcdreplay
+
