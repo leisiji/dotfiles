@@ -14,6 +14,16 @@
 			"command": "bash-language-server",
 			"filetypes": ["sh"],
 			"args": ["start"]
+		},
+		"cmake": {
+			"command": "cmake-language-server",
+			"filetypes": ["cmake"],
+			"rootPatterns": [
+				"build/"
+			],
+			"initializationOptions": {
+			"buildDirectory": "build"
+			}
 		}
 	},
 	"suggest.timeout": 500,

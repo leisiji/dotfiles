@@ -101,7 +101,7 @@ Plug 'junegunn/vim-easy-align', {'on' : '<Plug>(EasyAlign)'}
 Plug 'sheerun/vim-polyglot'
 Plug 'skywind3000/asyncrun.vim', {'on':'AsyncRun'}
 Plug 'simnalamburt/vim-mundo', {'on' : 'MundoToggle'}
-Plug 'puremourning/vimspector'
+"Plug 'puremourning/vimspector'
 call plug#end()
 
 let g:srcery_italic = 1
@@ -186,7 +186,6 @@ let g:coc_global_extensions=[
 			\ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver', 'coc-explorer',
 			\ 'coc-python', 'coc-emmet', 'coc-vimlsp', 'coc-git', 'coc-powershell', 'coc-css', 'coc-emmet'
 			\ ]
-
 inoremap <silent><expr> <TAB>
 			\ pumvisible() ? "\<C-n>" :
 			\ <SID>check_back_space() ? "\<TAB>" :

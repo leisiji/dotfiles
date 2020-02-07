@@ -22,12 +22,18 @@ sudo pacman -S zathura zathura-pdf-mupdf i3 alacritty \
 yay -S vnote i3status-rust nerd-fonts-complete
 
 # shell related, lua is for z.lua
-sudo pacman -S zsh exa fzf ranger tmux diff-so-fancy bat lua
+# w3m can display image in terminal
+sudo pacman -S zsh exa fzf ranger tmux diff-so-fancy bat lua w3m
 
 # neovim related, nodejs is for coc-nvim
-sudo pacman -S neovim ripgrep nodejs
+sudo pacman -S neovim ripgrep nodejs bear
 pip3 install --user pynvim
 yay -S ccls
+```
+pip:
+```bash
+pip3 install --user \
+			cmake-language-server jedi
 ```
 
 Plugin Manager:

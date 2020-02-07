@@ -13,3 +13,4 @@
 !/vnote
 /vnote/*
 !/vnote/vnote.ini
+!/pip

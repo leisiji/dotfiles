@@ -27,6 +27,7 @@ export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=999999999
 export SAVEHIST=$HISTSIZE
 export MANPAGER='nvim +Man!'
+export PATH="$PATH:$HOME/.local/bin/"
 
 # key-bindings 放在前面，防止后面的快捷键被覆盖
 zplugin snippet OMZ::lib/key-bindings.zsh
