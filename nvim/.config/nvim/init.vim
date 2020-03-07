@@ -214,15 +214,14 @@ let g:vim_markdown_math = 1
 
 " coc-explorer
 let g:indentLine_fileTypeExclude = ['coc-explorer']
-let s:CocExplorerCommand = 'CocCommand explorer --toggle --width=35 --sources=buffer+,file+'
-function ToggleCocExplorerPrj()
-	execute s:CocExplorerCommand.' .'
-endfunction
-function ToggleCocExplorerFile()
-	execute s:CocExplorerCommand
-endfunction
-nnoremap <leader>tj :call ToggleCocExplorerPrj()<CR>
-nnoremap <leader>tr :call ToggleCocExplorerFile()<CR>
+let g:coc_explorer_global_presets = {
+\   'floating': {
+\      'position': 'floating',
+\      'floating-width': 100
+\   }
+\ }
+let g:coc_expl_command = "CocCommand explorer --preset floating"
+nmap <space>tr :exec g:coc_expl_command<CR>
 
 " coc-git
 nnoremap <silent> <space>gs :<C-u>CocList --normal gstatus<CR>
@@ -264,8 +263,9 @@ let g:interestingWordsGUIColors = ['#8CCBEA', '#A4E57E', '#FFDB72', '#FF7272', '
 
 " inline_edit
 nnoremap <leader>e :<C-u>InlineEdit<CR>
-vnoremap <leader>e :InlineEdit<CR>
+xnoremap <leader>e :InlineEdit<cr>
 let g:inline_edit_new_buffer_command = "tabedit"
+let g:inline_edit_autowrite = 1
 
 " easy-align
 xmap ga <Plug>(EasyAlign)

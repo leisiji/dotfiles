@@ -4,12 +4,7 @@ My dotfiles for Arch linux.
 
 ## Installation
 
-Link config file to home dir:
-```bash
-ln -s  ~/.config/zsh/zshrc.zsh ~/.zshrc
-ln -s  ~/.config/git/.gitconfig ~/.gitconfig
-ln -s ~/.config/tmux/.tmux.conf ~/.tmux.conf
-```
+I'm using stow to manage my dotfiles
 
 Software dependencies:
 ```bash
