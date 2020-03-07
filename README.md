@@ -33,7 +33,7 @@ yay -S ccls
 pip:
 ```bash
 pip3 install --user \
-			cmake-language-server jedi
+			cmake-language-server jedi pynvim
 ```
 
 Plugin Manager:

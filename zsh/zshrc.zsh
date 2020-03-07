@@ -54,3 +54,11 @@ bindkey '^[,' autosuggest-accept
 # 初始化补全
 zpcompinit; zpcdreplay
 
+# 补全 bat
+addBat () {
+	text_to_add=" | bat"
+	RBUFFER=${text_to_add}${RBUFFER}
+}
+zle -N addBat
+bindkey '^[a' addBat
+

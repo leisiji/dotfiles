@@ -56,9 +56,9 @@ vnoremap <M-e> 5e
 vnoremap <M-b> 5b
 vnoremap <C-b> 5b
 vnoremap <M-w> 5w
-nnoremap <C-Y> <C-r>
+nnoremap <M-y> <C-r>
 "Remove all trailing whitespace by pressing F5
-nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+nnoremap <M-s> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 "tnoremap <Esc> <C-\><C-n>
 nnoremap <C-t> :tabnew<CR>
 inoremap <m-h> <c-left>
@@ -66,6 +66,7 @@ inoremap <m-l> <c-right>
 vmap <leader>y "+y
 nnoremap <leader>p "+p
 nnoremap <leader>rt :<C-U>%retab!<CR>
+nnoremap <leader>ft :<C-U>set ft=
 
 call plug#begin('~/.vim/plugged')
 
@@ -96,12 +97,12 @@ Plug 'AndrewRadev/inline_edit.vim', {'on' : 'InlineEdit' }
 Plug 'easymotion/vim-easymotion', {'on' : '<Plug>(easymotion-overwin-f2)'}
 
 Plug 'neoclide/vim-jsx-improve', {'for' : ['js', 'html']}
-Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp', 'cc']}
 Plug 'junegunn/vim-easy-align', {'on' : '<Plug>(EasyAlign)'}
 Plug 'sheerun/vim-polyglot'
 Plug 'skywind3000/asyncrun.vim', {'on':'AsyncRun'}
 Plug 'simnalamburt/vim-mundo', {'on' : 'MundoToggle'}
-"Plug 'puremourning/vimspector'
+Plug 'puremourning/vimspector', {'do' : './install_gadget.py --all --disable-tcl'}
 call plug#end()
 
 let g:srcery_italic = 1
@@ -184,8 +185,8 @@ set shortmess+=c
 set signcolumn=yes
 let g:coc_global_extensions=[
 			\ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver', 'coc-explorer',
-			\ 'coc-python', 'coc-emmet', 'coc-vimlsp', 'coc-git', 'coc-powershell', 'coc-css', 'coc-emmet'
-			\ ]
+			\ 'coc-python', 'coc-emmet', 'coc-vimlsp', 'coc-git', 'coc-powershell', 'coc-css', 'coc-emmet',
+			\ 'coc-eslint']
 inoremap <silent><expr> <TAB>
 			\ pumvisible() ? "\<C-n>" :
 			\ <SID>check_back_space() ? "\<TAB>" :
@@ -250,6 +251,9 @@ augroup user_plugin
 
 	" coc-explorer
 	autocmd FileType coc-explorer setlocal signcolumn=no
+
+	" tab switch
+	autocmd TabLeave * let g:last_active_tab = tabpagenr()
 augroup END
 
 " vim-interestingwords
@@ -316,5 +320,4 @@ nnoremap <silent> <Leader>z :call WinZoomToggle()<CR>
 
 let g:last_active_tab = 1
 nnoremap <silent> <M-q> :execute 'tabnext ' . g:last_active_tab<cr>
-autocmd TabLeave * let g:last_active_tab = tabpagenr()
 
