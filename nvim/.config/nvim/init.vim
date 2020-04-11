@@ -24,7 +24,7 @@ set incsearch
 set noswapfile
 set cul
 
-noremap <leader>q :bd<CR>
+nn <silent> <leader>q :if(expand('%') == '')<Bar>exe 'q'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
 noremap <leader>s :w<CR>
 nnoremap <M-1> 1gt
 nnoremap <M-2> 2gt
@@ -201,16 +201,16 @@ endfunction
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 let g:coc_snippet_next = '<C-n>'
 " lsp
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-nmap <leader>rn <Plug>(coc-rename)
-nn <M-j> <Plug>(coc-definition)
-nn <M-r> <Plug>(coc-references)
+nmap [g <Plug>(coc-diagnostic-prev)
+nmap ]g <Plug>(coc-diagnostic-next)
+nmap <M-j> <Plug>(coc-definition)
+nmap <M-r> <Plug>(coc-references)
 nn <M-v> :call CocAction('jumpDefinition','vsplit')<cr>
 nn <M-t> :call CocAction('jumpDefinition','tabe')<cr>
 nn <M-k> :call CocActionAsync('doHover')<cr>
-nn <silent> <space>v :<C-u>CocList outline<cr>
+nn <leader>rn <Plug>(coc-rename)
+nn <space>a :<C-u>CocList diagnostics<cr>
+nn <space>v :<C-u>CocList outline<cr>
 " coc-yank
 nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 " coc function obj
