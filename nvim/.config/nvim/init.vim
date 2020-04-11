@@ -24,7 +24,7 @@ set incsearch
 set noswapfile
 set cul
 
-noremap <leader>q :q<CR>
+noremap <leader>q :bd<CR>
 noremap <leader>s :w<CR>
 nnoremap <M-1> 1gt
 nnoremap <M-2> 2gt
@@ -85,7 +85,7 @@ Plug 'neoclide/coc-sources'
 
 Plug 'lfv89/vim-interestingwords'
 Plug 'Yggdroot/indentLine'
-Plug 'liuchengxu/vista.vim'
+"Plug 'liuchengxu/vista.vim', {'on' : 'Vista'}
 Plug 'scrooloose/nerdcommenter'
 Plug 'farmergreg/vim-lastplace'
 Plug 'mg979/vim-visual-multi'
@@ -96,13 +96,13 @@ Plug 'voldikss/vim-floaterm', {'on' : 'FloatermToggle'}
 Plug 'AndrewRadev/inline_edit.vim', {'on' : 'InlineEdit' }
 Plug 'easymotion/vim-easymotion', {'on' : '<Plug>(easymotion-overwin-f2)'}
 
-Plug 'neoclide/vim-jsx-improve', {'for' : ['js', 'html']}
+Plug 'neoclide/vim-jsx-improve', {'for' : ['js']}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp', 'cc']}
 Plug 'junegunn/vim-easy-align', {'on' : '<Plug>(EasyAlign)'}
 Plug 'sheerun/vim-polyglot'
-Plug 'skywind3000/asyncrun.vim', {'on':'AsyncRun'}
+Plug 'skywind3000/asynctasks.vim', {'on' : 'AsyncTask'} | Plug 'skywind3000/asyncrun.vim'
 Plug 'simnalamburt/vim-mundo', {'on' : 'MundoToggle'}
-Plug 'puremourning/vimspector', {'do' : './install_gadget.py --all --disable-tcl'}
+"Plug 'puremourning/vimspector', {'do' : './install_gadget.py --all --disable-tcl'}
 call plug#end()
 
 let g:srcery_italic = 1
@@ -116,12 +116,12 @@ let g:cpp_member_variable_highlight = 1
 let g:cpp_posix_standard = 1
 
 "vista.vim
-let g:vista_close_on_jump=1
-nnoremap <F4> :<C-U>Vista<CR>
+"let g:vista_close_on_jump=1
+"nnoremap <leader>v :<C-U>Vista<CR>
 
 " lightline
-function! NearestMethodOrFunction() abort
-	return get(b:, 'vista_nearest_method_or_function', '')
+function! CocCurrentFunction() abort
+	return get(b:, 'coc_current_function', '')
 endfunction
 let g:lightline = {
 			\ 'colorscheme': 'wombat',
@@ -130,7 +130,7 @@ let g:lightline = {
 			\			  [ 'readonly', 'filename', 'modified', 'method' ] ]
 			\ },
 			\ 'component_function': {
-			\	'method': 'NearestMethodOrFunction'
+			\	'method': 'CocCurrentFunction'
 			\ },
 			\ }
 let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
@@ -146,15 +146,16 @@ noremap <C-f> :Leaderf --fuzzy line<CR>
 noremap <leader>m :Leaderf --fuzzy mru<CR>
 noremap <leader>b :Leaderf! --fuzzy buffer<CR>
 noremap <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -e %s ", expand("<cword>"))<CR><CR>
-noremap <leader>a :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+noremap <leader>fa :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 noremap <leader>d :<C-U><C-R>=printf("Leaderf! rg -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":~:."))<CR><CR>
 noremap <leader>o :<C-U>LeaderfRgRecall<CR>
-xnoremap <leader>a :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+xnoremap <leader>fa :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
 let g:Lf_FollowLinks = 1
+let g:Lf_JumpToExistingWindow = 1
 let g:Lf_HideHelp = 1
 let g:Lf_WildIgnore = {
 			\ 'dir': ['.svn','.git','.hg'],
-			\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+			\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]', 'compile_commands.json']
 			\}
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
@@ -178,11 +179,12 @@ noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
 nnoremap <F7> :Leaderf gtags --all --result ctags-x<CR>
 " repo setting
 "let g:Lf_RootMarkers=['.root']
-"let g:Lf_UseVersionControlTool=0
+let g:Lf_ExternalCommand = 'rg --files --no-ignore "%s"'
 
 "coc.vim
 set shortmess+=c
 set signcolumn=yes
+set updatetime=300
 let g:coc_global_extensions=[
 			\ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver', 'coc-explorer',
 			\ 'coc-python', 'coc-emmet', 'coc-vimlsp', 'coc-git', 'coc-powershell', 'coc-css', 'coc-emmet',
@@ -198,12 +200,32 @@ function! s:check_back_space() abort
 endfunction
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 let g:coc_snippet_next = '<C-n>'
-
+" lsp
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 nmap <leader>rn <Plug>(coc-rename)
-nmap <M-j> <Plug>(coc-definition)
-nmap <M-r> <Plug>(coc-reference)
+nn <M-j> <Plug>(coc-definition)
+nn <M-r> <Plug>(coc-references)
+nn <M-v> :call CocAction('jumpDefinition','vsplit')<cr>
+nn <M-t> :call CocAction('jumpDefinition','tabe')<cr>
 nn <M-k> :call CocActionAsync('doHover')<cr>
+nn <silent> <space>v :<C-u>CocList outline<cr>
+" coc-yank
 nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
+" coc function obj
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+" ccls
+function! CclsMap() abort
+	nn <silent> <leader>xm :call CocLocations('ccls','$ccls/member')<cr>
+	nn <silent> <leader>xf :call CocLocations('ccls','$ccls/member',{'kind':3})<cr>
+	nn <silent> <leader>xs :call CocLocations('ccls','$ccls/member',{'kind':2})<cr>
+	nn <silent> <leader>xv :call CocLocations('ccls','$ccls/vars')<cr>
+	nn <silent> <leader>xe :call CocLocations('ccls','$ccls/call',{'hierarchy':v:true, 'levels':10})<cr>
+endfunction
 
 " vim-markdown
 let g:vim_markdown_folding_disabled=1
@@ -214,14 +236,9 @@ let g:vim_markdown_math = 1
 
 " coc-explorer
 let g:indentLine_fileTypeExclude = ['coc-explorer']
-let g:coc_explorer_global_presets = {
-\   'floating': {
-\      'position': 'floating',
-\      'floating-width': 100
-\   }
-\ }
-let g:coc_expl_command = "CocCommand explorer --preset floating"
-nmap <space>tr :exec g:coc_expl_command<CR>
+nmap <space>tr :CocCommand explorer --preset floating<CR>
+hi CocExplorerNormalFloatBorder guifg=#414347 guibg=#272B34
+hi CocExplorerNormalFloat guibg=#272B34
 
 " coc-git
 nnoremap <silent> <space>gs :<C-u>CocList --normal gstatus<CR>
@@ -243,13 +260,10 @@ tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
 
 augroup user_plugin
 	autocmd!
-	" vista.vim
-	autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-	" defx
-	"autocmd FileType defx call s:defx_mappings()
 
-	" coc-explorer
-	autocmd FileType coc-explorer setlocal signcolumn=no
+	" coc-nvim
+	autocmd FileType c,cpp call CclsMap()
+	autocmd CursorHold * silent call CocActionAsync('highlight')
 
 	" tab switch
 	autocmd TabLeave * let g:last_active_tab = tabpagenr()
@@ -278,6 +292,11 @@ nmap f <Plug>(easymotion-overwin-f2)
 nmap <leader>u :MundoToggle<CR>
 
 let g:vimspector_enable_mappings = 'HUMAN'
+
+" asynctasks
+let g:asyncrun_open = 6
+let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg']
+noremap <leader><leader>r :AsyncTask file-run<cr>
 
 nnoremap <expr> <CR> NormalMapForEnter() . "\<Esc>"
 function! NormalMapForEnter()

@@ -7,6 +7,9 @@
 			"initializationOptions": {
 				"cache": {
 					"directory": "/tmp/ccls"
+				},
+				"client": {
+					"snippetSupport": true
 				}
 			}
 		},
@@ -22,7 +25,7 @@
 				"build/"
 			],
 			"initializationOptions": {
-			"buildDirectory": "build"
+				"buildDirectory": "build"
 			}
 		}
 	},
@@ -37,6 +40,8 @@
 	"coc.source.buffer.ignoreGitignore": false,
 	"coc.source.tag.shortcut": "T",
 	"coc.source.tag.priority": 78,
+	"coc.preferences.currentFunctionSymbolAutoUpdate":true,
+	"coc.preferences.jumpCommand": "tab drop",
 	"list.insertMappings": {
 		"<C-c>": "do:exit",
 		"<C-p>": "action:preview",
@@ -48,7 +53,16 @@
 		"<Up>": "prompt:previous",
 		"<C-v>": "prompt:paste"
 	},
-	"explorer.quitOnOpen": true,
 	"explorer.icon.enableNerdfont": true,
-	"explorer.openAction.strategy": "previousBuffer"
+	"explorer.keyMappings": {
+		"v": "open:vsplit"
+	},
+	"explorer.quitOnOpen": true,
+	"explorer.presets": {
+		"floating": {
+			"position": "floating",
+			"floating-width": 100
+		}
+	},
+	"tsserver.npm": "/usr/bin/npm"
 }
