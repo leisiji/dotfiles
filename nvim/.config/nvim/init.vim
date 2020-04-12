@@ -24,7 +24,15 @@ set incsearch
 set noswapfile
 set cul
 
-nn <silent> <leader>q :if(expand('%') == '')<Bar>exe 'q'<Bar>else<Bar>exe 'bd'<Bar>endif<cr>
+function! MyQuit() abort
+	if len(win_findbuf(bufnr())) > 1 || expand('%') == ''
+		exe 'q'
+	else
+		exe 'bd'
+	endif
+endfunction
+nn <silent> <leader>q :call MyQuit()<CR>
+
 noremap <leader>s :w<CR>
 nnoremap <M-1> 1gt
 nnoremap <M-2> 2gt
@@ -206,7 +214,7 @@ nmap ]g <Plug>(coc-diagnostic-next)
 nmap <M-t> <Plug>(coc-definition)
 nmap <M-r> <Plug>(coc-references)
 nn <M-v> :call CocAction('jumpDefinition','vsplit')<cr>
-nn <M-j> :call CocAction('jumpDefinition','drop')<cr>
+nn <M-j> :call CocAction('jumpDefinition', 'edit')<cr>
 nn <M-k> :call CocActionAsync('doHover')<cr>
 nn <leader>rn <Plug>(coc-rename)
 nn <space>a :<C-u>CocList --normal diagnostics<cr>
