@@ -133,10 +133,10 @@ let g:lightline = {
 			\	'method': 'CocCurrentFunction'
 			\ },
 			\ }
-let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
-let g:lightline.tabline_subseparator = { 'left': "\ue0bb", 'right': "\ue0bb" }
+"let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
+"let g:lightline.tabline_subseparator = { 'left': "\ue0bb", 'right': "\ue0bb" }
 let s:palette = g:lightline#colorscheme#wombat#palette
-let s:palette.tabline.tabsel = [ ['#d0d0d0', '#5f8787', 252, 66, 'bold'] ]
+let s:palette.tabline.tabsel = [ ['black', '#7FB3D5', 252, 66, 'bold'] ]
 unlet s:palette
 
 "leaderf
@@ -203,10 +203,10 @@ let g:coc_snippet_next = '<C-n>'
 " lsp
 nmap [g <Plug>(coc-diagnostic-prev)
 nmap ]g <Plug>(coc-diagnostic-next)
-nmap <M-j> <Plug>(coc-definition)
+nmap <M-t> <Plug>(coc-definition)
 nmap <M-r> <Plug>(coc-references)
 nn <M-v> :call CocAction('jumpDefinition','vsplit')<cr>
-nn <M-t> :call CocAction('jumpDefinition','tabe')<cr>
+nn <M-j> :call CocAction('jumpDefinition','drop')<cr>
 nn <M-k> :call CocActionAsync('doHover')<cr>
 nn <leader>rn <Plug>(coc-rename)
 nn <space>a :<C-u>CocList --normal diagnostics<cr>
@@ -303,32 +303,6 @@ let g:asyncrun_open = 6
 let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg']
 noremap <leader><leader>r :AsyncTask file-run<cr>
 
-nnoremap <expr> <CR> NormalMapForEnter() . "\<Esc>"
-function! NormalMapForEnter()
-	if &filetype ==# 'quickfix'
-		return "\<CR>"
-	elseif index([
-		\ 'c',
-		\ 'cpp',
-		\ 'cs',
-		\ 'css',
-		\ 'java',
-		\ 'rust',
-		\ 'scss',
-		\ 'typescript',
-		\ 'typescript.tsx'
-	\ ],&filetype) >= 0
-		let l:line = getline('.')
-		if l:line != '' && l:line !~ '^\s\+$' && index([';', '{', '(', '\'], l:line[-1:]) < 0
-			return "A;"
-		else
-			return ""
-		endif
-	else
-		return ""
-	endif
-endfunction
-
 function! WinZoomToggle() abort
 	if exists('t:zoomed') && t:zoomed
 		execute t:zoom_winrestcmd
@@ -343,5 +317,5 @@ endfunction
 nnoremap <silent> <Leader>z :call WinZoomToggle()<CR>
 
 let g:last_active_tab = 1
-nnoremap <silent> <M-q> :execute 'tabnext ' . g:last_active_tab<cr>
+nnoremap <M-q> :execute 'tabn ' . g:last_active_tab<cr>
 
