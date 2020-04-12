@@ -209,8 +209,8 @@ nn <M-v> :call CocAction('jumpDefinition','vsplit')<cr>
 nn <M-t> :call CocAction('jumpDefinition','tabe')<cr>
 nn <M-k> :call CocActionAsync('doHover')<cr>
 nn <leader>rn <Plug>(coc-rename)
-nn <space>a :<C-u>CocList diagnostics<cr>
-nn <space>v :<C-u>CocList outline<cr>
+nn <space>a :<C-u>CocList --normal diagnostics<cr>
+nn <space>v :<C-u>CocList --normal outline<cr>
 " coc-yank
 nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 " coc function obj
@@ -220,10 +220,15 @@ omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 " ccls
 function! CclsMap() abort
+	" class data member
 	nn <silent> <leader>xm :call CocLocations('ccls','$ccls/member')<cr>
+	" class function member
 	nn <silent> <leader>xf :call CocLocations('ccls','$ccls/member',{'kind':3})<cr>
+	" class's inner struct or typedef
 	nn <silent> <leader>xs :call CocLocations('ccls','$ccls/member',{'kind':2})<cr>
+	" class refs
 	nn <silent> <leader>xv :call CocLocations('ccls','$ccls/vars')<cr>
+	" function call chains
 	nn <silent> <leader>xe :call CocLocations('ccls','$ccls/call',{'hierarchy':v:true, 'levels':10})<cr>
 endfunction
 
