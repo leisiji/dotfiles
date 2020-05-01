@@ -57,12 +57,7 @@
 	"explorer.keyMappings": {
 		"v": "open:vsplit"
 	},
-	"explorer.quitOnOpen": true,
-	"explorer.presets": {
-		"floating": {
-			"position": "floating",
-			"floating-width": 100
-		}
-	},
+	"explorer.floating.width": 100,
+	"explorer.position": "floating",
 	"tsserver.npm": "/usr/bin/npm"
 }
