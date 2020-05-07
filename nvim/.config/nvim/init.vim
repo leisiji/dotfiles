@@ -42,13 +42,18 @@ nn <M-4> 4gt
 nn <M-5> 5gt
 nn <M-l> <Esc>:tabnext<CR>
 nn <M-h> <Esc>:tabprevious<CR>
+" move like bash in insert mode
 ino <C-j> <Down>
 ino <C-k> <Up>
-ino <C-h> <Left>
-ino <C-l> <Right>
+ino <C-b> <Left>
+ino <C-f> <Right>
 ino <C-a> <Home>
 ino <C-e> <End>
 ino <C-d> <Delete>
+ino <C-h> <Backspace>
+ino <M-b> <C-Left>
+ino <M-f> <C-Right>
+ino <M-d> <C-o>diw
 nn H ^
 nn L $
 vn H ^
@@ -163,7 +168,7 @@ let g:Lf_FollowLinks = 1
 let g:Lf_JumpToExistingWindow = 1
 let g:Lf_HideHelp = 1
 let g:Lf_WildIgnore = {
-			\ 'dir': ['.svn','.git','.hg'],
+			\ 'dir': ['.svn','.git','.hg','build'],
 			\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]', 'compile_commands.json']
 			\}
 let g:Lf_WindowPosition = 'popup'
