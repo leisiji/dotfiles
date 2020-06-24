@@ -34,7 +34,7 @@ zplugin snippet OMZ::lib/key-bindings.zsh
 zplugin snippet OMZ::lib/completion.zsh
 zplugin ice wait'0' lucid; zplugin snippet OMZ::plugins/extract/extract.plugin.zsh
 zplugin ice wait'0' lucid; zplugin snippet OMZ::plugins/fzf/fzf.plugin.zsh
-zplugin ice wait'0' lucid; zplugin snippet OMZ::plugins/sudo/sudo.plugin.zsh
+#zplugin ice wait'0' lucid; zplugin snippet OMZ::plugins/sudo/sudo.plugin.zsh
 zplugin ice wait'0' lucid; zplugin snippet OMZ::plugins/git/git.plugin.zsh
 
 zplugin light romkatv/powerlevel10k

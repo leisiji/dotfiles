@@ -159,7 +159,7 @@ nn <C-p> :Leaderf --fuzzy file<CR>
 nn <C-f> :Leaderf --fuzzy line<CR>
 nn <leader>m :Leaderf --fuzzy mru<CR>
 nn <leader>b :Leaderf! --fuzzy buffer<CR>
-nn <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -e %s ", expand("<cword>"))<CR><CR>
+nn <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -w -e %s ", expand("<cword>"))<CR><CR>
 nn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
 nn <leader>d :<C-U><C-R>=printf("Leaderf! rg -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":~:."))<CR><CR>
 nn <leader>o :<C-U>LeaderfRgRecall<CR>
@@ -203,7 +203,7 @@ set updatetime=300
 let g:coc_global_extensions=[
 			\ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver', 'coc-explorer',
 			\ 'coc-python', 'coc-emmet', 'coc-vimlsp', 'coc-git', 'coc-powershell', 'coc-css', 'coc-emmet',
-			\ 'coc-eslint']
+			\ 'coc-eslint', 'coc-java']
 ino <silent><expr> <TAB>
 			\ pumvisible() ? "\<C-n>" :
 			\ <SID>check_back_space() ? "\<TAB>" :
