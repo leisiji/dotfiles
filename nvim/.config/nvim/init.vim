@@ -331,3 +331,8 @@ nn <silent> <Leader>z :call WinZoomToggle()<CR>
 let g:last_active_tab = 1
 nn <M-q> :execute 'tabn ' . g:last_active_tab<cr>
 
+" scp copy
+"let g:scp_des_proj = "xxx"
+"let g:scp_src_proj = "xxx"
+"let g:ip_des = 142
+"nn <leader><leader>t :<C-U><C-R>=printf("AsyncRun! sshpass -p yexuelin scp %s yexuelin@192.168.10.%d:%s", expand("%:p"), g:ip_des, g:scp_des_proj . substitute(expand("%:p"), g:scp_src_proj, "", ""))<CR><CR>

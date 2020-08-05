@@ -18,7 +18,8 @@ yay -S vnote i3status-rust nerd-fonts-complete
 
 # shell related, lua is for z.lua
 # w3m can display image in terminal
-sudo pacman -S zsh exa fzf ranger tmux diff-so-fancy bat lua w3m
+sudo pacman -S zsh exa fzf ranger tmux diff-so-fancy bat lua w3m \
+					universal-ctags global
 
 # neovim related, nodejs is for coc-nvim
 sudo pacman -S neovim ripgrep nodejs bear
