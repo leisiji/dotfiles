@@ -61,4 +61,3 @@ addBat () {
 }
 zle -N addBat
 bindkey '^[a' addBat
-

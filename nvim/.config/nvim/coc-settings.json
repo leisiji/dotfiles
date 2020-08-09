@@ -59,5 +59,6 @@
 	},
 	"explorer.floating.width": 100,
 	"explorer.position": "floating",
-	"tsserver.npm": "/usr/bin/npm"
+	"tsserver.npm": "/usr/bin/npm",
+	"java.home": "/usr/lib/jvm/java-11-openjdk"
 }

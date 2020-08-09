@@ -33,6 +33,7 @@ function! MyQuit() abort
 	endif
 endfunction
 nn <silent> <leader>q :call MyQuit()<CR>
+nn <silent> <leader><leader>q :qa<CR>
 
 nn <leader>s :w<CR>
 nn <M-1> 1gt
@@ -80,7 +81,6 @@ ino <m-l> <c-right>
 vmap <leader>y "+y
 nn <leader>p "+p
 nn <leader>rt :<C-U>%retab!<CR>
-nn <leader>ft :<C-U>set ft=
 
 call plug#begin('~/.vim/plugged')
 
@@ -116,6 +116,11 @@ Plug 'junegunn/vim-easy-align', {'on' : '<Plug>(EasyAlign)'}
 Plug 'sheerun/vim-polyglot'
 Plug 'skywind3000/asynctasks.vim', {'on' : 'AsyncTask'} | Plug 'skywind3000/asyncrun.vim'
 Plug 'simnalamburt/vim-mundo', {'on' : 'MundoToggle'}
+Plug 'ARM9/arm-syntax-vim', {'for' : ['asm']}
+Plug 'Shirk/vim-gas', {'for' : ['asm']}
+Plug 'rubberduck203/aosp-vim', {'for' : ['hal', 'bp', 'rc']}
+Plug 'uiiaoo/java-syntax.vim', {'for' : ['java']}
+"Plug 'jsfaint/gen_tags.vim', {'for' : ['c']}
 "Plug 'puremourning/vimspector', {'do' : './install_gadget.py --all --disable-tcl'}
 call plug#end()
 
@@ -173,10 +178,9 @@ let g:Lf_WildIgnore = {
 			\}
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
-"let g:Lf_PopupPosition = [29, 0]
 "leaderf tags
 let g:Lf_Gtagslabel = 'native-pygments'
-let g:Lf_GtagsAutoGenerate = 1
+let g:Lf_GtagsAutoGenerate = 0
 let g:Lf_NormalMap = {
 			\ "File":[["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
 			\ "Buffer":[["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
@@ -188,13 +192,12 @@ let g:Lf_NormalMap = {
 nn <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
 nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
 nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
-nn <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
-nn <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
-nn <F7> :Leaderf gtags --all --result ctags-x<CR>
+nn <leader>ft :<C-U>Leaderf filetype<CR>
 " repo setting
 "let g:Lf_RootMarkers=['.root']
-let g:Lf_ExternalCommand = 'rg --files --no-ignore "%s"'
-let g:Lf_RgConfig = ["--no-ignore"]
+let g:Lf_ExternalCommand = 'rg --files "%s"'
+" repo files
+"let g:Lf_ExternalCommand = 'rg --files --no-ignore "%s"'
 
 "coc.vim
 set shortmess+=c
@@ -284,6 +287,8 @@ augroup user_plugin
 
 	" tab switch
 	autocmd TabLeave * let g:last_active_tab = tabpagenr()
+
+	au BufRead,BufNewFile *.lds setfiletype ld
 augroup END
 
 " vim-interestingwords
@@ -307,8 +312,6 @@ let g:polyglot_disabled = [ 'c', 'cpp', 'markdown', 'javascript' ]
 nm f <Plug>(easymotion-overwin-f2)
 
 nm <leader>u :MundoToggle<CR>
-
-let g:vimspector_enable_mappings = 'HUMAN'
 
 " asynctasks
 let g:asyncrun_open = 6
@@ -336,3 +339,5 @@ nn <M-q> :execute 'tabn ' . g:last_active_tab<cr>
 "let g:scp_src_proj = "xxx"
 "let g:ip_des = 142
 "nn <leader><leader>t :<C-U><C-R>=printf("AsyncRun! sshpass -p yexuelin scp %s yexuelin@192.168.10.%d:%s", expand("%:p"), g:ip_des, g:scp_des_proj . substitute(expand("%:p"), g:scp_src_proj, "", ""))<CR><CR>
+highlight link JavaIdentifier NONE
+
