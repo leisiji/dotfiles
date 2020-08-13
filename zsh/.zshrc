@@ -40,9 +40,9 @@ zplugin ice wait'0' lucid; zplugin snippet OMZ::plugins/git/git.plugin.zsh
 zplugin light romkatv/powerlevel10k
 zplugin light zdharma/fast-syntax-highlighting
 zplugin light zsh-users/zsh-autosuggestions
+zplugin light skywind3000/z.lua
 zplugin ice blockf; zplugin light zsh-users/zsh-completions
 zplugin ice wait'0' lucid; zplugin light hlissner/zsh-autopair
-zplugin ice wait'1' lucid; zplugin light skywind3000/z.lua
 zplugin ice wait'1' lucid; zplugin light wfxr/forgit
 zplugin ice wait'0' lucid; zplugin light zsh-users/zsh-history-substring-search
 
@@ -61,3 +61,8 @@ addBat () {
 }
 zle -N addBat
 bindkey '^[a' addBat
+bindkey -s '\eq'   'cd ..\n'
+bindkey -s '\el'   'ls -l\n'
+bindkey -s '\ee' 'ni '
+bindkey -s '\ew' 'cd '
+
