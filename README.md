@@ -22,13 +22,12 @@ sudo pacman -S zsh exa fzf ranger tmux diff-so-fancy bat lua w3m \
 					universal-ctags global
 
 # neovim related, nodejs is for coc-nvim
-sudo pacman -S neovim ripgrep nodejs npm bear universal-ctags global
+sudo pacman -S neovim ripgrep fd nodejs npm bear universal-ctags global
 yay -S ccls-git
 ```
 pip:
 ```bash
-pip3 install --user \
-			cmake-language-server jedi pynvim
+pip3 install --user cmake-language-server jedi pynvim
 ```
 
 Plugin Manager:
@@ -37,7 +36,7 @@ Plugin Manager:
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-# zplugin
+# zinit
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 ```
 

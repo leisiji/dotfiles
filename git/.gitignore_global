@@ -1,0 +1,5 @@
+.root
+compile_commands.json
+.project
+.settings
+.vscode

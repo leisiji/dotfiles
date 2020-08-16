@@ -30,29 +30,33 @@ export MANPAGER='nvim +Man!'
 export PATH="$PATH:$HOME/.local/bin/"
 
 # key-bindings 放在前面，防止后面的快捷键被覆盖
-zplugin snippet OMZ::lib/key-bindings.zsh
-zplugin snippet OMZ::lib/completion.zsh
-zplugin ice wait'0' lucid; zplugin snippet OMZ::plugins/extract/extract.plugin.zsh
-zplugin ice wait'0' lucid; zplugin snippet OMZ::plugins/fzf/fzf.plugin.zsh
-#zplugin ice wait'0' lucid; zplugin snippet OMZ::plugins/sudo/sudo.plugin.zsh
-zplugin ice wait'0' lucid; zplugin snippet OMZ::plugins/git/git.plugin.zsh
+zinit snippet OMZ::lib/key-bindings.zsh
+zinit snippet OMZ::lib/completion.zsh
+zinit ice wait'0' lucid; zinit snippet OMZ::plugins/extract/extract.plugin.zsh
+zinit ice wait'0' lucid; zinit snippet OMZ::plugins/fzf/fzf.plugin.zsh
+#zinit ice wait'0' lucid; zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
+zinit ice wait'0' lucid; zinit snippet OMZ::plugins/git/git.plugin.zsh
 
-zplugin light romkatv/powerlevel10k
-zplugin light zdharma/fast-syntax-highlighting
-zplugin light zsh-users/zsh-autosuggestions
-zplugin light skywind3000/z.lua
-zplugin ice blockf; zplugin light zsh-users/zsh-completions
-zplugin ice wait'0' lucid; zplugin light hlissner/zsh-autopair
-zplugin ice wait'1' lucid; zplugin light wfxr/forgit
-zplugin ice wait'0' lucid; zplugin light zsh-users/zsh-history-substring-search
+# 初始化补全
+zpcompinit; zpcdreplay
+zinit light Aloxaf/fzf-tab
+
+zinit light romkatv/powerlevel10k
+zinit light zdharma/fast-syntax-highlighting
+zinit light zsh-users/zsh-autosuggestions
+zinit light skywind3000/z.lua
+zinit ice blockf; zinit light zsh-users/zsh-completions
+zinit ice wait'0' lucid; zinit light hlissner/zsh-autopair
+zinit ice wait'1' lucid; zinit light wfxr/forgit
+zinit ice wait'0' lucid; zinit light zsh-users/zsh-history-substring-search
 
 export ZSH_AUTOSUGGEST_USE_ASYNC="true"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
 bindkey ',' autosuggest-execute
 bindkey '^[,' autosuggest-accept
 
-# 初始化补全
-zpcompinit; zpcdreplay
+zstyle ':fzf-tab:complete:_zlua:*' query-string input
+zstyle ':fzf-tab:complete:cd:*' query-string input
 
 # 补全 bat
 addBat () {

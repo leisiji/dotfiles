@@ -92,14 +92,15 @@ Plug 'srcery-colors/srcery-vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh', 'on' : 'Leaderf'}
 Plug 'itchyny/lightline.vim'
 Plug 'honza/vim-snippets'
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!', 'on': 'Clap'}
+Plug 'liuchengxu/vista.vim', {'on' : ['Vista', 'Clap']}
 
-Plug 'jsfaint/gen_tags.vim', {'for' : ['c', 'cpp']}
+"Plug 'jsfaint/gen_tags.vim', {'for' : ['c', 'cpp']}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc-sources'
 
 Plug 'lfv89/vim-interestingwords'
 Plug 'Yggdroot/indentLine'
-"Plug 'liuchengxu/vista.vim', {'on' : 'Vista'}
 Plug 'scrooloose/nerdcommenter'
 Plug 'farmergreg/vim-lastplace'
 Plug 'mg979/vim-visual-multi'
@@ -111,7 +112,7 @@ Plug 'AndrewRadev/inline_edit.vim', {'on' : 'InlineEdit'}
 Plug 'easymotion/vim-easymotion', {'on' : '<Plug>(easymotion-overwin-f2)'}
 
 Plug 'neoclide/vim-jsx-improve', {'for' : ['js']}
-Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp', 'cc']}
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
 Plug 'junegunn/vim-easy-align', {'on' : '<Plug>(EasyAlign)'}
 Plug 'sheerun/vim-polyglot'
 Plug 'skywind3000/asynctasks.vim', {'on' : 'AsyncTask'} | Plug 'skywind3000/asyncrun.vim'
@@ -134,10 +135,6 @@ let g:indentLine_leadingSpaceChar='·'
 let g:cpp_member_variable_highlight = 1
 let g:cpp_posix_standard = 1
 
-"vista.vim
-"let g:vista_close_on_jump=1
-"nn <leader>v :<C-U>Vista<CR>
-
 " lightline
 function! CocCurrentFunction() abort
 	return get(b:, 'coc_current_function', '')
@@ -158,46 +155,6 @@ let s:palette = g:lightline#colorscheme#wombat#palette
 let s:palette.tabline.tabsel = [ ['black', '#7FB3D5', 252, 66, 'bold'] ]
 unlet s:palette
 
-"leaderf
-nn <C-r> :Leaderf --fuzzy function<CR>
-nn <C-p> :Leaderf --fuzzy file<CR>
-nn <C-f> :Leaderf --fuzzy line<CR>
-nn <leader>m :Leaderf --fuzzy mru<CR>
-nn <leader>b :Leaderf! --fuzzy buffer<CR>
-nn <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -w -e %s ", expand("<cword>"))<CR><CR>
-nn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
-nn <leader>d :<C-U><C-R>=printf("Leaderf! rg -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":~:."))<CR><CR>
-nn <leader>o :<C-U>LeaderfRgRecall<CR>
-xn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
-let g:Lf_FollowLinks = 1
-let g:Lf_JumpToExistingWindow = 1
-let g:Lf_HideHelp = 1
-let g:Lf_WildIgnore = {
-			\ 'dir': ['.svn','.git','.hg','build'],
-			\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]', 'compile_commands.json']
-			\}
-let g:Lf_WindowPosition = 'popup'
-let g:Lf_PreviewInPopup = 1
-"leaderf tags
-let g:Lf_Gtagslabel = 'native-pygments'
-let g:Lf_GtagsAutoGenerate = 0
-let g:Lf_NormalMap = {
-			\ "File":[["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
-			\ "Buffer":[["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
-			\ "Mru":[["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
-			\ "Gtags":[["<ESC>", ':exec g:Lf_py "gtagsExplManager.quit()"<CR>']],
-			\ "Rg":[["<ESC>", ':exec g:Lf_py "rgExplManager.quit()"<CR>']],
-			\ "Line":[["<ESC>", ':exec g:Lf_py "lineExplManager.quit()"<CR>']],
-			\}
-nn <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
-nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
-nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
-nn <leader>ft :<C-U>Leaderf filetype<CR>
-" repo setting
-"let g:Lf_RootMarkers=['.root']
-let g:Lf_ExternalCommand = 'rg --files "%s"'
-" repo files
-"let g:Lf_ExternalCommand = 'rg --files --no-ignore "%s"'
 
 "coc.vim
 set shortmess+=c
@@ -307,11 +264,14 @@ let g:inline_edit_autowrite = 1
 xm ga <Plug>(EasyAlign)
 nm ga <Plug>(EasyAlign)
 
-let g:polyglot_disabled = [ 'c', 'cpp', 'markdown', 'javascript' ]
+let g:polyglot_disabled = [ 'c', 'cpp', 'markdown', 'javascript' , 'java']
 
 nm f <Plug>(easymotion-overwin-f2)
-
 nm <leader>u :MundoToggle<CR>
+
+"vista.vim
+"let g:vista_close_on_jump=1
+"nn <leader>v :<C-U>Vista<CR>
 
 " asynctasks
 let g:asyncrun_open = 6
@@ -341,3 +301,56 @@ nn <M-q> :execute 'tabn ' . g:last_active_tab<cr>
 "nn <leader><leader>t :<C-U><C-R>=printf("AsyncRun! sshpass -p yexuelin scp %s yexuelin@192.168.10.%d:%s", expand("%:p"), g:ip_des, g:scp_des_proj . substitute(expand("%:p"), g:scp_src_proj, "", ""))<CR><CR>
 highlight link JavaIdentifier NONE
 
+"vim-clap
+nn <C-r> :Clap tags<CR>
+nn <C-p> :Clap files<CR>
+nn <C-f> :Clap blines<CR>
+"nn <leader>b :Clap buffers<CR>
+nn <leader>m :Clap history<CR>
+nn <leader>ft :Clap filetypes<CR>
+nn <leader>fj :Clap jumps<CR>
+nn <leader>fa :<C-U><C-R>=printf("Clap grep ++opt=--no-ignore ++opt=-w ++query=%s", expand("<cword>"))<CR>
+xn <leader>fa :Clap grep ++query=@visual<CR>
+let g:clap_theme = 'material_design_dark'
+
+"leaderf
+"nn <C-r> :Leaderf --fuzzy function<CR>
+"nn <C-p> :LeaderfFile<CR>
+"nn <M-f> :Leaderf rg --current-buffer<CR>
+"nn <leader>m :Leaderf --fuzzy mru<CR>
+"nn <C-f> :Leaderf rg --current-buffer<CR>
+nn <leader>b :Leaderf! buffer<CR>
+nn <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -w -e %s ", expand("<cword>"))<CR><CR>
+"nn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
+"nn <leader>d :<C-U><C-R>=printf("Leaderf! rg -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":~:."))<CR><CR>
+"nn <leader>o :<C-U>LeaderfRgRecall<CR>
+"xn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+"let g:Lf_FollowLinks = 1
+let g:Lf_JumpToExistingWindow = 1
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_GtagsAutoGenerate = 0
+let g:Lf_NormalMap = {
+			\ "File":[["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+			\ "Buffer":[["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+			\ "Mru":[["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+			\ "Gtags":[["<ESC>", ':exec g:Lf_py "gtagsExplManager.quit()"<CR>']],
+			\ "Rg":[["<ESC>", ':exec g:Lf_py "rgExplManager.quit()"<CR>']],
+			\ "Line":[["<ESC>", ':exec g:Lf_py "lineExplManager.quit()"<CR>']],
+			\}
+"let g:Lf_HideHelp = 1
+"let g:Lf_WildIgnore = {
+			"\ 'dir': ['.svn','.git','.hg','build'],
+			"\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]', 'compile_commands.json']
+			"\}
+"let g:Lf_PreviewInPopup = 1
+"leaderf tags
+"let g:Lf_Gtagslabel = 'native-pygments'
+"nn <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+"nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+"nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+"nn <leader>ft :<C-U>Leaderf filetype<CR>
+" repo setting
+"let g:Lf_RootMarkers=['.root']
+"let g:Lf_ExternalCommand = 'rg --files "%s"'
+" repo files
+"let g:Lf_UseVersionControlTool = 0
