@@ -15,6 +15,8 @@ git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 sudo pacman -S zathura zathura-pdf-mupdf i3 alacritty \
 				adobe-source-code-pro-fonts
 yay -S vnote i3status-rust nerd-fonts-complete
+# Chinese input method
+sudo pacman -S fcitx5 fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-material-color rime
 
 # shell related, lua is for z.lua
 # w3m can display image in terminal
@@ -38,5 +40,8 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 
 # zinit
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+
+# tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 

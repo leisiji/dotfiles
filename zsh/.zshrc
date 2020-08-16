@@ -19,7 +19,8 @@ autoload -Uz _zinit
 
 alias ni=nvim
 alias ra=ranger
-alias tmux='tmux -2'
+alias t='tmux -2'
+alias ta='tmux -2 a'
 alias ls=exa
 export TERM=xterm-256color
 export TERM_ITALICS=true
@@ -37,14 +38,17 @@ zinit ice wait'0' lucid; zinit snippet OMZ::plugins/fzf/fzf.plugin.zsh
 #zinit ice wait'0' lucid; zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
 zinit ice wait'0' lucid; zinit snippet OMZ::plugins/git/git.plugin.zsh
 
+# zlua shoud be put before completion init
+zinit light skywind3000/z.lua
 # 初始化补全
 zpcompinit; zpcdreplay
+# fzf-tab should be put after completion init, and before
+# syntax-highligt, autosuggestions
 zinit light Aloxaf/fzf-tab
 
 zinit light romkatv/powerlevel10k
 zinit light zdharma/fast-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
-zinit light skywind3000/z.lua
 zinit ice blockf; zinit light zsh-users/zsh-completions
 zinit ice wait'0' lucid; zinit light hlissner/zsh-autopair
 zinit ice wait'1' lucid; zinit light wfxr/forgit

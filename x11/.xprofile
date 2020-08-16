@@ -1,0 +1,5 @@
+export GTK_IM_MODULE=fcitx5
+export QT_IM_MODULE=fcitx5
+export XMODIFIERS="@im=fcitx5"
+fcitx5&
+xrandr --output HDMI-2 --auto --primary --output eDP-1 --off

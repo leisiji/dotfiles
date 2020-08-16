@@ -84,7 +84,7 @@ nn <leader>rt :<C-U>%retab!<CR>
 
 call plug#begin('~/.vim/plugged')
 
-if executable('fcitx')
+if executable('fcitx5')
 	Plug 'lilydjwg/fcitx.vim', { 'on': [] } | au InsertEnter * call plug#load('fcitx.vim')
 endif
 
