@@ -89,10 +89,10 @@ if executable('fcitx5')
 endif
 
 Plug 'srcery-colors/srcery-vim'
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh', 'on' : 'Leaderf'}
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh', 'on' : ['Leaderf', 'LeaderfFile']}
 Plug 'itchyny/lightline.vim'
 Plug 'honza/vim-snippets'
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!', 'on': 'Clap'}
+"Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!', 'on': 'Clap'}
 Plug 'liuchengxu/vista.vim', {'on' : ['Vista', 'Clap']}
 
 "Plug 'jsfaint/gen_tags.vim', {'for' : ['c', 'cpp']}
@@ -302,29 +302,29 @@ nn <M-q> :execute 'tabn ' . g:last_active_tab<cr>
 highlight link JavaIdentifier NONE
 
 "vim-clap
-nn <C-r> :Clap tags<CR>
-nn <C-p> :Clap files<CR>
-nn <C-f> :Clap blines<CR>
+"nn <C-r> :Clap tags<CR>
+"nn <C-p> :Clap files<CR>
+"nn <C-f> :Clap blines<CR>
 "nn <leader>b :Clap buffers<CR>
-nn <leader>m :Clap history<CR>
-nn <leader>ft :Clap filetypes<CR>
-nn <leader>fj :Clap jumps<CR>
-nn <leader>fa :<C-U><C-R>=printf("Clap grep ++opt=--no-ignore ++opt=-w ++query=%s", expand("<cword>"))<CR>
-xn <leader>fa :Clap grep ++query=@visual<CR>
-let g:clap_theme = 'material_design_dark'
+"nn <leader>m :Clap history<CR>
+"nn <leader>ft :Clap filetypes<CR>
+"nn <leader>fj :Clap jumps<CR>
+"nn <leader>fa :<C-U><C-R>=printf("Clap grep ++opt=--no-ignore ++opt=-w ++query=%s", expand("<cword>"))<CR>
+"xn <leader>fa :Clap grep ++query=@visual<CR>
+"let g:clap_theme = 'material_design_dark'
 
 "leaderf
-"nn <C-r> :Leaderf --fuzzy function<CR>
-"nn <C-p> :LeaderfFile<CR>
-"nn <M-f> :Leaderf rg --current-buffer<CR>
-"nn <leader>m :Leaderf --fuzzy mru<CR>
-"nn <C-f> :Leaderf rg --current-buffer<CR>
+nn <C-r> :Leaderf --fuzzy function<CR>
+nn <C-p> :LeaderfFile<CR>
+nn <M-f> :Leaderf rg --current-buffer<CR>
+nn <leader>m :Leaderf --fuzzy mru<CR>
+nn <C-f> :Leaderf rg --current-buffer<CR>
 nn <leader>b :Leaderf! buffer<CR>
 nn <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -w -e %s ", expand("<cword>"))<CR><CR>
-"nn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
-"nn <leader>d :<C-U><C-R>=printf("Leaderf! rg -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":~:."))<CR><CR>
-"nn <leader>o :<C-U>LeaderfRgRecall<CR>
-"xn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+nn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
+nn <leader>d :<C-U><C-R>=printf("Leaderf! rg -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":~:."))<CR><CR>
+nn <leader>o :<C-U>LeaderfRgRecall<CR>
+xn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
 "let g:Lf_FollowLinks = 1
 let g:Lf_JumpToExistingWindow = 1
 let g:Lf_WindowPosition = 'popup'
@@ -337,20 +337,20 @@ let g:Lf_NormalMap = {
 			\ "Rg":[["<ESC>", ':exec g:Lf_py "rgExplManager.quit()"<CR>']],
 			\ "Line":[["<ESC>", ':exec g:Lf_py "lineExplManager.quit()"<CR>']],
 			\}
-"let g:Lf_HideHelp = 1
-"let g:Lf_WildIgnore = {
-			"\ 'dir': ['.svn','.git','.hg','build'],
-			"\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]', 'compile_commands.json']
-			"\}
-"let g:Lf_PreviewInPopup = 1
+let g:Lf_HideHelp = 1
+let g:Lf_WildIgnore = {
+			\ 'dir': ['.svn','.git','.hg','build'],
+			\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]', 'compile_commands.json']
+			\}
+let g:Lf_PreviewInPopup = 1
 "leaderf tags
-"let g:Lf_Gtagslabel = 'native-pygments'
-"nn <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
-"nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
-"nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
-"nn <leader>ft :<C-U>Leaderf filetype<CR>
+let g:Lf_Gtagslabel = 'native-pygments'
+nn <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+nn <leader>ft :<C-U>Leaderf filetype<CR>
 " repo setting
-"let g:Lf_RootMarkers=['.root']
-"let g:Lf_ExternalCommand = 'rg --files "%s"'
+let g:Lf_RootMarkers=['.root']
+let g:Lf_ExternalCommand = 'fd "%s" --type file'
 " repo files
 "let g:Lf_UseVersionControlTool = 0
