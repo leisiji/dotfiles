@@ -26,7 +26,7 @@ set noswapfile
 set cul
 
 function! MyQuit() abort
-	if len(win_findbuf(bufnr())) > 1 || expand('%') == ''
+	if len(win_findbuf(bufnr())) == 1 || expand('%') == ''
 		exe 'q'
 	else
 		exe 'bd'
@@ -316,9 +316,9 @@ highlight link JavaIdentifier NONE
 "leaderf
 nn <C-r> :Leaderf --fuzzy function<CR>
 nn <C-p> :LeaderfFile<CR>
-nn <M-f> :Leaderf rg --current-buffer<CR>
-nn <leader>m :Leaderf --fuzzy mru<CR>
 nn <C-f> :Leaderf rg --current-buffer<CR>
+nn <leader>m :Leaderf --fuzzy mru<CR>
+nn <M-f> :Leaderf rg --all-buffers<CR>
 nn <leader>b :Leaderf! buffer<CR>
 nn <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -w -e %s ", expand("<cword>"))<CR><CR>
 nn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
@@ -351,6 +351,7 @@ nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 nn <leader>ft :<C-U>Leaderf filetype<CR>
 " repo setting
 let g:Lf_RootMarkers=['.root']
-let g:Lf_ExternalCommand = 'fd "%s" --type file'
+let g:Lf_ExternalCommand = 'fd "%s" --type file -I'
 " repo files
 "let g:Lf_UseVersionControlTool = 0
+let g:Lf_ShowDevIcons = 0
