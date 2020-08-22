@@ -26,7 +26,7 @@ set noswapfile
 set cul
 
 function! MyQuit() abort
-	if len(win_findbuf(bufnr())) == 1 || expand('%') == ''
+	if len(win_findbuf(bufnr())) > 1 || expand('%') == '' || tabpagenr('$') == 1
 		exe 'q'
 	else
 		exe 'bd'
@@ -338,10 +338,6 @@ let g:Lf_NormalMap = {
 			\ "Line":[["<ESC>", ':exec g:Lf_py "lineExplManager.quit()"<CR>']],
 			\}
 let g:Lf_HideHelp = 1
-let g:Lf_WildIgnore = {
-			\ 'dir': ['.svn','.git','.hg','build'],
-			\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]', 'compile_commands.json']
-			\}
 let g:Lf_PreviewInPopup = 1
 "leaderf tags
 let g:Lf_Gtagslabel = 'native-pygments'
@@ -351,7 +347,7 @@ nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 nn <leader>ft :<C-U>Leaderf filetype<CR>
 " repo setting
 let g:Lf_RootMarkers=['.root']
-let g:Lf_ExternalCommand = 'fd "%s" --type file -I'
+let g:Lf_ExternalCommand = 'fd --type file "%s"'
 " repo files
 "let g:Lf_UseVersionControlTool = 0
 let g:Lf_ShowDevIcons = 0

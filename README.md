@@ -20,7 +20,7 @@ sudo pacman -S fcitx5 fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fci
 
 # shell related, lua is for z.lua
 # w3m can display image in terminal
-sudo pacman -S zsh exa fzf ranger tmux diff-so-fancy bat lua w3m \
+sudo pacman -S zsh exa fzf ranger hexyl tmux diff-so-fancy bat lua w3m \
 					universal-ctags global
 
 # neovim related, nodejs is for coc-nvim

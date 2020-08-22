@@ -1,0 +1,6 @@
+*.o
+*.ko
+*.a
+*.map
+*.so
+build/
