@@ -3,4 +3,4 @@
 *.a
 *.map
 *.so
-build/
+*.class

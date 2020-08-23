@@ -4,4 +4,4 @@ compile_commands.json
 .settings
 .vscode
 *.map
-build/
+*.class

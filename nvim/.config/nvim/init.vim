@@ -123,6 +123,7 @@ Plug 'rubberduck203/aosp-vim', {'for' : ['hal', 'bp', 'rc']}
 Plug 'uiiaoo/java-syntax.vim', {'for' : ['java']}
 "Plug 'jsfaint/gen_tags.vim', {'for' : ['c']}
 "Plug 'puremourning/vimspector', {'do' : './install_gadget.py --all --disable-tcl'}
+Plug 'pechorin/any-jump.vim', {'on' : 'AnyJump'}
 call plug#end()
 
 let g:srcery_italic = 1
@@ -163,7 +164,7 @@ set updatetime=300
 let g:coc_global_extensions=[
 			\ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver', 'coc-explorer',
 			\ 'coc-python', 'coc-emmet', 'coc-vimlsp', 'coc-git', 'coc-powershell', 'coc-css', 'coc-emmet',
-			\ 'coc-eslint', 'coc-java']
+			\ 'coc-eslint', 'coc-java', 'coc-prettier']
 ino <silent><expr> <TAB>
 			\ pumvisible() ? "\<C-n>" :
 			\ <SID>check_back_space() ? "\<TAB>" :
@@ -340,10 +341,10 @@ let g:Lf_NormalMap = {
 let g:Lf_HideHelp = 1
 let g:Lf_PreviewInPopup = 1
 "leaderf tags
-let g:Lf_Gtagslabel = 'native-pygments'
-nn <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
-nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
-nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+"let g:Lf_Gtagslabel = 'native-pygments'
+"nn <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+"nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+"nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 nn <leader>ft :<C-U>Leaderf filetype<CR>
 " repo setting
 let g:Lf_RootMarkers=['.root']
@@ -351,3 +352,9 @@ let g:Lf_ExternalCommand = 'fd --type file "%s"'
 " repo files
 "let g:Lf_UseVersionControlTool = 0
 let g:Lf_ShowDevIcons = 0
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+let g:any_jump_disable_default_keybindings = 1
+nnoremap <leader>fd :AnyJump<CR>
+nnoremap <leader>fo :AnyJumpLastResults<CR>
+
