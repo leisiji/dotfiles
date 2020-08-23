@@ -7,8 +7,8 @@ fi
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-	command mkdir -p $HOME/.zinit
-	command git clone https://github.com/zdharma/zinit $HOME/.zinit/bin
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
 fi
 source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
@@ -16,6 +16,14 @@ autoload -Uz _zinit
 ### End of Zinit installer's chunk
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zinit-zsh/z-a-rust \
+    zinit-zsh/z-a-as-monitor \
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-bin-gem-node
 
 alias ni=nvim
 alias ra=ranger
