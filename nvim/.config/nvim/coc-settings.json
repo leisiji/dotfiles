@@ -10,7 +10,8 @@
 				},
 				"client": {
 					"snippetSupport": true
-				}
+				},
+				"highlight": {"lsRanges": true }
 			}
 		},
 		"bash": {
@@ -61,5 +62,6 @@
 	"explorer.position": "floating",
 	"tsserver.npm": "/usr/bin/npm",
 	"java.home": "/usr/lib/jvm/java-11-openjdk",
-	"python.jediEnabled": false
+  "python.jediEnabled": false,
+  "java.format.settings.url": "/home/ye/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml"
 }

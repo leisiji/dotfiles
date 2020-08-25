@@ -112,7 +112,8 @@ Plug 'AndrewRadev/inline_edit.vim', {'on' : 'InlineEdit'}
 Plug 'easymotion/vim-easymotion', {'on' : '<Plug>(easymotion-overwin-f2)'}
 
 Plug 'neoclide/vim-jsx-improve', {'for' : ['js']}
-Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
+"Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
+Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': ['c', 'cpp']}
 Plug 'junegunn/vim-easy-align', {'on' : '<Plug>(EasyAlign)'}
 Plug 'sheerun/vim-polyglot'
 Plug 'skywind3000/asynctasks.vim', {'on' : 'AsyncTask'} | Plug 'skywind3000/asyncrun.vim'
@@ -323,7 +324,7 @@ nn <M-f> :Leaderf rg --all-buffers<CR>
 nn <leader>b :Leaderf! buffer<CR>
 nn <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -w -e %s ", expand("<cword>"))<CR><CR>
 nn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
-nn <leader>d :<C-U><C-R>=printf("Leaderf! rg -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":~:."))<CR><CR>
+nn <leader>d :<C-U><C-R>=printf("Leaderf! rg -w -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":~:."))<CR><CR>
 nn <leader>o :<C-U>LeaderfRgRecall<CR>
 xn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
 "let g:Lf_FollowLinks = 1
