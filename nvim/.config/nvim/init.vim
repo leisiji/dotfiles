@@ -92,11 +92,8 @@ Plug 'srcery-colors/srcery-vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh', 'on' : ['Leaderf', 'LeaderfFile']}
 Plug 'itchyny/lightline.vim'
 Plug 'honza/vim-snippets'
-"Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!', 'on': 'Clap'}
-Plug 'liuchengxu/vista.vim', {'on' : ['Vista', 'Clap']}
 
-"Plug 'jsfaint/gen_tags.vim', {'for' : ['c', 'cpp']}
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'} | Plug 'rubberduck203/aosp-vim', {'for' : ['hal', 'bp', 'rc']} 
 Plug 'neoclide/coc-sources'
 
 Plug 'lfv89/vim-interestingwords'
@@ -112,7 +109,6 @@ Plug 'AndrewRadev/inline_edit.vim', {'on' : 'InlineEdit'}
 Plug 'easymotion/vim-easymotion', {'on' : '<Plug>(easymotion-overwin-f2)'}
 
 Plug 'neoclide/vim-jsx-improve', {'for' : ['js']}
-"Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
 Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': ['c', 'cpp']}
 Plug 'junegunn/vim-easy-align', {'on' : '<Plug>(EasyAlign)'}
 Plug 'sheerun/vim-polyglot'
@@ -120,9 +116,7 @@ Plug 'skywind3000/asynctasks.vim', {'on' : 'AsyncTask'} | Plug 'skywind3000/asyn
 Plug 'simnalamburt/vim-mundo', {'on' : 'MundoToggle'}
 Plug 'ARM9/arm-syntax-vim', {'for' : ['asm']}
 Plug 'Shirk/vim-gas', {'for' : ['asm']}
-Plug 'rubberduck203/aosp-vim', {'for' : ['hal', 'bp', 'rc']}
 Plug 'uiiaoo/java-syntax.vim', {'for' : ['java']}
-"Plug 'jsfaint/gen_tags.vim', {'for' : ['c']}
 "Plug 'puremourning/vimspector', {'do' : './install_gadget.py --all --disable-tcl'}
 Plug 'pechorin/any-jump.vim', {'on' : 'AnyJump'}
 call plug#end()
@@ -151,12 +145,9 @@ let g:lightline = {
 			\	'method': 'CocCurrentFunction'
 			\ },
 			\ }
-"let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
-"let g:lightline.tabline_subseparator = { 'left': "\ue0bb", 'right': "\ue0bb" }
 let s:palette = g:lightline#colorscheme#wombat#palette
 let s:palette.tabline.tabsel = [ ['black', '#7FB3D5', 252, 66, 'bold'] ]
 unlet s:palette
-
 
 "coc.vim
 set shortmess+=c
@@ -195,19 +186,6 @@ xm if <Plug>(coc-funcobj-i)
 xm af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
-" ccls
-function! CclsMap() abort
-	" class data member
-	nn <silent> <leader>xm :call CocLocations('ccls','$ccls/member')<cr>
-	" class function member
-	nn <silent> <leader>xf :call CocLocations('ccls','$ccls/member',{'kind':3})<cr>
-	" class's inner struct or typedef
-	nn <silent> <leader>xs :call CocLocations('ccls','$ccls/member',{'kind':2})<cr>
-	" class refs
-	nn <silent> <leader>xv :call CocLocations('ccls','$ccls/vars')<cr>
-	" function call chains
-	nn <silent> <leader>xe :call CocLocations('ccls','$ccls/call',{'hierarchy':v:true, 'levels':10})<cr>
-endfunction
 
 " vim-markdown
 let g:vim_markdown_folding_disabled=1
@@ -239,22 +217,15 @@ tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
 
 augroup user_plugin
 	autocmd!
-
 	" coc-nvim
-	autocmd FileType c,cpp call CclsMap()
 	autocmd CursorHold * silent call CocActionAsync('highlight')
-
 	" tab switch
 	autocmd TabLeave * let g:last_active_tab = tabpagenr()
-
 	au BufRead,BufNewFile *.lds setfiletype ld
 augroup END
 
 " vim-interestingwords
 let g:interestingWordsGUIColors = ['#8CCBEA', '#A4E57E', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
-
-" vim-startify
-"let g:startify_session_dir = '~/.vim/sessions'
 
 " inline_edit
 nn <leader>e :<C-u>InlineEdit<CR>
@@ -270,10 +241,6 @@ let g:polyglot_disabled = [ 'c', 'cpp', 'markdown', 'javascript' , 'java']
 
 nm f <Plug>(easymotion-overwin-f2)
 nm <leader>u :MundoToggle<CR>
-
-"vista.vim
-"let g:vista_close_on_jump=1
-"nn <leader>v :<C-U>Vista<CR>
 
 " asynctasks
 let g:asyncrun_open = 6
@@ -302,18 +269,6 @@ nn <M-q> :execute 'tabn ' . g:last_active_tab<cr>
 "let g:ip_des = 142
 "nn <leader><leader>t :<C-U><C-R>=printf("AsyncRun! sshpass -p yexuelin scp %s yexuelin@192.168.10.%d:%s", expand("%:p"), g:ip_des, g:scp_des_proj . substitute(expand("%:p"), g:scp_src_proj, "", ""))<CR><CR>
 highlight link JavaIdentifier NONE
-
-"vim-clap
-"nn <C-r> :Clap tags<CR>
-"nn <C-p> :Clap files<CR>
-"nn <C-f> :Clap blines<CR>
-"nn <leader>b :Clap buffers<CR>
-"nn <leader>m :Clap history<CR>
-"nn <leader>ft :Clap filetypes<CR>
-"nn <leader>fj :Clap jumps<CR>
-"nn <leader>fa :<C-U><C-R>=printf("Clap grep ++opt=--no-ignore ++opt=-w ++query=%s", expand("<cword>"))<CR>
-"xn <leader>fa :Clap grep ++query=@visual<CR>
-"let g:clap_theme = 'material_design_dark'
 
 "leaderf
 nn <C-r> :Leaderf --fuzzy function<CR>
