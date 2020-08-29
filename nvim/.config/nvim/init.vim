@@ -222,6 +222,7 @@ augroup user_plugin
 	" tab switch
 	autocmd TabLeave * let g:last_active_tab = tabpagenr()
 	au BufRead,BufNewFile *.lds setfiletype ld
+	au FocusGained * :checktime
 augroup END
 
 " vim-interestingwords
@@ -297,14 +298,15 @@ let g:Lf_NormalMap = {
 let g:Lf_HideHelp = 1
 let g:Lf_PreviewInPopup = 1
 "leaderf tags
-"let g:Lf_Gtagslabel = 'native-pygments'
-"nn <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
-"nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
-"nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+let g:Lf_Gtagslabel = 'native-pygments'
+nn <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 nn <leader>ft :<C-U>Leaderf filetype<CR>
 " repo setting
 let g:Lf_RootMarkers=['.root']
 let g:Lf_ExternalCommand = 'fd --type file "%s"'
+let g:Lf_GtagsAutoUpdate = 0
 " repo files
 "let g:Lf_UseVersionControlTool = 0
 let g:Lf_ShowDevIcons = 0
