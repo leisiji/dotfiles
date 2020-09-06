@@ -24,7 +24,7 @@ sudo pacman -S zsh exa fzf ranger hexyl tmux diff-so-fancy bat lua w3m \
 					universal-ctags global
 
 # neovim related, nodejs is for coc-nvim
-sudo pacman -S neovim ripgrep fd nodejs npm bear universal-ctags global
+sudo pacman -S neovim ripgrep fd nodejs npm bear
 yay -S ccls-git
 ```
 pip:
