@@ -118,7 +118,6 @@ Plug 'ARM9/arm-syntax-vim', {'for' : ['asm']}
 Plug 'Shirk/vim-gas', {'for' : ['asm']}
 Plug 'uiiaoo/java-syntax.vim', {'for' : ['java']}
 "Plug 'puremourning/vimspector', {'do' : './install_gadget.py --all --disable-tcl'}
-Plug 'pechorin/any-jump.vim', {'on' : 'AnyJump'}
 call plug#end()
 
 let g:srcery_italic = 1
@@ -186,6 +185,8 @@ xm if <Plug>(coc-funcobj-i)
 xm af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
+"ccls
+nn <leader>xm :call CocLocations('ccls','$ccls/call',{'caller':v:true, 'hierarchy':v:true})<CR>
 
 " vim-markdown
 let g:vim_markdown_folding_disabled=1
@@ -312,7 +313,4 @@ let g:Lf_GtagsAutoUpdate = 0
 let g:Lf_ShowDevIcons = 0
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-let g:any_jump_disable_default_keybindings = 1
-nnoremap <leader>fd :AnyJump<CR>
-nnoremap <leader>fo :AnyJumpLastResults<CR>
 
