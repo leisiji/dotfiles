@@ -54,14 +54,8 @@
 		"<Up>": "prompt:previous",
 		"<C-v>": "prompt:paste"
 	},
-	"explorer.icon.enableNerdfont": true,
-	"explorer.keyMappings": {
-		"v": "open:vsplit"
-	},
-	"explorer.floating.width": 100,
-	"explorer.position": "floating",
 	"tsserver.npm": "/usr/bin/npm",
 	"java.home": "/usr/lib/jvm/java-11-openjdk",
-  "python.jediEnabled": false,
-  "java.format.settings.url": "/home/ye/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml"
+	"python.jediEnabled": false,
+	"java.format.settings.url": "/home/ye/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml"
 }

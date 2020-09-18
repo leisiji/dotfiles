@@ -24,6 +24,7 @@ set smartcase
 set incsearch
 set noswapfile
 set cul
+set expandtab
 
 function! MyQuit() abort
 	if len(win_findbuf(bufnr())) > 1 || expand('%') == '' || tabpagenr('$') == 1
@@ -82,6 +83,8 @@ vmap <leader>y "+y
 nn <leader>p "+p
 nn <leader>rt :<C-U>%retab!<CR>
 
+let g:polyglot_disabled = [ 'c', 'cpp', 'markdown', 'javascript', 'aidl']
+
 call plug#begin('~/.vim/plugged')
 
 if executable('fcitx5')
@@ -93,7 +96,7 @@ Plug 'Yggdroot/LeaderF', { 'do': './install.sh', 'on' : ['Leaderf', 'LeaderfFile
 Plug 'itchyny/lightline.vim'
 Plug 'honza/vim-snippets'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'} | Plug 'rubberduck203/aosp-vim', {'for' : ['hal', 'bp', 'rc']} 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc-sources'
 
 Plug 'lfv89/vim-interestingwords'
@@ -109,15 +112,15 @@ Plug 'AndrewRadev/inline_edit.vim', {'on' : 'InlineEdit'}
 Plug 'easymotion/vim-easymotion', {'on' : '<Plug>(easymotion-overwin-f2)'}
 
 Plug 'neoclide/vim-jsx-improve', {'for' : ['js']}
-Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': ['c', 'cpp']}
 Plug 'junegunn/vim-easy-align', {'on' : '<Plug>(EasyAlign)'}
+Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': ['c', 'cpp']}
 Plug 'sheerun/vim-polyglot'
 Plug 'skywind3000/asynctasks.vim', {'on' : 'AsyncTask'} | Plug 'skywind3000/asyncrun.vim'
 Plug 'simnalamburt/vim-mundo', {'on' : 'MundoToggle'}
 Plug 'ARM9/arm-syntax-vim', {'for' : ['asm']}
 Plug 'Shirk/vim-gas', {'for' : ['asm']}
-Plug 'uiiaoo/java-syntax.vim', {'for' : ['java']}
-"Plug 'puremourning/vimspector', {'do' : './install_gadget.py --all --disable-tcl'}
+Plug 'rubberduck203/aosp-vim', {'for' : ['hal', 'bp', 'rc']}
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins', 'on' : ['Defx'] }
 call plug#end()
 
 let g:srcery_italic = 1
@@ -144,18 +147,21 @@ let g:lightline = {
 			\	'method': 'CocCurrentFunction'
 			\ },
 			\ }
+"let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
+"let g:lightline.tabline_subseparator = { 'left': "\ue0bb", 'right': "\ue0bb" }
 let s:palette = g:lightline#colorscheme#wombat#palette
 let s:palette.tabline.tabsel = [ ['black', '#7FB3D5', 252, 66, 'bold'] ]
 unlet s:palette
+
 
 "coc.vim
 set shortmess+=c
 set signcolumn=yes
 set updatetime=300
 let g:coc_global_extensions=[
-			\ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver', 'coc-explorer',
+			\ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver',
 			\ 'coc-python', 'coc-emmet', 'coc-vimlsp', 'coc-git', 'coc-powershell', 'coc-css', 'coc-emmet',
-			\ 'coc-eslint', 'coc-java', 'coc-prettier']
+			\ 'coc-eslint', 'coc-java']
 ino <silent><expr> <TAB>
 			\ pumvisible() ? "\<C-n>" :
 			\ <SID>check_back_space() ? "\<TAB>" :
@@ -195,10 +201,6 @@ let g:vim_markdown_conceal_code_blocks = 0
 let g:tex_conceal = ""
 let g:vim_markdown_math = 1
 
-" coc-explorer
-let g:indentLine_fileTypeExclude = ['coc-explorer']
-nm <space>tr :CocCommand explorer<CR>
-
 " coc-git
 nn <silent> <space>gs :<C-u>CocList --normal gstatus<CR>
 nn <leader>gu :CocCommand git.chunkUndo<CR>
@@ -218,16 +220,23 @@ tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
 
 augroup user_plugin
 	autocmd!
+
 	" coc-nvim
 	autocmd CursorHold * silent call CocActionAsync('highlight')
+
 	" tab switch
 	autocmd TabLeave * let g:last_active_tab = tabpagenr()
+
 	au BufRead,BufNewFile *.lds setfiletype ld
-	au FocusGained * :checktime
+	au BufRead,BufNewFile *.aidl setfiletype java
+	au FileType defx call s:defx_my_settings()
 augroup END
 
 " vim-interestingwords
 let g:interestingWordsGUIColors = ['#8CCBEA', '#A4E57E', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
+
+" vim-startify
+"let g:startify_session_dir = '~/.vim/sessions'
 
 " inline_edit
 nn <leader>e :<C-u>InlineEdit<CR>
@@ -239,7 +248,6 @@ let g:inline_edit_autowrite = 1
 xm ga <Plug>(EasyAlign)
 nm ga <Plug>(EasyAlign)
 
-let g:polyglot_disabled = [ 'c', 'cpp', 'markdown', 'javascript' , 'java']
 
 nm f <Plug>(easymotion-overwin-f2)
 nm <leader>u :MundoToggle<CR>
@@ -270,14 +278,13 @@ nn <M-q> :execute 'tabn ' . g:last_active_tab<cr>
 "let g:scp_src_proj = "xxx"
 "let g:ip_des = 142
 "nn <leader><leader>t :<C-U><C-R>=printf("AsyncRun! sshpass -p yexuelin scp %s yexuelin@192.168.10.%d:%s", expand("%:p"), g:ip_des, g:scp_des_proj . substitute(expand("%:p"), g:scp_src_proj, "", ""))<CR><CR>
-highlight link JavaIdentifier NONE
 
 "leaderf
 nn <C-r> :Leaderf --fuzzy function<CR>
 nn <C-p> :LeaderfFile<CR>
 nn <C-f> :Leaderf rg --current-buffer<CR>
 nn <leader>m :Leaderf --fuzzy mru<CR>
-nn <M-f> :Leaderf rg --all-buffers<CR>
+nn <M-f> :<C-U><C-R>=printf("Leaderf! rg -F --all-buffers -w -e %s ", expand("<cword>"))<CR><CR>
 nn <leader>b :Leaderf! buffer<CR>
 nn <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -w -e %s ", expand("<cword>"))<CR><CR>
 nn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
@@ -313,4 +320,28 @@ let g:Lf_GtagsAutoUpdate = 0
 let g:Lf_ShowDevIcons = 0
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
+" defx
+function! s:defx_my_settings() abort
+	nnoremap <silent><buffer><expr> l
+	\ defx#do_action('open_tree', 'toggle')
+	nnoremap <silent><buffer><expr> v
+	\ defx#do_action('multi', ['vsplit', 'quit'])
+	nnoremap <silent><buffer><expr> t
+	\ defx#do_action('multi', ['tab drop', 'quit'])
+	nnoremap <silent><buffer><expr> <CR> defx#do_action('open')
+	nnoremap <silent><buffer><expr> c defx#do_action('copy')
+	nnoremap <silent><buffer><expr> m defx#do_action('move')
+	nnoremap <silent><buffer><expr> p defx#do_action('paste')
+	nnoremap <silent><buffer><expr> A defx#do_action('new_directory')
+	nnoremap <silent><buffer><expr> a defx#do_action('new_file')
+	nnoremap <silent><buffer><expr> d defx#do_action('remove')
+	nnoremap <silent><buffer><expr> r defx#do_action('rename')
+	nnoremap <silent><buffer><expr> . defx#do_action('toggle_ignored_files')
+	nnoremap <silent><buffer><expr> q defx#do_action('quit')
+	nnoremap <silent><buffer><expr> <ESC> defx#do_action('quit')
+	nnoremap <silent><buffer><expr> <backspace> defx#do_action('cd', ['..'])
+endfunction
+
+nn <leader>tj :Defx -split=floating<CR>
+nn <leader>tr :Defx `expand('%:p:h')` -search=`expand('%:p')` -split=floating<CR>
 
