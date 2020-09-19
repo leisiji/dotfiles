@@ -37,6 +37,9 @@ export HISTSIZE=999999999
 export SAVEHIST=$HISTSIZE
 export MANPAGER='nvim +Man!'
 export PATH="$PATH:$HOME/.local/bin/"
+export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d'
 
 # key-bindings 放在前面，防止后面的快捷键被覆盖
 zinit snippet OMZ::lib/key-bindings.zsh

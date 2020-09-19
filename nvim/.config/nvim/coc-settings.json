@@ -28,6 +28,10 @@
 			"initializationOptions": {
 				"buildDirectory": "build"
 			}
+		},
+		"kotlin": {
+			"command": "kotlin-language-server",
+			"filetypes": ["kotlin"]
 		}
 	},
 	"suggest.timeout": 500,

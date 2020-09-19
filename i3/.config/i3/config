@@ -8,6 +8,7 @@
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
+popup_during_fullscreen smart
 
 set $mod Mod4
 
@@ -198,4 +199,5 @@ bar {
         urgent_workspace #2f343a #900000 #ffffff
     }
 }
+
 exec_always --no-startup-id xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
