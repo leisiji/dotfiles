@@ -24,7 +24,6 @@ set smartcase
 set incsearch
 set noswapfile
 set cul
-set expandtab
 
 function! MyQuit() abort
     if len(win_findbuf(bufnr())) > 1 || expand('%') == '' || tabpagenr('$') == 1
@@ -83,7 +82,7 @@ vmap <leader>y "+y
 nn <leader>p "+p
 nn <leader>rt :<C-U>%retab!<CR>
 
-let g:polyglot_disabled = [ 'c', 'cpp', 'markdown', 'javascript', 'aidl']
+"let g:polyglot_disabled = [ 'c', 'cpp', 'markdown', 'javascript', 'aidl']
 
 call plug#begin('~/.vim/plugged')
 
@@ -114,13 +113,15 @@ Plug 'easymotion/vim-easymotion', {'on' : '<Plug>(easymotion-overwin-f2)'}
 Plug 'neoclide/vim-jsx-improve', {'for' : ['js']}
 Plug 'junegunn/vim-easy-align', {'on' : '<Plug>(EasyAlign)'}
 Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': ['c', 'cpp']}
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 Plug 'skywind3000/asynctasks.vim', {'on' : 'AsyncTask'} | Plug 'skywind3000/asyncrun.vim'
 Plug 'simnalamburt/vim-mundo', {'on' : 'MundoToggle'}
 Plug 'ARM9/arm-syntax-vim', {'for' : ['asm']}
 Plug 'Shirk/vim-gas', {'for' : ['asm']}
 Plug 'rubberduck203/aosp-vim', {'for' : ['hal', 'bp', 'rc']}
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins', 'on' : ['Defx'] }
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive', {'on' : 'Git'}
 "Plug 'puremourning/vimspector', {'do' : './install_gadget.py --all --disable-tcl'}
 call plug#end()
 
@@ -155,10 +156,10 @@ unlet s:palette
 "coc.vim
 set shortmess+=c
 set signcolumn=yes
-set updatetime=300
+set updatetime=500
 let g:coc_global_extensions=[
             \ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver',
-            \ 'coc-python', 'coc-emmet', 'coc-vimlsp', 'coc-git', 'coc-powershell', 'coc-css', 'coc-emmet',
+            \ 'coc-python', 'coc-emmet', 'coc-vimlsp', 'coc-powershell', 'coc-css', 'coc-emmet',
             \ 'coc-eslint', 'coc-java']
 ino <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>" :
@@ -184,6 +185,7 @@ nn <space>v :<C-u>CocList --normal outline<cr>
 nn <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 " ccls, call chain
 nn <leader>xm :call CocLocations('ccls','$ccls/call',{'caller':v:true, 'hierarchy':v:true})<CR>
+command! -nargs=0 Format :call CocAction('format')
 
 " vim-markdown
 let g:vim_markdown_folding_disabled=1
@@ -192,15 +194,13 @@ let g:vim_markdown_conceal_code_blocks = 0
 let g:tex_conceal = ""
 let g:vim_markdown_math = 1
 
-" coc-git
-nn <silent> <space>gs :<C-u>CocList --normal gstatus<CR>
-nn <leader>gu :CocCommand git.chunkUndo<CR>
-nn <leader>gf :CocCommand git.foldUnchanged<CR>
-nn <leader>gd :CocCommand git.diffCached<CR>
-nm <leader>gi <Plug>(coc-git-chunkinfo)
-nm <leader>gc <Plug>(coc-git-commit)
-nm <leader>gj <Plug>(coc-git-nextchunk)
-nm <leader>gk <Plug>(coc-git-prevchunk)
+" git
+nn <leader>gf :GitGutterFold<CR>
+nn <leader>ga :GitGutterStageHunk<CR>
+nn <leader>gu :GitGutterUndoHunk<CR>
+nn <leader>gb :Git blame<CR>
+nn <leader>gd :Git diff<CR>
+let g:gitgutter_preview_win_floating = 1
 
 " floaterm
 nn <leader>tt :FloatermToggle<CR>
