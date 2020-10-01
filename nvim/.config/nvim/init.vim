@@ -26,11 +26,11 @@ set noswapfile
 set cul
 
 function! MyQuit() abort
-    if len(win_findbuf(bufnr())) > 1 || expand('%') == '' || tabpagenr('$') == 1
-        exe 'q'
-    else
-        exe 'bd'
-    endif
+	if len(win_findbuf(bufnr())) > 1 || expand('%') == '' || tabpagenr('$') == 1
+		exe 'q'
+	else
+		exe 'bd'
+	endif
 endfunction
 nn <silent> <leader>q :call MyQuit()<CR>
 nn <silent> <leader><leader>q :qa<CR>
@@ -75,24 +75,33 @@ nn <M-y> <C-r>
 "Remove all trailing whitespace by pressing F5
 nn <M-s> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 "tnoremap <Esc> <C-\><C-n>
-nn <C-t> :tabnew<CR>
 ino <m-h> <c-left>
 ino <m-l> <c-right>
 vmap <leader>y "+y
 nn <leader>p "+p
 nn <leader>rt :<C-U>%retab!<CR>
 
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+	if (index(['vim','help'], &filetype) >= 0)
+		execute 'vertical h '.expand('<cword>')
+	else
+		execute 'vertical Man '.expand('<cword>')
+	endif
+endfunction
+
 "let g:polyglot_disabled = [ 'c', 'cpp', 'markdown', 'javascript', 'aidl']
 
 call plug#begin('~/.vim/plugged')
 
 if executable('fcitx5')
-    Plug 'lilydjwg/fcitx.vim', { 'on': [] } | au InsertEnter * call plug#load('fcitx.vim')
+	Plug 'lilydjwg/fcitx.vim', { 'on': [] } | au InsertEnter * call plug#load('fcitx.vim')
 endif
 
 Plug 'srcery-colors/srcery-vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh', 'on' : ['Leaderf', 'LeaderfFile']}
 Plug 'itchyny/lightline.vim'
+"Plug 'hardcoreplayers/spaceline.vim' | Plug 'ryanoasis/vim-devicons'
 Plug 'honza/vim-snippets'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -101,7 +110,6 @@ Plug 'neoclide/coc-sources'
 Plug 'lfv89/vim-interestingwords'
 Plug 'Yggdroot/indentLine'
 Plug 'scrooloose/nerdcommenter'
-Plug 'farmergreg/vim-lastplace'
 Plug 'mg979/vim-visual-multi'
 Plug 'tpope/vim-surround'
 Plug 'plasticboy/vim-markdown', {'for' : ['md']}
@@ -130,45 +138,46 @@ colorscheme srcery
 
 let g:indentLine_leadingSpaceEnabled=1
 let g:indentLine_leadingSpaceChar='·'
-let g:indentLine_fileTypeExclude = ['defx', 'help']
+let g:indentLine_fileTypeExclude = ['defx', 'help', 'man']
 
+"let g:spaceline_diff_tool='git-gutter'
+"let g:spaceline_seperate_style= 'none'
 " lightline
 function! CocCurrentFunction() abort
-    return get(b:, 'coc_current_function', '')
+	return get(b:, 'coc_current_function', '')
 endfunction
 let g:lightline = {
-            \ 'colorscheme': 'wombat',
-            \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'readonly', 'filename', 'modified', 'method' ] ]
-            \ },
-            \ 'component_function': {
-            \   'method': 'CocCurrentFunction'
-            \ },
-            \ }
-"let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
-"let g:lightline.tabline_subseparator = { 'left': "\ue0bb", 'right': "\ue0bb" }
+			\ 'colorscheme': 'wombat',
+			\ 'active': {
+			\	'left': [ [ 'mode', 'paste' ],
+			\			  [ 'readonly', 'filename', 'modified', 'method' ] ]
+			\ },
+			\ 'component_function': {
+			\	'method': 'CocCurrentFunction'
+			\ },
+			\ }
+let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
+let g:lightline.tabline_subseparator = { 'left': "\ue0bb", 'right': "\ue0bb" }
 let s:palette = g:lightline#colorscheme#wombat#palette
 let s:palette.tabline.tabsel = [ ['black', '#7FB3D5', 252, 66, 'bold'] ]
 unlet s:palette
-
 
 "coc.vim
 set shortmess+=c
 set signcolumn=yes
 set updatetime=500
 let g:coc_global_extensions=[
-            \ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver',
-            \ 'coc-python', 'coc-emmet', 'coc-vimlsp', 'coc-powershell', 'coc-css', 'coc-emmet',
-            \ 'coc-eslint', 'coc-java']
+			\ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver',
+			\ 'coc-python', 'coc-emmet', 'coc-vimlsp', 'coc-powershell', 'coc-css', 'coc-emmet',
+			\ 'coc-eslint', 'coc-java']
 ino <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
+			\ pumvisible() ? "\<C-n>" :
+			\ <SID>check_back_space() ? "\<TAB>" :
+			\ coc#refresh()
 ino <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 ino <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 let g:coc_snippet_next = '<C-n>'
@@ -210,19 +219,24 @@ let g:floaterm_position='center'
 tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
 
 augroup user_plugin
-    autocmd!
+	autocmd!
 
-    " coc-nvim
-    autocmd CursorHold * silent call CocActionAsync('highlight')
+	" coc-nvim
+	autocmd CursorHold * silent call CocActionAsync('highlight')
 
-    " tab switch
-    autocmd TabLeave * let g:last_active_tab = tabpagenr()
+	" tab switch
+	autocmd TabLeave * let g:last_active_tab = tabpagenr()
 
-    au BufRead,BufNewFile *.lds setfiletype ld
-    au BufRead,BufNewFile *.aidl setfiletype java
-    au FocusGained * :checktime
+	au BufRead,BufNewFile *.lds setfiletype ld
+	au BufRead,BufNewFile *.aidl setfiletype java
+	au FocusGained * :checktime
 
-    au FileType defx call s:defx_my_settings()
+	au FileType defx call s:defx_my_settings()
+
+	autocmd BufReadPost *
+	  \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+	  \ |	exe "normal! g`\""
+	  \ | endif
 augroup END
 
 " vim-interestingwords
@@ -250,15 +264,15 @@ let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg']
 nn <leader><leader>r :AsyncTask file-run<cr>
 
 function! WinZoomToggle() abort
-    if exists('t:zoomed') && t:zoomed
-        execute t:zoom_winrestcmd
-        let t:zoomed = 0
-    else
-        let t:zoom_winrestcmd = winrestcmd()
-        resize
-        vertical resize
-        let t:zoomed = 1
-    endif
+	if exists('t:zoomed') && t:zoomed
+		execute t:zoom_winrestcmd
+		let t:zoomed = 0
+	else
+		let t:zoom_winrestcmd = winrestcmd()
+		resize
+		vertical resize
+		let t:zoomed = 1
+	endif
 endfunction
 nn <silent> <Leader>z :call WinZoomToggle()<CR>
 
@@ -283,18 +297,17 @@ nn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
 nn <leader>d :<C-U><C-R>=printf("Leaderf! rg -w -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":~:."))<CR><CR>
 nn <leader>o :<C-U>LeaderfRgRecall<CR>
 xn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
-"let g:Lf_FollowLinks = 1
 let g:Lf_JumpToExistingWindow = 1
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_GtagsAutoGenerate = 0
 let g:Lf_NormalMap = {
-            \ "File":[["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
-            \ "Buffer":[["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
-            \ "Mru":[["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
-            \ "Gtags":[["<ESC>", ':exec g:Lf_py "gtagsExplManager.quit()"<CR>']],
-            \ "Rg":[["<ESC>", ':exec g:Lf_py "rgExplManager.quit()"<CR>']],
-            \ "Line":[["<ESC>", ':exec g:Lf_py "lineExplManager.quit()"<CR>']],
-            \}
+			\ "File":[["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+			\ "Buffer":[["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+			\ "Mru":[["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+			\ "Gtags":[["<ESC>", ':exec g:Lf_py "gtagsExplManager.quit()"<CR>']],
+			\ "Rg":[["<ESC>", ':exec g:Lf_py "rgExplManager.quit()"<CR>']],
+			\ "Line":[["<ESC>", ':exec g:Lf_py "lineExplManager.quit()"<CR>']],
+			\}
 let g:Lf_HideHelp = 1
 let g:Lf_PreviewInPopup = 1
 "leaderf tags
@@ -309,35 +322,36 @@ let g:Lf_ExternalCommand = 'fd --type file "%s"'
 let g:Lf_GtagsAutoUpdate = 0
 " repo files
 "let g:Lf_UseVersionControlTool = 0
+"let g:Lf_FollowLinks = 1
 let g:Lf_ShowDevIcons = 0
 
 " defx
 function DefxExpandDir() abort
-    let s:dirNames = split(expand('%'), '/')
-    execute ":Defx -split=vertical -winwidth=30"
-    for s:dirName in s:dirNames
-        call search(s:dirName)
-        call defx#call_action('open_tree', 'toggle')
-    endfor
+	let s:dirNames = split(expand('%'), '/')
+	execute ":Defx -split=vertical -winwidth=30"
+	for s:dirName in s:dirNames
+		call search(s:dirName)
+		call defx#call_action('open_tree', 'toggle')
+	endfor
 endfunction
 
 function! s:defx_my_settings() abort
-    nnoremap <silent><buffer><expr> l defx#do_action('open_tree', 'toggle')
-    nnoremap <silent><buffer><expr> h defx#do_action('close_tree')
-    nnoremap <silent><buffer><expr> v defx#do_action('multi', [['drop', 'vsplit'], 'quit'])
-    nnoremap <silent><buffer><expr> t defx#do_action('multi', [['drop', 'tabnew'], 'quit'])
-    nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')
-    nnoremap <silent><buffer><expr> c defx#do_action('copy')
-    nnoremap <silent><buffer><expr> m defx#do_action('move')
-    nnoremap <silent><buffer><expr> p defx#do_action('paste')
-    nnoremap <silent><buffer><expr> A defx#do_action('new_directory')
-    nnoremap <silent><buffer><expr> a defx#do_action('new_file')
-    nnoremap <silent><buffer><expr> dd defx#do_action('remove')
-    nnoremap <silent><buffer><expr> r defx#do_action('rename')
-    nnoremap <silent><buffer><expr> . defx#do_action('toggle_ignored_files')
-    nnoremap <silent><buffer><expr> q defx#do_action('quit')
-    nnoremap <silent><buffer><expr> <ESC> defx#do_action('quit')
-    nnoremap <silent><buffer><expr> <backspace> defx#do_action('cd', ['..'])
+	nnoremap <silent><buffer><expr> l defx#do_action('open_tree', 'toggle')
+	nnoremap <silent><buffer><expr> h defx#do_action('close_tree')
+	nnoremap <silent><buffer><expr> v defx#do_action('multi', [['drop', 'vsplit'], 'quit'])
+	nnoremap <silent><buffer><expr> t defx#do_action('multi', [['drop', 'tabnew'], 'quit'])
+	nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')
+	nnoremap <silent><buffer><expr> c defx#do_action('copy')
+	nnoremap <silent><buffer><expr> m defx#do_action('move')
+	nnoremap <silent><buffer><expr> p defx#do_action('paste')
+	nnoremap <silent><buffer><expr> A defx#do_action('new_directory')
+	nnoremap <silent><buffer><expr> a defx#do_action('new_file')
+	nnoremap <silent><buffer><expr> dd defx#do_action('remove')
+	nnoremap <silent><buffer><expr> r defx#do_action('rename')
+	nnoremap <silent><buffer><expr> . defx#do_action('toggle_ignored_files')
+	nnoremap <silent><buffer><expr> q defx#do_action('quit')
+	nnoremap <silent><buffer><expr> <ESC> defx#do_action('quit')
+	nnoremap <silent><buffer><expr> <backspace> defx#do_action('cd', ['..'])
 endfunction
 
 nn <silent> <leader>tr :Defx -resume -split=vertical -winwidth=30<CR>
