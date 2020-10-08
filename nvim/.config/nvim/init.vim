@@ -101,7 +101,6 @@ endif
 Plug 'srcery-colors/srcery-vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh', 'on' : ['Leaderf', 'LeaderfFile']}
 Plug 'itchyny/lightline.vim'
-"Plug 'hardcoreplayers/spaceline.vim' | Plug 'ryanoasis/vim-devicons'
 Plug 'honza/vim-snippets'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -140,8 +139,6 @@ let g:indentLine_leadingSpaceEnabled=1
 let g:indentLine_leadingSpaceChar='·'
 let g:indentLine_fileTypeExclude = ['defx', 'help', 'man']
 
-"let g:spaceline_diff_tool='git-gutter'
-"let g:spaceline_seperate_style= 'none'
 " lightline
 function! CocCurrentFunction() abort
 	return get(b:, 'coc_current_function', '')
@@ -156,8 +153,8 @@ let g:lightline = {
 			\	'method': 'CocCurrentFunction'
 			\ },
 			\ }
-let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
-let g:lightline.tabline_subseparator = { 'left': "\ue0bb", 'right': "\ue0bb" }
+"let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
+"let g:lightline.tabline_subseparator = { 'left': "\ue0bb", 'right': "\ue0bb" }
 let s:palette = g:lightline#colorscheme#wombat#palette
 let s:palette.tabline.tabsel = [ ['black', '#7FB3D5', 252, 66, 'bold'] ]
 unlet s:palette
