@@ -36,6 +36,7 @@ nn <silent> <leader>q :call MyQuit()<CR>
 nn <silent> <leader><leader>q :qa<CR>
 
 nn <leader>s :w<CR>
+nn <M-a> <C-w>w
 nn <M-1> 1gt
 nn <M-2> 2gt
 nn <M-3> 3gt
