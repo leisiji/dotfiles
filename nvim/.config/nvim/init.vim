@@ -328,7 +328,8 @@ function DefxExpandDir() abort
 	let s:dirNames = split(expand('%'), '/')
 	execute ":Defx -split=vertical -winwidth=30"
 	for s:dirName in s:dirNames
-		call search(s:dirName)
+		let s:dirNamePattern = '\<' . s:dirName . '\>'
+		call search(s:dirName, 'e')
 		call defx#call_action('open_tree', 'toggle')
 	endfor
 endfunction
