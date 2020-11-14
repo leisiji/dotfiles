@@ -116,7 +116,7 @@ Plug 'plasticboy/vim-markdown', {'for' : ['md']}
 Plug 'sbdchd/neoformat', {'on' : 'Neoformat'}
 Plug 'voldikss/vim-floaterm', {'on' : 'FloatermToggle'}
 Plug 'AndrewRadev/inline_edit.vim', {'on' : 'InlineEdit'}
-Plug 'easymotion/vim-easymotion', {'on' : '<Plug>(easymotion-overwin-f2)'}
+"Plug 'easymotion/vim-easymotion', {'on' : '<Plug>(easymotion-overwin-f2)'}
 
 Plug 'neoclide/vim-jsx-improve', {'for' : ['js']}
 Plug 'junegunn/vim-easy-align', {'on' : '<Plug>(EasyAlign)'}
@@ -131,6 +131,7 @@ Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins', 'on' : ['Defx'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive', {'on' : 'Git'}
 "Plug 'puremourning/vimspector', {'do' : './install_gadget.py --all --disable-tcl'}
+Plug 'gcmt/wildfire.vim', {'on' : '<Plug>(wildfire-fuel)'}
 call plug#end()
 
 let g:srcery_italic = 1
@@ -164,6 +165,7 @@ unlet s:palette
 set shortmess+=c
 set signcolumn=yes
 set updatetime=500
+hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
 let g:coc_global_extensions=[
 			\ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver',
 			\ 'coc-python', 'coc-emmet', 'coc-vimlsp', 'coc-powershell', 'coc-css', 'coc-emmet',
@@ -192,7 +194,9 @@ nn <space>v :<C-u>CocList --normal outline<cr>
 nn <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 " ccls, call chain
 nn <leader>xm :call CocLocations('ccls','$ccls/call',{'caller':v:true, 'hierarchy':v:true})<CR>
-command! -nargs=0 Format :call CocAction('format')
+
+xmap <leader><leader>f <Plug>(coc-format-selected)
+nmap <leader><leader>f <Plug>(coc-format)
 
 " vim-markdown
 let g:vim_markdown_folding_disabled=1
@@ -235,6 +239,8 @@ augroup user_plugin
 	  \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
 	  \ |	exe "normal! g`\""
 	  \ | endif
+
+	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup END
 
 " vim-interestingwords
@@ -357,3 +363,4 @@ nn <silent> <leader>tr :Defx -resume -split=vertical -winwidth=30<CR>
 nn <silent> <leader>tf :Defx -resume -split=floating<CR>
 nn <silent> <leader>tj :call DefxExpandDir()<CR>
 
+nm <Enter> <Plug>(wildfire-fuel)

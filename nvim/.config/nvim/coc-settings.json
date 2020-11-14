@@ -32,6 +32,21 @@
 		"kotlin": {
 			"command": "kotlin-language-server",
 			"filetypes": ["kotlin"]
+		},
+		"lua": {
+			"cwd": "/usr/share/lua-language-server",
+			"command": "/usr/bin/lua-language-server",
+			"args": ["-E", "-e", "LANG=en", "/usr/share/lua-language-server/main.lua"],
+			"filetypes": ["lua"],
+			"rootPatterns": [".git/"],
+			"settings": {
+				"Lua": {
+					"diagnostics":{
+						"enable":true,
+						"disable":["lowercase-global"]
+					}
+				}
+			}
 		}
 	},
 	"suggest.timeout": 500,
@@ -45,6 +60,7 @@
 	"coc.source.buffer.ignoreGitignore": false,
 	"coc.source.tag.shortcut": "T",
 	"coc.source.tag.priority": 78,
+	"suggest.languageSourcePriority":77,
 	"coc.preferences.currentFunctionSymbolAutoUpdate":true,
 	"coc.preferences.jumpCommand": "tab drop",
 	"list.insertMappings": {
