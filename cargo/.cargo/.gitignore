@@ -1,3 +1,2 @@
-git
-registry
-.package-cache
+*
+!config

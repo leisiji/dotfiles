@@ -6,36 +6,34 @@ My dotfiles for Arch linux.
 
 I'm using stow to manage my dotfiles
 
-Software dependencies:
+minimal development on terminal:
 ```bash
 # yay installation
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
-# desktop basic
+# shell related, lua is for z.lua
+# w3m can display image in terminal
+sudo pacman -S zsh exa fzf ranger tmux lua w3m \
+					universal-ctags global diff-so-fancy
+
+# neovim related, nodejs is for coc-nvim
+sudo pacman -S neovim nodejs npm
+
+yarn global add bash-language-server
+yay -S ccls kotlin-language-server lua-language-server-git
+pip3 install --user cmake-language-server pynvim bear compiledb
+
+# tools based on rust
+cargo install hexyl bat ripgrep fd-find bat
+```
+desktop development:
+```bash
 sudo pacman -S zathura zathura-pdf-mupdf i3 alacritty \
 				adobe-source-code-pro-fonts
 yay -S vnote i3status-rust nerd-fonts-complete
 # Chinese input method
 sudo pacman -S fcitx5 fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-material-color rime
-
-# shell related, lua is for z.lua
-# w3m can display image in terminal
-sudo pacman -S zsh exa fzf ranger hexyl tmux diff-so-fancy bat lua w3m \
-					universal-ctags global
-
-# neovim related, nodejs is for coc-nvim
-sudo pacman -S neovim ripgrep fd nodejs npm bear
-
-# language server protocol
-npm install -g bash-language-server
-yay -S ccls kotlin-language-server lua-language-server-git
-pip3 install --user cmake-language-server
 ```
-pip:
-```bash
-pip3 install --user pynvim
-```
-
 Plugin Manager:
 ```bash
 # vim-plug
