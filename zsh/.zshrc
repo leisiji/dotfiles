@@ -30,6 +30,7 @@ alias ra=ranger
 alias t='tmux -2'
 alias ta='tmux -2 a'
 alias ls=exa
+alias cr='cd $(git rev-parse --show-toplevel)'
 export TERM=xterm-256color
 export TERM_ITALICS=true
 export HISTFILE="$HOME/.zsh_history"
@@ -67,7 +68,6 @@ zinit ice wait'0' lucid; zinit light zsh-users/zsh-history-substring-search
 
 export ZSH_AUTOSUGGEST_USE_ASYNC="true"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
-bindkey ',' autosuggest-execute
 bindkey '^[,' autosuggest-accept
 
 zstyle ':fzf-tab:complete:_zlua:*' query-string input
@@ -80,8 +80,6 @@ addBat () {
 }
 zle -N addBat
 bindkey '^[a' addBat
-bindkey -s '\eq'   'cd ..\n'
-bindkey -s '\el'   'ls -l\n'
-bindkey -s '\ee' 'ni '
-bindkey -s '\ew' 'cd '
-
+bindkey -s '\eq' 'cd ..\n'
+bindkey -s '\el' 'ls -l\n'
+bindkey -s '\ev' 'ni '
