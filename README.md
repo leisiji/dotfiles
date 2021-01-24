@@ -13,7 +13,7 @@ git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
 # shell related, lua is for z.lua
 # w3m can display image in terminal
-sudo pacman -S zsh exa fzf ranger tmux lua w3m \
+sudo pacman -S zsh fzf ranger tmux lua w3m \
 					universal-ctags global diff-so-fancy
 
 # neovim related, nodejs is for coc-nvim
@@ -24,15 +24,19 @@ yay -S ccls kotlin-language-server lua-language-server-git
 pip3 install --user cmake-language-server pynvim bear compiledb
 
 # tools based on rust
-cargo install hexyl bat ripgrep fd-find bat
+cargo install hexyl bat ripgrep fd-find exa
 ```
 desktop development:
 ```bash
 sudo pacman -S zathura zathura-pdf-mupdf i3 alacritty \
 				adobe-source-code-pro-fonts
-yay -S vnote i3status-rust nerd-fonts-complete
+yay -S vnote i3status-rust nerd-fonts-source-code-pro
+
+# i3status-rust dependency
+yay -S alsa-utils ttf-font-awesome powerline-fonts
+
 # Chinese input method
-sudo pacman -S fcitx5 fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-material-color rime
+sudo pacman -S fcitx5 fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-material-color
 ```
 Plugin Manager:
 ```bash

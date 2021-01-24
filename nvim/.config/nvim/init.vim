@@ -132,6 +132,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive', {'on' : 'Git'}
 "Plug 'puremourning/vimspector', {'do' : './install_gadget.py --all --disable-tcl'}
 Plug 'gcmt/wildfire.vim', {'on' : '<Plug>(wildfire-fuel)'}
+Plug 'voldikss/vim-skylight'
 call plug#end()
 
 let g:srcery_italic = 1
@@ -168,8 +169,8 @@ set updatetime=500
 hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
 let g:coc_global_extensions=[
 			\ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver',
-			\ 'coc-python', 'coc-emmet', 'coc-vimlsp', 'coc-powershell', 'coc-css', 'coc-emmet',
-			\ 'coc-eslint', 'coc-java']
+			\ 'coc-pyright', 'coc-emmet', 'coc-vimlsp', 'coc-powershell', 'coc-css', 'coc-eslint',
+			\ 'coc-java']
 ino <silent><expr> <TAB>
 			\ pumvisible() ? "\<C-n>" :
 			\ <SID>check_back_space() ? "\<TAB>" :

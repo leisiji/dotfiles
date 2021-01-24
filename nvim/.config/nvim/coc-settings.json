@@ -61,21 +61,10 @@
 	"coc.source.tag.shortcut": "T",
 	"coc.source.tag.priority": 78,
 	"suggest.languageSourcePriority":77,
+	"yank.priority": 50,
 	"coc.preferences.currentFunctionSymbolAutoUpdate":true,
 	"coc.preferences.jumpCommand": "tab drop",
-	"list.insertMappings": {
-		"<C-c>": "do:exit",
-		"<C-p>": "action:preview",
-		"<C-j>": "do:next",
-		"<C-k>": "do:previous",
-		"<C-x>": "do:toggle",
-		"<C-s>": "do:switch",
-		"<Down>": "prompt:next",
-		"<Up>": "prompt:previous",
-		"<C-v>": "prompt:paste"
-	},
 	"tsserver.npm": "/usr/bin/npm",
 	"java.home": "/usr/lib/jvm/java-11-openjdk",
-	"python.jediEnabled": false,
 	"java.format.settings.url": "/home/ye/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml"
 }
