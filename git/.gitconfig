@@ -3,7 +3,28 @@
 	name = leisiji
 [core]
 	editor = nvim
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta
 	excludesfile = ~/.gitignore_global
 [color]
 	ui = true
+[pager]
+	show = bat
+	diff = delta
+[alias]
+	rg = !rg $(git rev-parse --show-toplevel) --column --smart-case -e
+	cma = commit --amend
+	df = diff .
+	dfc = diff --cached .
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	side-by-side = true
+	features = decorations
+	line-numbers-left-format = ""
+	line-numbers-right-format = "│"
+	whitespace-error-style = 22 reverse
+	syntax-theme = Dracula
+[delta "decorations"]
+	commit-decoration-style = bold yellow box ul
+	file-style = bold yellow ul
+	file-decoration-style = none
