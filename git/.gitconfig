@@ -14,7 +14,8 @@
 	rg = !rg $(git rev-parse --show-toplevel) --column --smart-case -e
 	cma = commit --amend
 	df = diff .
-	dfc = diff --cached .
+	dfc = diff --cached
+	dfs = diff --cached --stat
 [interactive]
 	diffFilter = delta --color-only
 [delta]
