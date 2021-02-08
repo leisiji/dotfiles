@@ -176,11 +176,12 @@ ino <silent><expr> <TAB>
 			\ pumvisible() ? "\<C-n>" :
 			\ <SID>check_back_space() ? "\<TAB>" :
 			\ coc#refresh()
-ino <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 function! s:check_back_space() abort
 	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~# '\s'
+	return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
+ino <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+ino <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 ino <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 let g:coc_snippet_next = '<C-n>'
 " lsp
@@ -193,7 +194,17 @@ nn <M-k> :call CocActionAsync('doHover')<cr>
 nn <space>a :<C-u>CocList --normal diagnostics<cr>
 nn <space>v :<C-u>CocList --normal outline<cr>
 nn <silent><expr> <leader>j coc#float#scroll(1, 1)
-nn <silent><expr> <leader>k coc#float#scroll(0, 1)
+nn <leader>k :call ScrollOrHightlight()<CR>
+
+function ScrollOrHightlight() abort
+	let hasScroll = coc#float#has_scroll()
+	if hasScroll
+		call coc#float#scroll(0, 1)
+	else
+		call InterestingWords('n')
+	endif
+endfunction
+
 " coc-yank
 nn <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 " ccls, call chain
@@ -249,6 +260,7 @@ augroup END
 
 " vim-interestingwords
 let g:interestingWordsGUIColors = ['#8CCBEA', '#A4E57E', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
+let g:interestingWordsCaseSensitive = 1
 
 " vim-startify
 "let g:startify_session_dir = '~/.vim/sessions'
