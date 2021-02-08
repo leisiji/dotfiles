@@ -20,7 +20,7 @@ yay -S git-delta
 sudo pacman -S neovim nodejs npm
 
 yarn global add bash-language-server
-yay -S ccls kotlin-language-server lua-language-server-git
+yay -S ccls kotlin-language-server lua-language-server-git groovy-language-server-git
 pip3 install --user cmake-language-server pynvim bear compiledb
 
 # tools based on rust

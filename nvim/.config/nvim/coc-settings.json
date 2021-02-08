@@ -47,6 +47,16 @@
 					}
 				}
 			}
+		},
+		"groovy": {
+			"command": "java",
+			"args": [
+				"-jar",
+				"/usr/share/java/groovy-language-server/groovy-language-server-all.jar"
+			],
+			"filetypes": [
+				"groovy"
+			]
 		}
 	},
 	"suggest.timeout": 500,
@@ -66,5 +76,6 @@
 	"coc.preferences.jumpCommand": "tab drop",
 	"tsserver.npm": "/usr/bin/npm",
 	"java.home": "/usr/lib/jvm/java-11-openjdk",
-	"java.format.settings.url": "/home/ye/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml"
+	"java.format.settings.url": "/home/ye/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml",
+	"java.codeGeneration.useBlocks":true
 }

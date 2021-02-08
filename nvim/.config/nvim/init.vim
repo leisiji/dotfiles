@@ -133,6 +133,7 @@ Plug 'tpope/vim-fugitive', {'on' : 'Git'}
 "Plug 'puremourning/vimspector', {'do' : './install_gadget.py --all --disable-tcl'}
 Plug 'gcmt/wildfire.vim', {'on' : '<Plug>(wildfire-fuel)'}
 Plug 'voldikss/vim-skylight'
+Plug 'mattn/emmet-vim', {'for' : 'html'}
 call plug#end()
 
 let g:srcery_italic = 1
@@ -191,6 +192,8 @@ nn <M-j> :call CocAction('jumpDefinition', 'edit')<cr>
 nn <M-k> :call CocActionAsync('doHover')<cr>
 nn <space>a :<C-u>CocList --normal diagnostics<cr>
 nn <space>v :<C-u>CocList --normal outline<cr>
+nn <silent><expr> <leader>j coc#float#scroll(1, 1)
+nn <silent><expr> <leader>k coc#float#scroll(0, 1)
 " coc-yank
 nn <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 " ccls, call chain
