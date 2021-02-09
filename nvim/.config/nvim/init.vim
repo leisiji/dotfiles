@@ -91,8 +91,6 @@ function! s:show_documentation()
 	endif
 endfunction
 
-"let g:polyglot_disabled = [ 'c', 'cpp', 'markdown', 'javascript', 'aidl']
-
 call plug#begin('~/.vim/plugged')
 
 if executable('fcitx5')
@@ -121,19 +119,18 @@ Plug 'AndrewRadev/inline_edit.vim', {'on' : 'InlineEdit'}
 Plug 'neoclide/vim-jsx-improve', {'for' : ['js']}
 Plug 'junegunn/vim-easy-align', {'on' : '<Plug>(EasyAlign)'}
 Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': ['c', 'cpp']}
-"Plug 'sheerun/vim-polyglot'
 Plug 'skywind3000/asynctasks.vim', {'on' : 'AsyncTask'} | Plug 'skywind3000/asyncrun.vim'
 Plug 'simnalamburt/vim-mundo', {'on' : 'MundoToggle'}
 Plug 'ARM9/arm-syntax-vim', {'for' : ['asm']}
 Plug 'Shirk/vim-gas', {'for' : ['asm']}
 Plug 'rubberduck203/aosp-vim', {'for' : ['hal', 'bp', 'rc']}
-Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins', 'on' : ['Defx'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive', {'on' : 'Git'}
 "Plug 'puremourning/vimspector', {'do' : './install_gadget.py --all --disable-tcl'}
 Plug 'gcmt/wildfire.vim', {'on' : '<Plug>(wildfire-fuel)'}
 Plug 'voldikss/vim-skylight'
 Plug 'mattn/emmet-vim', {'for' : 'html'}
+Plug 'lambdalisue/fern.vim', {'on' : 'Fern'}
 call plug#end()
 
 let g:srcery_italic = 1
@@ -141,7 +138,7 @@ colorscheme srcery
 
 let g:indentLine_leadingSpaceEnabled=1
 let g:indentLine_leadingSpaceChar='·'
-let g:indentLine_fileTypeExclude = ['defx', 'help', 'man']
+let g:indentLine_fileTypeExclude = ['fern', 'help', 'man']
 
 " lightline
 function! CocCurrentFunction() abort
@@ -248,12 +245,12 @@ augroup user_plugin
 	au BufRead,BufNewFile *.aidl setfiletype java
 	au FocusGained * :checktime
 
-	au FileType defx call s:defx_my_settings()
-
 	autocmd BufReadPost *
 	  \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
 	  \ |	exe "normal! g`\""
 	  \ | endif
+
+	au FileType fern call s:init_fern()
 
 	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup END
@@ -345,38 +342,21 @@ let g:Lf_GtagsAutoUpdate = 0
 "let g:Lf_FollowLinks = 1
 let g:Lf_ShowDevIcons = 0
 
-" defx
-function DefxExpandDir() abort
-	let s:dirNames = split(expand('%'), '/')
-	execute ":Defx -split=vertical -winwidth=30"
-	for s:dirName in s:dirNames
-		let s:dirNamePattern = '\<' . s:dirName . '\>'
-		call search(s:dirName, 'e')
-		call defx#call_action('open_tree', 'toggle')
-	endfor
+nn <leader>tj :Fern . -reveal=% -drawer<CR>
+nn <leader>tr :Fern . -drawer<CR>
+function! s:init_fern() abort
+	nmap <buffer> t <Plug>(fern-action-open:tabedit)
+	nmap <buffer> v <Plug>(fern-action-open:vsplit)
+	nmap <buffer> R gg<Plug>(fern-action-reload)<C-o>
+	nmap <buffer> l <Plug>(fern-action-expand)
+	nmap <buffer> h <Plug>(fern-action-collapse)
+	nmap <buffer> <C-j> 5j
+	nmap <buffer> <C-k> 5k
+	nmap <buffer> A <Plug>(fern-action-new-dir)
+	nmap <buffer> a <Plug>(fern-action-new-file)
+	nmap <buffer> D <Plug>(fern-action-remove)
+	nmap <buffer> r <Plug>(fern-action-rename)
+	nmap <buffer> q :<C-u>quit<CR>
 endfunction
-
-function! s:defx_my_settings() abort
-	nnoremap <silent><buffer><expr> l defx#do_action('open_tree', 'toggle')
-	nnoremap <silent><buffer><expr> h defx#do_action('close_tree')
-	nnoremap <silent><buffer><expr> v defx#do_action('multi', [['drop', 'vsplit'], 'quit'])
-	nnoremap <silent><buffer><expr> t defx#do_action('multi', [['drop', 'tabnew'], 'quit'])
-	nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')
-	nnoremap <silent><buffer><expr> c defx#do_action('copy')
-	nnoremap <silent><buffer><expr> m defx#do_action('move')
-	nnoremap <silent><buffer><expr> p defx#do_action('paste')
-	nnoremap <silent><buffer><expr> A defx#do_action('new_directory')
-	nnoremap <silent><buffer><expr> a defx#do_action('new_file')
-	nnoremap <silent><buffer><expr> dd defx#do_action('remove')
-	nnoremap <silent><buffer><expr> r defx#do_action('rename')
-	nnoremap <silent><buffer><expr> . defx#do_action('toggle_ignored_files')
-	nnoremap <silent><buffer><expr> q defx#do_action('quit')
-	nnoremap <silent><buffer><expr> <ESC> defx#do_action('quit')
-	nnoremap <silent><buffer><expr> <backspace> defx#do_action('cd', ['..'])
-endfunction
-
-nn <silent> <leader>tr :Defx -resume -split=vertical -winwidth=30<CR>
-nn <silent> <leader>tf :Defx -resume -split=floating<CR>
-nn <silent> <leader>tj :call DefxExpandDir()<CR>
 
 nm <Enter> <Plug>(wildfire-fuel)
