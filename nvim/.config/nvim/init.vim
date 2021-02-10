@@ -342,8 +342,10 @@ let g:Lf_GtagsAutoUpdate = 0
 "let g:Lf_FollowLinks = 1
 let g:Lf_ShowDevIcons = 0
 
+" fern.vim
 nn <leader>tj :Fern . -reveal=% -drawer<CR>
 nn <leader>tr :Fern . -drawer<CR>
+let g:fern#disable_default_mappings = 1
 function! s:init_fern() abort
 	nmap <buffer> t <Plug>(fern-action-open:tabedit)
 	nmap <buffer> v <Plug>(fern-action-open:vsplit)
@@ -357,6 +359,8 @@ function! s:init_fern() abort
 	nmap <buffer> D <Plug>(fern-action-remove)
 	nmap <buffer> r <Plug>(fern-action-rename)
 	nmap <buffer> q :<C-u>quit<CR>
+	nmap <buffer> z <Plug>(fern-action-zoom:half)
+	nmap <buffer><nowait> ! <Plug>(fern-action-hidden:toggle)
 endfunction
 
 nm <Enter> <Plug>(wildfire-fuel)
