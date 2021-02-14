@@ -1,0 +1,22 @@
+configuration {
+	mydi: "drun,window,run";
+	lines: 15;
+	columns: 1;
+	font: "mono 11";
+	show-icons: true;
+	dpi: 200;
+	kb-primary-paste: "Control+V,Shift+Insert";
+	kb-secondary-paste: "Control+v,Insert";
+	kb-move-char-back: "Left,Control+h";
+	kb-move-char-forward: "Right,Control+l";
+	kb-mode-next: "Tab";
+	kb-mode-previous: "Shift+Tab";
+	kb-row-up: "Up,Control+k";
+	kb-row-down: "Down,Control+j";
+	kb-cancel: "Escape,Control+c";
+	kb-remove-to-eol: "";
+	kb-accept-entry: "Return,KP_Enter";
+	kb-row-tab: "";
+	kb-remove-char-back: "BackSpace,Shift+BackSpace";
+	theme: "themes/gruvbox-material-dark";
+}

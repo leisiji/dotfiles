@@ -28,7 +28,7 @@ cargo install hexyl bat ripgrep fd-find exa
 ```
 desktop development:
 ```bash
-sudo pacman -S zathura zathura-pdf-mupdf i3 alacritty \
+sudo pacman -S zathura zathura-pdf-mupdf i3 rofi alacritty \
 				adobe-source-code-pro-fonts
 yay -S vnote i3status-rust nerd-fonts-source-code-pro
 
