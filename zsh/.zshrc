@@ -37,6 +37,7 @@ export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=999999999
 export SAVEHIST=$HISTSIZE
 export MANPAGER='nvim +Man!'
+export EDITOR='nvim'
 export PATH="$PATH:$HOME/.local/bin/:$HOME/.yarn/bin/:$HOME/.cargo/bin/"
 export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

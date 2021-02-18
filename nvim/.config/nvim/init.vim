@@ -131,6 +131,7 @@ Plug 'gcmt/wildfire.vim', {'on' : '<Plug>(wildfire-fuel)'}
 Plug 'voldikss/vim-skylight'
 Plug 'mattn/emmet-vim', {'for' : 'html'}
 Plug 'lambdalisue/fern.vim', {'on' : 'Fern'}
+Plug 'APZelos/blamer.nvim', {'on' : 'BlamerToggle'}
 call plug#end()
 
 let g:srcery_italic = 1
@@ -224,6 +225,7 @@ nn <leader>gu :GitGutterUndoHunk<CR>
 nn <leader>gb :Git blame<CR>
 nn <leader>gd :Git diff<CR>
 let g:gitgutter_preview_win_floating = 1
+nn <leader><leader>b :BlamerToggle<CR>
 
 " floaterm
 nn <leader>tt :FloatermToggle<CR>
