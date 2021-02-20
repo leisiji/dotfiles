@@ -1,0 +1,48 @@
+let mapleader=" "
+set surround
+set multiple-cursors
+
+set scrolloff=10
+set incsearch
+
+map <leader>r <Action>(RenameElement)
+
+nn <leader>s :w<CR>
+nn <M-a> <C-w>w
+nn <M-1> 1gt
+nn <M-2> 2gt
+nn <M-3> 3gt
+nn <M-4> 4gt
+nn <M-5> 5gt
+nn <M-l> <Esc>:tabnext<CR>
+nn <M-h> <Esc>:tabprevious<CR>
+" move like bash in insert mode
+ino <C-j> <Down>
+ino <C-k> <Up>
+ino <C-b> <Left>
+ino <C-f> <Right>
+ino <C-a> <Home>
+ino <C-e> <End>
+ino <C-d> <Delete>
+ino <C-h> <Backspace>
+ino <M-b> <C-Left>
+ino <M-f> <C-Right>
+ino <M-d> <C-o>diw
+nn H ^
+nn L $
+vn H ^
+vn L g_
+nn <C-j> 5j
+nn <C-k> 5k
+vn <C-j> 5j
+vn <C-k> 5k
+nn <M-e> 5e
+nn <M-b> 5b
+nn <C-b> 5b
+nn <M-w> 5w
+vn <M-e> 5e
+vn <M-b> 5b
+vn <C-b> 5b
+vn <M-w> 5w
+nn <M-y> <C-r>
+nn <silent> <leader>q :q<CR>

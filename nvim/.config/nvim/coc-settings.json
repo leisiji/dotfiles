@@ -50,13 +50,22 @@
 		},
 		"groovy": {
 			"command": "java",
+			"trace.server":"off",
 			"args": [
 				"-jar",
 				"/usr/share/java/groovy-language-server/groovy-language-server-all.jar"
 			],
 			"filetypes": [
 				"groovy"
-			]
+			],
+			"settings":{
+				"groovy":{
+					"classpath":[
+						"/usr/share/java/gradle/lib",
+						"/usr/share/groovy/lib"
+					]
+				}
+			}
 		}
 	},
 	"suggest.timeout": 500,
