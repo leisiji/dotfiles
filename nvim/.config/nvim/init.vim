@@ -134,7 +134,6 @@ Plug 'lambdalisue/fern.vim', {'on' : 'Fern'}
 Plug 'APZelos/blamer.nvim', {'on' : 'BlamerToggle'}
 call plug#end()
 
-let g:srcery_italic = 1
 colorscheme srcery
 
 let g:indentLine_leadingSpaceEnabled=1
@@ -146,7 +145,7 @@ function! CocCurrentFunction() abort
 	return get(b:, 'coc_current_function', '')
 endfunction
 let g:lightline = {
-			\ 'colorscheme': 'wombat',
+			\ 'colorscheme': 'srcery',
 			\ 'active': {
 			\	'left': [ [ 'mode', 'paste' ],
 			\			  [ 'readonly', 'filename', 'modified', 'method' ] ]
