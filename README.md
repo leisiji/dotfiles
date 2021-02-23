@@ -7,7 +7,7 @@ My dotfiles for Arch linux.
 I'm using stow to manage my dotfiles
 
 minimal development on terminal:
-```bash
+```sh
 # yay installation
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
@@ -34,12 +34,13 @@ yay -S vnote i3status-rust nerd-fonts-source-code-pro
 
 # i3status-rust dependency
 yay -S alsa-utils ttf-font-awesome powerline-fonts
-
-# Chinese input method
+```
+Chinese input method
+```sh
 sudo pacman -S fcitx5 fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-material-color
 ```
 Plugin Manager:
-```bash
+```sh
 # vim-plug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

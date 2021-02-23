@@ -35,15 +35,15 @@ endfunction
 nn <silent> <leader>q :call MyQuit()<CR>
 nn <silent> <leader><leader>q :qa<CR>
 
-nn <leader>s :w<CR>
+nn <silent> <leader>s :w<CR>
 nn <M-a> <C-w>w
 nn <M-1> 1gt
 nn <M-2> 2gt
 nn <M-3> 3gt
 nn <M-4> 4gt
 nn <M-5> 5gt
-nn <M-l> <Esc>:tabnext<CR>
-nn <M-h> <Esc>:tabprevious<CR>
+nn <silent> <M-l> <Esc>:tabnext<CR>
+nn <silent> <M-h> <Esc>:tabprevious<CR>
 " move like bash in insert mode
 ino <C-j> <Down>
 ino <C-k> <Up>
@@ -182,16 +182,16 @@ ino <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 ino <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 let g:coc_snippet_next = '<C-n>'
 " lsp
-nm <M-t> <Plug>(coc-definition)
-nm <M-r> <Plug>(coc-references)
-nm <leader>rn <Plug>(coc-rename)
-nn <M-v> :call CocAction('jumpDefinition','vsplit')<cr>
-nn <M-j> :call CocAction('jumpDefinition', 'edit')<cr>
-nn <M-k> :call CocActionAsync('doHover')<cr>
-nn <space>a :<C-u>CocList --normal diagnostics<cr>
-nn <space>v :<C-u>CocList --normal outline<cr>
-nn <silent><expr> <leader>j coc#float#scroll(1, 1)
-nn <leader>k :call ScrollOrHightlight()<CR>
+nm <silent> <M-t> <Plug>(coc-definition)
+nm <silent> <M-r> <Plug>(coc-references)
+nm <silent> <leader>rn <Plug>(coc-rename)
+nn <silent> <M-v> :call CocAction('jumpDefinition','vsplit')<cr>
+nn <silent> <M-j> :call CocAction('jumpDefinition', 'edit')<cr>
+nn <silent> <M-k> :call CocActionAsync('doHover')<cr>
+nn <silent> <space>a :<C-u>CocList --normal diagnostics<cr>
+nn <silent> <space>v :<C-u>CocList --normal outline<cr>
+nn <silent> <expr> <leader>j coc#float#scroll(1, 1)
+nn <silent> <leader>k :call ScrollOrHightlight()<CR>
 
 function ScrollOrHightlight() abort
 	let hasScroll = coc#float#has_scroll()
@@ -218,16 +218,16 @@ let g:tex_conceal = ""
 let g:vim_markdown_math = 1
 
 " git
-nn <leader>gf :GitGutterFold<CR>
-nn <leader>ga :GitGutterStageHunk<CR>
-nn <leader>gu :GitGutterUndoHunk<CR>
-nn <leader>gb :Git blame<CR>
-nn <leader>gd :Git diff<CR>
+nn <silent> <leader>gf :GitGutterFold<CR>
+nn <silent> <leader>ga :GitGutterStageHunk<CR>
+nn <silent> <leader>gu :GitGutterUndoHunk<CR>
+nn <silent> <leader>gb :Git blame<CR>
+nn <silent> <leader>gd :Git diff<CR>
 let g:gitgutter_preview_win_floating = 1
-nn <leader><leader>b :BlamerToggle<CR>
+nn <silent> <leader><leader>b :BlamerToggle<CR>
 
 " floaterm
-nn <leader>tt :FloatermToggle<CR>
+nn <silent> <leader>tt :FloatermToggle<CR>
 tnoremap <M-q> <C-\><C-n>
 let g:floaterm_type='floating'
 let g:floaterm_position='center'
@@ -304,17 +304,17 @@ nn <M-q> :execute 'tabn ' . g:last_active_tab<cr>
 "nn <leader><leader>t :<C-U><C-R>=printf("AsyncRun! sshpass -p yexuelin scp %s yexuelin@192.168.10.%d:%s", expand("%:p"), g:ip_des, g:scp_des_proj . substitute(expand("%:p"), g:scp_src_proj, "", ""))<CR><CR>
 
 "leaderf
-nn <C-r> :Leaderf --fuzzy function<CR>
-nn <C-p> :LeaderfFile<CR>
-nn <C-f> :Leaderf rg --current-buffer<CR>
-nn <leader>m :Leaderf --fuzzy mru<CR>
-nn <M-f> :<C-U><C-R>=printf("Leaderf! rg -F --all-buffers -w -e %s ", expand("<cword>"))<CR><CR>
-nn <leader>b :Leaderf! buffer<CR>
-nn <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -w -e %s ", expand("<cword>"))<CR><CR>
-nn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
-nn <leader>d :<C-U><C-R>=printf("Leaderf! rg -w -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":~:."))<CR><CR>
-nn <leader>o :<C-U>LeaderfRgRecall<CR>
-xn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+nn <silent> <C-r> :Leaderf --fuzzy function<CR>
+nn <silent> <C-p> :LeaderfFile<CR>
+nn <silent> <C-f> :Leaderf rg --current-buffer<CR>
+nn <silent> <leader>m :Leaderf --fuzzy mru<CR>
+nn <silent> <M-f> :<C-U><C-R>=printf("Leaderf! rg -F --all-buffers -w -e %s ", expand("<cword>"))<CR><CR>
+nn <silent> <leader>b :Leaderf! buffer<CR>
+nn <silent> <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -w -e %s ", expand("<cword>"))<CR><CR>
+nn <silent> <leader>fa :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
+nn <silent> <leader>d :<C-U><C-R>=printf("Leaderf! rg -w -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":~:."))<CR><CR>
+nn <silent> <leader>o :<C-U>LeaderfRgRecall<CR>
+xn <silent> <leader>fa :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
 let g:Lf_JumpToExistingWindow = 1
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_GtagsAutoGenerate = 0
