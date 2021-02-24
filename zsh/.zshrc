@@ -85,3 +85,8 @@ bindkey -s '\eq' 'cd ..\n'
 bindkey -s '\el' 'ls -l\n'
 bindkey -s '\ev' 'ni '
 bindkey -s '\es' 'gst .\n'
+
+# hint of the completion of task by tmux
+precmd () {
+	echo -n -e "\a"
+}
