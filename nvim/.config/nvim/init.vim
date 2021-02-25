@@ -311,10 +311,10 @@ nn <silent> <leader>m :Leaderf --fuzzy mru<CR>
 nn <silent> <M-f> :<C-U><C-R>=printf("Leaderf! rg -F --all-buffers -w -e %s ", expand("<cword>"))<CR><CR>
 nn <silent> <leader>b :Leaderf! buffer<CR>
 nn <silent> <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -w -e %s ", expand("<cword>"))<CR><CR>
-nn <silent> <leader>fa :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
+nn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
 nn <silent> <leader>d :<C-U><C-R>=printf("Leaderf! rg -w -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":~:."))<CR><CR>
 nn <silent> <leader>o :<C-U>LeaderfRgRecall<CR>
-xn <silent> <leader>fa :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+xn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
 let g:Lf_JumpToExistingWindow = 1
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_GtagsAutoGenerate = 0
