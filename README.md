@@ -4,17 +4,16 @@ My dotfiles for Arch linux.
 
 ## Installation
 
-I'm using stow to manage my dotfiles
+I'm using stow to manage my dotfiles.
 
-minimal development on terminal:
+Minimal development on terminal:
 ```sh
 # yay installation
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
 # shell related, lua is for z.lua
 # w3m can display image in terminal
-sudo pacman -S zsh fzf ranger tmux lua w3m universal-ctags global 
-yay -S git-delta
+sudo pacman -S zsh fzf ranger tmux lua w3m universal-ctags global
 
 # neovim related, nodejs is for coc-nvim
 sudo pacman -S neovim nodejs npm
@@ -24,18 +23,18 @@ yay -S ccls kotlin-language-server lua-language-server-git groovy-language-serve
 pip3 install --user cmake-language-server pynvim bear compiledb
 
 # tools based on rust
-cargo install hexyl bat ripgrep fd-find exa
+cargo install hexyl bat ripgrep fd-find exa git-delta
 ```
-desktop development:
+Desktop:
 ```bash
-sudo pacman -S zathura zathura-pdf-mupdf i3 rofi alacritty \
-				adobe-source-code-pro-fonts
-yay -S vnote i3status-rust nerd-fonts-source-code-pro
+sudo pacman -S zathura zathura-pdf-mupdf alacritty
+yay -S vnote nerd-fonts-source-code-pro
 
-# i3status-rust dependency
+# i3
+sudo pacman -S i3 i3status-rust xdotool rofi
 yay -S alsa-utils ttf-font-awesome powerline-fonts
 ```
-Chinese input method
+Chinese input method:
 ```sh
 sudo pacman -S fcitx5 fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-material-color
 ```
