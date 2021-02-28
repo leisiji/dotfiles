@@ -127,7 +127,6 @@ Plug 'rubberduck203/aosp-vim', {'for' : ['hal', 'bp', 'rc']}
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive', {'on' : 'Git'}
 "Plug 'puremourning/vimspector', {'do' : './install_gadget.py --all --disable-tcl'}
-Plug 'gcmt/wildfire.vim', {'on' : '<Plug>(wildfire-fuel)'}
 Plug 'voldikss/vim-skylight'
 Plug 'mattn/emmet-vim', {'for' : 'html'}
 Plug 'lambdalisue/fern.vim', {'on' : 'Fern'}
@@ -364,4 +363,3 @@ function! s:init_fern() abort
 	nmap <buffer><nowait> ! <Plug>(fern-action-hidden:toggle)
 endfunction
 
-nm <Enter> <Plug>(wildfire-fuel)
