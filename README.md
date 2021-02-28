@@ -36,7 +36,7 @@ yay -S alsa-utils ttf-font-awesome powerline-fonts
 ```
 Chinese input method:
 ```sh
-sudo pacman -S fcitx5 fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-material-color
+sudo pacman -S fcitx5 fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fcitx5-material-color adobe-source-han-sans-otc-fonts
 ```
 Plugin Manager:
 ```sh
