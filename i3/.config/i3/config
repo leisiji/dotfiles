@@ -56,6 +56,7 @@ bindsym $mod+l focus right
 # scroll window without changing focus when mouse on the other side
 bindsym $mod+j exec --no-startup-id "xdotool click 5"
 bindsym $mod+k exec --no-startup-id "xdotool click 4"
+bindsym $mod+m exec "$HOME/.config/i3/scripts/touchpad-toggle.sh"
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -125,7 +126,6 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # start applicatoin
-bindsym $mod+F2 exec firefox
 bindsym	$mod+F3 exec pcmanfm
 
 
