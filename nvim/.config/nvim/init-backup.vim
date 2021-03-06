@@ -55,7 +55,6 @@ ino <C-d> <Delete>
 ino <C-h> <Backspace>
 ino <M-b> <C-Left>
 ino <M-f> <C-Right>
-ino <M-d> <C-o>diw
 nn H ^
 nn L $
 vn H ^
@@ -76,8 +75,9 @@ nn <M-y> <C-r>
 "Remove all trailing whitespace by pressing F5
 nn <M-s> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 "tnoremap <Esc> <C-\><C-n>
-ino <m-h> <c-left>
-ino <m-l> <c-right>
+ino <M-b> <c-left>
+ino <M-f> <c-right>
+ino <M-d> <C-o>diw
 vmap <leader>y "+y
 nn <leader>p "+p
 nn <leader>rt :<C-U>%retab!<CR>
@@ -191,6 +191,8 @@ nn <silent> <space>a :<C-u>CocList --normal diagnostics<cr>
 nn <silent> <space>v :<C-u>CocList --normal outline<cr>
 nn <silent> <expr> <leader>j coc#float#scroll(1, 1)
 nn <silent> <leader>k :call ScrollOrHightlight()<CR>
+xmap <leader><leader>f <Plug>(coc-format-selected)
+nmap <leader><leader>f <Plug>(coc-format)
 
 function ScrollOrHightlight() abort
 	let hasScroll = coc#float#has_scroll()
@@ -205,9 +207,6 @@ endfunction
 nn <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 " ccls, call chain
 nn <leader>xm :call CocLocations('ccls','$ccls/call',{'caller':v:true, 'hierarchy':v:true})<CR>
-
-xmap <leader><leader>f <Plug>(coc-format-selected)
-nmap <leader><leader>f <Plug>(coc-format)
 
 " vim-markdown
 let g:vim_markdown_folding_disabled=1

@@ -41,9 +41,16 @@
 			"rootPatterns": [".git/"],
 			"settings": {
 				"Lua": {
+					"workspace": {
+						"library": {
+							"/usr/share/nvim/runtime/lua": true
+						},
+						"maxPreload": 2000,
+						"preloadFileSize": 1000
+					},
 					"diagnostics":{
 						"enable":true,
-						"disable":["lowercase-global"]
+						"globals": ["vim"]
 					}
 				}
 			}

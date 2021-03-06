@@ -1,0 +1,5 @@
+require('options')
+require('keymap')
+require('plugins')
+require('event')
+vim.cmd("colorscheme zephyr")
