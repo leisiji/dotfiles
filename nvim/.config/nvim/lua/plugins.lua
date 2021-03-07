@@ -10,8 +10,8 @@ require('packer').startup(function(use)
 	    requires = {'kyazdani42/nvim-web-devicons'}
   	}
 	use { 'glepnir/zephyr-nvim' }
-	use { 'voldikss/vim-floaterm', cmd = 'FloatermToggle' }
+	use { 'voldikss/vim-floaterm', opt = true, cmd = 'FloatermToggle' }
 	use {
-		'Yggdroot/LeaderF', run = './install.sh', cmd = {'Leaderf', 'LeaderfFile'}
+		'Yggdroot/LeaderF', run = './install.sh', opt = true, cmd = {'Leaderf', 'LeaderfFile'}
 	}
 end)

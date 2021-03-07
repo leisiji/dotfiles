@@ -94,16 +94,16 @@ endfunction
 call plug#begin('~/.vim/plugged')
 
 if executable('fcitx5')
-	Plug 'lilydjwg/fcitx.vim', { 'on': [] } | au InsertEnter * call plug#load('fcitx.vim')
+	Plug 'lilydjwg/fcitx.vim', { 'on': [] }
 endif
+Plug 'honza/vim-snippets', { 'on' : [] }
+Plug 'neoclide/coc-sources', { 'on' : [] }
 
 Plug 'srcery-colors/srcery-vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh', 'on' : ['Leaderf', 'LeaderfFile']}
 Plug 'itchyny/lightline.vim'
-Plug 'honza/vim-snippets'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc-sources'
 
 Plug 'lfv89/vim-interestingwords'
 Plug 'Yggdroot/indentLine'
@@ -114,23 +114,21 @@ Plug 'plasticboy/vim-markdown', {'for' : ['md']}
 Plug 'sbdchd/neoformat', {'on' : 'Neoformat'}
 Plug 'voldikss/vim-floaterm', {'on' : 'FloatermToggle'}
 Plug 'AndrewRadev/inline_edit.vim', {'on' : 'InlineEdit'}
-"Plug 'easymotion/vim-easymotion', {'on' : '<Plug>(easymotion-overwin-f2)'}
 
-Plug 'neoclide/vim-jsx-improve', {'for' : ['js']}
 Plug 'junegunn/vim-easy-align', {'on' : '<Plug>(EasyAlign)'}
 Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': ['c', 'cpp']}
 Plug 'skywind3000/asynctasks.vim', {'on' : 'AsyncTask'} | Plug 'skywind3000/asyncrun.vim'
-Plug 'simnalamburt/vim-mundo', {'on' : 'MundoToggle'}
 Plug 'ARM9/arm-syntax-vim', {'for' : ['asm']}
 Plug 'Shirk/vim-gas', {'for' : ['asm']}
 Plug 'rubberduck203/aosp-vim', {'for' : ['hal', 'bp', 'rc']}
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive', {'on' : 'Git'}
-"Plug 'puremourning/vimspector', {'do' : './install_gadget.py --all --disable-tcl'}
 Plug 'voldikss/vim-skylight'
 Plug 'mattn/emmet-vim', {'for' : 'html'}
 Plug 'lambdalisue/fern.vim', {'on' : 'Fern'}
 Plug 'APZelos/blamer.nvim', {'on' : 'BlamerToggle'}
+Plug 'airblade/vim-gitgutter'
+"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+"Plug 'puremourning/vimspector', {'do' : './install_gadget.py --all --disable-tcl'}
 call plug#end()
 
 colorscheme srcery
@@ -231,8 +229,16 @@ let g:floaterm_type='floating'
 let g:floaterm_position='center'
 tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
 
+let g:my_plugin_loaded = 0
+
 augroup user_plugin
 	autocmd!
+
+	au InsertEnter *
+		\ if g:my_plugin_loaded == 0
+		\ |  let g:my_plugin_loaded = 1 | call plug#load('fcitx.vim') | call plug#load('vim-snippets')
+		\ | call plug#load('coc-sources')
+		\ | endif
 
 	" coc-nvim
 	autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -257,9 +263,6 @@ augroup END
 " vim-interestingwords
 let g:interestingWordsGUIColors = ['#8CCBEA', '#A4E57E', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
 let g:interestingWordsCaseSensitive = 1
-
-" vim-startify
-"let g:startify_session_dir = '~/.vim/sessions'
 
 " inline_edit
 nn <leader>e :<C-u>InlineEdit<CR>
@@ -295,13 +298,24 @@ nn <silent> <Leader>z :call WinZoomToggle()<CR>
 let g:last_active_tab = 1
 nn <M-q> :execute 'tabn ' . g:last_active_tab<cr>
 
-" scp copy
-"let g:scp_des_proj = "xxx"
-"let g:scp_src_proj = "xxx"
-"let g:ip_des = 142
-"nn <leader><leader>t :<C-U><C-R>=printf("AsyncRun! sshpass -p yexuelin scp %s yexuelin@192.168.10.%d:%s", expand("%:p"), g:ip_des, g:scp_des_proj . substitute(expand("%:p"), g:scp_src_proj, "", ""))<CR><CR>
-
 "leaderf
+let g:Lf_JumpToExistingWindow = 1
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_GtagsAutoGenerate = 0
+let g:Lf_PreviewInPopup = 1
+let g:Lf_Gtagslabel = 'native-pygments'
+let g:Lf_RootMarkers=['.root']
+let g:Lf_ExternalCommand = 'fd --type file "%s"'
+let g:Lf_GtagsAutoUpdate = 0
+let g:Lf_ShowDevIcons = 0
+let g:Lf_NormalMap = {
+			\ "File":[["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+			\ "Buffer":[["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+			\ "Mru":[["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+			\ "Gtags":[["<ESC>", ':exec g:Lf_py "gtagsExplManager.quit()"<CR>']],
+			\ "Rg":[["<ESC>", ':exec g:Lf_py "rgExplManager.quit()"<CR>']],
+			\ "Line":[["<ESC>", ':exec g:Lf_py "lineExplManager.quit()"<CR>']],
+			\}
 nn <silent> <C-r> :Leaderf --fuzzy function<CR>
 nn <silent> <C-p> :LeaderfFile<CR>
 nn <silent> <C-f> :Leaderf rg --current-buffer<CR>
@@ -311,40 +325,17 @@ nn <silent> <leader>b :Leaderf! buffer<CR>
 nn <silent> <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -w -e %s ", expand("<cword>"))<CR><CR>
 nn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
 nn <silent> <leader>d :<C-U><C-R>=printf("Leaderf! rg -w -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":~:."))<CR><CR>
-nn <silent> <leader>o :<C-U>LeaderfRgRecall<CR>
 xn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
-let g:Lf_JumpToExistingWindow = 1
-let g:Lf_WindowPosition = 'popup'
-let g:Lf_GtagsAutoGenerate = 0
-let g:Lf_NormalMap = {
-			\ "File":[["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
-			\ "Buffer":[["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
-			\ "Mru":[["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
-			\ "Gtags":[["<ESC>", ':exec g:Lf_py "gtagsExplManager.quit()"<CR>']],
-			\ "Rg":[["<ESC>", ':exec g:Lf_py "rgExplManager.quit()"<CR>']],
-			\ "Line":[["<ESC>", ':exec g:Lf_py "lineExplManager.quit()"<CR>']],
-			\}
-let g:Lf_HideHelp = 1
-let g:Lf_PreviewInPopup = 1
 "leaderf tags
-let g:Lf_Gtagslabel = 'native-pygments'
 nn <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
 nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
 nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 nn <leader>ft :<C-U>Leaderf filetype<CR>
-" repo setting
-let g:Lf_RootMarkers=['.root']
-let g:Lf_ExternalCommand = 'fd --type file "%s"'
-let g:Lf_GtagsAutoUpdate = 0
-" repo files
-"let g:Lf_UseVersionControlTool = 0
-"let g:Lf_FollowLinks = 1
-let g:Lf_ShowDevIcons = 0
 
 " fern.vim
+let g:fern#disable_default_mappings = 1
 nn <leader>tj :Fern . -reveal=% -drawer<CR>
 nn <leader>tr :Fern . -drawer<CR>
-let g:fern#disable_default_mappings = 1
 function! s:init_fern() abort
 	nmap <buffer> t <Plug>(fern-action-open:tabedit)
 	nmap <buffer> v <Plug>(fern-action-open:vsplit)

@@ -34,5 +34,11 @@ local plug_map = {
 	["i|<Tab>"] = map_cmd('pumvisible() ? "\\<C-n>" : "\\<Tab>"'):with_expr():with_noremap(),
 	["i|<S-Tab>"] = map_cmd('pumvisible() ? "\\<C-p>" : "\\<Tab>"'):with_expr():with_noremap(),
 	["i|<cr>"] = map_cmd('pumvisible() ? "\\<C-y>" : "\\<C-g>u<CR>"'):with_expr():with_noremap(),
+
+	["n|<Leader>p"] = map_cmd('LeaderfFile'):with_expr():with_noremap(),
+	["n|<Leader>ff"] = map_cmd('LeaderfFile'):with_expr():with_noremap(),
+	["n|<C-r>"] = map_cmd('Leaderf --fuzzy function'):with_expr():with_noremap(),
+	["n|<C-f>"] = map_cmd('Leaderf rg --current-buffer'):with_expr():with_noremap(),
+	["n|<M-f>"] = map_cmd('Leaderf rg --current-buffer'):with_expr():with_noremap(),
 }
 bind.nvim_load_mapping(plug_map)
