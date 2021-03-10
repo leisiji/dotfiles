@@ -3,4 +3,9 @@ export QT_IM_MODULE=fcitx5
 export XMODIFIERS="@im=fcitx5"
 fcitx5 -d
 xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
-xrandr --output HDMI-2 --auto --primary --output eDP-1 --off
+hdmi=$(xrandr | grep 'HDMI[-]*[[:digit:]] connected')
+eDP=$(xrandr | grep 'eDP[-]*[[:digit:]] connected')
+if [ ! -z "$hdmi" ]; then
+	xrandr --output ${hdmi%% *} --auto --primary --output ${eDP%% *} --off
+fi
+# vim:tw=78:ts=4:ft=sh

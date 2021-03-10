@@ -13,7 +13,7 @@ git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
 # shell related, lua is for z.lua
 # w3m can display image in terminal
-sudo pacman -S zsh fzf ranger tmux lua w3m universal-ctags global
+sudo pacman -S zsh fzf ranger tmux lua w3m universal-ctags global xclip
 
 # neovim related, nodejs is for coc-nvim
 sudo pacman -S neovim nodejs npm
