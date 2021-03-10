@@ -16,11 +16,11 @@ git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 sudo pacman -S zsh fzf ranger tmux lua w3m universal-ctags global xclip
 
 # neovim related, nodejs is for coc-nvim
-sudo pacman -S neovim nodejs npm
+sudo pacman -S neovim nodejs npm bear
 
 yarn global add bash-language-server
 yay -S ccls kotlin-language-server lua-language-server-git groovy-language-server-git
-pip3 install --user cmake-language-server pynvim bear compiledb
+pip3 install --user cmake-language-server pynvim compiledb
 
 # tools based on rust
 cargo install hexyl bat ripgrep fd-find exa git-delta
