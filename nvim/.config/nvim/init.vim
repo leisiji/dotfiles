@@ -1,29 +1,9 @@
-set hidden
-set nobackup
-set nowritebackup
-set number
-set scrolloff=10
-set autoread
-set autowrite
+set hidden nobackup nowritebackup number scrolloff=10 autoread autowrite noswapfile
 set list lcs=tab:→\ ,trail:·,extends:↷,precedes:↶
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set smarttab
-set smartindent
-set t_Co=256
-set termguicolors
-set showtabline=2
+set tabstop=4 shiftwidth=4 softtabstop=4 smarttab smartindent ignorecase smartcase incsearch cul
+set t_Co=256 termguicolors showtabline=2
+set undofile undodir=$HOME/.cache/vim/undo
 let mapleader=" "
-set undofile
-set undodir=$HOME/.cache/vim/undo
-filetype plugin indent on
-syntax enable
-set ignorecase
-set smartcase
-set incsearch
-set noswapfile
-set cul
 
 function! MyQuit() abort
 	if len(win_findbuf(bufnr())) > 1 || expand('%') == '' || tabpagenr('$') == 1
@@ -91,77 +71,10 @@ function! s:show_documentation()
 	endif
 endfunction
 
-call plug#begin('~/.vim/plugged')
-
-if executable('fcitx5')
-	Plug 'lilydjwg/fcitx.vim', { 'on': [] }
-endif
-Plug 'honza/vim-snippets', { 'on' : [] }
-Plug 'neoclide/coc-sources', { 'on' : [] }
-
-Plug 'srcery-colors/srcery-vim'
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh', 'on' : ['Leaderf', 'LeaderfFile']}
-Plug 'itchyny/lightline.vim'
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-Plug 'lfv89/vim-interestingwords'
-Plug 'Yggdroot/indentLine'
-Plug 'scrooloose/nerdcommenter'
-Plug 'mg979/vim-visual-multi'
-Plug 'tpope/vim-surround'
-Plug 'plasticboy/vim-markdown', {'for' : ['md']}
-Plug 'sbdchd/neoformat', {'on' : 'Neoformat'}
-Plug 'voldikss/vim-floaterm', {'on' : 'FloatermToggle'}
-Plug 'AndrewRadev/inline_edit.vim', {'on' : 'InlineEdit'}
-
-Plug 'junegunn/vim-easy-align', {'on' : '<Plug>(EasyAlign)'}
-Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': ['c', 'cpp']}
-Plug 'skywind3000/asynctasks.vim', {'on' : 'AsyncTask'} | Plug 'skywind3000/asyncrun.vim'
-Plug 'ARM9/arm-syntax-vim', {'for' : ['asm']}
-Plug 'Shirk/vim-gas', {'for' : ['asm']}
-Plug 'rubberduck203/aosp-vim', {'for' : ['hal', 'bp', 'rc']}
-Plug 'tpope/vim-fugitive', {'on' : 'Git'}
-Plug 'voldikss/vim-skylight'
-Plug 'mattn/emmet-vim', {'for' : 'html'}
-Plug 'lambdalisue/fern.vim', {'on' : 'Fern'}
-Plug 'APZelos/blamer.nvim', {'on' : 'BlamerToggle'}
-Plug 'airblade/vim-gitgutter'
-"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-"Plug 'puremourning/vimspector', {'do' : './install_gadget.py --all --disable-tcl'}
-call plug#end()
-
-colorscheme srcery
-
-let g:indentLine_leadingSpaceEnabled=1
-let g:indentLine_leadingSpaceChar='·'
-let g:indentLine_fileTypeExclude = ['fern', 'help', 'man']
-
-" lightline
-function! CocCurrentFunction() abort
-	return get(b:, 'coc_current_function', '')
-endfunction
-let g:lightline = {
-			\ 'colorscheme': 'srcery',
-			\ 'active': {
-			\	'left': [ [ 'mode', 'paste' ],
-			\			  [ 'readonly', 'filename', 'modified', 'method' ] ]
-			\ },
-			\ 'component_function': {
-			\	'method': 'CocCurrentFunction'
-			\ },
-			\ }
-"let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
-"let g:lightline.tabline_subseparator = { 'left': "\ue0bb", 'right': "\ue0bb" }
-let s:palette = g:lightline#colorscheme#wombat#palette
-let s:palette.tabline.tabsel = [ ['black', '#7FB3D5', 252, 66, 'bold'] ]
-unlet s:palette
+lua require('plugins')
 
 "coc.vim
-set shortmess+=c
-set signcolumn=yes
-set updatetime=500
-hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
+set shortmess+=c signcolumn=yes updatetime=500
 let g:coc_global_extensions=[
 			\ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver',
 			\ 'coc-pyright', 'coc-emmet', 'coc-vimlsp', 'coc-powershell', 'coc-css', 'coc-eslint',
@@ -188,57 +101,24 @@ nn <silent> <M-k> :call CocActionAsync('doHover')<cr>
 nn <silent> <space>a :<C-u>CocList --normal diagnostics<cr>
 nn <silent> <space>v :<C-u>CocList --normal outline<cr>
 nn <silent> <expr> <leader>j coc#float#scroll(1, 1)
-nn <silent> <leader>k :call ScrollOrHightlight()<CR>
 xmap <leader><leader>f <Plug>(coc-format-selected)
 nmap <leader><leader>f <Plug>(coc-format)
 
-function ScrollOrHightlight() abort
-	let hasScroll = coc#float#has_scroll()
-	if hasScroll
-		call coc#float#scroll(0, 1)
-	else
-		call InterestingWords('n')
-	endif
-endfunction
-
 " coc-yank
 nn <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
-" ccls, call chain
-nn <leader>xm :call CocLocations('ccls','$ccls/call',{'caller':v:true, 'hierarchy':v:true})<CR>
-
-" vim-markdown
-let g:vim_markdown_folding_disabled=1
-let g:vim_markdown_conceal = 0
-let g:vim_markdown_conceal_code_blocks = 0
-let g:tex_conceal = ""
-let g:vim_markdown_math = 1
 
 " git
-nn <silent> <leader>gf :GitGutterFold<CR>
-nn <silent> <leader>ga :GitGutterStageHunk<CR>
-nn <silent> <leader>gu :GitGutterUndoHunk<CR>
-nn <silent> <leader>gb :Git blame<CR>
-nn <silent> <leader>gd :Git diff<CR>
-let g:gitgutter_preview_win_floating = 1
 nn <silent> <leader><leader>b :BlamerToggle<CR>
 
 " floaterm
-nn <silent> <leader>tt :FloatermToggle<CR>
-tnoremap <M-q> <C-\><C-n>
 let g:floaterm_type='floating'
 let g:floaterm_position='center'
+nn <silent> <leader>tt :FloatermToggle<CR>
+tnoremap <M-q> <C-\><C-n>
 tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
-
-let g:my_plugin_loaded = 0
 
 augroup user_plugin
 	autocmd!
-
-	au InsertEnter *
-		\ if g:my_plugin_loaded == 0
-		\ |  let g:my_plugin_loaded = 1 | call plug#load('fcitx.vim') | call plug#load('vim-snippets')
-		\ | call plug#load('coc-sources')
-		\ | endif
 
 	" coc-nvim
 	autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -255,14 +135,8 @@ augroup user_plugin
 	  \ |	exe "normal! g`\""
 	  \ | endif
 
-	au FileType fern call s:init_fern()
-
 	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup END
-
-" vim-interestingwords
-let g:interestingWordsGUIColors = ['#8CCBEA', '#A4E57E', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
-let g:interestingWordsCaseSensitive = 1
 
 " inline_edit
 nn <leader>e :<C-u>InlineEdit<CR>
@@ -273,9 +147,6 @@ let g:inline_edit_autowrite = 1
 " easy-align
 xm ga <Plug>(EasyAlign)
 nm ga <Plug>(EasyAlign)
-
-nm f <Plug>(easymotion-overwin-f2)
-nm <leader><leader>u :MundoToggle<CR>
 
 " asynctasks
 let g:asyncrun_open = 6
@@ -308,6 +179,7 @@ let g:Lf_RootMarkers=['.root']
 let g:Lf_ExternalCommand = 'fd --type file "%s"'
 let g:Lf_GtagsAutoUpdate = 0
 let g:Lf_ShowDevIcons = 0
+let g:Lf_HideHelp = 1
 let g:Lf_NormalMap = {
 			\ "File":[["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
 			\ "Buffer":[["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
@@ -331,25 +203,4 @@ nn <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cw
 nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
 nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 nn <leader>ft :<C-U>Leaderf filetype<CR>
-
-" fern.vim
-let g:fern#disable_default_mappings = 1
-nn <leader>tj :Fern . -reveal=% -drawer<CR>
-nn <leader>tr :Fern . -drawer<CR>
-function! s:init_fern() abort
-	nmap <buffer> t <Plug>(fern-action-open:tabedit)
-	nmap <buffer> v <Plug>(fern-action-open:vsplit)
-	nmap <buffer> R gg<Plug>(fern-action-reload)<C-o>
-	nmap <buffer> l <Plug>(fern-action-expand)
-	nmap <buffer> h <Plug>(fern-action-collapse)
-	nmap <buffer> <C-j> 5j
-	nmap <buffer> <C-k> 5k
-	nmap <buffer> A <Plug>(fern-action-new-dir)
-	nmap <buffer> a <Plug>(fern-action-new-file)
-	nmap <buffer> D <Plug>(fern-action-remove)
-	nmap <buffer> r <Plug>(fern-action-rename)
-	nmap <buffer> q :<C-u>quit<CR>
-	nmap <buffer> z <Plug>(fern-action-zoom:half)
-	nmap <buffer><nowait> ! <Plug>(fern-action-hidden:toggle)
-endfunction
 
