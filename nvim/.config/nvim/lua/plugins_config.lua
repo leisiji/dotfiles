@@ -67,7 +67,7 @@ function config.treesitter()
 		ensure_installed = "maintained",
 		highlight = {
 			enable = true,
-			disable = { "c" }
+			disable = { "c", "cpp" }
 		}
 	}
 end
@@ -82,9 +82,39 @@ function config.gitsigns()
 			topdelete = { hl = 'DiffDelete', text = '‾'},
 			changedelete = { hl = 'DiffChange', text = '~' }
 		},
-        watch_index = {
+		watch_index = {
 			interval = 5000
 		},
+		keymaps = {
+			noremap = true,
+			buffer = true,
+			['n <leader><leader>n'] = '<cmd>lua require"gitsigns".next_hunk()<CR>',
+			['n <leader><leader>N'] = '<cmd>lua require"gitsigns".prev_hunk()<CR>',
+			['n <leader><leader>b'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
+		}
+	}
+end
+
+function config.nvim_tree()
+	local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+	vim.g.nvim_tree_bindings = {
+		["v"]     = tree_cb("vsplit"),
+		["s"]     = tree_cb("split"),
+		["t"]     = tree_cb("tabnew"),
+		["l"]     = tree_cb("edit"),
+		["h"]     = tree_cb("close_node"),
+		["<Tab>"] = tree_cb("preview"),
+		["."]     = tree_cb("toggle_dotfiles"),
+		["R"]     = tree_cb("refresh"),
+		["a"]     = tree_cb("create"), -- Adding a dir requires an ending /
+		["D"]     = tree_cb("remove"),
+		["r"]     = tree_cb("rename"),
+		["x"]     = tree_cb("cut"),
+		["c"]     = tree_cb("copy"),
+		["p"]     = tree_cb("paste"),
+		["q"]     = tree_cb("close"),
+		["<BS>"]  = tree_cb("dir_up"),
+		["<CR>"]  = tree_cb("cd"),
 	}
 end
 

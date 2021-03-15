@@ -8,7 +8,7 @@ packer.startup(function()
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		run = ':TSUpdate',
-		config = function() PLUGINS_CONFIG.treesitter() end
+		config = PLUGINS_CONFIG.treesitter
 	}
 	use {
 		'nvim-lua/plenary.nvim'
@@ -18,8 +18,8 @@ packer.startup(function()
 	use {
 		'neoclide/coc.nvim', branch = 'release',
 		requires = {
-			{ 'neoclide/coc-sources', opt = true, after = 'coc.nvim' },
-			{ 'honza/vim-snippets', opt = true, after = 'coc.nvim' }
+			{ 'neoclide/coc-sources', after = 'coc.nvim' },
+			{ 'honza/vim-snippets', after = 'coc.nvim' }
 		}
 	}
 	use { 'mattn/emmet-vim', opt = true, ft = {'html'} }
@@ -34,7 +34,7 @@ packer.startup(function()
 	use {
 		'glepnir/galaxyline.nvim',
 		branch = 'main',
-		config = function() PLUGINS_CONFIG.statusline() end
+		config = PLUGINS_CONFIG.statusline
 	}
 
 	use {
@@ -46,16 +46,12 @@ packer.startup(function()
 		cmd = {'Leaderf', 'LeaderfFile'}
 	}
 	use {
-		'APZelos/blamer.nvim', opt = true,
-		cmd = 'BlamerToggle'
-	}
-	use {
 		'AndrewRadev/inline_edit.vim', opt = true,
 		cmd = 'InlineEdit'
 	}
 	use {
-		'sbdchd/neoformat', opt = true,
-		cmd = 'Neoformat'
+		'mhartington/formatter.nvim', opt = true,
+		cmd = 'Format'
 	}
 	use {
 		'tpope/vim-surround', opt = true,
@@ -65,12 +61,21 @@ packer.startup(function()
 		'lewis6991/gitsigns.nvim',
 		event = {'BufRead','BufNewFile'},
 		opt = true,
-		config = function() PLUGINS_CONFIG.gitsigns() end,
+		config = PLUGINS_CONFIG.gitsigns
 	}
 	use {
 		'glepnir/indent-guides.nvim',
 		opt = true,
 		event = 'BufRead'
+	}
+	use {
+		'junegunn/vim-easy-align', opt = true,
+		cmd = 'EasyAlign'
+	}
+	use {
+		'kyazdani42/nvim-tree.lua', opt = true,
+		config = PLUGINS_CONFIG.nvim_tree,
+		cmd = { 'NvimTreeOpen', 'NvimTreeFindFile' }
 	}
 end)
 

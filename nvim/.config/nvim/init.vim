@@ -4,6 +4,10 @@ set tabstop=4 shiftwidth=4 softtabstop=4 smarttab smartindent ignorecase smartca
 set t_Co=256 termguicolors showtabline=2
 set undofile undodir=$HOME/.cache/vim/undo
 let mapleader=" "
+let g:markdown_fenced_languages = [
+	\ 'vim', 'cpp', 'c', 'java', 'python',
+	\ 'sh', 'make', 'groovy', 'sql', 'javascript'
+	\]
 
 function! MyQuit() abort
 	if len(win_findbuf(bufnr())) > 1 || expand('%') == '' || tabpagenr('$') == 1
@@ -107,9 +111,6 @@ nmap <leader><leader>f <Plug>(coc-format)
 " coc-yank
 nn <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 
-" git
-nn <silent> <leader><leader>b :BlamerToggle<CR>
-
 " floaterm
 let g:floaterm_type='floating'
 let g:floaterm_position='center'
@@ -145,8 +146,7 @@ let g:inline_edit_new_buffer_command = "tabedit"
 let g:inline_edit_autowrite = 1
 
 " easy-align
-xm ga <Plug>(EasyAlign)
-nm ga <Plug>(EasyAlign)
+xm ga :EasyAlign<cr>
 
 " asynctasks
 let g:asyncrun_open = 6
@@ -204,3 +204,7 @@ nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cw
 nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 nn <leader>ft :<C-U>Leaderf filetype<CR>
 
+let g:nvim_tree_show_icons = { 'git': 0, 'folders': 0, 'files': 0 }
+let g:nvim_tree_tab_open = 0
+nn <leader>tr :NvimTreeOpen<cr>
+nn <leader>tj :NvimTreeFindFile<cr>
