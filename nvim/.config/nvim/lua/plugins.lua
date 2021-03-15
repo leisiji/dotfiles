@@ -18,8 +18,8 @@ packer.startup(function()
 	use {
 		'neoclide/coc.nvim', branch = 'release',
 		requires = {
-			{ 'neoclide/coc-sources', after = 'coc.nvim' },
-			{ 'honza/vim-snippets', after = 'coc.nvim' }
+			{ 'neoclide/coc-sources' },
+			{ 'honza/vim-snippets' }
 		}
 	}
 	use { 'mattn/emmet-vim', opt = true, ft = {'html'} }

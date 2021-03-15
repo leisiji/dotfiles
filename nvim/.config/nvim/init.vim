@@ -204,7 +204,7 @@ nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cw
 nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 nn <leader>ft :<C-U>Leaderf filetype<CR>
 
-let g:nvim_tree_show_icons = { 'git': 0, 'folders': 0, 'files': 0 }
+let g:nvim_tree_show_icons = { 'git': 0, 'folders': 1, 'files': 0 }
 let g:nvim_tree_tab_open = 0
 nn <leader>tr :NvimTreeOpen<cr>
 nn <leader>tj :NvimTreeFindFile<cr>
