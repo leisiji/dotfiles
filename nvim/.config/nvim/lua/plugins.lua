@@ -77,5 +77,11 @@ packer.startup(function()
 		config = PLUGINS_CONFIG.nvim_tree,
 		cmd = { 'NvimTreeOpen', 'NvimTreeFindFile' }
 	}
+	if vim.fn.executable('fcitx5') == 1 then
+		use {
+			'lilydjwg/fcitx.vim', opt = true, branch = 'fcitx5',
+			event = 'InsertEnter'
+		}
+	end
 end)
 
