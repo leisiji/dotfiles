@@ -71,8 +71,10 @@ export ZSH_AUTOSUGGEST_USE_ASYNC="true"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
 bindkey '^[,' autosuggest-accept
 
-zstyle ':fzf-tab:complete:_zlua:*' query-string input
-zstyle ':fzf-tab:complete:cd:*' query-string input
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 $realpath'
+zstyle ':fzf-tab:*' switch-group ',' '.'
 
 # 补全 bat
 addBat () {
