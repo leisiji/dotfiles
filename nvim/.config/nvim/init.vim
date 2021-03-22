@@ -1,11 +1,11 @@
-set hidden nobackup nowritebackup number scrolloff=10 autoread autowrite noswapfile
+set hidden nowritebackup number scrolloff=10 autoread autowrite noswapfile
 set list lcs=tab:→\ ,trail:·,extends:↷,precedes:↶
 set tabstop=4 shiftwidth=4 softtabstop=4 smarttab smartindent ignorecase smartcase incsearch cul
 set t_Co=256 termguicolors showtabline=2
 set undofile undodir=$HOME/.cache/vim/undo
 let mapleader=" "
 let g:markdown_fenced_languages = [
-	\ 'vim', 'cpp', 'c', 'java', 'python',
+	\ 'vim', 'cpp', 'c', 'java', 'python', 'lua',
 	\ 'sh', 'make', 'groovy', 'sql', 'javascript'
 	\]
 
@@ -68,7 +68,7 @@ nn <leader>rt :<C-U>%retab!<CR>
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
-	if (index(['vim','help'], &filetype) >= 0)
+	if (&filetype == 'vim' || &filetype == 'lua' || &filetype == 'help')
 		execute 'vertical h '.expand('<cword>')
 	else
 		execute 'vertical Man '.expand('<cword>')
@@ -115,8 +115,8 @@ nn <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 let g:floaterm_type='floating'
 let g:floaterm_position='center'
 nn <silent> <leader>tt :FloatermToggle<CR>
-tnoremap <M-q> <C-\><C-n>
-tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
+"tnoremap <M-q> <C-\><C-n>
+"tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
 
 augroup user_plugin
 	autocmd!
@@ -189,14 +189,14 @@ let g:Lf_NormalMap = {
 			\ "Line":[["<ESC>", ':exec g:Lf_py "lineExplManager.quit()"<CR>']],
 			\}
 nn <silent> <C-r> :Leaderf --fuzzy function<CR>
-nn <silent> <C-p> :LeaderfFile<CR>
+"nn <silent> <C-p> :Leaderf file<CR>
 nn <silent> <C-f> :Leaderf rg --current-buffer<CR>
 nn <silent> <leader>m :Leaderf --fuzzy mru<CR>
 nn <silent> <M-f> :<C-U><C-R>=printf("Leaderf! rg -F --all-buffers -w -e %s ", expand("<cword>"))<CR><CR>
 nn <silent> <leader>b :Leaderf! buffer<CR>
 nn <silent> <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -w -e %s ", expand("<cword>"))<CR><CR>
 nn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
-nn <silent> <leader>d :<C-U><C-R>=printf("Leaderf! rg -w -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":~:."))<CR><CR>
+nn <silent> <leader>d :<C-U><C-R>=printf("Leaderf! rg -w -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":."))<CR><CR>
 xn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
 "leaderf tags
 nn <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
@@ -204,7 +204,11 @@ nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cw
 nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 nn <leader>ft :<C-U>Leaderf filetype<CR>
 
+nn <silent> <C-p> :lua require('fzf_commands').files()<CR>
+
 let g:nvim_tree_show_icons = { 'git': 0, 'folders': 1, 'files': 0 }
 let g:nvim_tree_tab_open = 0
 nn <leader>tr :NvimTreeOpen<cr>
 nn <leader>tj :NvimTreeFindFile<cr>
+
+hi CocHighlightText guibg=#b16286 guifg=#ebdbb2

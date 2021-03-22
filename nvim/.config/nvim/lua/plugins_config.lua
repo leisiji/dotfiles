@@ -67,7 +67,6 @@ function config.treesitter()
 		ensure_installed = "maintained",
 		highlight = {
 			enable = true,
-			disable = { "c", "cpp" }
 		}
 	}
 end

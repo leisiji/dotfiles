@@ -23,9 +23,6 @@ packer.startup(function()
 		}
 	}
 	use { 'mattn/emmet-vim', opt = true, ft = {'html'} }
-	use {
-		'jackguo380/vim-lsp-cxx-highlight', opt = true, ft = {'c', 'cpp'}
-	}
 
 	use {
 		'glepnir/zephyr-nvim',
@@ -43,7 +40,7 @@ packer.startup(function()
 	}
 	use {
 		'Yggdroot/LeaderF', run = './install.sh', opt = true,
-		cmd = {'Leaderf', 'LeaderfFile'}
+		cmd = {'Leaderf'}
 	}
 	use {
 		'AndrewRadev/inline_edit.vim', opt = true,
@@ -75,7 +72,7 @@ packer.startup(function()
 	use {
 		'kyazdani42/nvim-tree.lua', opt = true,
 		config = PLUGINS_CONFIG.nvim_tree,
-		cmd = { 'NvimTreeOpen', 'NvimTreeFindFile' }
+		cmd = { 'NvimTreeOpen', 'NvimTreeToggle', 'NvimTreeFindFile' }
 	}
 	if vim.fn.executable('fcitx5') == 1 then
 		use {
@@ -83,5 +80,13 @@ packer.startup(function()
 			event = 'InsertEnter'
 		}
 	end
+	use {
+		'norcalli/nvim-colorizer.lua', opt = true,
+		ft = { 'html', 'css', 'help', 'lua', 'vim' },
+		config = function () require'colorizer'.setup() end
+	}
+	use {
+		'vijaymarupudi/nvim-fzf'
+	}
 end)
 
