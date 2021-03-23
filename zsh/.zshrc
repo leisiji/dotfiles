@@ -45,7 +45,8 @@ export FZF_ALT_C_COMMAND='fd --type d'
 
 # key-bindings 放在前面，防止后面的快捷键被覆盖
 zinit snippet OMZ::lib/key-bindings.zsh
-zinit snippet OMZ::lib/completion.zsh
+#zinit snippet OMZ::lib/completion.zsh
+zinit snippet /usr/share/fzf/key-bindings.zsh
 zinit ice wait'0' lucid; zinit snippet OMZ::plugins/extract/extract.plugin.zsh
 zinit ice wait'0' lucid; zinit snippet OMZ::plugins/fzf/fzf.plugin.zsh
 #zinit ice wait'0' lucid; zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
