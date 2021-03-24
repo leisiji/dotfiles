@@ -1,5 +1,5 @@
 local M = {}
-local fzf = require "fzf".fzf
+local fzf = require('fzf').fzf
 local fn = vim.fn
 
 local FZF_CAHCE_FILES_DIR = fn.expand("~/.cache/nvim/fzf_files/")
@@ -36,8 +36,6 @@ function M.find_files()
 			vimcmd = "tabnew"
 		elseif choices[1] == "ctrl-v" then
 			vimcmd = "vnew"
-		elseif choices[1] == "ctrl-s" then
-			vimcmd = "new"
 		elseif choices[1] == "ctrl-r" then
 			os.remove(cache_file)
 		else
@@ -49,7 +47,7 @@ function M.find_files()
 				vim.cmd(vimcmd .. " " .. fn.fnameescape(choices[i]))
 			end
 		else
-			M.find_files()
+			vim.schedule(M.find_files)
 		end
 	end)()
 end

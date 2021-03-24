@@ -116,27 +116,28 @@ let g:floaterm_type='floating'
 let g:floaterm_position='center'
 nn <silent> <leader>tt :FloatermToggle<CR>
 "tnoremap <M-q> <C-\><C-n>
-"tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
 
 augroup user_plugin
 	autocmd!
 
 	" coc-nvim
-	autocmd CursorHold * silent call CocActionAsync('highlight')
+	au CursorHold * silent call CocActionAsync('highlight')
 
 	" tab switch
-	autocmd TabLeave * let g:last_active_tab = tabpagenr()
+	au TabLeave * let g:last_active_tab = tabpagenr()
 
 	au BufRead,BufNewFile *.lds setfiletype ld
 	au BufRead,BufNewFile *.aidl setfiletype java
 	au FocusGained * :checktime
 
-	autocmd BufReadPost *
+	au BufReadPost *
 	  \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
 	  \ |	exe "normal! g`\""
 	  \ | endif
 
-	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+	au User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+	au FileType floaterm tnoremap <buffer> <ESC> <C-\><C-n>:FloatermToggle<CR>
 augroup END
 
 " inline_edit
@@ -210,4 +211,3 @@ let g:nvim_tree_tab_open = 0
 nn <leader>tr :NvimTreeOpen<cr>
 nn <leader>tj :NvimTreeFindFile<cr>
 
-hi CocHighlightText guibg=#b16286 guifg=#ebdbb2
