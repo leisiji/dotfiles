@@ -9,7 +9,7 @@ function M.find_files()
 	local format_cur_dir, _ = cur_dir:gsub("/", "_")
 	local cache_file = FZF_CAHCE_FILES_DIR .. format_cur_dir
 	local command = ""
-	local preview = "bat --line-range=:$(($FZF_PREVIEW_LINES - 5)) --color always -- {}"
+	local preview = "head {}"
 	local modified_time = fn.getftime(cache_file)
 
 	if (modified_time == -1) or (os.time() - modified_time > 604800) then -- refresh per week

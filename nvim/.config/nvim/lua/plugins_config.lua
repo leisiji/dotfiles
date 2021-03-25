@@ -117,4 +117,11 @@ function config.nvim_tree()
 	}
 end
 
+function config.colorscheme()
+
+	vim.cmd('colorscheme zephyr')
+	vim.cmd('hi TabLineSel guibg='..COLORS.blue..' guifg='..COLORS.bg)
+	--vim.o.tabline = "%!v:lua.mytabline()"
+end
+
 return config

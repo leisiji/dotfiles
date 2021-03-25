@@ -17,10 +17,10 @@ function M.grep_lines()
 		--	return vim.api.nvim_buf_get_lines(buf, 0, -1, false)
 		--end)
 
-		local choices = fzf("cat -n "..vim.fn.expand("%:p"), "--nth=2 ")
+		local choices = fzf("cat -n "..vim.fn.expand("%:p"), "--reverse --tabstop=1 --nth=2..")
 		if not choices then return end
 
-		print(utils.get_leading_num(choices[1]))
+		vim.cmd(utils.get_leading_num(choices[1]))
 	end)()
 end
 

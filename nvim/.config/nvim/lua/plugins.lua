@@ -10,13 +10,11 @@ packer.startup(function()
 		run = ':TSUpdate',
 		config = PLUGINS_CONFIG.treesitter
 	}
-	use {
-		'nvim-lua/plenary.nvim'
-	}
 
 	-- coc.nvim
 	use {
 		'neoclide/coc.nvim', branch = 'release',
+		opt = true, event = 'BufRead',
 		requires = {
 			{ 'neoclide/coc-sources' },
 			{ 'honza/vim-snippets' }
@@ -26,7 +24,7 @@ packer.startup(function()
 
 	use {
 		'glepnir/zephyr-nvim',
-		config = function() vim.cmd('colorscheme zephyr') end
+		config = PLUGINS_CONFIG.colorscheme
 	}
 	use {
 		'glepnir/galaxyline.nvim',
