@@ -49,6 +49,7 @@ zinit snippet OMZ::lib/completion.zsh
 zinit ice wait'0' lucid; zinit snippet OMZ::plugins/extract/extract.plugin.zsh
 #zinit ice wait'0' lucid; zinit snippet OMZ::plugins/fzf/fzf.plugin.zsh
 zinit snippet /usr/share/fzf/key-bindings.zsh
+zinit snippet /usr/share/fzf/completion.zsh
 #zinit ice wait'0' lucid; zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
 zinit ice wait'0' lucid; zinit snippet OMZ::plugins/git/git.plugin.zsh
 

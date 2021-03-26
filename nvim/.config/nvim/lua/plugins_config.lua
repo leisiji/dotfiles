@@ -118,10 +118,28 @@ function config.nvim_tree()
 end
 
 function config.colorscheme()
-
+	function _G.mytabline()
+		local pagenum = vim.fn.tabpagenr('$')
+		local s = ''
+		local i = 1
+		while i <= pagenum  do
+			if i == vim.fn.tabpagenr() then
+				s = s..'%#TabLineSel#'
+			else
+				s = s..'%#TabLine#'
+			end
+			s = s .. tostring(i)
+			local path = vim.fn.bufname(vim.fn.tabpagebuflist(i)[vim.fn.tabpagewinnr(i)])
+			s = s .. ' ' .. vim.fn.fnamemodify(path, ":t")
+			s = s .. ' %#TabLineFill#%T'
+			i = i + 1
+		end
+		return s
+	end
 	vim.cmd('colorscheme zephyr')
 	vim.cmd('hi TabLineSel guibg='..COLORS.blue..' guifg='..COLORS.bg)
-	--vim.o.tabline = "%!v:lua.mytabline()"
+	vim.cmd('hi TabLine guibg='..COLORS.fg..' guifg='..COLORS.darkblue)
+	vim.o.tabline = "%!v:lua.mytabline()"
 end
 
 return config
