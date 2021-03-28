@@ -10,15 +10,19 @@ packer.startup(function()
 		run = ':TSUpdate',
 		config = PLUGINS_CONFIG.treesitter
 	}
+	use {
+		'nvim-lua/plenary.nvim' -- needed by gitsigns
+	}
 
 	-- coc.nvim
 	use {
-		'neoclide/coc.nvim', branch = 'release',
-		opt = true, event = 'BufRead',
+		'neoclide/coc.nvim', branch = 'release', opt = true,
+		event = 'BufRead',
 		requires = {
 			{ 'neoclide/coc-sources' },
 			{ 'honza/vim-snippets' }
-		}
+		},
+		config = PLUGINS_CONFIG.cocnvim
 	}
 	use { 'mattn/emmet-vim', opt = true, ft = {'html'} }
 
@@ -49,28 +53,21 @@ packer.startup(function()
 		cmd = 'Format'
 	}
 	use {
-		'tpope/vim-surround', opt = true,
-		event = 'BufRead'
+		'tpope/vim-surround', opt = true, event = 'BufRead'
 	}
 	use {
-		'lewis6991/gitsigns.nvim',
-		event = {'BufRead','BufNewFile'},
-		opt = true,
+		'lewis6991/gitsigns.nvim', opt = true, event = { 'BufRead' },
 		config = PLUGINS_CONFIG.gitsigns
 	}
 	use {
-		'glepnir/indent-guides.nvim',
-		opt = true,
-		event = 'BufRead'
+		'glepnir/indent-guides.nvim', opt = true, event = 'BufRead'
 	}
 	use {
 		'junegunn/vim-easy-align', opt = true,
 		cmd = 'EasyAlign'
 	}
 	use {
-		'kyazdani42/nvim-tree.lua', opt = true,
-		config = PLUGINS_CONFIG.nvim_tree,
-		cmd = { 'NvimTreeOpen', 'NvimTreeToggle', 'NvimTreeFindFile' }
+		'lambdalisue/fern.vim', opt = true, cmd = 'Fern'
 	}
 	if vim.fn.executable('fcitx5') == 1 then
 		use {

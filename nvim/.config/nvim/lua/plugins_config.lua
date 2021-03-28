@@ -9,6 +9,7 @@ VI_MODES = {
 	V = { COLORS.blue,  '  V-LINE ' },
 	[''] = { COLORS.blue, '  VISUAL ' },
 	c = { COLORS.violet, '  COMMAND ' },
+	t = { COLORS.yellow, '  TERMINAL ' },
 }
 
 function config.statusline()
@@ -73,7 +74,7 @@ end
 
 -- gitsigns
 function config.gitsigns()
-	require('gitsigns').setup {
+	require'gitsigns'.setup {
 		signs = {
 			add = {hl = 'DiffAdd', text = '+'},
 			change = {hl = 'DiffChange', text = '~'},
@@ -119,27 +120,43 @@ end
 
 function config.colorscheme()
 	function _G.mytabline()
-		local pagenum = vim.fn.tabpagenr('$')
+		local fn = vim.fn
+		local pagenum = fn.tabpagenr('$')
 		local s = ''
 		local i = 1
 		while i <= pagenum  do
-			if i == vim.fn.tabpagenr() then
+			if i == fn.tabpagenr() then
 				s = s..'%#TabLineSel#'
 			else
 				s = s..'%#TabLine#'
 			end
-			s = s .. tostring(i)
-			local path = vim.fn.bufname(vim.fn.tabpagebuflist(i)[vim.fn.tabpagewinnr(i)])
-			s = s .. ' ' .. vim.fn.fnamemodify(path, ":t")
-			s = s .. ' %#TabLineFill#%T'
+			s = s .. ' ' .. tostring(i) .. '.'
+			local bufnr = fn.tabpagebuflist(i)[vim.fn.tabpagewinnr(i)]
+			local path = fn.bufname(bufnr)
+			s = s .. fn.fnamemodify(path, ":t")
+			if fn.getbufvar(bufnr, '&modified') == 1 then
+				s = s .. '+'
+			else
+				s = s .. ' '
+			end
+			s = s .. '%#TabLineFill#%T'
 			i = i + 1
 		end
 		return s
 	end
 	vim.cmd('colorscheme zephyr')
-	vim.cmd('hi TabLineSel guibg='..COLORS.blue..' guifg='..COLORS.bg)
-	vim.cmd('hi TabLine guibg='..COLORS.fg..' guifg='..COLORS.darkblue)
+	vim.cmd('hi TabLineSel gui=bold guibg='..COLORS.blue..' guifg='..COLORS.bg)
+	vim.cmd('hi TabLine gui=NONE guibg='..COLORS.fg..' guifg='..COLORS.darkblue)
 	vim.o.tabline = "%!v:lua.mytabline()"
+end
+
+function config.cocnvim()
+	vim.g.coc_global_extensions = {
+		'coc-json', 'coc-snippets', 'coc-pairs', 'coc-yank', 'coc-tsserver',
+		'coc-pyright', 'coc-emmet', 'coc-vimlsp', 'coc-css', 'coc-eslint', 'coc-java'
+	}
+	vim.g.coc_snippet_next = '<C-n>'
+	vim.cmd('hi CocHighlightText guibg='..COLORS.yellow..' guifg='..COLORS.bg)
 end
 
 return config

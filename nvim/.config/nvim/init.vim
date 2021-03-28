@@ -79,9 +79,6 @@ lua require('plugins')
 
 "coc.vim
 set shortmess+=c signcolumn=yes updatetime=500
-let g:coc_global_extensions=[
-			\ 'coc-json', 'coc-snippets', 'coc-pairs', 'coc-tag', 'coc-yank', 'coc-tsserver',
-			\ 'coc-pyright', 'coc-emmet', 'coc-vimlsp', 'coc-css', 'coc-eslint', 'coc-java']
 ino <silent><expr> <TAB>
 			\ pumvisible() ? "\<C-n>" :
 			\ <SID>check_back_space() ? "\<TAB>" :
@@ -93,7 +90,6 @@ endfunction
 ino <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 ino <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 ino <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-let g:coc_snippet_next = '<C-n>'
 " lsp
 nm <silent> <M-t> <Plug>(coc-definition)
 nm <silent> <M-r> <Plug>(coc-references)
@@ -136,6 +132,8 @@ augroup user_plugin
 	au User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
 	au FileType floaterm tnoremap <buffer> <ESC> <C-\><C-n>:FloatermToggle<CR>
+
+	au FileType fern call s:init_fern()
 augroup END
 
 " inline_edit
@@ -190,7 +188,6 @@ let g:Lf_NormalMap = {
 nn <silent> <C-r> :Leaderf --fuzzy function<CR>
 nn <silent> <leader>m :Leaderf --fuzzy mru<CR>
 nn <silent> <M-f> :<C-U><C-R>=printf("Leaderf! rg -F --all-buffers -w -e %s ", expand("<cword>"))<CR><CR>
-nn <silent> <leader>b :Leaderf! buffer<CR>
 nn <silent> <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -w -e %s ", expand("<cword>"))<CR><CR>
 nn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
 nn <silent> <leader>d :<C-U><C-R>=printf("Leaderf! rg -w -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":."))<CR><CR>
@@ -201,11 +198,29 @@ nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cw
 nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 nn <leader>ft :<C-U>Leaderf filetype<CR>
 
-nn <silent> <C-p> :lua require('nvim_fzf_commands.files').find_files()<CR>
-nn <silent> <C-f> :lua require('nvim_fzf_commands.ripgrep').grep_lines()<CR>
+nn <silent> <C-p> :lua require('fzf_utils.nvim_fzf_commands').find_files()<CR>
+nn <silent> <C-f> :lua require('fzf_utils.nvim_fzf_commands').grep_lines()<CR>
+nn <silent> <leader>b :lua require('fzf_utils.nvim_fzf_commands').buffers()<CR>
+nn <silent> <leader><leader>m :lua require('fzf_utils.nvim_fzf_commands').Man()<CR>
+nn <silent> <leader><leader>h :lua require('fzf_utils.fzf_helptags')()<CR>
 
-let g:nvim_tree_show_icons = { 'git': 0, 'folders': 1, 'files': 0 }
-let g:nvim_tree_tab_open = 0
-nn <leader>tr :NvimTreeOpen<cr>
-nn <leader>tj :NvimTreeFindFile<cr>
+let g:fern#disable_default_mappings = 1
+nn <leader>tj :Fern . -reveal=% -drawer<CR>
+nn <leader>tr :Fern . -drawer<CR>
+function! s:init_fern() abort
+	nmap <buffer> t <Plug>(fern-action-open:tabedit)
+	nmap <buffer> v <Plug>(fern-action-open:vsplit)
+	nmap <buffer> R gg<Plug>(fern-action-reload)<C-o>
+	nmap <buffer> l <Plug>(fern-action-expand)
+	nmap <buffer> h <Plug>(fern-action-collapse)
+	nmap <buffer> <C-j> 5j
+	nmap <buffer> <C-k> 5k
+	nmap <buffer> A <Plug>(fern-action-new-dir)
+	nmap <buffer> a <Plug>(fern-action-new-file)
+	nmap <buffer> D <Plug>(fern-action-remove)
+	nmap <buffer> r <Plug>(fern-action-rename)
+	nmap <buffer> q :<C-u>quit<CR>
+	nmap <buffer> z <Plug>(fern-action-zoom:half)
+	nmap <buffer><nowait> ! <Plug>(fern-action-hidden:toggle)
+endfunction
 
