@@ -15,13 +15,13 @@ end)
 
 local function rg_fzf(pattern, dir)
 	coroutine.wrap(function ()
-		local rgcmd = "rg --vimgrep --no-heading --color ansi " .. fn.shellescape(pattern)
+		local rgcmd = "rg -w --vimgrep --no-heading --color ansi " .. fn.shellescape(pattern)
 
 		if type(dir) == "string" then
 			rgcmd = rgcmd .. ' ' .. dir
 		end
 
-		local choices = fzf(rgcmd, "--preview="..shell)
+		local choices = fzf(rgcmd, "--preview-window=hidden:top --preview="..shell)
 		if not choices then return end
 
 		local parsed_content = parse_vimgrep(choices[1])
