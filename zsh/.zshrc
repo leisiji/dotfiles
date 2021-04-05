@@ -26,7 +26,6 @@ zinit light-mode for \
 	zinit-zsh/z-a-bin-gem-node
 
 alias ni=nvim
-alias ra=ranger
 alias t='tmux -2'
 alias ta='tmux -2 a'
 alias ls=exa
@@ -42,6 +41,7 @@ export PATH="$PATH:$HOME/.local/bin/:$HOME/.yarn/bin/:$HOME/.cargo/bin/"
 export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d'
+export FZF_DEFAULT_OPTS='--ansi --bind ctrl-d:half-page-down,ctrl-u:half-page-up'
 
 # key-bindings 放在前面，防止后面的快捷键被覆盖
 zinit snippet OMZ::lib/key-bindings.zsh

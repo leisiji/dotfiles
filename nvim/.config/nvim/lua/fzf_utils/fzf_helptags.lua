@@ -42,7 +42,7 @@ local function deal_with_tags(tagfile, cb)
 	coroutine.yield()
 end
 
-local function fzf_function(cb)
+local function get_help_tags(cb)
 	local runtimepaths = vim.api.nvim_list_runtime_paths()
 	local total_done = 0
 	for _, rtp in ipairs(runtimepaths) do
@@ -60,7 +60,7 @@ end
 return function()
 	local fzf = require('fzf').fzf
 	coroutine.wrap(function ()
-		local result = fzf(fzf_function, "--nth 1 --ansi --expect=ctrl-t")
+		local result = fzf(get_help_tags, "--nth 1 --ansi --expect=ctrl-t")
 		if not result then
 			return
 		end

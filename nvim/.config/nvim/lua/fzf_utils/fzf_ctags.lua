@@ -1,42 +1,33 @@
 local fzf = require('fzf').fzf
 local fn = vim.fn
-local path
+local cur_file
 
--- get function from emacs-like output of ctags
-local function get_ctags(cb)
-	local cmd = string.format("ctags -e -f- %s", path)
+-- example: {"_type": "tag", "pattern": "/^void thaw_secondary_cpus(void)$/", "line": 1412, "kind": "function"}
+local function get_ctags(fzf_cb)
+	local cmd = string.format("ctags --output-format=json -u --fields=nzP -f- %s", cur_file)
 	local res = fn.systemlist(cmd)
-	if res == nil then
-		cb(nil)
-		return
-	end
 
-	local i = 3
-	local func_name = nil
-	local ln_start = 0
-	while i <= #res  do
-		local line = res[i]
-		local j = 0
-		while j < #line  do
-			--print(string.byte(line, j))
-			local char = string.byte(line, j)
-			if char  == 0x7f then
-				func_name = string.sub(line, 1, j - 1)
-			elseif char == 0x01 then
-				ln_start = j + 1
-			elseif char == 0x2c then
-				cb(string.sub(line, ln_start, j - 1) .. '  ' .. func_name)
-			end
-			j = j + 1
+	for _,val in pairs(res) do
+		local tag_json_obj = fn.json_decode(val)
+		if tag_json_obj["kind"] == "function" then
+			local pattern = tag_json_obj["pattern"]
+			local func_name = string.sub(pattern, 3, #pattern - 2)
+			local ln = tag_json_obj["line"]
+			local str = string.format("%s: %s", ln, func_name)
+			fzf_cb(str, function () end)
 		end
-		i = i + 1
 	end
-	cb(nil)
+	fzf_cb(nil, function () end)
 end
 
 return function()
-	path = fn.expand("%:p")
+	local utils = require('fzf_utils.utils')
+	cur_file = fn.expand("%:p")
 	coroutine.wrap(function ()
-		local choices = fzf(get_ctags, "--nth 1 --ansi --expect=ctrl-t")
+		local shell = utils.get_preview_action(cur_file, fn.line('$'))
+		local result = fzf(get_ctags, "--reverse --preview "..shell)
+		if result ~= nil then
+			vim.cmd(utils.get_leading_num(result[1]))
+		end
 	end)()
 end

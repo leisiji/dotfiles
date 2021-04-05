@@ -58,7 +58,7 @@ vn <M-w> 5w
 nn <M-y> <C-r>
 "Remove all trailing whitespace by pressing F5
 nn <M-s> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-"tnoremap <Esc> <C-\><C-n>
+tnoremap <M-e> <C-\><C-n>
 ino <M-b> <c-left>
 ino <M-f> <c-right>
 ino <M-d> <C-o>diw
@@ -200,6 +200,7 @@ nn <leader>ft :<C-U>Leaderf filetype<CR>
 
 nn <silent> <C-p> :lua require('fzf_utils.nvim_fzf_commands').find_files()<CR>
 nn <silent> <C-f> :lua require('fzf_utils.nvim_fzf_commands').grep_lines()<CR>
+nn <silent> <C-r> :lua require('fzf_utils.fzf_ctags')()<CR>
 nn <silent> <leader>b :lua require('fzf_utils.nvim_fzf_commands').buffers()<CR>
 nn <silent> <leader><leader>m :lua require('fzf_utils.nvim_fzf_commands').Man()<CR>
 nn <silent> <leader><leader>h :lua require('fzf_utils.fzf_helptags')()<CR>
