@@ -24,8 +24,7 @@ return function()
 	local utils = require('fzf_utils.utils')
 	cur_file = fn.expand("%:p")
 	coroutine.wrap(function ()
-		local shell = utils.get_preview_action(cur_file, fn.line('$'))
-		local result = fzf(get_ctags, "--reverse --preview "..shell)
+		local result = fzf(get_ctags, "--preview="..utils.get_preview_action(cur_file))
 		if result ~= nil then
 			vim.cmd(utils.get_leading_num(result[1]))
 		end

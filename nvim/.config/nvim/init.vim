@@ -167,29 +167,16 @@ let g:last_active_tab = 1
 nn <M-q> :execute 'tabn ' . g:last_active_tab<cr>
 
 "leaderf
-let g:Lf_JumpToExistingWindow = 1
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_GtagsAutoGenerate = 0
 let g:Lf_PreviewInPopup = 1
 let g:Lf_Gtagslabel = 'native-pygments'
 let g:Lf_RootMarkers=['.root']
-let g:Lf_ExternalCommand = 'fd --type file "%s"'
 let g:Lf_GtagsAutoUpdate = 0
 let g:Lf_ShowDevIcons = 0
-let g:Lf_HideHelp = 1
-let g:Lf_NormalMap = {
-			\ "File":[["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
-			\ "Buffer":[["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
-			\ "Mru":[["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
-			\ "Gtags":[["<ESC>", ':exec g:Lf_py "gtagsExplManager.quit()"<CR>']],
-			\ "Rg":[["<ESC>", ':exec g:Lf_py "rgExplManager.quit()"<CR>']],
-			\ "Line":[["<ESC>", ':exec g:Lf_py "lineExplManager.quit()"<CR>']],
-			\}
-nn <silent> <C-r> :Leaderf --fuzzy function<CR>
 nn <silent> <leader>m :Leaderf --fuzzy mru<CR>
 nn <silent> <M-f> :<C-U><C-R>=printf("Leaderf! rg -F --all-buffers -w -e %s ", expand("<cword>"))<CR><CR>
 nn <silent> <leader>ff :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -w -e %s ", expand("<cword>"))<CR><CR>
-nn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR>
 nn <silent> <leader>d :<C-U><C-R>=printf("Leaderf! rg -w -e %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":."))<CR><CR>
 xn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
 "leaderf tags
@@ -198,12 +185,18 @@ nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cw
 nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 nn <leader>ft :<C-U>Leaderf filetype<CR>
 
+" fzf find
 nn <silent> <C-p> :lua require('fzf_utils.nvim_fzf_commands').find_files()<CR>
 nn <silent> <C-f> :lua require('fzf_utils.nvim_fzf_commands').grep_lines()<CR>
 nn <silent> <C-r> :lua require('fzf_utils.fzf_ctags')()<CR>
 nn <silent> <leader>b :lua require('fzf_utils.nvim_fzf_commands').buffers()<CR>
 nn <silent> <leader><leader>m :lua require('fzf_utils.nvim_fzf_commands').Man()<CR>
 nn <silent> <leader><leader>h :lua require('fzf_utils.fzf_helptags')()<CR>
+
+" Rg search
+nn <leader>fa :<C-U><C-R>=printf("FzfRg %s ", expand("<cword>"))<CR>
+nn <silent> <leader>ff :<C-U><C-R>=printf("FzfRg %s %s", expand("<cword>"), expand("%"))<CR><CR>
+command! -complete=dir -nargs=+ FzfRg lua require('fzf_utils.commands').load_command(<f-args>)
 
 let g:fern#disable_default_mappings = 1
 nn <leader>tj :Fern . -reveal=% -drawer<CR>
