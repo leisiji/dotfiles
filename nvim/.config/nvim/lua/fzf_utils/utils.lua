@@ -1,14 +1,14 @@
 local M = {}
 local fn = vim.fn
-_G.PREVIEW_LINE_NUMS = 8
 
 function M.get_leading_num(str)
 	return string.match(str, "%d+")
 end
 
-function M.preview_lines(path, line)
-	local start_line = line - PREVIEW_LINE_NUMS
-	local end_line = line + PREVIEW_LINE_NUMS
+function M.preview_lines(path, line, fzf_preview_lines)
+	local half_preview_lines = fzf_preview_lines / 2
+	local start_line = line - half_preview_lines
+	local end_line = line + half_preview_lines
 
 	if start_line < 0 then
 		start_line = 0
@@ -21,10 +21,10 @@ end
 
 -- get preview action that has result starting with line number
 function M.get_preview_action(path)
-	local shell = require('fzf.actions').action(function(selections, _, _)
+	local shell = require('fzf.actions').action(function(selections, fzf_preview_lines, _)
 		if selections ~= nil then
 			local line_nr = tonumber(M.get_leading_num(selections[1]))
-			return M.preview_lines(path, line_nr)
+			return M.preview_lines(path, line_nr, fzf_preview_lines)
 		end
 	end)
 	return shell
@@ -37,7 +37,7 @@ function M.tabedit(path, row, col)
 		vim.api.nvim_win_set_cursor(0, {row, col})
 		vim.cmd("normal! zz")
 	end
-	vim.wo.cul = true -- cursorline of terminal mode is default off
+	vim.wo.cul = true
 end
 
 function M.vsplitedit(path)

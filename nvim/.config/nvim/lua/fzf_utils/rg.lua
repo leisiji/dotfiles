@@ -8,9 +8,9 @@ local function parse_vimgrep(str)
 	return {string.match(str, "(.-):(%d+):(%d+):.*")}
 end
 
-local shell = require('fzf.actions').action(function(selections, _, _)
+local shell = require('fzf.actions').action(function(selections, fzf_preview_lines, _)
 	local parsed_content = parse_vimgrep(selections[1])
-	return utils.preview_lines(parsed_content[1], parsed_content[2])
+	return utils.preview_lines(parsed_content[1], parsed_content[2], fzf_preview_lines)
 end)
 
 local function rg_fzf(pattern, dir)
