@@ -41,7 +41,7 @@ export PATH="$PATH:$HOME/.local/bin/:$HOME/.yarn/bin/:$HOME/.cargo/bin/"
 export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d'
-export FZF_DEFAULT_OPTS='--ansi --bind ctrl-d:half-page-down,ctrl-u:half-page-up,tab:down,ctrl-p:toggle-preview --reverse --cycle'
+export FZF_DEFAULT_OPTS='--ansi --bind ctrl-d:half-page-down,ctrl-u:half-page-up,tab:down,ctrl-p:toggle-preview --reverse --cycle --preview-window=hidden:top'
 
 # key-bindings 放在前面，防止后面的快捷键被覆盖
 zinit snippet OMZ::lib/key-bindings.zsh

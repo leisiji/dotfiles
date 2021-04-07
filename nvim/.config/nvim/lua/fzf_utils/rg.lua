@@ -21,7 +21,7 @@ local function rg_fzf(pattern, dir)
 			rgcmd = rgcmd .. ' ' .. dir
 		end
 
-		local choices = fzf(rgcmd, "--preview-window=hidden:top --preview="..shell)
+		local choices = fzf(rgcmd, "--preview="..shell)
 		if not choices then return end
 
 		local parsed_content = parse_vimgrep(choices[1])

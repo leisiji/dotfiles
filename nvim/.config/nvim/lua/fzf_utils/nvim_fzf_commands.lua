@@ -7,8 +7,7 @@ local M = {}
 function M.grep_lines()
 	coroutine.wrap(function()
 		local path = fn.expand("%:p")
-		local choices = fzf("cat -n " .. path, "--tabstop=1 --nth=2.. --preview "
-						.. utils.get_preview_action(path))
+		local choices = fzf("cat -n " .. path, "--tabstop=1 --nth=2.. --preview=" .. utils.get_preview_action(path))
 		if choices ~= nil then
 			vim.cmd(utils.get_leading_num(choices[1]))
 		end
