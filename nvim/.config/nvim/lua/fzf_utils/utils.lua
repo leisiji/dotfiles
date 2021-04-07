@@ -1,6 +1,6 @@
 local M = {}
 local fn = vim.fn
-_G.PREVIEW_LINE_NUMS = 17
+_G.PREVIEW_LINE_NUMS = 8
 
 function M.get_leading_num(str)
 	return string.match(str, "%d+")
