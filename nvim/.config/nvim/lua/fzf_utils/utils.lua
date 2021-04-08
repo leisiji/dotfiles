@@ -11,6 +11,7 @@ function M.preview_lines(path, line, fzf_preview_lines)
 	local end_line = line + half_preview_lines
 
 	if start_line < 0 then
+		end_line = end_line - start_line
 		start_line = 0
 	end
 
