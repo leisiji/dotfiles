@@ -60,7 +60,7 @@ end
 return function()
 	local fzf = require('fzf').fzf
 	coroutine.wrap(function ()
-		local result = fzf(get_help_tags, "--nth 1 --ansi --expect=ctrl-t")
+		local result = fzf(get_help_tags, "--nth 1 --expect=ctrl-t")
 		if not result then
 			return
 		end
