@@ -175,7 +175,6 @@ let g:Lf_RootMarkers=['.root']
 let g:Lf_GtagsAutoUpdate = 0
 let g:Lf_ShowDevIcons = 0
 nn <silent> <leader>m :Leaderf --fuzzy mru<CR>
-xn <leader>fa :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
 "leaderf tags
 nn <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
 nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
@@ -192,10 +191,22 @@ nn <silent> <leader><leader>h :lua require('fzf_utils.fzf_helptags')()<CR>
 
 " Rg search
 nn <leader>fa :<C-U><C-R>=printf("FzfRg %s ", expand("<cword>"))<CR>
+nn <leader>d :<C-U><C-R>=printf("FzfRg %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":."))<CR>
 nn <silent> <leader>ff :<C-U><C-R>=printf("FzfRg %s %s", expand("<cword>"), expand("%"))<CR><CR>
-nn <silent> <leader>d :<C-U><C-R>=printf("FzfRg %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":."))<CR><CR>
 nn <silent> <M-f> :<C-U><C-R>=printf("FzfRg --all-buffers %s", expand("<cword>"))<CR><CR>
+xn <leader>fa :<C-U><C-R>=printf("FzfRg %s", RgVisual())<CR>
 command! -complete=dir -nargs=+ FzfRg lua require('fzf_utils.commands').load_command(<f-args>)
+
+function! RgVisual()
+    try
+        let x_save = getreg("x", 1)
+        let type = getregtype("x")
+        norm! gv"xy
+        return '"' . escape(@x, '"') . '"'
+    finally
+        call setreg("x", x_save, type)
+    endtry
+endfunction
 
 let g:fern#disable_default_mappings = 1
 nn <leader>tj :Fern . -reveal=% -drawer<CR>
