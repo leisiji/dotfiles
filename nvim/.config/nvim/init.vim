@@ -3,6 +3,7 @@ set list lcs=tab:→\ ,trail:·,extends:↷,precedes:↶
 set ts=4 sw=4 noswf sts=4
 set undofile undodir=$HOME/.cache/vim/undo
 lua require('options')
+set expandtab
 
 function! MyQuit() abort
 	if len(win_findbuf(bufnr())) > 1 || expand('%') == '' || tabpagenr('$') == 1
