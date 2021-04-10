@@ -23,7 +23,7 @@ yay -S ccls kotlin-language-server lua-language-server-git groovy-language-serve
 pip3 install --user cmake-language-server pynvim compiledb
 
 # tools based on rust
-cargo install hexyl bat ripgrep fd-find exa git-delta
+cargo install hexyl bat ripgrep fd-find exa git-delta gitui
 ```
 Desktop:
 ```sh
@@ -40,14 +40,10 @@ sudo pacman -S fcitx5 fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-chinese-addons fci
 ```
 Plugin Manager:
 ```sh
-# vim-plug
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# packer.nvim
+git clone https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 # zinit
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
-
-# tpm
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
