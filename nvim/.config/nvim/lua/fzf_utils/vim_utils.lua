@@ -1,3 +1,6 @@
+local M = {}
+local fzf = require('fzf').fzf
+
 -- total with 2 types of coroutines (except the necessary one)
 -- the first used to search; the second used to read file
 local function readfilecb(path, read_tag_cb)
@@ -57,8 +60,7 @@ local function get_help_tags(cb)
 	end
 end
 
-return function()
-	local fzf = require('fzf').fzf
+function M.vim_help()
 	coroutine.wrap(function ()
 		local result = fzf(get_help_tags, "--nth 1 --expect=ctrl-t")
 		if not result then
@@ -77,3 +79,27 @@ return function()
 		vim.cmd(string.format("%s h %s", windowcmd, choice))
 	end)()
 end
+
+function M.vim_cmd_history()
+	local fn = vim.fn
+	local search = "cmd"
+	local nr = fn.histnr(search)
+	local count = 0
+	local cmd_hists = {}
+
+	while nr >= 0 do
+		local cmd = fn.histget(search, nr - count)
+		nr = nr - 1
+		if cmd ~= nil and #cmd > 0 then
+			cmd_hists[count] = cmd
+			count = count + 1
+		end
+	end
+
+	coroutine.wrap(function ()
+		local result = fzf(cmd_hists, "")
+		vim.cmd(result[1])
+	end)()
+end
+
+return M

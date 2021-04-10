@@ -7,7 +7,6 @@ local global_cfg = {
 	backup = false;
 	writebackup = false;
 	swapfile = false;
-	number = true;
 	autoread = true;
 	autowrite = true;
 	smarttab = true;
@@ -40,6 +39,7 @@ end
 
 local win_cfg = {
 	signcolumn = "yes";
+	number = true;
 	cul = true;
 }
 for k, v in pairs(win_cfg) do

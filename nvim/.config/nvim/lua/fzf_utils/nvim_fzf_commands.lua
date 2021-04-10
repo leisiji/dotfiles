@@ -7,11 +7,15 @@ local M = {}
 function M.grep_lines()
 	coroutine.wrap(function()
 		local path = fn.expand("%:p")
-		local choices = fzf("cat -n " .. path, "--tabstop=1 --nth=2.. --preview=" .. utils.get_preview_action(path))
-		if choices ~= nil then
-			vim.cmd(utils.get_leading_num(choices[1]))
-		end
+		local col = fn.getcurpos()[3]
+		local choices = fzf("cat -n " .. path, "--tabstop=1 --nth=2.. --expect=ctrl-v --preview=" .. utils.get_preview_action(path))
+		local row = utils.get_leading_num(choices[2])
 
+		if choices[1] == "ctrl-v" then
+			utils.vsplitedit(path, row, col)
+		else
+			api.nvim_win_set_cursor(0, {row, col})
+		end
 	end)()
 end
 
@@ -19,9 +23,8 @@ function M.find_files()
 	local FZF_CAHCE_FILES_DIR = fn.stdpath('cache') .. '/fzf_files/'
 	local cache_file = FZF_CAHCE_FILES_DIR .. fn.sha256(fn.getcwd())
 	local command = "cat " .. cache_file
-	local modified_time = fn.getftime(cache_file)
 
-	if (modified_time == -1) or (os.time() - modified_time > 604800) then -- refresh per week
+	if fn.filereadable(cache_file) == 0 then
 
 		if fn.isdirectory(FZF_CAHCE_FILES_DIR) == 0  then
 			fn.mkdir(FZF_CAHCE_FILES_DIR)
@@ -33,19 +36,19 @@ function M.find_files()
 	end
 
 	coroutine.wrap(function ()
-		local choices = fzf(command, "--expect=ctrl-t,ctrl-v,ctrl-r")
+		local choices = fzf(command, "--expect=ctrl-v,ctrl-r,ctrl-t")
 
 		if not choices then return end
 
 		local file = fn.fnameescape(choices[2])
 
-		if choices[1] == "ctrl-t" then
-			utils.tabedit(file, nil, nil)
-		elseif choices[1] == "ctrl-v" then
+		if choices[1] == "ctrl-v" then
 			utils.vsplitedit(file)
 		elseif choices[1] == "ctrl-r" then
 			os.remove(cache_file)
 			vim.schedule(M.find_files)
+		else
+			utils.tabedit(file, nil, nil)
 		end
 	end)()
 end

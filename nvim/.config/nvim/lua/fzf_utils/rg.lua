@@ -8,7 +8,7 @@ local function parse_vimgrep(str)
 	return {string.match(str, "(.-):(%d+):(%d+):.*")}
 end
 
-local shell = require('fzf.actions').action(function(selections, fzf_preview_lines, _)
+local shell = "--expect=ctrl-v --preview="..require('fzf.actions').action(function(selections, fzf_preview_lines, _)
 	local parsed_content = parse_vimgrep(selections[1])
 	return utils.preview_lines(parsed_content[1], parsed_content[2], fzf_preview_lines)
 end)
@@ -27,12 +27,17 @@ local function get_rg_cmd(pattern, dir)
 	return rgcmd
 end
 
-local function deal_with_rg_results(result)
+local function deal_with_rg_results(key, result)
 	local parsed_content = parse_vimgrep(result)
 	local filename = parsed_content[1]
-	local row = parsed_content[2]
-	local col = parsed_content[3]
-	utils.tabedit(filename, tonumber(row), tonumber(col) - 1)
+	local row = tonumber(parsed_content[2])
+	local col = tonumber(parsed_content[3]) - 1
+
+	if key == "ctrl-v" then
+		utils.vsplitedit(filename, row, col)
+	else
+		utils.tabedit(filename, row, col)
+	end
 end
 
 local function get_all_buffers(pattern)
@@ -49,20 +54,18 @@ local function get_all_buffers(pattern)
 	return get_rg_cmd(pattern, buffers)
 end
 
+--------------------- command function ----------------------
 function M.search_path(pattern, path)
 	coroutine.wrap(function ()
-		local choices = fzf(get_rg_cmd(pattern, path), "--preview="..shell)
-		if not choices then return end
-		deal_with_rg_results(choices[1])
+		local choices = fzf(get_rg_cmd(pattern, path), shell)
+		deal_with_rg_results(choices[1], choices[2])
 	end)()
 end
 
 function M.search_all_buffers(pattern)
 	coroutine.wrap(function ()
-		local choices = fzf(get_all_buffers(pattern), "--preview="..shell)
-		if choices ~= nil then
-			deal_with_rg_results(choices[1])
-		end
+		local choices = fzf(get_all_buffers(pattern), shell)
+		deal_with_rg_results(choices[1], choices[2])
 	end)()
 end
 

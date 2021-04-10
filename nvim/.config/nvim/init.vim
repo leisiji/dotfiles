@@ -1,8 +1,10 @@
-set hidden nowritebackup number scrolloff=10 autoread autowrite noswapfile
+"set hidden nowritebackup number scrolloff=10 autoread autowrite noswapfile
 set list lcs=tab:→\ ,trail:·,extends:↷,precedes:↶
-set tabstop=4 shiftwidth=4 softtabstop=4 smarttab smartindent ignorecase smartcase incsearch cul
-set t_Co=256 termguicolors showtabline=2
+set tabstop=4
+"set tabstop=4 shiftwidth=4 softtabstop=4 smarttab smartindent ignorecase smartcase incsearch cul
+"set t_Co=256 termguicolors showtabline=2
 set undofile undodir=$HOME/.cache/vim/undo
+lua require('options')
 let mapleader=" "
 let g:markdown_fenced_languages = [
 	\ 'vim', 'cpp', 'c', 'java', 'python', 'lua',
@@ -173,39 +175,39 @@ let g:Lf_PreviewInPopup = 1
 let g:Lf_Gtagslabel = 'native-pygments'
 let g:Lf_RootMarkers=['.root']
 let g:Lf_GtagsAutoUpdate = 0
-let g:Lf_ShowDevIcons = 0
 nn <silent> <leader>m :Leaderf --fuzzy mru<CR>
+nn <leader>ft :<C-U>Leaderf filetype<CR>
 "leaderf tags
 nn <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
 nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
 nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
-nn <leader>ft :<C-U>Leaderf filetype<CR>
 
 " fzf find
 nn <silent> <C-p> :lua require('fzf_utils.nvim_fzf_commands').find_files()<CR>
 nn <silent> <C-f> :lua require('fzf_utils.nvim_fzf_commands').grep_lines()<CR>
-nn <silent> <C-r> :lua require('fzf_utils.fzf_ctags')()<CR>
+nn <silent> <C-r> :lua require('fzf_utils.ctags')()<CR>
 nn <silent> <leader>b :lua require('fzf_utils.nvim_fzf_commands').buffers()<CR>
 nn <silent> <leader><leader>m :lua require('fzf_utils.nvim_fzf_commands').Man()<CR>
-nn <silent> <leader><leader>h :lua require('fzf_utils.fzf_helptags')()<CR>
+nn <silent> <leader><leader>h :lua require('fzf_utils.vim_utils').vim_help()<CR>
 
 " Rg search
 nn <leader>fa :<C-U><C-R>=printf("FzfRg %s ", expand("<cword>"))<CR>
 nn <leader>d :<C-U><C-R>=printf("FzfRg %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":."))<CR>
 nn <silent> <leader>ff :<C-U><C-R>=printf("FzfRg %s %s", expand("<cword>"), expand("%"))<CR><CR>
 nn <silent> <M-f> :<C-U><C-R>=printf("FzfRg --all-buffers %s", expand("<cword>"))<CR><CR>
+nn <silent> <leader>h :<C-U><C-R>=printf("lua require('fzf_utils.vim_utils').vim_cmd_history", expand("<cword>"))<CR><CR>
 xn <leader>fa :<C-U><C-R>=printf("FzfRg %s", RgVisual())<CR>
 command! -complete=dir -nargs=+ FzfRg lua require('fzf_utils.commands').load_command(<f-args>)
 
 function! RgVisual()
-    try
-        let x_save = getreg("x", 1)
-        let type = getregtype("x")
-        norm! gv"xy
-        return '"' . escape(@x, '"') . '"'
-    finally
-        call setreg("x", x_save, type)
-    endtry
+	try
+		let x_save = getreg("x", 1)
+		let type = getregtype("x")
+		norm! gv"xy
+		return '"' . escape(@x, '"') . '"'
+	finally
+		call setreg("x", x_save, type)
+	endtry
 endfunction
 
 let g:fern#disable_default_mappings = 1
