@@ -37,7 +37,6 @@ local function cmdedit(tabcmd, path, row, col)
 		vim.api.nvim_win_set_cursor(0, {row, col})
 		vim.cmd("normal! zz")
 	end
-	vim.wo.cul = true
 end
 
 function M.tabedit(path, row, col)

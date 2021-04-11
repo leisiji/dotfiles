@@ -15,6 +15,7 @@ function M.grep_lines()
 			utils.vsplitedit(path, row, col)
 		else
 			api.nvim_win_set_cursor(0, {row, col})
+			vim.cmd("normal! zz")
 		end
 	end)()
 end

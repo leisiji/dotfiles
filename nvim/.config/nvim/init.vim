@@ -123,7 +123,6 @@ augroup user_plugin
 	au TabLeave * let g:last_active_tab = tabpagenr()
 
 	au BufRead,BufNewFile *.lds setfiletype ld
-	au BufRead,BufNewFile *.aidl setfiletype java
 	au FocusGained * :checktime
 
 	au BufReadPost *
@@ -136,6 +135,8 @@ augroup user_plugin
 	au FileType floaterm tnoremap <buffer> <ESC> <C-\><C-n>:FloatermToggle<CR>
 
 	au FileType fern call s:init_fern()
+
+	au BufReadPost,WinEnter * if ! &cursorline | setlocal cul | endif
 augroup END
 
 " inline_edit
