@@ -5,11 +5,11 @@ local packer = require('packer')
 local use = packer.use
 packer.startup(function()
 	use { 'wbthomason/packer.nvim' }
-	use {
-		'nvim-treesitter/nvim-treesitter', opt = true,
-		run = ':TSUpdate', event = 'BufRead',
-		config = PLUGINS_CONFIG.treesitter
-	}
+	--use {
+	--	'nvim-treesitter/nvim-treesitter', opt = true,
+	--	run = ':TSUpdate', event = 'BufRead',
+	--	config = PLUGINS_CONFIG.treesitter
+	--}
 	use {
 		'nvim-lua/plenary.nvim' -- needed by gitsigns
 	}
