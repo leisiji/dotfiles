@@ -37,8 +37,8 @@ packer.startup(function()
 	}
 
 	use {
-		'voldikss/vim-floaterm', opt = true,
-		cmd = 'FloatermToggle'
+		'caenrique/nvim-toggle-terminal', opt = true,
+		cmd = 'ToggleTerminal'
 	}
 	use {
 		'Yggdroot/LeaderF', run = './install.sh', opt = true,

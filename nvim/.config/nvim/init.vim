@@ -60,7 +60,7 @@ vn <M-w> 5w
 nn <M-y> <C-r>
 "Remove all trailing whitespace by pressing F5
 nn <M-s> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-tnoremap <M-e> <C-\><C-n>
+tno <M-e> <C-\><C-n>
 ino <M-b> <c-left>
 ino <M-f> <c-right>
 ino <M-d> <C-o>diw
@@ -109,9 +109,8 @@ nmap <leader><leader>f <Plug>(coc-format)
 nn <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 
 " floaterm
-let g:floaterm_type='floating'
-let g:floaterm_position='center'
-nn <silent> <leader>tt :FloatermToggle<CR>
+nn <silent> <leader>tt :ToggleTerminal<CR>
+tno <silent> <expr> <esc> (&ft == 'fzf') ? '<esc>' : '<C-\><C-n>:ToggleTerminal<CR>'
 
 augroup user_plugin
 	autocmd!
@@ -132,8 +131,6 @@ augroup user_plugin
 
 	au User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
-	au FileType floaterm tnoremap <buffer> <ESC> <C-\><C-n>:FloatermToggle<CR>
-
 	au FileType fern call s:init_fern()
 
 	au BufReadPost,WinEnter * if ! &cursorline | setlocal cul | endif
@@ -147,11 +144,6 @@ let g:inline_edit_autowrite = 1
 
 " easy-align
 xm ga :EasyAlign<cr>
-
-" asynctasks
-let g:asyncrun_open = 6
-let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg']
-nn <leader><leader>r :AsyncTask file-run<cr>
 
 function! WinZoomToggle() abort
 	if exists('t:zoomed') && t:zoomed
