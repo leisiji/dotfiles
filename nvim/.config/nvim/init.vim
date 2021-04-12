@@ -161,20 +161,6 @@ nn <silent> <Leader>z :call WinZoomToggle()<CR>
 let g:last_active_tab = 1
 nn <M-q> :execute 'tabn ' . g:last_active_tab<cr>
 
-"leaderf
-let g:Lf_WindowPosition = 'popup'
-let g:Lf_GtagsAutoGenerate = 0
-let g:Lf_PreviewInPopup = 1
-let g:Lf_Gtagslabel = 'native-pygments'
-let g:Lf_RootMarkers=['.root']
-let g:Lf_GtagsAutoUpdate = 0
-nn <silent> <leader>m :Leaderf --fuzzy mru<CR>
-nn <leader>ft :<C-U>Leaderf filetype<CR>
-"leaderf tags
-nn <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
-nn <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
-nn <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
-
 " fzf find
 nn <silent> <C-p> :lua require('fzf_utils.nvim_fzf_commands').find_files()<CR>
 nn <silent> <C-f> :lua require('fzf_utils.nvim_fzf_commands').grep_lines()<CR>

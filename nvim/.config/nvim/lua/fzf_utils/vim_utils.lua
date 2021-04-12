@@ -60,6 +60,22 @@ local function get_help_tags(cb)
 	end
 end
 
+function M.get_filetypes()
+	coroutine.wrap(function ()
+		local fn = vim.fn
+		local syntax_files = fn.globpath(vim.o.rtp, 'syntax/*.vim')
+		local filetypes = fn.split(syntax_files, '\n')
+		local count = 1
+		local filetypes_list = {}
+		for _,filetype in ipairs(filetypes) do
+			filetypes_list[count] = fn.fnamemodify(filetype, ':t:r')
+			count = count + 1
+		end
+		local result = fzf(filetypes_list, "--nth 1")
+		vim.cmd("set ft="..result)
+	end)()
+end
+
 function M.vim_help()
 	coroutine.wrap(function ()
 		local result = fzf(get_help_tags, "--nth 1 --expect=ctrl-t")

@@ -41,10 +41,6 @@ packer.startup(function()
 		cmd = 'ToggleTerminal'
 	}
 	use {
-		'Yggdroot/LeaderF', run = './install.sh', opt = true,
-		cmd = {'Leaderf'}
-	}
-	use {
 		'AndrewRadev/inline_edit.vim', opt = true,
 		cmd = 'InlineEdit'
 	}
