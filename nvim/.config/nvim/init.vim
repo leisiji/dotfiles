@@ -174,7 +174,7 @@ nn <leader>fa :<C-U><C-R>=printf("FzfRg %s ", expand("<cword>"))<CR>
 nn <leader>d :<C-U><C-R>=printf("FzfRg %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":."))<CR>
 nn <silent> <leader>ff :<C-U><C-R>=printf("FzfRg %s %s", expand("<cword>"), expand("%"))<CR><CR>
 nn <silent> <M-f> :<C-U><C-R>=printf("FzfRg --all-buffers %s", expand("<cword>"))<CR><CR>
-nn <silent> <leader>h :<C-U><C-R>=printf("lua require('fzf_utils.vim_utils').vim_cmd_history", expand("<cword>"))<CR><CR>
+nn <silent> <leader>h :lua require('fzf_utils.vim_utils').vim_cmd_history()<CR>
 xn <leader>fa :<C-U><C-R>=printf("FzfRg %s", RgVisual())<CR>
 command! -complete=dir -nargs=+ FzfRg lua require('fzf_utils.commands').load_command(<f-args>)
 
