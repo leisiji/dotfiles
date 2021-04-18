@@ -35,7 +35,7 @@
 		},
 		"lua": {
 			"cwd": "/usr/share/lua-language-server",
-			"command": "/usr/bin/lua-language-server",
+			"command": "lua-language-server",
 			"args": ["-E", "-e", "LANG=en", "/usr/share/lua-language-server/main.lua"],
 			"filetypes": ["lua"],
 			"rootPatterns": [".git/"],

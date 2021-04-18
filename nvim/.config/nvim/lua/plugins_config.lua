@@ -95,29 +95,6 @@ function config.gitsigns()
 	}
 end
 
-function config.nvim_tree()
-	local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-	vim.g.nvim_tree_bindings = {
-		["v"]     = tree_cb("vsplit"),
-		["s"]     = tree_cb("split"),
-		["t"]     = tree_cb("tabnew"),
-		["l"]     = tree_cb("edit"),
-		["h"]     = tree_cb("close_node"),
-		["<Tab>"] = tree_cb("preview"),
-		["."]     = tree_cb("toggle_dotfiles"),
-		["R"]     = tree_cb("refresh"),
-		["a"]     = tree_cb("create"), -- Adding a dir requires an ending /
-		["D"]     = tree_cb("remove"),
-		["r"]     = tree_cb("rename"),
-		["x"]     = tree_cb("cut"),
-		["c"]     = tree_cb("copy"),
-		["p"]     = tree_cb("paste"),
-		["q"]     = tree_cb("close"),
-		["<BS>"]  = tree_cb("dir_up"),
-		["<CR>"]  = tree_cb("cd"),
-	}
-end
-
 function config.colorscheme()
 	function _G.mytabline()
 		local fn = vim.fn
@@ -152,8 +129,9 @@ end
 
 function config.cocnvim()
 	vim.g.coc_global_extensions = {
-		'coc-json', 'coc-snippets', 'coc-pairs', 'coc-yank', 'coc-tsserver',
-		'coc-pyright', 'coc-emmet', 'coc-vimlsp', 'coc-css', 'coc-eslint', 'coc-java'
+		'coc-json', 'coc-snippets', 'coc-pairs', 'coc-yank', 'coc-tsserver', 'coc-sql',
+		'coc-pyright', 'coc-emmet', 'coc-vimlsp', 'coc-css', 'coc-eslint', 'coc-java',
+		'coc-markdownlint'
 	}
 	vim.g.coc_snippet_next = '<C-n>'
 	vim.cmd('hi CocHighlightText guibg='..COLORS.yellow..' guifg='..COLORS.bg)

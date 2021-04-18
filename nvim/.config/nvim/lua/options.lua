@@ -1,3 +1,4 @@
+local vim_glo = vim.g
 
 vim.g.mapleader = " "
 
@@ -33,3 +34,9 @@ local win_cfg = {
 for k, v in pairs(win_cfg) do
 	vim.wo[k] = v
 end
+
+vim_glo.mapleader = " "
+vim_glo.markdown_fenced_languages = {
+	'vim', 'cpp', 'c', 'java', 'python', 'lua',
+	'sh', 'make', 'groovy', 'sql', 'javascript'
+}

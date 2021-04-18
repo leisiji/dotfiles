@@ -36,6 +36,8 @@ local function vim_command(arg2)
 		vim_utils.vim_help()
 	elseif arg2 == "cmdHists" then
 		vim_utils.vim_cmd_history()
+	elseif arg2 == "filetypes" then
+		vim_utils.get_filetypes()
 	end
 end
 

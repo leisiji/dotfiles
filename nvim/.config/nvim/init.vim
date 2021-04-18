@@ -1,15 +1,8 @@
 "set hidden nowritebackup number scrolloff=10 autoread autowrite noswapfile
 set list lcs=tab:→\ ,trail:·,extends:↷,precedes:↶
 set ts=4 sw=4 noswf sts=4
-"set tabstop=4 shiftwidth=4 softtabstop=4 smarttab smartindent ignorecase smartcase incsearch cul
-"set t_Co=256 termguicolors showtabline=2
 set undofile undodir=$HOME/.cache/vim/undo
 lua require('options')
-let mapleader=" "
-let g:markdown_fenced_languages = [
-	\ 'vim', 'cpp', 'c', 'java', 'python', 'lua',
-	\ 'sh', 'make', 'groovy', 'sql', 'javascript'
-	\]
 
 function! MyQuit() abort
 	if len(win_findbuf(bufnr())) > 1 || expand('%') == '' || tabpagenr('$') == 1
@@ -102,28 +95,22 @@ nn <silent> <M-k> :call CocActionAsync('doHover')<cr>
 nn <silent> <space>a :<C-u>CocList --normal diagnostics<cr>
 nn <silent> <space>v :<C-u>CocList --normal outline<cr>
 nn <silent> <expr> <leader>j coc#float#scroll(1, 1)
-nmap <silent> <M-d> <Plug>(coc-cursors-word)*
 xmap <leader><leader>f <Plug>(coc-format-selected)
 nmap <leader><leader>f <Plug>(coc-format)
 
 " coc-yank
 nn <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 
-" floaterm
+" toggle terminal
 nn <silent> <leader>tt :ToggleTerminal<CR>
 tno <silent> <expr> <esc> (&ft == 'fzf') ? '<esc>' : '<C-\><C-n>:ToggleTerminal<CR>'
 
 augroup user_plugin
 	autocmd!
 
-	" coc-nvim
-	au CursorHold * silent call CocActionAsync('highlight')
-
-	" tab switch
-	au TabLeave * let g:last_active_tab = tabpagenr()
-
-	au BufRead,BufNewFile *.lds setfiletype ld
-	au FocusGained * :checktime
+	au CursorHold * silent call CocActionAsync('highlight') " coc-nvim
+	au TabLeave * let g:last_active_tab = tabpagenr() " tab switch
+	au FocusGained * :checktime " open last place
 
 	au BufReadPost *
 	  \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
@@ -131,10 +118,9 @@ augroup user_plugin
 	  \ | endif
 
 	au User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-
 	au FileType fern call s:init_fern()
-
 	au BufReadPost,WinEnter * if ! &cursorline | setlocal cul | endif
+	au FileType markdown if ! &expandtab | setlocal expandtab | endif
 augroup END
 
 " inline_edit
@@ -171,6 +157,7 @@ nn <silent> <leader>b :FzfCommand --buffers<CR>
 nn <silent> <leader><leader>m :FzfCommand --man<CR>
 nn <silent> <leader><leader>h :FzfCommand --vim help<CR>
 nn <silent> <leader>h :FzfCommand --vim cmdHists<CR>
+nn <silent> <leader>ft :FzfCommand --vim filetypes<CR>
 
 " gtags fzf
 nn <silent> <leader>fd :<C-U><C-R>=printf("FzfCommand --gtags -d %s", expand("<cword>"))<CR><CR>
