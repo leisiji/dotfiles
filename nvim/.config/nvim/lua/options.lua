@@ -26,17 +26,6 @@ for k, v in pairs(global_cfg) do
 	vim.o[k] = v
 end
 
--- load buffer only options
-local buffer_cfg = {
-	shiftwidth = 4;
-	tabstop = 4;
-	softtabstop = 4;
-	swapfile = false;
-}
-for k, v in pairs(buffer_cfg) do
-	vim.bo[k] = v
-end
-
 local win_cfg = {
 	signcolumn = "yes";
 	number = true;

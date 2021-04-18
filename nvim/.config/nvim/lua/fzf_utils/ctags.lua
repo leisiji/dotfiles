@@ -1,3 +1,4 @@
+local M = {}
 local fzf = require('fzf').fzf
 local fn = vim.fn
 
@@ -10,7 +11,8 @@ local function get_ctags(file)
 
 	for _,val in pairs(res) do
 		local tag_json_obj = fn.json_decode(val)
-		if tag_json_obj["kind"] == "function" then
+		local tag_type = tag_json_obj["kind"]
+		if tag_type == "function" or tag_type == "method" or tag_type == "member" then
 			local pattern = tag_json_obj["pattern"]
 			local func_name = string.sub(pattern, 3, #pattern - 2)
 			local ln = tag_json_obj["line"]
@@ -23,7 +25,7 @@ local function get_ctags(file)
 	return funcs
 end
 
-return function()
+function M.get_cur_buf_func()
 	local utils = require('fzf_utils.utils')
 	local cur_file = fn.expand("%:p")
 	local col = fn.getcurpos()[3]
@@ -39,3 +41,5 @@ return function()
 		end
 	end)()
 end
+
+return M

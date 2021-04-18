@@ -6,8 +6,8 @@ local use = packer.use
 packer.startup(function()
 	use { 'wbthomason/packer.nvim' }
 	use {
-		'nvim-treesitter/nvim-treesitter',
-		run = ':TSUpdate',
+		'nvim-treesitter/nvim-treesitter', opt = true,
+		run = ':TSUpdate', event = 'BufRead',
 		config = PLUGINS_CONFIG.treesitter
 	}
 	use {
@@ -52,7 +52,7 @@ packer.startup(function()
 		'tpope/vim-surround', opt = true, event = 'BufRead'
 	}
 	use {
-		'lewis6991/gitsigns.nvim', opt = true, event = { 'BufRead' },
+		'lewis6991/gitsigns.nvim', opt = true, event = 'BufRead',
 		config = PLUGINS_CONFIG.gitsigns
 	}
 	use {
@@ -78,6 +78,10 @@ packer.startup(function()
 	}
 	use {
 		'vijaymarupudi/nvim-fzf'
+	}
+	use {
+		'antoinemadec/vim-highlight-groups', opt = true,
+		cmd = 'HighlightGroupsAddWord'
 	}
 end)
 

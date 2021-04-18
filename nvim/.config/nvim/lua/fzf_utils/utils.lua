@@ -5,7 +5,7 @@ function M.get_leading_num(str)
 	return tonumber(string.match(str, "%d+"))
 end
 
-function M.preview_lines(path, line, fzf_preview_lines)
+local function preview_lines(path, line, fzf_preview_lines)
 	local half_preview_lines = fzf_preview_lines / 2
 	local start_line = line - half_preview_lines
 	local end_line = line + half_preview_lines
@@ -20,12 +20,17 @@ function M.preview_lines(path, line, fzf_preview_lines)
 	return fn.system(cmd)
 end
 
+M.vimgrep_preview = "--expect=ctrl-v --preview="..require('fzf.actions').action(function(selections, fzf_preview_lines, _)
+	local parsed_content = {string.match(selections[1], "(.-):(%d+):.*")}
+	return preview_lines(parsed_content[1], parsed_content[2], fzf_preview_lines)
+end)
+
 -- get preview action that has result starting with line number
 function M.get_preview_action(path)
 	local shell = require('fzf.actions').action(function(selections, fzf_preview_lines, _)
 		if selections ~= nil then
 			local line_nr = M.get_leading_num(selections[1])
-			return M.preview_lines(path, line_nr, fzf_preview_lines)
+			return preview_lines(path, line_nr, fzf_preview_lines)
 		end
 	end)
 	return shell

@@ -5,3 +5,6 @@ compile_commands.json
 .vscode
 *.map
 *.class
+GPATH
+GRTAGS
+GTAGS

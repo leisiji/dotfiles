@@ -1,6 +1,6 @@
 "set hidden nowritebackup number scrolloff=10 autoread autowrite noswapfile
 set list lcs=tab:→\ ,trail:·,extends:↷,precedes:↶
-set tabstop=4
+set ts=4 sw=4 noswf sts=4
 "set tabstop=4 shiftwidth=4 softtabstop=4 smarttab smartindent ignorecase smartcase incsearch cul
 "set t_Co=256 termguicolors showtabline=2
 set undofile undodir=$HOME/.cache/vim/undo
@@ -102,6 +102,7 @@ nn <silent> <M-k> :call CocActionAsync('doHover')<cr>
 nn <silent> <space>a :<C-u>CocList --normal diagnostics<cr>
 nn <silent> <space>v :<C-u>CocList --normal outline<cr>
 nn <silent> <expr> <leader>j coc#float#scroll(1, 1)
+nmap <silent> <M-d> <Plug>(coc-cursors-word)*
 xmap <leader><leader>f <Plug>(coc-format-selected)
 nmap <leader><leader>f <Plug>(coc-format)
 
@@ -161,22 +162,28 @@ nn <silent> <Leader>z :call WinZoomToggle()<CR>
 let g:last_active_tab = 1
 nn <M-q> :execute 'tabn ' . g:last_active_tab<cr>
 
+command! -complete=dir -nargs=+ FzfCommand lua require('fzf_utils.commands').load_command(<f-args>)
 " fzf find
-nn <silent> <C-p> :lua require('fzf_utils.nvim_fzf_commands').find_files()<CR>
-nn <silent> <C-f> :lua require('fzf_utils.nvim_fzf_commands').grep_lines()<CR>
-nn <silent> <C-r> :lua require('fzf_utils.ctags')()<CR>
-nn <silent> <leader>b :lua require('fzf_utils.nvim_fzf_commands').buffers()<CR>
-nn <silent> <leader><leader>m :lua require('fzf_utils.nvim_fzf_commands').Man()<CR>
-nn <silent> <leader><leader>h :lua require('fzf_utils.vim_utils').vim_help()<CR>
+nn <silent> <C-p> :FzfCommand --files<CR>
+nn <silent> <C-f> :FzfCommand --lines<CR>
+nn <silent> <C-r> :FzfCommand --ctags<CR>
+nn <silent> <leader>b :FzfCommand --buffers<CR>
+nn <silent> <leader><leader>m :FzfCommand --man<CR>
+nn <silent> <leader><leader>h :FzfCommand --vim help<CR>
+nn <silent> <leader>h :FzfCommand --vim cmdHists<CR>
+
+" gtags fzf
+nn <silent> <leader>fd :<C-U><C-R>=printf("FzfCommand --gtags -d %s", expand("<cword>"))<CR><CR>
+nn <silent> <leader>fr :<C-U><C-R>=printf("FzfCommand --gtags -r %s", expand("<cword>"))<CR><CR>
+nn <silent> <leader>fu :FzfCommand --gtags --update<CR>
+nn <silent> <leader>fb :FzfCommand --gtags --update-buffer<CR>
 
 " Rg search
-nn <leader>fa :<C-U><C-R>=printf("FzfRg %s ", expand("<cword>"))<CR>
-nn <leader>d :<C-U><C-R>=printf("FzfRg %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":."))<CR>
-nn <silent> <leader>ff :<C-U><C-R>=printf("FzfRg %s %s", expand("<cword>"), expand("%"))<CR><CR>
-nn <silent> <M-f> :<C-U><C-R>=printf("FzfRg --all-buffers %s", expand("<cword>"))<CR><CR>
-nn <silent> <leader>h :lua require('fzf_utils.vim_utils').vim_cmd_history()<CR>
-xn <leader>fa :<C-U><C-R>=printf("FzfRg %s", RgVisual())<CR>
-command! -complete=dir -nargs=+ FzfRg lua require('fzf_utils.commands').load_command(<f-args>)
+nn <leader>fa :<C-U><C-R>=printf("FzfCommand --rg %s ", expand("<cword>"))<CR>
+nn <leader>d :<C-U><C-R>=printf("FzfCommand --rg %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":."))<CR>
+nn <silent> <leader>ff :<C-U><C-R>=printf("FzfCommand --rg %s %s", expand("<cword>"), expand("%"))<CR><CR>
+nn <silent> <M-f> :<C-U><C-R>=printf("FzfCommand --rg --all-buffers %s", expand("<cword>"))<CR><CR>
+xn <leader>fa :<C-U><C-R>=printf("FzfCommand --rg %s", RgVisual())<CR>
 
 function! RgVisual()
 	try
@@ -209,3 +216,5 @@ function! s:init_fern() abort
 	nmap <buffer><nowait> ! <Plug>(fern-action-hidden:toggle)
 endfunction
 
+nn <silent> <leader>k :HighlightGroupsAddWord 4 0<CR>
+nn <silent> <leader>K :HighlightGroupsClearGroup 4 0<CR>
