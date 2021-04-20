@@ -56,7 +56,8 @@ packer.startup(function()
 		config = PLUGINS_CONFIG.gitsigns
 	}
 	use {
-		'glepnir/indent-guides.nvim', opt = true, event = 'BufRead'
+		'glepnir/indent-guides.nvim', opt = true, event = 'BufRead',
+		config = PLUGINS_CONFIG.indent_guide
 	}
 	use {
 		'junegunn/vim-easy-align', opt = true,

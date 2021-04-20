@@ -137,4 +137,11 @@ function config.cocnvim()
 	vim.cmd('hi CocHighlightText guibg='..COLORS.yellow..' guifg='..COLORS.bg)
 end
 
+function config.indent_guide()
+	require('indent_guides').setup({
+		even_colors = { fg = COLORS.yellow, bg = '#2a3834' };
+		odd_colors = { fg = COLORS.yellow, bg = '#2a3834' };
+	})
+end
+
 return config
