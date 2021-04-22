@@ -19,7 +19,7 @@ local function rg_command(arg2, arg3)
 	local rg = require('fzf_utils.rg')
 
 	if arg2 == "--all-buffers" then
-		rg.search_all_buffers(arg2)
+		rg.search_all_buffers(arg3)
 	else
 		rg.search_path(arg2, arg3)
 	end
