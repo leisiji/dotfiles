@@ -34,6 +34,7 @@ ino <C-d> <Delete>
 ino <C-h> <Backspace>
 ino <M-b> <C-Left>
 ino <M-f> <C-Right>
+ino <silent> <M-d> <C-o>diw
 nn H ^
 nn L $
 vn H ^
@@ -54,9 +55,6 @@ nn <M-y> <C-r>
 "Remove all trailing whitespace by pressing F5
 nn <M-s> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 tno <M-e> <C-\><C-n>
-ino <M-b> <c-left>
-ino <M-f> <c-right>
-ino <M-d> <C-o>diw
 vmap <leader>y "+y
 nn <leader>p "+p
 nn <leader>rt :<C-U>%retab!<CR>
