@@ -71,14 +71,14 @@ function M.get_filetypes()
 			filetypes_list[count] = fn.fnamemodify(filetype, ':t:r')
 			count = count + 1
 		end
-		local result = fzf(filetypes_list, "--nth 1")
-		vim.cmd("set ft="..result)
+		local result = fzf(filetypes_list, '')
+		vim.cmd("set ft="..result[1])
 	end)()
 end
 
 function M.vim_help()
 	coroutine.wrap(function ()
-		local result = fzf(get_help_tags, "--nth 1 --expect=ctrl-t")
+		local result = fzf(get_help_tags, '--nth 1 --expect=ctrl-t')
 		if not result then
 			return
 		end
