@@ -73,6 +73,14 @@
 					]
 				}
 			}
+		},
+		"golang": {
+			"command": "gopls",
+			"rootPatterns": [ "go.mod" ],
+			"filetypes": [ "go" ],
+			"initializationOptions": {
+				"usePlaceholders": true
+			}
 		}
 	},
 	"suggest.timeout": 500,

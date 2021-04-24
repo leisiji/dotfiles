@@ -95,6 +95,7 @@ nn <silent> <space>v :<C-u>CocList --normal outline<cr>
 nn <silent> <expr> <leader>j coc#float#scroll(1, 1)
 xmap <leader><leader>f <Plug>(coc-format-selected)
 nmap <leader><leader>f <Plug>(coc-format)
+nn <C-a> :CocCommand document.renameCurrentWord<cr>
 
 " coc-yank
 nn <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
