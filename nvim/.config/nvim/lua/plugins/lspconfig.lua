@@ -50,7 +50,7 @@ local function lua_lsp()
 			Lua = {
 				diagnostics = {
 					enable = true,
-					globals = { "vim", "packer_plugins" }
+					globals = { "vim" }
 				},
 				runtime = { version = "LuaJIT" },
 				workspace = {
@@ -68,13 +68,9 @@ local function lua_lsp()
 end
 
 function M.init()
-	--vim.g.completion_enable_snippet = 'snippets.nvim'
-	vim.g.completion_trigger_keyword_length = 2
-	vim.g.completion_timer_cycle = 500
-
 	local guibg = COLORS.yellow
 	local guifg = COLORS.bg
-	local exec = vim.api.nvim_exec
+	local exec = vim.cmd
 
 	exec('hi LspReferenceRead guibg=' .. guibg .. ' guifg=' .. guifg)
 	exec('hi LspReferenceWrite guibg=' .. guibg .. ' guifg=' .. guifg)
@@ -86,6 +82,10 @@ end
 
 function M.completion_setup()
 	vim.g.completion_enable_snippet = 'snippets.nvim'
+	vim.g.completion_matching_smart_case = 1
+	vim.g.completion_trigger_keyword_length = 2
+	vim.g.completion_timer_cycle = 500
+
 	require('completion').on_attach()
 	vim.api.nvim_exec([[
 		augroup completion_setup
@@ -93,12 +93,10 @@ function M.completion_setup()
 			autocmd BufEnter * lua require'completion'.on_attach()
 		augroup END
 	]], false)
-end
 
-function M.completion_buffer()
 	vim.g.completion_chain_complete_list = {
 		default = {
-			{ complete_items = { 'lsp', 'buffers' } },
+			{ complete_items = { 'lsp', 'buffers', 'snippet' } },
 			{ mode = { '<c-p>' } },
 			{ mode = { '<c-n>' } }
 		}
