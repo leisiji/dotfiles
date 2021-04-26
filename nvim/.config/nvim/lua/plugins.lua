@@ -1,5 +1,5 @@
-
 PLUGINS_CONFIG = require('plugins_config')
+LSP_CONFIG = require('plugins.lspconfig')
 
 local packer = require('packer')
 local use = packer.use
@@ -14,17 +14,32 @@ packer.startup(function()
 		'nvim-lua/plenary.nvim' -- needed by gitsigns
 	}
 
-	-- coc.nvim
-	use {
-		'neoclide/coc.nvim', branch = 'release', opt = true,
-		event = 'BufRead',
-		requires = {
-			{ 'neoclide/coc-sources' },
-			{ 'honza/vim-snippets' }
-		},
-		config = PLUGINS_CONFIG.cocnvim
-	}
 	use { 'mattn/emmet-vim', opt = true, ft = {'html'} }
+
+	-- lsp and completion
+	use {
+		'neovim/nvim-lspconfig', event = 'BufReadPre', opt = true,
+		config = function () LSP_CONFIG.init() end,
+	}
+	use {
+		'glepnir/lspsaga.nvim'
+	}
+	use {
+		'nvim-lua/completion-nvim', opt = true, event = 'InsertEnter',
+		config = function () LSP_CONFIG.completion_setup() end
+	}
+	use {
+		'steelsojka/completion-buffers', opt = true, event = 'InsertEnter',
+		config = function () LSP_CONFIG.completion_buffer() end
+	}
+	use {
+		'windwp/nvim-autopairs', opt = true, event = 'BufRead',
+		config = function () require('nvim-autopairs').setup() end
+	}
+	use {
+		'norcalli/snippets.nvim', opt = true, event = 'InsertEnter',
+		config = function () require'snippets'.use_suggested_mappings() end
+	}
 
 	use {
 		'glepnir/zephyr-nvim',

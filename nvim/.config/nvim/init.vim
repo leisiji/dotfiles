@@ -71,36 +71,6 @@ endfunction
 
 lua require('plugins')
 
-"coc.vim
-set shortmess+=c signcolumn=yes updatetime=500
-ino <silent><expr> <TAB>
-			\ pumvisible() ? "\<C-n>" :
-			\ <SID>check_back_space() ? "\<TAB>" :
-			\ coc#refresh()
-function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-ino <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-ino <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-ino <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" lsp
-nm <silent> <M-t> <Plug>(coc-definition)
-nm <silent> <M-r> <Plug>(coc-references)
-nm <silent> <leader>rn <Plug>(coc-rename)
-nn <silent> <M-v> :call CocAction('jumpDefinition','vsplit')<cr>
-nn <silent> <M-j> :call CocAction('jumpDefinition', 'edit')<cr>
-nn <silent> <M-k> :call CocActionAsync('doHover')<cr>
-nn <silent> <space>a :<C-u>CocList --normal diagnostics<cr>
-nn <silent> <space>v :<C-u>CocList --normal outline<cr>
-nn <silent> <expr> <leader>j coc#float#scroll(1, 1)
-xmap <leader><leader>f <Plug>(coc-format-selected)
-nmap <leader><leader>f <Plug>(coc-format)
-nn <C-a> :CocCommand document.renameCurrentWord<cr>
-
-" coc-yank
-nn <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
-
 " toggle terminal
 nn <silent> <leader>tt :ToggleTerminal<CR>
 tno <silent> <expr> <esc> (&ft == 'fzf') ? '<esc>' : '<C-\><C-n>:ToggleTerminal<CR>'
@@ -108,7 +78,6 @@ tno <silent> <expr> <esc> (&ft == 'fzf') ? '<esc>' : '<C-\><C-n>:ToggleTerminal<
 augroup user_plugin
 	autocmd!
 
-	au CursorHold * silent call CocActionAsync('highlight') " coc-nvim
 	au TabLeave * let g:last_active_tab = tabpagenr() " tab switch
 	au FocusGained * :checktime " open last place
 
@@ -117,10 +86,10 @@ augroup user_plugin
 	  \ |	exe "normal! g`\""
 	  \ | endif
 
-	au User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 	au FileType fern call s:init_fern()
 	au BufReadPost,WinEnter * if ! &cursorline | setlocal cul | endif
 	au FileType markdown if ! &expandtab | setlocal expandtab | endif
+
 augroup END
 
 " inline_edit
@@ -205,3 +174,10 @@ endfunction
 
 nn <silent> <leader>k :HighlightGroupsAddWord 4 0<CR>
 nn <silent> <leader>K :HighlightGroupsClearGroup 4 0<CR>
+
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+imap <tab> <Plug>(completion_smart_tab)
+set completeopt=menuone,noinsert,noselect
+set shortmess+=c
+
