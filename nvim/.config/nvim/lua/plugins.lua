@@ -29,8 +29,7 @@ packer.startup(function()
 		config = function () LSP_CONFIG.completion_setup() end
 	}
 	use {
-		'steelsojka/completion-buffers', opt = true, event = 'InsertEnter',
-		config = function () LSP_CONFIG.completion_buffer() end
+		'steelsojka/completion-buffers', opt = true, event = 'InsertEnter'
 	}
 	use {
 		'windwp/nvim-autopairs', opt = true, event = 'BufRead',

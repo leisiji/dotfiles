@@ -64,7 +64,6 @@ end
 -- treesitter
 function config.treesitter()
 	require'nvim-treesitter.configs'.setup {
-		-- one of "all", "maintained" , or a list of languages
 		ensure_installed = "maintained",
 		highlight = {
 			enable = true,
@@ -121,21 +120,11 @@ function config.colorscheme()
 		end
 		return s
 	end
-	local exec = vim.api.nvim_exec
+	local exec = vim.cmd
 	exec('colorscheme zephyr')
 	exec('hi TabLineSel gui=bold guibg='..COLORS.blue..' guifg='..COLORS.bg)
 	exec('hi TabLine gui=NONE guibg='..COLORS.fg..' guifg='..COLORS.darkblue)
 	vim.o.tabline = "%!v:lua.mytabline()"
-end
-
-function config.cocnvim()
-	vim.g.coc_global_extensions = {
-		'coc-json', 'coc-snippets', 'coc-pairs', 'coc-yank', 'coc-tsserver', 'coc-sql',
-		'coc-pyright', 'coc-emmet', 'coc-vimlsp', 'coc-css', 'coc-eslint', 'coc-java',
-		'coc-markdownlint'
-	}
-	vim.g.coc_snippet_next = '<C-n>'
-	vim.cmd('hi CocHighlightText guibg='..COLORS.yellow..' guifg='..COLORS.bg)
 end
 
 function config.indent_guide()
