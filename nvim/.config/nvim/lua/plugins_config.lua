@@ -121,9 +121,10 @@ function config.colorscheme()
 		end
 		return s
 	end
-	vim.cmd('colorscheme zephyr')
-	vim.cmd('hi TabLineSel gui=bold guibg='..COLORS.blue..' guifg='..COLORS.bg)
-	vim.cmd('hi TabLine gui=NONE guibg='..COLORS.fg..' guifg='..COLORS.darkblue)
+	local exec = vim.api.nvim_exec
+	exec('colorscheme zephyr')
+	exec('hi TabLineSel gui=bold guibg='..COLORS.blue..' guifg='..COLORS.bg)
+	exec('hi TabLine gui=NONE guibg='..COLORS.fg..' guifg='..COLORS.darkblue)
 	vim.o.tabline = "%!v:lua.mytabline()"
 end
 
