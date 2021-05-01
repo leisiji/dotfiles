@@ -26,9 +26,9 @@ local function init_keymap()
 	mapkey('n', '<M-r>', '<cmd>Lspsaga lsp_finder<cr>', opts)
 	mapkey('n', '<M-k>', "<cmd>Lspsaga hover_doc<cr>", opts)
 	mapkey('n', '<leader>j', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>", opts)
-	mapkey('n', '<space>rn', '<cmd>Lspsaga rename<cr>', opts)
-	mapkey('n', '<space>ca', '<cmd>Lspsaga code_action<cr>', opts)
-	mapkey('n', '<C-h>', '<cmd>Lspsaga signature_help<cr>', opts)
+	mapkey('n', '<leader>rn', '<cmd>Lspsaga rename<cr>', opts)
+	mapkey('n', '<leader>ca', '<cmd>Lspsaga code_action<cr>', opts)
+	mapkey('n', '<leader><leader>p', '<cmd>Lspsaga preview_definition<cr>', opts)
 
 	mapkey('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>', opts)
 	mapkey('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>', opts)
@@ -61,16 +61,20 @@ local function setup_lsp(lspconfig)
 		on_attach = on_attach;
 	}
 
-	lspconfig.ccls.setup(default_cfg)
+	lspconfig.ccls.setup {
+		init_options = {
+			cache = { directory = '/tmp/ccls' }
+		}
+	}
 	lspconfig.pyright.setup(default_cfg)
 	lspconfig.cmake.setup(default_cfg)
 	lspconfig.bashls.setup(default_cfg)
 end
 
 local function setup_config(lspconfig)
-	local global_capabilities = vim.lsp.protocol.make_client_capabilities()
-	global_capabilities.textDocument.completion.completionItem.snippetSupport = true
-	global_capabilities.textDocument.completion.completionItem.resolveSupport = {
+	local global_cap = vim.lsp.protocol.make_client_capabilities()
+	global_cap.textDocument.completion.completionItem.snippetSupport = true
+	global_cap.textDocument.completion.completionItem.resolveSupport = {
 		properties = {
 			'documentation',
 			'detail',
@@ -81,7 +85,7 @@ local function setup_config(lspconfig)
 	lspconfig.util.default_config = vim.tbl_extend(
 		"force",
 		lspconfig.util.default_config,
-		{ capabilities = global_capabilities }
+		{ capabilities = global_cap }
 	)
 end
 
@@ -125,6 +129,15 @@ end
 
 function M.snippet()
 	require'snippets'.use_suggested_mappings()
+end
+
+function M.setup_lspsaga()
+	require 'lspsaga'.init_lsp_saga {
+		max_preview_lines = 25,
+		finder_action_keys = {
+			open = '<cr>', vsplit = 'v', split = 's', quit = '<ESC>'
+		},
+	}
 end
 
 return M
