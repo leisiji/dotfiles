@@ -131,6 +131,7 @@ function config.indent_guide()
 	require('indent_guides').setup({
 		even_colors = { fg = COLORS.yellow, bg = '#2a3834' };
 		odd_colors = { fg = COLORS.yellow, bg = '#2a3834' };
+		exclude_filetypes = { 'fern' }
 	})
 end
 

@@ -88,6 +88,7 @@ augroup user_plugin
 	au FileType fern call s:init_fern()
 	au BufReadPost,WinEnter * if ! &cursorline | setlocal cul | endif
 	au FileType markdown if ! &expandtab | setlocal expandtab | endif
+	au TextYankPost * silent! lua vim.highlight.on_yank{ higroup = "IncSearch", timeout = 700 }
 
 augroup END
 
