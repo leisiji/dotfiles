@@ -26,12 +26,12 @@ packer.startup(function()
 		config = function () LSP_CONFIG.setup_lspsaga() end
 	}
 	use {
-		'steelsojka/completion-buffers', opt = true, event = 'InsertEnter',
-		after = 'completion-nvim'
-	}
-	use {
 		'nvim-lua/completion-nvim', opt = true, event = 'InsertEnter',
 		config = function () LSP_CONFIG.completion_setup() end
+	}
+	use {
+		'steelsojka/completion-buffers', opt = true, event = 'InsertEnter',
+		after = 'completion-nvim'
 	}
 	use {
 		'windwp/nvim-autopairs', opt = true, event = 'BufRead',
@@ -58,12 +58,21 @@ packer.startup(function()
 		'mhartington/formatter.nvim', opt = true, cmd = 'Format',
 		config = function () require'plugins.formatter'.init() end
 	}
+	use {
+		'AndrewRadev/inline_edit.vim', opt = true, cmd = 'InlineEdit',
+		config = function ()
+			vim.g.inline_edit_new_buffer_command = "tabedit"
+			vim.g.inline_edit_autowrite = 1
+		end
+	}
+	use {
+		'sindrets/diffview.nvim', opt = true, cmd = 'DiffviewOpen'
+	}
 
 	use { 'glepnir/zephyr-nvim', config = PLUGINS_CONFIG.colorscheme }
 	use { 'glepnir/galaxyline.nvim', branch = 'main', config = PLUGINS_CONFIG.statusline }
 
 	use { 'caenrique/nvim-toggle-terminal', opt = true, cmd = 'ToggleTerminal' }
-	use { 'AndrewRadev/inline_edit.vim', opt = true, cmd = 'InlineEdit' }
 	use { 'tpope/vim-surround', opt = true, event = 'BufRead' }
 	use { 'junegunn/vim-easy-align', opt = true, cmd = 'EasyAlign' }
 	use { 'lambdalisue/fern.vim', opt = true, cmd = 'Fern' }

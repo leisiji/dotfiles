@@ -96,8 +96,6 @@ augroup END
 " inline_edit
 nn <leader>e :<C-u>InlineEdit<CR>
 xn <leader>e :InlineEdit<cr>
-let g:inline_edit_new_buffer_command = "tabedit"
-let g:inline_edit_autowrite = 1
 
 " easy-align
 xm ga :EasyAlign<cr>

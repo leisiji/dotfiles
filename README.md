@@ -19,9 +19,13 @@ sudo pacman -S zsh fzf nnn tmux lua w3m universal-ctags global xclip
 # neovim related, nodejs is for coc-nvim
 sudo pacman -S neovim nodejs npm bear yarn
 
-yarn global add bash-language-server
-yay -S ccls kotlin-language-server lua-language-server-git groovy-language-server-git
-pip3 install --user cmake-language-server pynvim compiledb
+# language-server
+yarn global add bash-language-server vim-language-server
+yay -S ccls kotlin-language-server lua-language-server-git \
+        groovy-language-server-git
+pip3 install --user cmake-language-server
+
+pip3 install --user pynvim compiledb
 
 # tools based on rust
 cargo install hexyl bat ripgrep fd-find exa git-delta gitui
@@ -49,7 +53,8 @@ Plugin Manager:
 
 ```sh
 # packer.nvim
-git clone https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+git clone https://github.com/wbthomason/packer.nvim \
+    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 # zinit
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
