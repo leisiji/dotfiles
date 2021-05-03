@@ -8,6 +8,7 @@ local on_attach = function(client, _)
 			augroup lsp_document_highlight
 				autocmd! * <buffer>
 				autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+				autocmd CursorHold <buffer> lua require('plugins.current_function').update()
 				autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
 			augroup END
 		]], false)
@@ -25,6 +26,7 @@ local function init_keymap()
 	-- lspsaga
 	mapkey('n', '<M-r>', '<cmd>Lspsaga lsp_finder<cr>', opts)
 	mapkey('n', '<M-k>', "<cmd>Lspsaga hover_doc<cr>", opts)
+	mapkey('i', '<M-k>', '<cmd>Lspsaga signature_help<CR>', opts)
 	mapkey('n', '<leader>j', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>", opts)
 	mapkey('n', '<leader>rn', '<cmd>Lspsaga rename<cr>', opts)
 	mapkey('n', '<leader>ca', '<cmd>Lspsaga code_action<cr>', opts)
@@ -39,8 +41,8 @@ local function init_keymap()
 	mapkey("v", "<leader><space>f", "<cmd>lua vim.lsp.buf.range_formatting()<cr>", opts)
 end
 
-local function setup_lsp(lspconfig)
-	lspconfig.sumneko_lua.setup {
+local function setup_lsp(lsp)
+	lsp.sumneko_lua.setup {
 		cmd = {
 			'/usr/bin/lua-language-server',
 			'-E', '-e', 'LANG=EN',
@@ -61,17 +63,18 @@ local function setup_lsp(lspconfig)
 		on_attach = on_attach;
 	}
 
-	lspconfig.ccls.setup {
+	lsp.ccls.setup {
 		init_options = {
 			cache = { directory = '/tmp/ccls' }
 		}
 	}
-	lspconfig.pyright.setup(default_cfg)
-	lspconfig.cmake.setup(default_cfg)
-	lspconfig.bashls.setup(default_cfg)
+	lsp.pyright.setup(default_cfg)
+	lsp.cmake.setup(default_cfg)
+	lsp.bashls.setup(default_cfg)
+	lsp.vimls.setup(default_cfg)
 end
 
-local function setup_config(lspconfig)
+local function setup_config(lsp)
 	local global_cap = vim.lsp.protocol.make_client_capabilities()
 	global_cap.textDocument.completion.completionItem.snippetSupport = true
 	global_cap.textDocument.completion.completionItem.resolveSupport = {
@@ -82,9 +85,9 @@ local function setup_config(lspconfig)
 		}
 	}
 
-	lspconfig.util.default_config = vim.tbl_extend(
+	lsp.util.default_config = vim.tbl_extend(
 		"force",
-		lspconfig.util.default_config,
+		lsp.util.default_config,
 		{ capabilities = global_cap }
 	)
 end
@@ -93,15 +96,15 @@ function M.init_lsp()
 	local guibg = COLORS.yellow
 	local guifg = COLORS.bg
 	local exec = vim.cmd
-	local lspconfig = require('lspconfig')
+	local lsp = require('lspconfig')
 
 	exec('hi LspReferenceRead guibg=' .. guibg .. ' guifg=' .. guifg)
 	exec('hi LspReferenceWrite guibg=' .. guibg .. ' guifg=' .. guifg)
 	exec('hi LspReferenceText guibg=' .. guibg .. ' guifg=' .. guifg)
 	init_keymap()
 
-	setup_config(lspconfig)
-	setup_lsp(lspconfig)
+	setup_config(lsp)
+	setup_lsp(lsp)
 end
 
 function M.completion_setup()
@@ -109,6 +112,7 @@ function M.completion_setup()
 	vim.g.completion_matching_smart_case = 1
 	vim.g.completion_trigger_keyword_length = 3
 	vim.g.completion_timer_cycle = 500
+	vim.g.completion_matching_strategy_list = { 'fuzzy' }
 
 	require('completion').on_attach()
 	vim.api.nvim_exec([[

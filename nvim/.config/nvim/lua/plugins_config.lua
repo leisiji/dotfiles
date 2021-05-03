@@ -32,10 +32,7 @@ function config.statusline()
 		CocFunc = {
 			provider = {
 				function()
-					local has_func, func_name =
-						pcall(vim.api.nvim_buf_get_var, 0, 'coc_current_function')
-					if not has_func then return end
-					return func_name
+					return vim.b.current_func_name
 				end
 			},
 			icon = '  λ ',
