@@ -1,73 +1,13 @@
-"set hidden nowritebackup number scrolloff=10 autoread autowrite noswapfile
+"set hidden nowritebackup number scrolloff=10 autoread autowrite
 set list lcs=tab:→\ ,trail:·,extends:↷,precedes:↶
 set ts=4 sw=4 noswf sts=4
 set undofile undodir=$HOME/.cache/vim/undo
-lua require('options')
 
-function! MyQuit() abort
-	if len(win_findbuf(bufnr())) > 1 || expand('%') == '' || tabpagenr('$') == 1
-		exe 'q'
-	else
-		exe 'bd'
-	endif
-endfunction
-nn <silent> <leader>q :call MyQuit()<CR>
-nn <silent> <leader><leader>q :qa<CR>
-
-nn <silent> <leader>s :w<CR>
-nn <M-a> <C-w>w
-nn <M-1> 1gt
-nn <M-2> 2gt
-nn <M-3> 3gt
-nn <M-4> 4gt
-nn <M-5> 5gt
-nn <silent> <M-l> <Esc>:tabnext<CR>
-nn <silent> <M-h> <Esc>:tabprevious<CR>
-" move like bash in insert mode
-ino <C-j> <Down>
-ino <C-k> <Up>
-ino <C-b> <Left>
-ino <C-f> <Right>
-ino <C-a> <Home>
-ino <C-e> <End>
-ino <C-d> <Delete>
-ino <C-h> <Backspace>
-ino <M-b> <C-Left>
-ino <M-f> <C-Right>
-ino <silent> <M-d> <C-o>diw
-nn H ^
-nn L $
-vn H ^
-vn L g_
-nn <C-j> 5j
-nn <C-k> 5k
-vn <C-j> 5j
-vn <C-k> 5k
-nn <M-e> 5e
-nn <M-b> 5b
-nn <C-b> 5b
-nn <M-w> 5w
-vn <M-e> 5e
-vn <M-b> 5b
-vn <C-b> 5b
-vn <M-w> 5w
-nn <M-y> <C-r>
-"Remove all trailing whitespace by pressing F5
+"Remove all trailing whitespace
 nn <M-s> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-tno <M-e> <C-\><C-n>
-vmap <leader>y "+y
-nn <leader>p "+p
-nn <leader>rt :<C-U>%retab!<CR>
 
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-	if (&filetype == 'vim' || &filetype == 'lua' || &filetype == 'help')
-		execute 'vertical h '.expand('<cword>')
-	else
-		execute 'vertical Man '.expand('<cword>')
-	endif
-endfunction
-
+lua require('options')
+lua require('keymaps')
 lua require('plugins')
 
 " toggle terminal
@@ -78,17 +18,18 @@ augroup user_plugin
 	autocmd!
 
 	au TabLeave * let g:last_active_tab = tabpagenr() " tab switch
-	au FocusGained * :checktime " open last place
+	au FocusGained * :checktime 
 
+	" open last place
 	au BufReadPost *
 	  \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
 	  \ |	exe "normal! g`\""
 	  \ | endif
 
-	au FileType fern call s:init_fern()
 	au BufReadPost,WinEnter * if ! &cursorline | setlocal cul | endif
 	au FileType markdown if ! &expandtab | setlocal expandtab | endif
 	au TextYankPost * silent! lua vim.highlight.on_yank{ higroup = "IncSearch", timeout = 700 }
+	au FileType NvimTree nmap <silent> <buffer> z :lua require('plugins.nvim_tree').resize_toggle()<cr>
 
 augroup END
 
@@ -134,7 +75,7 @@ nn <silent> <leader>fb :FzfCommand --gtags --update-buffer<CR>
 
 " Rg search
 nn <leader>fa :<C-U><C-R>=printf("FzfCommand --rg %s ", expand("<cword>"))<CR>
-nn <leader>d :<C-U><C-R>=printf("FzfCommand --rg %s %s", expand("<cword>"), fnamemodify(expand("%:p:h"), ":."))<CR>
+nn <leader>d :<C-U><C-R>=printf("FzfCommand --rg %s %s", expand("<cword>"), GetFileDir())<CR>
 nn <silent> <leader>ff :<C-U><C-R>=printf("FzfCommand --rg %s %s", expand("<cword>"), expand("%"))<CR><CR>
 nn <silent> <M-f> :<C-U><C-R>=printf("FzfCommand --rg --all-buffers %s", expand("<cword>"))<CR><CR>
 xn <leader>fa :<C-U><C-R>=printf("FzfCommand --rg %s", RgVisual())<CR>
@@ -150,32 +91,21 @@ function! RgVisual()
 	endtry
 endfunction
 
-let g:fern#disable_default_mappings = 1
-nn <leader>tj :Fern . -reveal=% -drawer<CR>
-nn <leader>tr :Fern . -drawer<CR>
-function! s:init_fern() abort
-	nmap <buffer> t <Plug>(fern-action-open:tabedit)
-	nmap <buffer> v <Plug>(fern-action-open:vsplit)
-	nmap <buffer> R gg<Plug>(fern-action-reload)<C-o>
-	nmap <buffer> l <Plug>(fern-action-expand)
-	nmap <buffer> h <Plug>(fern-action-collapse)
-	nmap <buffer> <C-j> 5j
-	nmap <buffer> <C-k> 5k
-	nmap <buffer> A <Plug>(fern-action-new-dir)
-	nmap <buffer> a <Plug>(fern-action-new-file)
-	nmap <buffer> D <Plug>(fern-action-remove)
-	nmap <buffer> r <Plug>(fern-action-rename)
-	nmap <buffer> q :<C-u>quit<CR>
-	nmap <buffer> z <Plug>(fern-action-zoom:half)
-	nmap <buffer><nowait> ! <Plug>(fern-action-hidden:toggle)
+function! GetFileDir()
+	return fnamemodify(expand("%:p:h"), ":.")
 endfunction
+
+nn <leader>tj :NvimTreeFindFile<CR>
+nn <leader>tr :NvimTreeToggle<CR>
 
 nn <silent> <leader>k :HighlightGroupsAddWord 4 0<CR>
 nn <silent> <leader>K :HighlightGroupsClearGroup 4 0<CR>
 
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+nn <leader><leader>d :<C-U><C-R>=printf("DiffviewOpen -- %s", GetFileDir())<CR><CR>
+"nn <leader><leader>c :<C-U><C-R>=printf("DiffviewOpen -- %s", expand('%:p'))<CR><CR>
+
+inoremap <expr> <Tab>	pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 imap <tab> <Plug>(completion_smart_tab)
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c
-

@@ -122,14 +122,29 @@ function config.colorscheme()
 	exec('hi TabLineSel gui=bold guibg='..COLORS.blue..' guifg='..COLORS.bg)
 	exec('hi TabLine gui=NONE guibg='..COLORS.fg..' guifg='..COLORS.darkblue)
 	vim.o.tabline = "%!v:lua.mytabline()"
+
 end
 
 function config.indent_guide()
 	require('indent_guides').setup({
 		even_colors = { fg = COLORS.yellow, bg = '#2a3834' };
 		odd_colors = { fg = COLORS.yellow, bg = '#2a3834' };
-		exclude_filetypes = { 'fern' }
+		exclude_filetypes = { 'NvimTree' }
 	})
+end
+
+function config.tree()
+end
+
+function config.diffview()
+	require'diffview'.setup { file_panel = { use_icons = false } }
+	-- vimdiff
+	vim.api.nvim_exec([[
+		hi DiffAdd    guibg=#26332c guifg=NONE
+		hi DiffChange guibg=#273842 guifg=NONE
+		hi DiffDelete guibg=#572E33 guifg=NONE
+		hi DiffText   guibg=#314753 guifg=NONE
+	]], false)
 end
 
 return config
