@@ -21,7 +21,8 @@ local global_cfg = {
 	laststatus = 2;
 	showtabline = 2;
 	updatetime = 500;
-	shortmess = "aoOTIcF"
+	shortmess = 'aoOTIcF',
+	completeopt = 'menuone,noinsert,noselect'
 }
 for k, v in pairs(global_cfg) do
 	vim.o[k] = v
