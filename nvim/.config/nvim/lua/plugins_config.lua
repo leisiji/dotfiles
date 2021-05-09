@@ -1,4 +1,4 @@
-local config = {}
+local M = {}
 
 -- galaxyline
 COLORS = require('galaxyline.theme').default
@@ -12,7 +12,7 @@ VI_MODES = {
 	t = { COLORS.yellow, '  TERMINAL ' },
 }
 
-function config.statusline()
+function M.statusline()
 	local galaxyline = require('galaxyline')
 	local section = galaxyline.section
 
@@ -59,7 +59,7 @@ function config.statusline()
 end
 
 -- treesitter
-function config.treesitter()
+function M.treesitter()
 	require'nvim-treesitter.configs'.setup {
 		ensure_installed = "maintained",
 		highlight = {
@@ -69,7 +69,7 @@ function config.treesitter()
 end
 
 -- gitsigns
-function config.gitsigns()
+function M.gitsigns()
 	require'gitsigns'.setup {
 		signs = {
 			add = {hl = 'GitGutterAdd', text = '+'},
@@ -91,7 +91,7 @@ function config.gitsigns()
 	}
 end
 
-function config.colorscheme()
+function M.colorscheme()
 	function _G.mytabline()
 		local fn = vim.fn
 		local pagenum = fn.tabpagenr('$')
@@ -125,7 +125,7 @@ function config.colorscheme()
 
 end
 
-function config.indent_guide()
+function M.indent_guide()
 	require('indent_guides').setup({
 		even_colors = { fg = COLORS.yellow, bg = '#2a3834' };
 		odd_colors = { fg = COLORS.yellow, bg = '#2a3834' };
@@ -133,10 +133,7 @@ function config.indent_guide()
 	})
 end
 
-function config.tree()
-end
-
-function config.diffview()
+function M.diffview()
 	require'diffview'.setup { file_panel = { use_icons = false } }
 	-- vimdiff
 	vim.api.nvim_exec([[
@@ -147,4 +144,9 @@ function config.diffview()
 	]], false)
 end
 
-return config
+function M.inline_edit()
+	vim.g.inline_edit_new_buffer_command = "tabedit"
+	vim.g.inline_edit_autowrite = 1
+end
+
+return M

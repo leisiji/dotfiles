@@ -1,6 +1,4 @@
-local vim_glo = vim.g
-
-vim.g.mapleader = " "
+local glo = vim.g
 
 -- load global options
 local global_cfg = {
@@ -22,7 +20,7 @@ local global_cfg = {
 	showtabline = 2;
 	updatetime = 500;
 	shortmess = 'aoOTIcF',
-	completeopt = 'menuone,noinsert,noselect'
+	completeopt = 'menuone,noselect'
 }
 for k, v in pairs(global_cfg) do
 	vim.o[k] = v
@@ -31,13 +29,14 @@ end
 local win_cfg = {
 	signcolumn = "yes";
 	number = true;
+	cul = true;
 }
 for k, v in pairs(win_cfg) do
 	vim.wo[k] = v
 end
 
-vim_glo.mapleader = " "
-vim_glo.markdown_fenced_languages = {
+glo.mapleader = " "
+glo.markdown_fenced_languages = {
 	'vim', 'cpp', 'c', 'java', 'python', 'lua',
 	'sh', 'make', 'groovy', 'sql', 'javascript'
 }

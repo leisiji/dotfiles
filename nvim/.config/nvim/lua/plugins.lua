@@ -1,102 +1,49 @@
-PLUGINS_CONFIG = require('plugins_config')
+PLUGS_CFG = require('plugins_config')
 LSP_CONFIG = require('plugins.lspconfig')
-COMPLETION_CONFIG = require('plugins.completion')
 
 local packer = require('packer')
 local use = packer.use
+
+local function plugin_config(name)
+	return require('plugins.'..name).config
+end
+
 packer.startup(function()
 	use { 'wbthomason/packer.nvim' }
-	use { 'nvim-lua/plenary.nvim' } -- needed by gitsigns
+	use { 'nvim-lua/plenary.nvim' } -- gitsigns
 	use { 'vijaymarupudi/nvim-fzf' }
 
 	-- colorscheme and statusline
-	use { 'glepnir/zephyr-nvim', config = PLUGINS_CONFIG.colorscheme }
-	use { 'glepnir/galaxyline.nvim', branch = 'main', config = PLUGINS_CONFIG.statusline }
-
-	use {
-		'nvim-treesitter/nvim-treesitter', opt = true,
-		run = ':TSUpdate', event = 'BufRead',
-		config = PLUGINS_CONFIG.treesitter
-	}
+	use { 'glepnir/zephyr-nvim', config = PLUGS_CFG.colorscheme }
+	use { 'glepnir/galaxyline.nvim', branch = 'main', config = PLUGS_CFG.statusline }
+	use { 'nvim-treesitter/nvim-treesitter', opt = true, run = ':TSUpdate', event = 'BufRead', config = PLUGS_CFG.treesitter }
 
 	-- lsp
-	use {
-		'neovim/nvim-lspconfig', event = 'BufReadPre', opt = true,
-		config = function () LSP_CONFIG.lsp_config() end,
-	}
-	use {
-		'glepnir/lspsaga.nvim', opt = true, cmd = 'Lspsaga',
-		config = function () LSP_CONFIG.lspsaga_config() end
-	}
+	use { 'neovim/nvim-lspconfig', event = 'BufReadPre', opt = true, config = function () LSP_CONFIG.lsp_config() end }
+	use { 'glepnir/lspsaga.nvim', opt = true, cmd = 'Lspsaga', config = LSP_CONFIG.lspsaga_config }
 
-	-- completion
-	use {
-		'nvim-lua/completion-nvim', opt = true, event = 'InsertEnter',
-		setup = COMPLETION_CONFIG.setup, config = COMPLETION_CONFIG.config
-	}
-	use {
-		'steelsojka/completion-buffers', opt = true, event = 'InsertEnter',
-		after = 'completion-nvim'
-	}
-	use {
-		'windwp/nvim-autopairs', opt = true, event = 'BufRead',
-		config = function () require('nvim-autopairs').setup() end
-	}
-	use {
-		'hrsh7th/vim-vsnip-integ', opt = true, event = 'InsertEnter',
-		requires = { 'hrsh7th/vim-vsnip', 'rafamadriz/friendly-snippets' }
-	}
+	use { 'hrsh7th/nvim-compe', opt = true, event = 'InsertEnter', requires = { 'Raimondi/delimitMate' }, config = plugin_config('compe') }
+	use { 'hrsh7th/vim-vsnip-integ', opt = true, event = 'InsertEnter', requires = { 'hrsh7th/vim-vsnip', 'rafamadriz/friendly-snippets' } }
 
 	-- code format
-	use {
-		'mhartington/formatter.nvim', opt = true, cmd = 'Format',
-		config = function () require'plugins.formatter'.init() end
-	}
-	use { 'tpope/vim-surround', opt = true, event = 'BufRead' }
+	use { 'mhartington/formatter.nvim', opt = true, cmd = 'Format', config = plugin_config('formatter') }
+	use { 'blackCauldron7/surround.nvim', opt = true, event = 'InsertEnter', config = function () require"surround".setup{} end }
 
 	-- Git
-	use {
-		'lewis6991/gitsigns.nvim', opt = true, event = 'BufRead',
-		config = PLUGINS_CONFIG.gitsigns
-	}
-	use {
-		'sindrets/diffview.nvim', opt = true, cmd = 'DiffviewOpen',
-		config = PLUGINS_CONFIG.diffview
-	}
+	use { 'lewis6991/gitsigns.nvim', opt = true, event = 'BufRead', config = PLUGS_CFG.gitsigns }
+	use { 'sindrets/diffview.nvim', opt = true, cmd = 'DiffviewOpen', config = PLUGS_CFG.diffview }
 
-	use {
-		'glepnir/indent-guides.nvim', opt = true, event = 'BufRead',
-		config = PLUGINS_CONFIG.indent_guide
-	}
-	use {
-		'norcalli/nvim-colorizer.lua', opt = true,
-		ft = { 'html', 'css', 'help', 'lua', 'vim' },
-		config = function () require'colorizer'.setup() end
-	}
-	use {
-		'AndrewRadev/inline_edit.vim', opt = true, cmd = 'InlineEdit',
-		setup = function ()
-			vim.g.inline_edit_new_buffer_command = "tabedit"
-			vim.g.inline_edit_autowrite = 1
-		end
-	}
-
-	use { 'caenrique/nvim-toggle-terminal', opt = true, cmd = 'ToggleTerminal' }
-	use { 'junegunn/vim-easy-align', opt = true, cmd = 'EasyAlign' }
-	use {
-		'kyazdani42/nvim-tree.lua', opt = true, cmd = { 'NvimTreeToggle', 'NvimTreeFindFile' },
-		config = require('plugins.nvim_tree').config
-	}
+	use { 'glepnir/indent-guides.nvim', opt = true, event = 'BufRead', config = PLUGS_CFG.indent_guide }
+	use { 'AndrewRadev/inline_edit.vim', opt = true, cmd = 'InlineEdit', setup = PLUGS_CFG.inline_edit }
+	use { 'numToStr/FTerm.nvim', opt = true, cmd = 'FTermToggle', config = plugin_config('fterm') }
+	use { 'kyazdani42/nvim-tree.lua', opt = true, cmd = { 'NvimTreeToggle', 'NvimTreeFindFile' }, config = plugin_config('nvim_tree') }
 	use { 'antoinemadec/vim-highlight-groups', opt = true, cmd = 'HighlightGroupsAddWord' }
-	use {
-		'npxbr/glow.nvim', opt = true, cmd = 'Glow'
-	}
+	use { 'npxbr/glow.nvim', opt = true, cmd = 'Glow' }
+	use { 'junegunn/vim-easy-align', opt = true, cmd = 'LiveEasyAlign' }
+	use { 'norcalli/nvim-colorizer.lua', opt = true, ft = { 'html', 'css', 'help', 'lua', 'vim' }, config = function () require'colorizer'.setup() end }
 
 	if vim.fn.executable('fcitx5') == 1 then
-		use {
-			'lilydjwg/fcitx.vim', opt = true, branch = 'fcitx5',
-			event = 'InsertEnter'
-		}
+		use { 'lilydjwg/fcitx.vim', opt = true, branch = 'fcitx5', event = 'InsertEnter' }
 	end
 end)
 
