@@ -8,6 +8,11 @@ local function cmd(lhs, rhs)
 	mapkey('n', lhs, format('<cmd>%s<cr>', rhs), opts)
 end
 
+local function cmd_gen(lhs, rhs)
+	local gen_opts = { noremap = true }
+	mapkey('n', lhs, format(':%s', rhs), gen_opts)
+end
+
 local function ino(lhs, rhs)
 	mapkey('i', lhs, rhs, opts)
 end
@@ -18,6 +23,10 @@ end
 
 local function vn(lhs, rhs)
 	mapkey('v', lhs, rhs, opts)
+end
+
+local function tn(lhs, rhs)
+	mapkey('t', lhs, rhs, opts)
 end
 
 local function xcmd(lhs, rhs)
@@ -40,6 +49,8 @@ local function init_nvim_keys()
 	vn('L', 'g_')
 	vn('<C-j>', '5j')
 	vn('<C-k>', '5k')
+	vn('<M-e>', '5e')
+	vn('<M-b>', '5b')
 	vn('<leader>y', '"+y')
 
 	for i = 1, 9, 1 do
@@ -54,6 +65,7 @@ local function init_nvim_keys()
 	cmd('K', 'call v:lua.MyshowDocument()')
 	cmd('<leader>rt', '%retab!')
 	cmd('<leader>z', 'call v:lua.MyWinZoomToggle()')
+	cmd('<M-q>', [[exe('tabn '.g:last_active_tab)]])
 
 	ino('<C-j>', '<Down>')
 	ino('<C-k>', '<Up>')
@@ -68,19 +80,19 @@ local function init_nvim_keys()
 	ino('<M-f>', '<C-Right>')
 	ino('<M-d>', '<C-o>diw')
 
-	mapkey('t', '<M-e>', '<C-\\><C-n>', opts)
+	tn('<M-e>', '<C-\\><C-n>')
 end
 
 local function init_plugins_keymaps()
 	-- terminal
-	cmd('<leader>tt', 'ToggleTerminal')
+	cmd('<leader>tt', 'FTermToggle')
 
 	-- inline edit
 	nn('<leader>e', '<C-u>InlineEdit')
 	xcmd('<leader>e', 'InlineEdit')
 
 	-- easy align
-	xcmd('ga', 'EasyAlign')
+	xcmd('ga', 'LiveEasyAlign')
 
 	-- nvim tree
 	cmd('<leader>tj', 'NvimTreeFindFile')
@@ -101,11 +113,43 @@ local function init_plugins_keymaps()
 	cmd('<leader>ft', 'FzfCommand --vim filetypes')
 	cmd('<leader>fd', [[exe('FzfCommand --gtags -d '.expand('<cword>'))]])
 	cmd('<leader>fr', [[exe("FzfCommand --gtags -r ".expand("<cword>"))]])
-	cmd('<leader>fa', [[exe("FzfCommand --rg ".expand("<cword>"))]])
+	cmd('<leader>fu', 'FzfCommand --gtags --update')
+	cmd('<leader>fb', 'FzfCommand --gtags --update-buffer')
+	cmd('<M-f>', [[exe('FzfCommand --rg --all-buffers '.expand('<cword>'))]])
+	cmd('<leader>ff', [[exe('FzfCommand --rg '.expand('<cword>')." ".expand('%'))]])
+
+	cmd_gen('<leader>d', [[<C-U><C-R>=printf('FzfCommand --rg %s %s', expand('<cword>'), v:lua.GetFileDir())<CR>]])
+	cmd_gen('<leader>fa', [[<C-U><C-R>='FzfCommand --rg '.expand('<cword>')<CR>]])
 
 	-- diffview.nvim
 	cmd('<leader><leader>d', [[exe('DiffviewOpen -- '.v:lua.GetFileDir())]])
 	cmd('<leader><leader>c', 'call v:lua.DiffViewFile()')
+
+	-- compe
+	local expr_opts = { expr = true }
+	mapkey('i', '<Tab>', 'v:lua.tab_complete()', expr_opts)
+	mapkey('i', '<S-Tab>', 'v:lua.s_tab_complete()', expr_opts)
+	mapkey('i', '<CR>', [[compe#confirm({'keys': "\<Plug>delimitMateCR", 'mode': ''})]],
+		{ expr = true, noremap = true }
+	)
+
+	-- lspsaga
+	cmd('<M-r>', 'Lspsaga lsp_finder')
+	cmd('<M-k>', "Lspsaga hover_doc")
+	cmd('<leader>rn', 'Lspsaga rename')
+	cmd('<leader>j', "lua require('lspsaga.action').smart_scroll_with_saga(1)")
+	cmd('<leader>ca', 'Lspsaga code_action')
+	cmd('<leader><leader>p', 'Lspsaga preview_definition')
+	ino('<M-k>', '<cmd>Lspsaga signature_help<CR>')
+
+	-- lsp
+	cmd('<M-j>', 'lua vim.lsp.buf.definition()')
+	cmd('<space>wa', 'lua vim.lsp.buf.add_workspace_folder()')
+	cmd('<space>wr', 'lua vim.lsp.buf.remove_workspace_folder()')
+	cmd('<space>wl', 'lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))')
+	cmd('<space>a', 'lua vim.lsp.diagnostic.show_line_diagnostics()')
+	cmd("<leader><space>f", "lua vim.lsp.buf.formatting()")
+	vn("<leader><space>f", "<cmd>lua vim.lsp.buf.range_formatting()<cr>")
 end
 
 function _G.MyQuit()
@@ -152,3 +196,17 @@ end
 
 init_nvim_keys()
 init_plugins_keymaps()
+
+-- Rg search
+--xn <leader>fa :<C-U><C-R>=printf("FzfCommand --rg %s", RgVisual())<CR>
+-- function! RgVisual()
+-- 	try
+-- 		let x_save = getreg("x", 1)
+-- 		let type = getregtype("x")
+-- 		norm! gv"xy
+-- 		return '"' . escape(@x, '"') . '"'
+-- 	finally
+-- 		call setreg("x", x_save, type)
+-- 	endtry
+-- endfunction
+

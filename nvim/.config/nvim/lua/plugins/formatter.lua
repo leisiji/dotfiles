@@ -8,7 +8,7 @@ local function gen_format_cfg(args)
 	}
 end
 
-function M.init()
+function M.config()
 	require('formatter').setup({
 		logging = false,
 		filetype = {
