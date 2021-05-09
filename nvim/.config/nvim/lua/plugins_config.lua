@@ -149,4 +149,9 @@ function M.inline_edit()
 	vim.g.inline_edit_autowrite = 1
 end
 
+function M.surround()
+	vim.g.surround_prefix = 'r'
+	require"surround".setup{}
+end
+
 return M

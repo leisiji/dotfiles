@@ -1,5 +1,3 @@
-local glo = vim.g
-
 -- load global options
 local global_cfg = {
 	hidden = true;
@@ -35,8 +33,4 @@ for k, v in pairs(win_cfg) do
 	vim.wo[k] = v
 end
 
-glo.mapleader = " "
-glo.markdown_fenced_languages = {
-	'vim', 'cpp', 'c', 'java', 'python', 'lua',
-	'sh', 'make', 'groovy', 'sql', 'javascript'
-}
+vim.g.mapleader = " "
