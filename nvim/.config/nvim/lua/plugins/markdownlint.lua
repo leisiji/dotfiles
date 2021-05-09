@@ -1,4 +1,3 @@
-
 local M = {}
 
 function M.config()
@@ -8,14 +7,32 @@ function M.config()
 		init_options = {
 			linters = {
 				markdownlint = {
-					command = "markdownlint",
-					sourceName = "markdownlint",
-					formatPattern = {
-						""
-					}
+						command = 'markdownlint',
+						rootPatterns = { '.git' },
+						isStderr = true,
+						debounce = 100,
+						args = { '--stdin' },
+						offsetLine = 0,
+						offsetColumn = 0,
+						sourceName = 'markdownlint',
+						securities = {
+							undefined = 'hint'
+						},
+						formatLines = 1,
+						formatPattern = {
+							'^.*:(\\d+)\\s+(.*)$',
+							{
+								line = 1,
+								column = -1,
+								message = 2,
+							}
+						}
 				}
 			},
-		}
+			filetypes = {
+				markdown = 'markdownlint',
+			}
+		},
 	}
 end
 
