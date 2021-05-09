@@ -15,7 +15,7 @@ augroup user_plugin
 	au TabLeave * let g:last_active_tab = tabpagenr() " tab switch
 
 	" open last place
-	au BufReadPost *
+	au BufWinEnter *
 	  \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
 	  \ |	exe "normal! g`\""
 	  \ | endif
