@@ -12,15 +12,11 @@ function M.config()
 	require('formatter').setup({
 		logging = false,
 		filetype = {
-			lua = {
-				function()
-					return {
-						exe = "luafmt",
-						args = {"--indent-count", 4, "--stdin"},
-						stdin = true
-					}
-				end
-			},
+			lua = gen_format_cfg({
+				exe = "luafmt",
+				args = {"--indent-count", 4, "--stdin"},
+				stdin = true
+			}),
 			c = gen_format_cfg({
 				exe = { "clang-format" },
 				stdin = false
