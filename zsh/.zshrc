@@ -44,6 +44,7 @@ export FZF_ALT_C_COMMAND='fd --type d'
 export FZF_DEFAULT_OPTS='--ansi --bind ctrl-d:half-page-down,ctrl-u:half-page-up,tab:down,ctrl-p:toggle-preview --reverse --cycle --preview-window=hidden:65%'
 export GTAGSLABEL='native-pygments'
 export GTAGSCONF='/usr/share/gtags/gtags.conf'
+export GOPROXY=https://goproxy.io,direct
 
 # key-bindings 放在前面，防止后面的快捷键被覆盖
 zinit snippet OMZ::lib/key-bindings.zsh

@@ -20,8 +20,9 @@ sudo pacman -S zsh fzf nnn tmux lua ueberzug universal-ctags global xclip
 sudo pacman -S neovim nodejs npm bear yarn
 yay -S glow
 
-# language-server
-yarn global add bash-language-server vim-language-server
+# language-server, linter
+yarn global add bash-language-server vim-language-server diagnostic-languageserver \
+                markdownlint-cli
 yay -S ccls kotlin-language-server lua-language-server-git \
         groovy-language-server-git jdtls
 pip3 install --user cmake-language-server
