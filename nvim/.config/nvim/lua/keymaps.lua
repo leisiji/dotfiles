@@ -88,8 +88,7 @@ local function init_plugins_keymaps()
 	cmd('<leader>tt', 'FTermToggle')
 
 	-- inline edit
-	nn('<leader>e', '<C-u>InlineEdit')
-	xcmd('<leader>e', 'InlineEdit')
+	cmd('<leader>e', 'InlineEdit')
 
 	-- easy align
 	xcmd('ga', 'LiveEasyAlign')
