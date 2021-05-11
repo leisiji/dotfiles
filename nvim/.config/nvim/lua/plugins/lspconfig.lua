@@ -55,8 +55,8 @@ local diagnosticls = {
 				securities = { undefined = 'hint' },
 				formatLines = 1,
 				formatPattern = {
-					'^.*:(\\d+):(\\d+)\\s+(.*)$',
-					{ line = 1, column = 2, message = 3 }
+					[[^[^:]+:(\d+):*(\d*)(.*)$]],
+					{ line = 1, column = -1, message = 3 }
 				}
 			}
 		},
