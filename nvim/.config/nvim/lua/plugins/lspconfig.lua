@@ -48,16 +48,15 @@ local diagnosticls = {
 			markdownlint = {
 				command = 'markdownlint',
 				rootPatterns = { '.git' },
-				isStderr = true,
-				debounce = 500,
-				args = { '--stdin' },
+				isStderr = true, debounce = 500,
 				offsetLine = 0, offsetColumn = 0,
+				args = { '--stdin' },
 				sourceName = 'markdownlint',
 				securities = { undefined = 'hint' },
 				formatLines = 1,
 				formatPattern = {
-					'^.*:(\\d+)\\s+(.*)$',
-					{ line = 1, column = -1, message = 2 }
+					'^.*:(\\d+):(\\d+)\\s+(.*)$',
+					{ line = 1, column = 2, message = 3 }
 				}
 			}
 		},
