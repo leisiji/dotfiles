@@ -74,7 +74,6 @@ local function all_lsp_config(lsp)
 	lsp.bashls.setup(default_cfg)
 	lsp.vimls.setup(default_cfg)
 	lsp.kotlin_language_server.setup(default_cfg)
-	lsp.jdtls.setup(default_cfg)
 end
 
 local function lsp_colors_config()
