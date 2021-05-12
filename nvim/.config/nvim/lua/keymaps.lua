@@ -139,6 +139,7 @@ local function init_plugins_keymaps()
 	cmd('<leader>j', "lua require('lspsaga.action').smart_scroll_with_saga(1)")
 	cmd('<leader>ca', 'Lspsaga code_action')
 	cmd('<leader><leader>p', 'Lspsaga preview_definition')
+	cmd('<M-o>', 'Lspsaga show_line_diagnostics')
 	ino('<M-k>', '<cmd>Lspsaga signature_help<CR>')
 
 	-- lsp

@@ -28,7 +28,7 @@ packer.startup(function()
 
 	-- code format
 	use { 'mhartington/formatter.nvim', opt = true, cmd = 'Format', config = plugin_config('formatter') }
-	use { 'blackCauldron7/surround.nvim', opt = true, event = 'InsertEnter', config = PLUGS_CFG.surround }
+	use { 'tpope/vim-surround', opt = true, event = 'InsertEnter' }
 
 	-- Git
 	use { 'lewis6991/gitsigns.nvim', opt = true, event = 'BufRead', config = PLUGS_CFG.gitsigns }
