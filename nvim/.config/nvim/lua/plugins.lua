@@ -21,6 +21,7 @@ packer.startup(function()
 	-- lsp
 	use { 'neovim/nvim-lspconfig', event = 'BufReadPre', opt = true, config = function () LSP_CONFIG.lsp_config() end }
 	use { 'glepnir/lspsaga.nvim', opt = true, cmd = 'Lspsaga', config = LSP_CONFIG.lspsaga_config }
+	use { 'mfussenegger/nvim-jdtls', opt = true, ft = { 'java' }, config = plugin_config('jdtls') }
 
 	use { 'hrsh7th/nvim-compe', opt = true, event = 'InsertEnter', requires = { 'Raimondi/delimitMate' }, config = plugin_config('compe') }
 	use { 'hrsh7th/vim-vsnip-integ', opt = true, event = 'InsertEnter', requires = { 'hrsh7th/vim-vsnip', 'rafamadriz/friendly-snippets' } }
