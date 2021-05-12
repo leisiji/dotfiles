@@ -48,7 +48,7 @@ local diagnosticls = {
 			markdownlint = {
 				command = 'markdownlint',
 				rootPatterns = { '.git' },
-				isStderr = true, debounce = 500,
+				isStderr = true, debounce = 1000,
 				offsetLine = 0, offsetColumn = 0,
 				args = { '--stdin' },
 				sourceName = 'markdownlint',
@@ -76,20 +76,26 @@ local function all_lsp_config(lsp)
 	lsp.kotlin_language_server.setup(default_cfg)
 end
 
-local function lsp_colors_config()
+local function lsp_basic()
 	local guibg = COLORS.yellow
 	local guifg = COLORS.bg
 	local exec = vim.cmd
+	local lsp = vim.lsp
 
 	exec('hi LspReferenceRead guibg=' .. guibg .. ' guifg=' .. guifg)
 	exec('hi LspReferenceWrite guibg=' .. guibg .. ' guifg=' .. guifg)
 	exec('hi LspReferenceText guibg=' .. guibg .. ' guifg=' .. guifg)
+
+	lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(
+		vim.lsp.diagnostic.on_publish_diagnostics, {
+			virtual_text = false, underline = true, signs = true
+		})
 end
 
 function M.lsp_config()
 	coroutine.wrap(function ()
 		local lsp = require('lspconfig')
-		lsp_colors_config()
+		lsp_basic()
 		all_lsp_config(lsp)
 	end)();
 end
