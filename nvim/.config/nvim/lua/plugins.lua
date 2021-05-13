@@ -37,7 +37,7 @@ packer.startup(function()
 	use { 'glepnir/indent-guides.nvim', opt = true, event = 'BufRead', config = PLUGS_CFG.indent_guide }
 	use { 'AndrewRadev/inline_edit.vim', opt = true, cmd = 'InlineEdit', setup = PLUGS_CFG.inline_edit }
 	use { 'numToStr/FTerm.nvim', opt = true, cmd = 'FTermToggle', config = plugin_config('fterm') }
-	use { 'kyazdani42/nvim-tree.lua', opt = true, cmd = { 'NvimTreeToggle', 'NvimTreeFindFile' }, config = plugin_config('nvim_tree') }
+	use { 'lambdalisue/fern.vim', opt = true, cmd = 'Fern', setup = plugin_config('fern') }
 	use { 'antoinemadec/vim-highlight-groups', opt = true, cmd = 'HighlightGroupsAddWord' }
 	use { 'npxbr/glow.nvim', opt = true, cmd = 'Glow' }
 	use { 'junegunn/vim-easy-align', opt = true, cmd = 'LiveEasyAlign' }

@@ -94,8 +94,8 @@ local function init_plugins_keymaps()
 	xcmd('ga', 'LiveEasyAlign')
 
 	-- nvim tree
-	cmd('<leader>tj', 'NvimTreeFindFile')
-	cmd('<leader>tr', 'NvimTreeToggle')
+	cmd('<leader>tj', 'Fern . -reveal=% -drawer')
+	cmd('<leader>tr', 'Fern . -drawer')
 
 	-- highlight group
 	cmd('<leader>k', 'HighlightGroupsAddWord 4 0')
