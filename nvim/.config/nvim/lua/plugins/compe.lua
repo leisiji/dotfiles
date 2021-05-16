@@ -37,6 +37,7 @@ _G.s_tab_complete = function()
 end
 
 function M.config()
+	vim.g.vsnip_snippet_dir = string.format("%s/snippets", fn.stdpath('config'))
 	require'compe'.setup {
 		enabled = true;
 		autocomplete = true;

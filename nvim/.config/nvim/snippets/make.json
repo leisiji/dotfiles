@@ -1,0 +1,17 @@
+{
+	"if" : {
+		"body":"ifeq (${1:cond}, ${2:cond})\n$0\nendif",
+		"prefix": "if",
+		"description": "if"
+	},
+	"ife" : {
+		"body":"ifeq (${1:cond0}, ${2:cond1})\n$3\nelse\n$0\nendif",
+		"prefix": "ife",
+		"description": "ifeq else"
+	},
+	"el" : {
+		"body":"else\n\t$0",
+		"prefix": "el",
+		"description": "else"
+	}
+}

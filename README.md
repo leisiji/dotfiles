@@ -12,7 +12,6 @@ Minimal development on terminal:
 # yay installation
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
-# shell related, lua is for z.lua
 # ueberzug can display image in terminal
 sudo pacman -S zsh fzf nnn tmux lua ueberzug universal-ctags global xclip
 
