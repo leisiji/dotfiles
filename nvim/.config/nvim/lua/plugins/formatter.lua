@@ -1,26 +1,18 @@
 local M = {}
 
-local function gen_format_cfg(args)
-	return {
-		function ()
-			return args
-		end
-	}
-end
-
 function M.config()
 	require('formatter').setup({
 		logging = false,
 		filetype = {
-			lua = gen_format_cfg({
-				exe = "luafmt",
-				args = {"--indent-count", 4, "--stdin"},
-				stdin = true
-			}),
-			c = gen_format_cfg({
-				exe = { "clang-format" },
-				stdin = false
-			}),
+			c = {
+				function ()
+					return {
+						exe =  'clang-format',
+						args = { '--style=file' },
+						stdin = true
+					}
+				end
+			}
 		}
 	})
 end

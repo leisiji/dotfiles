@@ -68,7 +68,11 @@ local function all_lsp_config(lsp)
 	lsp.sumneko_lua.setup(lua_cfg)
 	lsp.diagnosticls.setup(diagnosticls)
 
-	lsp.ccls.setup { init_options = { cache = { directory = '/tmp/ccls' } } }
+	local ccls_opts = {
+		init_options = { cache = { directory = '/tmp/ccls' } },
+		on_attach = on_attach, capabilities = cap
+	}
+	lsp.ccls.setup(ccls_opts)
 	lsp.pyright.setup(default_cfg)
 	lsp.cmake.setup(default_cfg)
 	lsp.bashls.setup(default_cfg)
@@ -88,7 +92,8 @@ local function lsp_basic()
 
 	lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(
 		vim.lsp.diagnostic.on_publish_diagnostics, {
-			virtual_text = false, underline = true, signs = true
+			virtual_text = false, underline = true, signs = true,
+			update_in_insert = false
 		})
 end
 

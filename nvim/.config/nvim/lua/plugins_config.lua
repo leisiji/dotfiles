@@ -122,7 +122,6 @@ function M.colorscheme()
 	exec('hi TabLineSel gui=bold guibg='..COLORS.blue..' guifg='..COLORS.bg)
 	exec('hi TabLine gui=NONE guibg='..COLORS.fg..' guifg='..COLORS.darkblue)
 	vim.o.tabline = "%!v:lua.mytabline()"
-
 end
 
 function M.indent_guide()

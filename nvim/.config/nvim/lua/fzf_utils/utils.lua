@@ -45,7 +45,7 @@ local function cmdedit(tabcmd, path, row, col)
 end
 
 function M.tabedit(path, row, col)
-	cmdedit("keepj tab drop %s", path, row, col)
+	cmdedit("tab drop %s", path, row, col)
 end
 
 function M.vsplitedit(path, row, col)

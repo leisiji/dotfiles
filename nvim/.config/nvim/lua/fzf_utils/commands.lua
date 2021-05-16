@@ -1,8 +1,12 @@
 local M = {}
-local fzf_commands = require('fzf_utils.nvim_fzf_commands')
+
+local function get_fzf(submodule)
+	return require('fzf_utils.'..submodule)
+end
+local fzf_commands = get_fzf('nvim_fzf_commands')
 
 local function gtags_command(arg2, arg3)
-	local gtags = require('fzf_utils.gtags')
+	local gtags = get_fzf('gtags')
 
 	if arg2 == "-d" then
 		gtags.find_definition(arg3)
@@ -16,7 +20,7 @@ local function gtags_command(arg2, arg3)
 end
 
 local function rg_command(arg2, arg3)
-	local rg = require('fzf_utils.rg')
+	local rg = get_fzf('rg')
 
 	if arg2 == "--all-buffers" then
 		rg.search_all_buffers(arg3)
@@ -26,12 +30,12 @@ local function rg_command(arg2, arg3)
 end
 
 local function ctags_command()
-	local ctags = require('fzf_utils.ctags')
+	local ctags = get_fzf('ctags')
 	ctags.get_cur_buf_func()
 end
 
 local function vim_command(arg2)
-	local vim_utils = require('fzf_utils.vim_utils')
+	local vim_utils = get_fzf('vim_utils')
 	if arg2 == 'help' then
 		vim_utils.vim_help()
 	elseif arg2 == "cmdHists" then
@@ -41,7 +45,19 @@ local function vim_command(arg2)
 	end
 end
 
-local subcommand = {
+-- arg4 to support 'tab drop'
+local function lsp_command(arg2, arg3, arg4)
+	local lsp = get_fzf('lsp')
+
+	if arg2 == 'jump_def' then
+		if arg4 ~= nil then
+			arg3 = string.format('%s %s', arg3, arg4)
+		end
+		lsp.jump_to_definition(arg3)
+	end
+end
+
+local command = {
 	files = fzf_commands.find_files,
 	lines = fzf_commands.grep_lines,
 	rg = rg_command,
@@ -50,17 +66,18 @@ local subcommand = {
 	man = fzf_commands.Man,
 	vim = vim_command,
 	gtags = gtags_command,
+	lsp = lsp_command,
 }
 
-function M.load_command(arg1, arg2, arg3)
+function M.load_command(arg1, ...)
 	if arg1 == nil then
 		return
 	end
 
 	local sub = string.sub(arg1, 3)
-	for idx,val in pairs(subcommand) do
+	for idx,val in pairs(command) do
 		if sub == idx then
-			val(arg2, arg3)
+			val(...)
 			break
 		end
 	end

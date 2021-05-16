@@ -66,6 +66,7 @@ local function init_nvim_keys()
 	cmd('<leader>rt', '%retab!')
 	cmd('<leader>z', 'call v:lua.MyWinZoomToggle()')
 	cmd('<M-q>', [[exe('tabn '.g:last_active_tab)]])
+	cmd('<M-s>', [[let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>]]) -- remove trailing whitespace
 
 	ino('<C-j>', '<Down>')
 	ino('<C-k>', '<Up>')
@@ -143,7 +144,8 @@ local function init_plugins_keymaps()
 	ino('<M-k>', '<cmd>Lspsaga signature_help<CR>')
 
 	-- lsp
-	cmd('<M-j>', 'lua vim.lsp.buf.definition()')
+	cmd('<M-j>', 'FzfCommand --lsp jump_def edit')
+	cmd('<M-t>', 'FzfCommand --lsp jump_def tab drop')
 	cmd('<space>wa', 'lua vim.lsp.buf.add_workspace_folder()')
 	cmd('<space>wr', 'lua vim.lsp.buf.remove_workspace_folder()')
 	cmd('<space>wl', 'lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))')
@@ -152,6 +154,7 @@ local function init_plugins_keymaps()
 	vn("<leader><space>f", "<cmd>lua vim.lsp.buf.range_formatting()<cr>")
 end
 
+-------------------- Global Function ---------------------------------------
 function _G.MyQuit()
 	local bufnrs = fn.win_findbuf(fn.bufnr())
 
@@ -192,6 +195,13 @@ end
 function _G.DiffViewFile()
 	exec('DiffviewOpen -- ' .. fn.expand('%'))
 	exec('DiffviewToggleFiles')
+end
+
+function _G.MyOpenLastplace()
+	local l = fn.line("'\"")
+	if l >= 1 and l <= fn.line('$') and vim.bo.filetype ~= 'commit' then
+		vim.cmd([[normal! g`"]])
+	end
 end
 
 init_nvim_keys()
