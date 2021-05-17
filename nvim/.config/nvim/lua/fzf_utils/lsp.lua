@@ -30,16 +30,19 @@ local function lsp_handle(m, ret)
 		return nil
 	end
 
-	local result = ret[1].result
 	local choice, key
+	local res = {}
 
-	if #result == 1 then
-		choice = lsp_to_vimgrep(result[1])
-	else
-		local res = {}
+	for _, v in pairs(ret) do
+		local result = v.result
 		for _, item in pairs(result) do
 			res[#res+1] = lsp_to_vimgrep(item)
 		end
+	end
+
+	if #res == 1 then
+		choice = res[1]
+	else
 		local choices = require('fzf').fzf(res, utils.vimgrep_preview)
 		key, choice = choices[1], choices[2]
 	end
