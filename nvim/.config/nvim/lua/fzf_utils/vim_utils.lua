@@ -65,13 +65,11 @@ function M.get_filetypes()
 		local fn = vim.fn
 		local syntax_files = fn.globpath(vim.o.rtp, 'syntax/*.vim')
 		local filetypes = fn.split(syntax_files, '\n')
-		local count = 1
-		local filetypes_list = {}
+		local ft_list = {}
 		for _,filetype in ipairs(filetypes) do
-			filetypes_list[count] = fn.fnamemodify(filetype, ':t:r')
-			count = count + 1
+			ft_list[#ft_list+1] = fn.fnamemodify(filetype, ':t:r')
 		end
-		local result = fzf(filetypes_list, '')
+		local result = fzf(ft_list, '')
 		vim.cmd("set ft="..result[1])
 	end)()
 end
@@ -100,20 +98,18 @@ function M.vim_cmd_history()
 	local fn = vim.fn
 	local search = "cmd"
 	local nr = fn.histnr(search)
-	local count = 0
-	local cmd_hists = {}
+	local cmds = {}
 
 	while nr >= 0 do
-		local cmd = fn.histget(search, nr - count)
+		local cmd = fn.histget(search, nr - #cmds)
 		nr = nr - 1
 		if cmd ~= nil and #cmd > 0 then
-			cmd_hists[count] = cmd
-			count = count + 1
+			cmds[#cmds+1] = cmd
 		end
 	end
 
 	coroutine.wrap(function ()
-		local result = fzf(cmd_hists, "")
+		local result = fzf(cmds, "")
 		vim.cmd(result[1])
 	end)()
 end

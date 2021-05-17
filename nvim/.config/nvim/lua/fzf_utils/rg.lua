@@ -33,12 +33,10 @@ end
 local function get_all_buffers(pattern)
 	local api = vim.api
 	local buffers = {}
-	local count = 1
 	for _, bufhandle in ipairs(api.nvim_list_bufs()) do
 		if api.nvim_buf_is_loaded(bufhandle) and fn.buflisted(bufhandle) == 1 then
 			local name = fn.bufname(bufhandle)
-			buffers[count] = name
-			count = count + 1
+			buffers[#buffers+1] = name
 		end
 	end
 	return get_rg_cmd(pattern, buffers)

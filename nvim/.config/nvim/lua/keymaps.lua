@@ -30,7 +30,7 @@ local function tn(lhs, rhs)
 end
 
 local function xcmd(lhs, rhs)
-	mapkey('x', lhs, format('<cmd>%s<cr>', rhs), opts)
+	mapkey('x', lhs, format(':%s<cr>', rhs), {})
 end
 
 local function init_nvim_keys()
@@ -92,7 +92,7 @@ local function init_plugins_keymaps()
 	cmd('<leader>e', 'InlineEdit')
 
 	-- easy align
-	xcmd('ga', 'LiveEasyAlign')
+	xcmd('ga', 'EasyAlign')
 
 	-- nvim tree
 	cmd('<leader>tj', 'Fern . -reveal=% -drawer')
@@ -117,6 +117,10 @@ local function init_plugins_keymaps()
 	cmd('<leader>fb', 'FzfCommand --gtags --update-buffer')
 	cmd('<M-f>', [[exe('FzfCommand --rg --all-buffers '.expand('<cword>'))]])
 	cmd('<leader>ff', [[exe('FzfCommand --rg '.expand('<cword>')." ".expand('%'))]])
+	cmd('<M-j>', 'FzfCommand --lsp jump_def edit')
+	cmd('<M-t>', 'FzfCommand --lsp jump_def tab drop')
+	cmd('<M-v>', 'FzfCommand --lsp jump_def vsplit')
+	cmd('<leader>rr', 'FzfCommand --lsp ref tab drop')
 
 	cmd_gen('<leader>d', [[<C-U><C-R>=printf('FzfCommand --rg %s %s', expand('<cword>'), v:lua.GetFileDir())<CR>]])
 	cmd_gen('<leader>fa', [[<C-U><C-R>='FzfCommand --rg '.expand('<cword>')<CR>]])
@@ -142,14 +146,12 @@ local function init_plugins_keymaps()
 	cmd('<leader><leader>p', 'Lspsaga preview_definition')
 	cmd('<M-o>', 'Lspsaga show_line_diagnostics')
 	ino('<M-k>', '<cmd>Lspsaga signature_help<CR>')
+	cmd('<leader>a', 'Lspsaga diagnostic_jump_next')
 
 	-- lsp
-	cmd('<M-j>', 'FzfCommand --lsp jump_def edit')
-	cmd('<M-t>', 'FzfCommand --lsp jump_def tab drop')
 	cmd('<space>wa', 'lua vim.lsp.buf.add_workspace_folder()')
 	cmd('<space>wr', 'lua vim.lsp.buf.remove_workspace_folder()')
 	cmd('<space>wl', 'lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))')
-	cmd('<space>a', 'lua vim.lsp.diagnostic.show_line_diagnostics()')
 	cmd("<leader><space>f", "lua vim.lsp.buf.formatting()")
 	vn("<leader><space>f", "<cmd>lua vim.lsp.buf.range_formatting()<cr>")
 end

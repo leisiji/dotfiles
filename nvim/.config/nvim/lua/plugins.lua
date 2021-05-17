@@ -36,7 +36,7 @@ packer.startup(function()
 	use { 'lambdalisue/fern.vim', opt = true, cmd = 'Fern', setup = require('plugins.fern').config() }
 	use { 'antoinemadec/vim-highlight-groups', opt = true, cmd = 'HighlightGroupsAddWord' }
 	use { 'npxbr/glow.nvim', opt = true, cmd = 'Glow' }
-	use { 'junegunn/vim-easy-align', opt = true, cmd = 'LiveEasyAlign' }
+	use { 'junegunn/vim-easy-align', opt = true, cmd = 'EasyAlign' }
 	use { 'norcalli/nvim-colorizer.lua', opt = true, ft = { 'html', 'css', 'help', 'lua', 'vim' }, config = function () require'colorizer'.setup() end }
 
 	if vim.fn.executable('fcitx5') then

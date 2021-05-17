@@ -7,7 +7,6 @@ local function get_ctags(file)
 	local cmd = string.format("ctags --output-format=json -u --fields=nzP -f- %s", file)
 	local res = fn.systemlist(cmd)
 	local funcs = {}
-	local count = 1
 
 	for _,val in pairs(res) do
 		local tag_json_obj = fn.json_decode(val)
@@ -17,8 +16,7 @@ local function get_ctags(file)
 			local func_name = string.sub(pattern, 3, #pattern - 2)
 			local ln = tag_json_obj["line"]
 			local str = string.format("%s: %s", ln, func_name)
-			funcs[count] = str
-			count = count + 1
+			funcs[#funcs+1] = str
 		end
 	end
 

@@ -49,11 +49,14 @@ end
 local function lsp_command(arg2, arg3, arg4)
 	local lsp = get_fzf('lsp')
 
+	if arg4 ~= nil then
+		arg3 = string.format('%s %s', arg3, arg4)
+	end
+
 	if arg2 == 'jump_def' then
-		if arg4 ~= nil then
-			arg3 = string.format('%s %s', arg3, arg4)
-		end
-		lsp.jump_to_definition(arg3)
+		lsp.definition(arg3)
+	elseif arg2 == 'ref' then
+		lsp.references(arg3)
 	end
 end
 
