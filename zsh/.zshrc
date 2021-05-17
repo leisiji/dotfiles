@@ -44,18 +44,22 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d'
 export FZF_DEFAULT_OPTS='--ansi --bind ctrl-d:half-page-down,ctrl-u:half-page-up,tab:down,ctrl-p:toggle-preview --reverse --cycle --preview-window=hidden:65%'
 export GTAGSLABEL='native-pygments'
-export GTAGSCONF='/usr/share/gtags/gtags.conf'
 export GOPROXY=https://goproxy.io,direct
 
 # key-bindings 放在前面，防止后面的快捷键被覆盖
 zinit snippet OMZ::lib/key-bindings.zsh
 zinit snippet OMZ::lib/completion.zsh
 zinit ice wait'0' lucid; zinit snippet OMZ::plugins/extract/extract.plugin.zsh
-#zinit ice wait'0' lucid; zinit snippet OMZ::plugins/fzf/fzf.plugin.zsh
-zinit snippet /usr/share/fzf/key-bindings.zsh
-zinit snippet /usr/share/fzf/completion.zsh
-#zinit ice wait'0' lucid; zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
 zinit ice wait'0' lucid; zinit snippet OMZ::plugins/git/git.plugin.zsh
+
+# gentoo prefix
+GENTOO_PREFIX=""
+if [ -d $HOME/gentoo ]; then
+	GENTOO_PREFIX=$HOME/gentoo
+fi
+zinit snippet $GENTOO_PREFIX/usr/share/fzf/key-bindings.zsh
+zinit snippet $GENTOO_PREFIX/usr/share/fzf/completion.zsh
+export GTAGSCONF='$GENTOO_PREFIX/usr/share/gtags/gtags.conf'
 
 # zlua shoud be put before completion init
 zinit light skywind3000/z.lua
