@@ -10,3 +10,5 @@ GRTAGS
 GTAGS
 workspace/
 .gradle/
+*.log
+.classpath

@@ -1,6 +1,6 @@
 local M = {}
 
-local on_attach = function(client, _)
+M.on_attach = function(client, _)
 	-- cursor hightlight and hint function name in statusline
 	if client.resolved_capabilities.document_highlight then
 		vim.api.nvim_exec([[
@@ -23,41 +23,20 @@ cap.textDocument.completion.completionItem.resolveSupport = {
 		'additionalTextEdits',
 	}
 }
-local default_cfg = { on_attach = on_attach, capabilities = cap }
-
-local lua_cfg = {
-	cmd = {
-		'/usr/bin/lua-language-server',
-		'-E', '-e', 'LANG=EN',
-		'/usr/share/lua-language-server/main.lua'
-	};
-	settings = {
-		Lua = {
-			diagnostics = { enable = true, globals = { "vim" } },
-			runtime = { version = "LuaJIT" },
-			workspace = { library = vim.list_extend({[vim.fn.expand("$VIMRUNTIME/lua")] = true},{}), },
-		},
-	};
-	on_attach = on_attach;
-}
+local default_cfg = { on_attach = M.on_attach, capabilities = cap }
 
 local diagnosticls = {
 	filetypes = { 'markdown' };
 	init_options = {
 		linters = {
 			markdownlint = {
-				command = 'markdownlint',
-				rootPatterns = { '.git' },
-				isStderr = true, debounce = 1000,
-				offsetLine = 0, offsetColumn = 0,
-				args = { '--stdin' },
-				sourceName = 'markdownlint',
-				securities = { undefined = 'hint' },
-				formatLines = 1,
+				command = 'markdownlint', rootPatterns = { '.git' },
+				isStderr = true, debounce = 1000, offsetLine = 0, offsetColumn = 0,
+				args = { '--stdin' }, sourceName = 'markdownlint', securities = { undefined = 'hint' }, formatLines = 1,
 				formatPattern = {
-					[[^[^:]+:(\d+):*(\d*)(.*)$]],
-					{ line = 1, column = -1, message = 3 }
-				}
+					[[^.*?:\s?(\d+)(:(\d+)?)?\s(MD\d{3}\/[A-Za-z0-9-/]+)\s(.*)$]],
+					{ line = 1, column = 3, message = { 4 } }
+				},
 			}
 		},
 		filetypes = { markdown = 'markdownlint' }
@@ -65,12 +44,11 @@ local diagnosticls = {
 }
 
 local function all_lsp_config(lsp)
-	lsp.sumneko_lua.setup(lua_cfg)
 	lsp.diagnosticls.setup(diagnosticls)
 
 	local ccls_opts = {
 		init_options = { cache = { directory = '/tmp/ccls' } },
-		on_attach = on_attach, capabilities = cap
+		on_attach = M.on_attach, capabilities = cap
 	}
 	lsp.ccls.setup(ccls_opts)
 	lsp.pyright.setup(default_cfg)

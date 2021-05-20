@@ -1,0 +1,66 @@
+{
+	"for": {
+		"prefix": "for",
+		"body": [
+			"for (${size_t} ${i} = ${1:0}; ${i} < ${2:length}; ${i}++) {",
+			"\t$3",
+			"}"
+		],
+		"description": "Code snippet for 'for' loop"
+	},
+	"while": {
+		"prefix": "while",
+		"body": ["while ($1) {", "\t$2", "}"],
+		"description": ""
+	},
+	"if": {
+		"prefix": "if",
+		"body": ["if ($1) {", "\t$2", "}"],
+		"description": "Code snippet for if statement"
+	},
+	"else": {
+		"prefix": "else",
+		"body": ["else {", "\t$1", "}"],
+		"description": "Code snippet for else statement"
+	},
+	"else if": {
+		"prefix": "else if",
+		"body": ["else if ($1) {", "\t$2", "}"],
+		"description": "Code snippet for else-if statement"
+	},
+	"struct": {
+		"prefix": "struct",
+		"body": ["struct ${MyStruct} {", "\t$1", "};"],
+		"description": "Code snippet for struct"
+	},
+	"switch": {
+		"prefix": "switch",
+		"body": ["switch (${switch_on}) {", "default:", "\tbreak;$1", "}"],
+		"description": "Code snippet for switch statement"
+	},
+	"union": {
+		"prefix": "union",
+		"body": ["union ${MyUnion} {", "\t$1", "};"],
+		"description": "Code snippet for union"
+	},
+	"#inc": {
+		"prefix": "#inc",
+		"body": ["#include \"$1\""],
+		"description": "Code snippet for #include \" \""
+	},
+	"print": {
+		"prefix": "print",
+		"body": ["printf(\"%s\\n\", $1);"],
+		"description": "Code snippet for #include \" \""
+	},
+	"Standard Starter Template": {
+		"prefix": "main",
+		"body": [
+			"",
+			"int main (int argc, char *argv[])\n{",
+			"\t$1\n\treturn 0;",
+			"}"
+		],
+		"description": "A standard starter template for a C program"
+	}
+}
