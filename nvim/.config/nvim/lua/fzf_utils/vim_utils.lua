@@ -1,60 +1,33 @@
 local M = {}
 local fzf = require('fzf').fzf
+local u = require('fzf_utils.utils')
 
--- total with 2 types of coroutines (except the necessary one)
--- the first used to search; the second used to read file
-local function readfilecb(path, read_tag_cb)
-	local uv = vim.loop
-	uv.fs_open(path, "r", 438, function(err, fd)
-		if err then
-			read_tag_cb(nil)
-			return
-		end
-		uv.fs_fstat(fd, function(_, stat)
-			uv.fs_read(fd, stat.size, 0, function(_, data)
-				uv.fs_close(fd, function(_)
-					return read_tag_cb(data)
-				end)
-			end)
-		end)
-	end)
-end
+local function deal_with_tags(path, cb)
+	local data = u.readfile(path)
+	if data == nil then
+		return
+	end
 
-local function deal_with_tags(tagfile, cb)
-	local search_dir_co = coroutine.running()
-	coroutine.wrap(function ()
-
-		local read_tag_co = coroutine.running()
-		readfilecb(tagfile, function (data)
-			coroutine.resume(read_tag_co, data)
-		end)
-		local data = coroutine.yield()
-
-		if data ~= nil then
-			for _, line in ipairs(vim.split(data, "\n")) do
-				local items = vim.split(line, "\t")
-				local tag = string.format("%s\t\27[0;37m%s\27[0m", items[1], items[2])
-				cb(tag, function ()
-					coroutine.resume(read_tag_co)
-				end)
-				coroutine.yield()
-			end
-		end
-		coroutine.resume(search_dir_co)
-	end)()
-	coroutine.yield()
+	for _, line in ipairs(vim.split(data, "\n")) do
+		local items = vim.split(line, "\t")
+		local tag = string.format("%s\t\27[0;37m%s\27[0m", items[1], items[2])
+		cb(tag, function () end)
+	end
 end
 
 local function get_help_tags(cb)
-	local runtimepaths = vim.api.nvim_list_runtime_paths()
-	local total_done = 0
-	for _, rtp in ipairs(runtimepaths) do
-		local tagfile = table.concat({rtp, "doc", "tags"}, "/")
+	local paths = vim.api.nvim_list_runtime_paths()
+	local total = 0
+
+	-- start coroutine on per tag file
+	for _, rtp in ipairs(paths) do
+		local f = string.format('%s/doc/tags', rtp)
 		coroutine.wrap(function ()
-			deal_with_tags(tagfile, cb)
-			total_done = total_done + 1
-			if total_done == #runtimepaths then
-				cb(nil)
+			deal_with_tags(f, cb)
+			-- close the pipe in last finished coroutine
+			total = total + 1
+			if total == #paths then
+				cb(nil, function () end)
 			end
 		end)()
 	end
