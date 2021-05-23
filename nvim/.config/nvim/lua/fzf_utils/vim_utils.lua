@@ -1,36 +1,30 @@
 local M = {}
 local fzf = require('fzf').fzf
 local u = require('fzf_utils.utils')
+local a = require('plenary.async_lib')
 
-local function deal_with_tags(path, cb)
-	local data = u.readfile(path)
-	if data == nil then
-		return
-	end
-
+local deal_with_tags = a.async(function (path, cb)
+	local data = a.await(u.readfile(path))
+	if data == nil then return end
 	for _, line in ipairs(vim.split(data, "\n")) do
 		local items = vim.split(line, "\t")
 		local tag = string.format("%s\t\27[0;37m%s\27[0m", items[1], items[2])
 		cb(tag, function () end)
 	end
-end
+end)
 
 local function get_help_tags(cb)
-	local paths = vim.api.nvim_list_runtime_paths()
-	local total = 0
-
-	-- start coroutine on per tag file
-	for _, rtp in ipairs(paths) do
-		local f = string.format('%s/doc/tags', rtp)
-		coroutine.wrap(function ()
-			deal_with_tags(f, cb)
-			-- close the pipe in last finished coroutine
-			total = total + 1
-			if total == #paths then
-				cb(nil, function () end)
-			end
-		end)()
-	end
+	a.async_void(function ()
+		local paths = vim.api.nvim_list_runtime_paths()
+		local futures = {}
+		-- start coroutine on per tag file
+		for _, rtp in ipairs(paths) do
+			local f = string.format('%s/doc/tags', rtp)
+			futures[#futures+1] = deal_with_tags(f, cb)
+		end
+		a.await_all(futures)
+		cb(nil, function () end)
+	end)()
 end
 
 function M.get_filetypes()

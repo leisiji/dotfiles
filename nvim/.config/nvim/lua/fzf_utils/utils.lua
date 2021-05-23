@@ -52,43 +52,19 @@ function M.vsplitedit(path, row, col)
 	cmdedit("vsplit %s", path, row, col)
 end
 
-local function coroutine_callback(func)
-	local co = coroutine.running()
-	local callback = function(...)
-		coroutine.resume(co, ...)
-	end
-	func(callback)
-	return coroutine.yield()
-end
-
-function M.coroutinify(func)
-	return function (...)
-		local args = {...}
-		return coroutine_callback(function (cb)
-			table.insert(args, cb)
-			func(unpack(args))
-		end)
-	end
-end
-
 -- file operation
-local uv = vim.loop
-M.open = M.coroutinify(uv.fs_open)
-M.close = M.coroutinify(uv.fs_close)
-M.stat = M.coroutinify(uv.fs_fstat)
-M.read = M.coroutinify(uv.fs_read)
-M.write = M.coroutinify(uv.fs_write)
+local a = require('plenary.async_lib')
+local async = a.async
+local await = a.await
 
 -- readfile in coroutine
-function M.readfile(path)
-	local _, fd = M.open(path, 'r', 438)
-	if fd == nil then
-		return nil
-	end
-	local _, s = M.stat(fd)
-	local _, data = M.read(fd, s.size, 0)
-	M.close(fd)
+M.readfile = async(function (path)
+	local _, fd = await(a.uv.fs_open(path, "r", 438))
+	if fd == nil then return nil end
+	local _, stat = await(a.uv.fs_fstat(fd))
+	local _, data = await(a.uv.fs_read(fd, stat.size, 0))
+	await(a.uv.fs_close(fd))
 	return data
-end
+end)
 
 return M

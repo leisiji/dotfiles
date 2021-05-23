@@ -1,7 +1,8 @@
 local M = {}
 local lsp, api, fn = vim.lsp, vim.api, vim.fn
 local utils = require('fzf_utils.utils')
-local request = utils.coroutinify(lsp.buf_request)
+local a = require('plenary.async_lib')
+local request = require('plenary.async_lib.lsp').buf_request
 
 -- transform function
 local function lsp_to_vimgrep(r)
@@ -58,8 +59,8 @@ local function lsp_handle(m, ret)
 end
 
 local function lsp_fzf(method, action)
-	coroutine.wrap(function ()
-		local _, _, r = request(0, method, lsp.util.make_position_params())
+	a.async_void(function ()
+		local _, _, r = a.await(request(0, method, lsp.util.make_position_params()))
 		local c, key = lsp_handle(method, r)
 		if c ~= nil then
 			if key == 'ctrl-v' then action = 'vsplit' end
