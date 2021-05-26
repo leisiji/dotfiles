@@ -26,12 +26,7 @@ local function jump_to_buffer(grep, action)
 end
 
 -- core function for finding def or ref
-local function lsp_handle(m, ret)
-  if ret == nil then
-    print(m .. ' not found!')
-    return nil
-  end
-
+local function lsp_handle(ret)
   local choice, key
   local res = {}
 
@@ -45,10 +40,7 @@ local function lsp_handle(m, ret)
     end
   end
 
-  if #res == 0 then
-    print(m .. ' not found!')
-    return nil
-  elseif #res == 1 then
+  if #res == 1 then
     choice = res[1]
   else
     local choices = require('fzf').fzf(res, utils.vimgrep_preview)
@@ -61,10 +53,16 @@ end
 local function lsp_fzf(method, action)
   a.async_void(function ()
     local r = a.await(request(0, method, lsp.util.make_position_params()))
-    local c, key = lsp_handle(method, r)
-    if c ~= nil then
-      if key == 'ctrl-v' then action = 'vsplit' end
-      jump_to_buffer(c, action)
+    if r == nil then
+      print(method + 'not found')
+    else
+      coroutine.wrap(function ()
+        local c, key = lsp_handle(r)
+        if c ~= nil then
+          if key == 'ctrl-v' then action = 'vsplit' end
+          jump_to_buffer(c, action)
+        end
+      end)()
     end
   end)()
 end
