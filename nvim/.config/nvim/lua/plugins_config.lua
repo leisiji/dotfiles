@@ -130,14 +130,13 @@ function M.indent_guide()
 end
 
 function M.diffview()
-  require'diffview'.setup { file_panel = { use_icons = false } }
-  -- vimdiff
   vim.api.nvim_exec([[
     hi DiffAdd    guibg=#26332c guifg=NONE
     hi DiffChange guibg=#273842 guifg=NONE
     hi DiffDelete guibg=#572E33 guifg=NONE
     hi DiffText   guibg=#314753 guifg=NONE
   ]], false)
+  require'diffview'.setup { file_panel = { use_icons = false } }
 end
 
 function M.inline_edit()

@@ -20,7 +20,7 @@ local function preview_lines(path, line, fzf_preview_lines)
   return fn.system(cmd)
 end
 
-M.expect_key = '--expect=ctrl-v,ctrl-r,ctrl-t,ctrl-s,enter'
+M.expect_key = '--expect=ctrl-v,ctrl-r,ctrl-t,ctrl-s'
 
 M.vimgrep_preview = M.expect_key.." --preview="..require('fzf.actions').action(function(selections, fzf_preview_lines, _)
   local parsed_content = {string.match(selections[1], "(.-):(%d+):.*")}
@@ -46,8 +46,8 @@ local function cmdedit(tabcmd, path, row, col)
   end
   if col ~= nil and row ~= nil then
     vim.api.nvim_win_set_cursor(0, {row, col})
-    vim.cmd("normal! zz")
   end
+  vim.cmd("normal! zz")
 end
 
 local key_actions = {

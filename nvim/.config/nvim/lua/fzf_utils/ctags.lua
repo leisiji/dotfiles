@@ -29,14 +29,11 @@ function M.get_cur_buf_func()
   local col = fn.getcurpos()[3]
   local res = get_ctags(cur_file)
   coroutine.wrap(function ()
-    local result = fzf(res, "--expect=ctrl-v --preview="..utils.get_preview_action(cur_file))
-
-    local row = utils.get_leading_num(result[2])
-    if result[1] == "ctrl-v" then
-      require('fzf_utils.utils').vsplitedit(cur_file, row, col)
-    else
-      vim.api.nvim_win_set_cursor(0, {row, col})
-    end
+    local cmd = string.format('%s --preview=%s',
+                  utils.expect_key, utils.get_preview_action(cur_file))
+    local choices = fzf(res, cmd)
+    utils.handle_key(choices[1], cur_file,
+                  utils.get_leading_num(choices[2]), col)
   end)()
 end
 

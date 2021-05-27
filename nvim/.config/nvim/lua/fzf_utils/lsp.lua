@@ -46,8 +46,8 @@ local function lsp_handle(ret, action)
   else
     coroutine.wrap(function ()
       local choices = require('fzf').fzf(res, utils.vimgrep_preview)
-      if choices[1] == 'ctrl-v' then a = 'vsplit' end
-      jump_to_buffer(choices[2], a)
+      if choices[1] == 'ctrl-v' then action = 'vsplit' end
+      jump_to_buffer(choices[2], action)
     end)()
   end
 end
