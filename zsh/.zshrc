@@ -59,7 +59,7 @@ if [ -d $HOME/gentoo ]; then
 fi
 zinit snippet $GENTOO_PREFIX/usr/share/fzf/key-bindings.zsh
 zinit snippet $GENTOO_PREFIX/usr/share/fzf/completion.zsh
-export GTAGSCONF='$GENTOO_PREFIX/usr/share/gtags/gtags.conf'
+export GTAGSCONF="$GENTOO_PREFIX/usr/share/gtags/gtags.conf"
 
 # zlua shoud be put before completion init
 zinit light skywind3000/z.lua

@@ -16,11 +16,7 @@ local function execute_global(options, pattern)
     local parsed_content = {string.match(choices[2], "(.-):(%d+):.*")}
     local filename = parsed_content[1]
     local row = tonumber(parsed_content[2])
-    if choices[1] == "ctrl-v" then
-      utils.vsplitedit(filename, row, 1)
-    else
-      utils.tabedit(filename, row, 1)
-    end
+    utils.handle_key(choices[1], filename, row, 1)
   end)()
 end
 

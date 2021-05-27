@@ -26,8 +26,8 @@ local function jump_to_buffer(grep, action)
 end
 
 -- core function for finding def or ref
-local function lsp_handle(ret)
-  local choice, key
+local function lsp_handle(ret, action)
+  local c
   local res = {}
 
   for _, v in pairs(ret) do
@@ -41,13 +41,15 @@ local function lsp_handle(ret)
   end
 
   if #res == 1 then
-    choice = res[1]
+    c = res[1]
+    jump_to_buffer(c, action)
   else
-    local choices = require('fzf').fzf(res, utils.vimgrep_preview)
-    key, choice = choices[1], choices[2]
+    coroutine.wrap(function ()
+      local choices = require('fzf').fzf(res, utils.vimgrep_preview)
+      if choices[1] == 'ctrl-v' then a = 'vsplit' end
+      jump_to_buffer(choices[2], a)
+    end)()
   end
-
-  return choice,key
 end
 
 local function lsp_fzf(method, action)
@@ -56,13 +58,7 @@ local function lsp_fzf(method, action)
     if r == nil then
       print(method + 'not found')
     else
-      coroutine.wrap(function ()
-        local c, key = lsp_handle(r)
-        if c ~= nil then
-          if key == 'ctrl-v' then action = 'vsplit' end
-          jump_to_buffer(c, action)
-        end
-      end)()
+      lsp_handle(r, action)
     end
   end)()
 end

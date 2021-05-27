@@ -8,15 +8,10 @@ function M.grep_lines()
   coroutine.wrap(function()
     local path = fn.expand("%:p")
     local col = fn.getcurpos()[3]
-    local choices = fzf("cat -n " .. path, "--tabstop=1 --nth=2.. --expect=ctrl-v --preview=" .. utils.get_preview_action(path))
+    local choices = fzf("cat -n " .. path, utils.expect_key..' --tabstop=1 --nth=2.. --preview=' .. utils.get_preview_action(path))
     local row = utils.get_leading_num(choices[2])
 
-    if choices[1] == "ctrl-v" then
-      utils.vsplitedit(path, row, col)
-    else
-      api.nvim_win_set_cursor(0, {row, col})
-      vim.cmd("normal! zz")
-    end
+    utils.handle_key(choices[1], path, row, col)
   end)()
 end
 
@@ -37,19 +32,15 @@ function M.find_files()
   end
 
   coroutine.wrap(function ()
-    local choices = fzf(command, "--expect=ctrl-v,ctrl-r,ctrl-t")
+    local choices = fzf(command, utils.expect_key)
 
     if not choices then return end
 
-    local file = fn.fnameescape(choices[2])
-
-    if choices[1] == "ctrl-v" then
-      utils.vsplitedit(file)
-    elseif choices[1] == "ctrl-r" then
+    if choices[1] == "ctrl-r" then
       os.remove(cache_file)
       vim.schedule(M.find_files)
     else
-      utils.tabedit(file, nil, nil)
+      utils.handle_key(choices[1], fn.fnameescape(choices[2]), nil, nil)
     end
   end)()
 end
@@ -65,10 +56,8 @@ function M.buffers()
         end
       end
     end
-    local choices = fzf(items, nil)
-    if choices ~= nil then
-      utils.tabedit(choices[1], nil, nil)
-    end
+    local choices = fzf(items, utils.expect_key)
+    utils.handle_key(choices[1], choices[2], nil, nil)
   end)()
 end
 

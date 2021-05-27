@@ -23,11 +23,7 @@ local function deal_with_rg_results(key, result)
   local row = tonumber(parsed_content[2])
   local col = tonumber(parsed_content[3]) - 1
 
-  if key == "ctrl-v" then
-    utils.vsplitedit(filename, row, col)
-  else
-    utils.tabedit(filename, row, col)
-  end
+  utils.handle_key(key, filename, row, col)
 end
 
 local function get_all_buffers(pattern)

@@ -20,7 +20,9 @@ local function preview_lines(path, line, fzf_preview_lines)
   return fn.system(cmd)
 end
 
-M.vimgrep_preview = "--expect=ctrl-v --preview="..require('fzf.actions').action(function(selections, fzf_preview_lines, _)
+M.expect_key = '--expect=ctrl-v,ctrl-r,ctrl-t,ctrl-s,enter'
+
+M.vimgrep_preview = M.expect_key.." --preview="..require('fzf.actions').action(function(selections, fzf_preview_lines, _)
   local parsed_content = {string.match(selections[1], "(.-):(%d+):.*")}
   return preview_lines(parsed_content[1], parsed_content[2], fzf_preview_lines)
 end)
@@ -37,19 +39,27 @@ function M.get_preview_action(path)
 end
 
 local function cmdedit(tabcmd, path, row, col)
-  vim.cmd(string.format(tabcmd, path))
+  if tabcmd == nil then tabcmd = 'edit' end
+  -- avoid second load
+  if fn.expand('%:p') ~= path or tabcmd ~= 'edit' then
+    vim.cmd(string.format('%s %s', tabcmd, path))
+  end
   if col ~= nil and row ~= nil then
     vim.api.nvim_win_set_cursor(0, {row, col})
     vim.cmd("normal! zz")
   end
 end
 
-function M.tabedit(path, row, col)
-  cmdedit("tab drop %s", path, row, col)
-end
+local key_actions = {
+  ['ctrl-v']='vsplit',
+  ['ctrl-s']='split',
+  ['ctrl-t']='tab drop',
+}
 
-function M.vsplitedit(path, row, col)
-  cmdedit("vsplit %s", path, row, col)
+function M.handle_key(key, path, row, col)
+  local action = key_actions[key]
+  if action == nil then action = 'edit' end
+  cmdedit(action, path, row, col)
 end
 
 -- file operation
