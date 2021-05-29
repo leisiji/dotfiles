@@ -1,5 +1,5 @@
 local M = {}
-local lsp, api, fn = vim.lsp, vim.api, vim.fn
+local lsp, fn = vim.lsp, vim.fn
 local utils = require('fzf_utils.utils')
 local a = require('plenary.async_lib')
 local request = require('plenary.async_lib.lsp').buf_request_all
@@ -13,16 +13,9 @@ local function lsp_to_vimgrep(r)
   return string.format('%s:%d:%d', path, loc.line + 1, loc.character + 1)
 end
 
-local function jump_to_buffer(grep, action)
+local function parse_vimgrep(grep)
   local res = { string.match(grep, "(.-):(%d+):(%d+)") }
-  local path = res[1]
-
-  if action ~= 'edit' or fn.bufloaded(fn.bufnr(path)) ~= 1 then
-    vim.cmd(string.format('%s %s', action, res[1]))
-  end
-
-  api.nvim_win_set_cursor(0, {tonumber(res[2]), tonumber(res[3])})
-  vim.cmd("normal! zz")
+  return { res[1], tonumber(res[2]), tonumber(res[3]) }
 end
 
 -- core function for finding def or ref
@@ -41,13 +34,13 @@ local function lsp_handle(ret, action)
   end
 
   if #res == 1 then
-    c = res[1]
-    jump_to_buffer(c, action)
+    c = parse_vimgrep(res[1])
+    utils.cmdedit(action, c[1], c[2], c[3])
   else
     coroutine.wrap(function ()
       local choices = require('fzf').fzf(res, utils.vimgrep_preview)
-      if choices[1] == 'ctrl-v' then action = 'vsplit' end
-      jump_to_buffer(choices[2], action)
+      c = parse_vimgrep(choices[2])
+      utils.handle_key(choices[1], c[1], c[2], c[3])
     end)()
   end
 end

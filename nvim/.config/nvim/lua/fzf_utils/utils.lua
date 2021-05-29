@@ -38,11 +38,10 @@ function M.get_preview_action(path)
   return shell
 end
 
-local function cmdedit(tabcmd, path, row, col)
-  if tabcmd == nil then tabcmd = 'edit' end
+function M.cmdedit(action, path, row, col)
   -- avoid second load
-  if fn.expand('%:p') ~= path or tabcmd ~= 'edit' then
-    vim.cmd(string.format('%s %s', tabcmd, path))
+  if action ~= 'edit' then
+    vim.cmd(string.format('%s %s', action, path))
   end
   if col ~= nil and row ~= nil then
     vim.api.nvim_win_set_cursor(0, {row, col})
@@ -58,8 +57,7 @@ local key_actions = {
 
 function M.handle_key(key, path, row, col)
   local action = key_actions[key]
-  if action == nil then action = 'edit' end
-  cmdedit(action, path, row, col)
+  M.cmdedit(action or 'tab drop', path, row, col)
 end
 
 -- file operation
