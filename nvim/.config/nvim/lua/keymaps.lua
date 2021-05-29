@@ -127,7 +127,7 @@ local function init_plugins_keymaps()
   cmd_gen('<leader>fa', [[<C-U><C-R>='FzfCommand --rg '.expand('<cword>')<CR>]])
 
   -- diffview.nvim
-  cmd('<leader><leader>d', [[exe('DiffviewOpen -- '.v:lua.GetFileDir())]])
+  cmd('<leader><leader>d', [[exe('DiffviewOpen -uno -- '.v:lua.GetFileDir())]])
   cmd('<leader><leader>c', 'call v:lua.DiffViewFile()')
 
   -- compe
@@ -196,7 +196,7 @@ function _G.GetFileDir()
 end
 
 function _G.DiffViewFile()
-  exec('DiffviewOpen -- ' .. fn.expand('%'))
+  exec('DiffviewOpen -uno -- ' .. fn.expand('%'))
   exec('DiffviewToggleFiles')
 end
 
