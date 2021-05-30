@@ -20,6 +20,7 @@ packer.startup(function()
   use { 'glepnir/lspsaga.nvim', opt = true, cmd = 'Lspsaga', config = LSP_CONFIG.lspsaga_config }
   use { 'mfussenegger/nvim-jdtls', opt = true, ft = { 'java' }, config = function () require('plugins.jdtls').config() end }
   use { 'folke/lua-dev.nvim', opt = true, ft = { 'lua' }, config = function () require('plugins.lua_dev').config() end }
+  use { 'simrat39/symbols-outline.nvim', opt = true, cmd = 'SymbolsOutline' }
 
   use { 'hrsh7th/nvim-compe', opt = true, event = 'InsertEnter', requires = { 'Raimondi/delimitMate' }, config = function () require('plugins.compe').config() end }
   use { 'hrsh7th/vim-vsnip-integ', opt = true, event = 'InsertEnter', requires = { 'hrsh7th/vim-vsnip', 'rafamadriz/friendly-snippets' } }

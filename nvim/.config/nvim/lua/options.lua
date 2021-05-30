@@ -12,7 +12,6 @@ local global_cfg = {
   incsearch = true;
   ignorecase = true;
   smartcase = true;
-  t_Co = "256";
   termguicolors = true;
   laststatus = 2;
   showtabline = 2;

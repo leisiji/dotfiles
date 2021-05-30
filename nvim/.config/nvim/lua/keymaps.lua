@@ -102,7 +102,7 @@ local function init_plugins_keymaps()
   cmd('<leader>k', 'HighlightGroupsAddWord 4 0')
   cmd('<leader>K', 'HighlightGroupsClearGroup 4 0')
 
-  -- nvim fzf
+  -- fzf_utils
   cmd('<C-p>', 'FzfCommand --files')
   cmd('<C-f>', 'FzfCommand --lines')
   cmd('<C-r>', 'FzfCommand --ctags')
@@ -140,7 +140,7 @@ local function init_plugins_keymaps()
 
   -- lspsaga
   cmd('<M-r>', 'Lspsaga lsp_finder')
-  cmd('<M-k>', "Lspsaga hover_doc")
+  cmd('<M-k>', 'Lspsaga hover_doc')
   cmd('<leader>rn', 'Lspsaga rename')
   cmd('<leader>j', "lua require('lspsaga.action').smart_scroll_with_saga(1)")
   cmd('<leader>ca', 'Lspsaga code_action')
@@ -153,8 +153,10 @@ local function init_plugins_keymaps()
   cmd('<space>wa', 'lua vim.lsp.buf.add_workspace_folder()')
   cmd('<space>wr', 'lua vim.lsp.buf.remove_workspace_folder()')
   cmd('<space>wl', 'lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))')
-  cmd("<leader><space>f", "lua vim.lsp.buf.formatting()")
-  vn("<leader><space>f", "<cmd>lua vim.lsp.buf.range_formatting()<cr>")
+  cmd('<leader><space>f', 'lua vim.lsp.buf.formatting()')
+  vn('<leader><space>f', '<cmd>lua vim.lsp.buf.range_formatting()<cr>')
+
+  cmd('<leader>v', 'SymbolsOutline')
 end
 
 -------------------- Global Function ---------------------------------------
