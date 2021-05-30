@@ -8,9 +8,8 @@ function M.grep_lines()
   coroutine.wrap(function()
     local path = fn.expand("%:p")
     local col = fn.getcurpos()[3]
-    local choices = fzf("cat -n " .. path, utils.expect_key..' --tabstop=1 --nth=2.. --preview=' .. utils.get_preview_action(path))
+    local choices = fzf('cat -n ' .. path, utils.expect_key..' --tabstop=1 --nth=2.. --preview=' .. utils.get_preview_action(path))
     local row = utils.get_leading_num(choices[2])
-
     utils.handle_key(choices[1], path, row, col)
   end)()
 end
@@ -18,7 +17,7 @@ end
 function M.find_files()
   local FZF_CAHCE_FILES_DIR = fn.stdpath('cache') .. '/fzf_files/'
   local cache_file = FZF_CAHCE_FILES_DIR .. fn.sha256(fn.getcwd())
-  local command = "cat " .. cache_file
+  local command = 'cat ' .. cache_file
 
   if fn.filereadable(cache_file) == 0 then
 
@@ -26,21 +25,16 @@ function M.find_files()
       fn.mkdir(FZF_CAHCE_FILES_DIR)
     end
 
-    local file = io.open(cache_file, "a")
-    io.close(file)
-    command = "fd -t f -L | tee " .. cache_file
+    command = 'fd -t f -L | tee ' .. cache_file
   end
 
   coroutine.wrap(function ()
     local choices = fzf(command, utils.expect_key)
-
-    if not choices then return end
-
-    if choices[1] == "ctrl-r" then
+    if choices[1] == 'ctrl-r' then
       os.remove(cache_file)
       vim.schedule(M.find_files)
     else
-      utils.handle_key(choices[1], fn.fnameescape(choices[2]), nil, nil)
+      utils.handle_key(choices[1], choices[2], nil, nil)
     end
   end)()
 end
@@ -63,12 +57,12 @@ end
 
 function M.Man()
   coroutine.wrap(function ()
-    local choices = fzf("man -k .", "--tiebreak begin --nth 1,2")
+    local choices = fzf('man -k .', '--tiebreak begin --nth 1,2')
     if choices then
       local split_items = vim.split(choices[1], " ")
       local manpagename = split_items[1]
-      local chapter = string.match(split_items[2], "%((.+)%)")
-      vim.cmd(string.format("vertical Man %s %s", chapter, manpagename))
+      local chapter = string.match(split_items[2], '%((.+)%)')
+      vim.cmd(string.format('vertical Man %s %s', chapter, manpagename))
     end
   end)()
 end

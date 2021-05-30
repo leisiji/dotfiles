@@ -121,6 +121,7 @@ local function init_plugins_keymaps()
   cmd('<M-t>', 'FzfCommand --lsp jump_def tab drop')
   cmd('<M-v>', 'FzfCommand --lsp jump_def vsplit')
   cmd('<leader>rr', 'FzfCommand --lsp ref tab drop')
+  cmd('<leader>m', 'FzfCommand --mru')
 
   cmd_gen('<leader>d', [[<C-U><C-R>=printf('FzfCommand --rg %s %s', expand('<cword>'), v:lua.GetFileDir())<CR>]])
   cmd_gen('<leader>fa', [[<C-U><C-R>='FzfCommand --rg '.expand('<cword>')<CR>]])

@@ -65,12 +65,20 @@ local a = require('plenary.async_lib')
 local async = a.async
 local await = a.await
 
--- readfile in coroutine
+-- file
 M.readfile = async(function (path)
   local _, fd = await(a.uv.fs_open(path, "r", 438))
   if fd == nil then return nil end
   local _, stat = await(a.uv.fs_fstat(fd))
   local _, data = await(a.uv.fs_read(fd, stat.size, 0))
+  await(a.uv.fs_close(fd))
+  return data
+end)
+
+M.writefile = async(function (path, data)
+  local _, fd = await(a.uv.fs_open(path, "w", 438))
+  if fd == nil then return nil end
+  await(a.uv.fs_write(fd, data, 0))
   await(a.uv.fs_close(fd))
   return data
 end)

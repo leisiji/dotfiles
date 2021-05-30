@@ -14,6 +14,7 @@ augroup user_plugin
     au FocusGained * :checkt
     au WinEnter * if ! &cursorline | setlocal cul | endif
     au TextYankPost * silent! lua vim.highlight.on_yank{ higroup = "IncSearch", timeout = 700 }
+    au BufReadPost * lua require('fzf_utils.mru').refresh_mru()
 augroup END
 
 command! -complete=dir -nargs=+ FzfCommand lua require('fzf_utils.commands').load_command(<f-args>)
