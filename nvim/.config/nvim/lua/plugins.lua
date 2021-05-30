@@ -7,7 +7,8 @@ local use = packer.use
 packer.startup(function()
   use { 'wbthomason/packer.nvim' }
   use { 'nvim-lua/plenary.nvim' } -- gitsigns
-  use { 'vijaymarupudi/nvim-fzf' }
+
+  use { 'leisiji/fzf_utils', opt = true, cmd = 'FzfCommand', requires = { 'vijaymarupudi/nvim-fzf' } }
 
   -- colorscheme and statusline
   use { 'glepnir/zephyr-nvim', config = PLUGS_CFG.colorscheme }
