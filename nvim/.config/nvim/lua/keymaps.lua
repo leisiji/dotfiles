@@ -134,9 +134,7 @@ local function init_plugins_keymaps()
   local expr_opts = { expr = true }
   mapkey('i', '<Tab>', 'v:lua.tab_complete()', expr_opts)
   mapkey('i', '<S-Tab>', 'v:lua.s_tab_complete()', expr_opts)
-  mapkey('i', '<CR>', [[compe#confirm({'keys': "\<Plug>delimitMateCR", 'mode': ''})]],
-    { expr = true, noremap = true }
-  )
+  mapkey('i', '<CR>', 'v:lua.completion_confirm()', { expr = true, noremap = true })
 
   -- lspsaga
   cmd('<M-r>', 'Lspsaga lsp_finder')

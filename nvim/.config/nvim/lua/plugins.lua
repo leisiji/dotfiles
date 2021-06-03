@@ -22,8 +22,10 @@ packer.startup(function()
   use { 'folke/lua-dev.nvim', opt = true, ft = { 'lua' }, config = function () require('plugins.lua_dev').config() end }
   use { 'simrat39/symbols-outline.nvim', opt = true, cmd = 'SymbolsOutline' }
 
-  use { 'hrsh7th/nvim-compe', opt = true, event = 'InsertEnter', requires = { 'Raimondi/delimitMate' }, config = function () require('plugins.compe').config() end }
-  use { 'hrsh7th/vim-vsnip-integ', opt = true, event = 'InsertEnter', requires = { 'hrsh7th/vim-vsnip', 'rafamadriz/friendly-snippets' } }
+  use { 'hrsh7th/nvim-compe', opt = true, event = 'InsertEnter', config = function () require('plugins.compe').config() end }
+  use { 'windwp/nvim-autopairs', opt = true, event = 'InsertEnter',
+        requires = { 'hrsh7th/vim-vsnip-integ', 'hrsh7th/vim-vsnip', 'rafamadriz/friendly-snippets' },
+        config = function ()  require('plugins.pairs').config() end }
 
   -- code format
   use { 'mhartington/formatter.nvim', opt = true, cmd = 'Format', config = function () require('plugins.formatter').config() end }
