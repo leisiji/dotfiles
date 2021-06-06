@@ -4,8 +4,7 @@ icons = "awesome"
 [[block]]
 block = "net"
 device = "wlo1"
-ssid = true
-speed_up = false
+format = "{ssid} {speed_down;K*b}"
 interval = 10
 
 [[block]]
@@ -20,27 +19,32 @@ alert = 10.0
 
 [[block]]
 block = "memory"
-interval = 60
+format_mem = "{mem_used}/{mem_total}"
 display_type = "memory"
-format_mem = "{Mup}%"
-format_swap = "{SUp}%"
+icons = true
+clickable = true
+interval = 60
+warning_mem = 80
+warning_swap = 80
+critical_mem = 95
+critical_swap = 95
 
 [[block]]
 block = "cpu"
 interval = 5
-format = "{utilization}% {frequency}GHz"
+format = "{utilization} {frequency}"
 
 [[block]]
 block = "temperature"
 collapsed = false
 interval = 60
-format = "{max}° max"
+format = "{max}"
 chip = "*-isa-*"
 
 [[block]]
 block = "battery"
 interval = 60
-format = "{percentage}%"
+format = "{percentage}"
 
 [[block]]
 block = "sound"
