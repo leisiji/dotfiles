@@ -6,7 +6,7 @@ local use = packer.use
 
 packer.startup(function()
   use { 'wbthomason/packer.nvim' }
-  use { 'nvim-lua/plenary.nvim' } -- gitsigns
+  use { 'nvim-lua/plenary.nvim' }
 
   use { 'leisiji/fzf_utils', opt = true, cmd = 'FzfCommand', requires = { 'vijaymarupudi/nvim-fzf' } }
 

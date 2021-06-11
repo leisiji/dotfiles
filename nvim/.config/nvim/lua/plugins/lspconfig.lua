@@ -3,26 +3,21 @@ local M = {}
 M.on_attach = function(client, _)
   -- cursor hightlight and hint function name in statusline
   if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec([[
+    vim.cmd([[
       augroup lsp_document_highlight
         autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorHold <buffer> lua require('plugins.current_function').update()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        au CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        au CursorHold <buffer> lua require('plugins.current_function').update()
+        au CursorMoved <buffer> lua vim.lsp.buf.clear_references()
       augroup END
-    ]], false)
+    ]])
   end
 end
 
 local cap = vim.lsp.protocol.make_client_capabilities()
-cap.textDocument.completion.completionItem.snippetSupport = true
-cap.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
-  }
-}
+local completion = cap.textDocument.completion.completionItem
+completion.snippetSupport = true
+completion.resolveSupport = { properties = { 'documentation', 'detail', 'additionalTextEdits' } }
 local default_cfg = { on_attach = M.on_attach, capabilities = cap }
 
 local diagnosticls = {
@@ -45,12 +40,7 @@ local diagnosticls = {
 
 local function all_lsp_config(lsp)
   lsp.diagnosticls.setup(diagnosticls)
-
-  local ccls_opts = {
-    init_options = { cache = { directory = '/tmp/ccls' } },
-    on_attach = M.on_attach, capabilities = cap
-  }
-  lsp.ccls.setup(ccls_opts)
+  lsp.ccls.setup({ init_options = { cache = { directory = '/tmp/ccls' } }, on_attach = M.on_attach, capabilities = cap })
   lsp.pyright.setup(default_cfg)
   lsp.cmake.setup(default_cfg)
   lsp.bashls.setup(default_cfg)
@@ -59,14 +49,14 @@ local function all_lsp_config(lsp)
 end
 
 local function lsp_basic()
-  local guibg = COLORS.yellow
-  local guifg = COLORS.bg
+  local bg = COLORS.yellow
+  local fg = COLORS.bg
   local exec = vim.cmd
   local lsp = vim.lsp
 
-  exec('hi LspReferenceRead guibg=' .. guibg .. ' guifg=' .. guifg)
-  exec('hi LspReferenceWrite guibg=' .. guibg .. ' guifg=' .. guifg)
-  exec('hi LspReferenceText guibg=' .. guibg .. ' guifg=' .. guifg)
+  exec('hi LspReferenceRead guibg=' .. bg .. ' guifg=' .. fg)
+  exec('hi LspReferenceWrite guibg=' .. bg .. ' guifg=' .. fg)
+  exec('hi LspReferenceText guibg=' .. bg .. ' guifg=' .. fg)
 
   lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
