@@ -1,61 +1,14 @@
 local M = {}
 
 -- galaxyline
-COLORS = require('galaxyline.theme').default
-VI_MODES = {
-  n = { COLORS.red,   '  NORMAL ' },
-  i = { COLORS.green, '  INSERT ' },
-  v = { COLORS.blue,  '  VISUAL ' },
-  V = { COLORS.blue,  '  V-LINE ' },
-  [''] = { COLORS.blue, '  VISUAL ' },
-  c = { COLORS.violet, '  COMMAND ' },
-  t = { COLORS.yellow, '  TERMINAL ' },
-}
+COLORS = require('zephyr')
 
 function M.statusline()
-  local galaxyline = require('galaxyline')
-  local section = galaxyline.section
-
-  section.left[1] = {
-    ViMode = {
-      provider = function()
-        local mode = VI_MODES[vim.fn.mode()]
-        if mode ~= nil then
-          vim.api.nvim_command('hi GalaxyViMode guibg='..mode[1])
-          return mode[2]
-        end
-      end,
-      highlight = {COLORS.bg, COLORS.bg, 'bold'}
-    }
-  }
-  section.left[2] = {
-    CocFunc = {
-      provider = {
-        function()
-          return vim.b.current_func_name
-        end
-      },
-      icon = '  λ ',
-      separator_highlight = { COLORS.yellow, COLORS.bg },
-      highlight = { COLORS.yellow, COLORS.bg },
-    }
-  }
-  section.right[1] = {
-    BufferType = {
-      provider = 'FileTypeName',
-      separator = ' | ',
-    }
-  }
-  section.right[2] = {
-    MaxLine = {
-      provider = function ()
-        return 'ln '..vim.fn.line('$')..' '
-      end,
-      separator = ' | ',
-    }
-  }
-
-  galaxyline.load_galaxyline()
+  require('feline').setup({
+    preset = 'noicon',
+    default_fg = COLORS.fg,
+    default_bg = COLORS.bg
+  })
 end
 
 -- treesitter
@@ -127,9 +80,9 @@ function M.colorscheme()
   end
   local exec = vim.cmd
   exec('colorscheme zephyr')
-  exec('hi TabLineSel gui=bold guibg='..COLORS.blue..' guifg='..COLORS.bg)
-  exec('hi TabLine gui=NONE guibg='..COLORS.fg..' guifg='..COLORS.darkblue)
-  vim.o.tabline = "%!v:lua.mytabline()"
+  exec(string.format('hi TabLineSel gui=bold guibg=%s guifg=%s', COLORS.blue, COLORS.bg))
+  exec(string.format('hi TabLine gui=NONE guibg=%s guifg=%s', COLORS.fg, COLORS.bg))
+  vim.o.tabline = '%!v:lua.mytabline()'
 end
 
 function M.indent_guide()
@@ -141,12 +94,12 @@ function M.indent_guide()
 end
 
 function M.diffview()
-  vim.api.nvim_exec([[
+  vim.cmd([[
     hi DiffAdd    guibg=#26332c guifg=NONE
     hi DiffChange guibg=#273842 guifg=NONE
     hi DiffDelete guibg=#572E33 guifg=NONE
     hi DiffText   guibg=#314753 guifg=NONE
-  ]], false)
+  ]])
   require'diffview'.setup { file_panel = { use_icons = false } }
 end
 

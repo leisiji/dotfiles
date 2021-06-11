@@ -6,13 +6,13 @@ local use = packer.use
 
 packer.startup(function()
   use { 'wbthomason/packer.nvim' }
-  use { 'nvim-lua/plenary.nvim' } -- gitsigns
+  use { 'nvim-lua/plenary.nvim' }
 
   use { 'leisiji/fzf_utils', opt = true, cmd = 'FzfCommand', requires = { 'vijaymarupudi/nvim-fzf' } }
 
   -- colorscheme and statusline
   use { 'glepnir/zephyr-nvim', config = PLUGS_CFG.colorscheme }
-  use { 'glepnir/galaxyline.nvim', branch = 'main', config = PLUGS_CFG.statusline }
+  use { 'famiu/feline.nvim', config = PLUGS_CFG.statusline }
   use { 'nvim-treesitter/nvim-treesitter', opt = true, run = ':TSUpdate', event = 'BufRead', config = PLUGS_CFG.treesitter }
   use { 'nvim-treesitter/nvim-treesitter-textobjects', opt = true, after = 'nvim-treesitter' }
 
