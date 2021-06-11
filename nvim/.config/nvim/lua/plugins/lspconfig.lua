@@ -6,9 +6,9 @@ M.on_attach = function(client, _)
     vim.api.nvim_exec([[
       augroup lsp_document_highlight
         autocmd! * <buffer>
-        au CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        au CursorHold <buffer> lua require('plugins.current_function').update()
-        au CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorHold <buffer> lua require('plugins.current_function').update()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
       augroup END
     ]], false)
   end
