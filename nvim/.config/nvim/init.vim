@@ -1,6 +1,6 @@
 set list lcs=tab:→\ ,trail:·
 set ts=4 sw=4 noswf sts=4
-set undofile undodir=$HOME/.cache/vim/undo
+set undofile
 set expandtab
 
 lua require('options')
