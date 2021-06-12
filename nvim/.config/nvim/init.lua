@@ -1,37 +1,97 @@
+vim.g.mapleader = " "
+
 local mapkey = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 local format = string.format
 local fn = vim.fn
 local exec = vim.cmd
 
-local function cmd(lhs, rhs)
-  mapkey('n', lhs, format('<cmd>%s<cr>', rhs), opts)
+-------------------- Global Function ---------------------------------------
+function _G.mytabline()
+  local pagenum = fn.tabpagenr('$')
+  local s = ''
+  local i = 1
+  while i <= pagenum  do
+    if i == fn.tabpagenr() then
+      s = s..'%#TabLineSel#'
+    else
+      s = s..'%#TabLine#'
+    end
+    s = s .. ' ' .. tostring(i) .. '.'
+    local bufnr = fn.tabpagebuflist(i)[vim.fn.tabpagewinnr(i)]
+    local path = fn.bufname(bufnr)
+    s = s .. fn.fnamemodify(path, ":t")
+    if fn.getbufvar(bufnr, '&modified') == 1 then
+      s = s .. '+'
+    else
+      s = s .. ' '
+    end
+    s = s .. '%#TabLineFill#%T'
+    i = i + 1
+  end
+  return s
 end
 
+function _G.MyWinZoomToggle()
+  local zoom = vim.t.zoom
+  if zoom ~= nil and zoom == 1 then
+    exec(vim.t.zoom_winrestcmd)
+    vim.t.zoom = 0
+  else
+    vim.t.zoom_winrestcmd = fn.winrestcmd()
+    exec('resize | vertical resize')
+    vim.t.zoom = 1
+  end
+end
+
+function _G.GetFileDir()
+  return fn.fnamemodify(fn.expand('%:p:h'), ':.')
+end
+
+function _G.DiffViewFile()
+  exec('DiffviewOpen -uno -- ' .. fn.expand('%'))
+  exec('DiffviewToggleFiles')
+end
+
+function _G.MyOpenLastplace()
+  local l = fn.line("'\"")
+  if l >= 1 and l <= fn.line('$') and vim.bo.filetype ~= 'commit' then
+    vim.cmd([[normal! g`"]])
+  end
+end
+
+function _G.MyQuit()
+  local bufnrs = fn.win_findbuf(fn.bufnr())
+  if #bufnrs > 1 or fn.expand('%') == '' or fn.tabpagenr('$') == 1 then
+    exec('q')
+  else
+    exec('bd')
+  end
+end
+
+function _G.MyshowDocument()
+  local filetype  = vim.bo.filetype
+  local word = fn.expand('<cword>')
+
+  if filetype == 'vim' or filetype == 'lua' or filetype == 'help' then
+    exec('vertical h '..word)
+  else
+    exec('vertical Man '..word)
+  end
+end
+
+-- keymaps
 local function cmd_gen(lhs, rhs)
   local gen_opts = { noremap = true }
   mapkey('n', lhs, format(':%s', rhs), gen_opts)
 end
 
-local function ino(lhs, rhs)
-  mapkey('i', lhs, rhs, opts)
-end
-
-local function nn(lhs, rhs)
-  mapkey('n', lhs, rhs, opts)
-end
-
-local function vn(lhs, rhs)
-  mapkey('v', lhs, rhs, opts)
-end
-
-local function tn(lhs, rhs)
-  mapkey('t', lhs, rhs, opts)
-end
-
-local function xcmd(lhs, rhs)
-  mapkey('x', lhs, format(':%s<cr>', rhs), {})
-end
+local function cmd(lhs, rhs) mapkey('n', lhs, format('<cmd>%s<cr>', rhs), opts) end
+local function ino(lhs, rhs) mapkey('i', lhs, rhs, opts) end
+local function nn(lhs, rhs) mapkey('n', lhs, rhs, opts) end
+local function vn(lhs, rhs) mapkey('v', lhs, rhs, opts) end
+local function tn(lhs, rhs) mapkey('t', lhs, rhs, opts) end
+local function xcmd(lhs, rhs) mapkey('x', lhs, format(':%s<cr>', rhs), {}) end
 
 local function init_nvim_keys()
   nn('<M-a>', '<C-w>w')
@@ -44,6 +104,9 @@ local function init_nvim_keys()
   nn('<M-w>', '5w')
   nn('<M-y>', '<C-r>')
   nn('<leader>p', '"+p')
+  for i = 1, 9, 1 do
+    nn(format('<M-%d>', i), format('%dgt', i))
+  end
 
   vn('H', '^')
   vn('L', 'g_')
@@ -52,10 +115,6 @@ local function init_nvim_keys()
   vn('<M-e>', '5e')
   vn('<M-b>', '5b')
   vn('<leader>y', '"+y')
-
-  for i = 1, 9, 1 do
-    nn(format('<M-%d>', i), format('%dgt', i))
-  end
 
   cmd('<leader>s', 'w')
   cmd('<M-l>', 'tabn')
@@ -157,69 +216,63 @@ local function init_plugins_keymaps()
   cmd('<leader>v', 'SymbolsOutline')
 end
 
--------------------- Global Function ---------------------------------------
-function _G.MyQuit()
-  local bufnrs = fn.win_findbuf(fn.bufnr())
-
-  if #bufnrs > 1 or fn.expand('%') == '' or fn.tabpagenr('$') == 1 then
-    exec('q')
-  else
-    exec('bd')
-  end
-end
-
-function _G.MyshowDocument()
-  local filetype  = vim.bo.filetype
-  local word = fn.expand('<cword>')
-
-  if filetype == 'vim' or filetype == 'lua' or filetype == 'help' then
-    exec('vertical h '..word)
-  else
-    exec('vertical Man '..word)
-  end
-end
-
-function _G.MyWinZoomToggle()
-  local zoom = vim.t.zoom
-  if zoom ~= nil and zoom == 1 then
-    exec(vim.t.zoom_winrestcmd)
-    vim.t.zoom = 0
-  else
-    vim.t.zoom_winrestcmd = fn.winrestcmd()
-    exec('resize | vertical resize')
-    vim.t.zoom = 1
-  end
-end
-
-function _G.GetFileDir()
-  return fn.fnamemodify(fn.expand('%:p:h'), ':.')
-end
-
-function _G.DiffViewFile()
-  exec('DiffviewOpen -uno -- ' .. fn.expand('%'))
-  exec('DiffviewToggleFiles')
-end
-
-function _G.MyOpenLastplace()
-  local l = fn.line("'\"")
-  if l >= 1 and l <= fn.line('$') and vim.bo.filetype ~= 'commit' then
-    vim.cmd([[normal! g`"]])
-  end
-end
-
 init_nvim_keys()
 init_plugins_keymaps()
 
--- Rg search
---xn <leader>fa :<C-U><C-R>=printf("FzfCommand --rg %s", RgVisual())<CR>
--- function! RgVisual()
---   try
---     let x_save = getreg("x", 1)
---     let type = getregtype("x")
---     norm! gv"xy
---     return '"' . escape(@x, '"') . '"'
---   finally
---     call setreg("x", x_save, type)
---   endtry
--- endfunction
+-- options
+local global_cfg = {
+  hidden = true;
+  backup = false;
+  writebackup = false;
+  autoread = true;
+  autowrite = true;
+  smarttab = true;
+  smartindent = true;
+  scrolloff = 10;
+  undofile = true;
+  incsearch = true;
+  ignorecase = true;
+  smartcase = true;
+  termguicolors = true;
+  laststatus = 2;
+  showtabline = 2;
+  updatetime = 500;
+  shortmess = 'aoOTIcF';
+  completeopt = 'menuone,noselect';
+  tabline = '%!v:lua.mytabline()'
+}
+local win_cfg = {
+  signcolumn = "yes";
+  number = true;
+  cul = true;
+}
+local buf_cfg = {
+  tabstop = 4;
+  shiftwidth = 4;
+  softtabstop = 4;
+  swapfile = false;
+  undofile = true;
+};
+for k, v in pairs(global_cfg) do
+  vim.o[k] = v
+end
+for k, v in pairs(win_cfg) do
+  vim.wo[k] = v
+end
+for k, v in pairs(buf_cfg) do
+  vim.bo[k] = v
+end
 
+require('plugins')
+
+exec([[
+  set list lcs=tab:→\ ,trail:·
+  augroup user_plugin
+    autocmd!
+    au TabLeave * let g:last_active_tab = tabpagenr() " tab switch
+    au BufWinEnter * call v:lua.MyOpenLastplace()
+    au FocusGained * :checkt
+    au WinEnter * if ! &cursorline | setlocal cul | endif
+    au TextYankPost * silent! lua vim.highlight.on_yank{ higroup = "IncSearch", timeout = 700 }
+  augroup END
+]])

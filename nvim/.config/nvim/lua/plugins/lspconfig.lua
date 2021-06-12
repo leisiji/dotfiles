@@ -73,13 +73,4 @@ function M.lsp_config()
   end)();
 end
 
-function M.lspsaga_config()
-  require 'lspsaga'.init_lsp_saga {
-    max_preview_lines = 25,
-    finder_action_keys = {
-      open = '<cr>', vsplit = 'v', split = 's', quit = { 'q', '<ESC>' },
-    },
-  }
-end
-
 return M
