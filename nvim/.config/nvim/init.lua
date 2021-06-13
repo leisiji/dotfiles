@@ -158,8 +158,10 @@ local function init_plugins_keymaps()
   cmd('<leader>tr', 'Fern . -drawer')
 
   -- highlight group
-  cmd('<leader>k', 'HighlightGroupsAddWord 4 0')
-  cmd('<leader>K', 'HighlightGroupsClearGroup 4 0')
+  cmd('<leader>k', 'Interestingwords --toggle')
+  cmd('<leader>K', 'Interestingwords --remove_all')
+  cmd('<leader>n', 'Interestingwords --navigate')
+  cmd('<leader>N', 'Interestingwords --navigate b')
 
   -- fzf_utils
   cmd('<C-p>', 'FzfCommand --files')
@@ -260,7 +262,7 @@ for k, v in pairs(win_cfg) do
   vim.wo[k] = v
 end
 for k, v in pairs(buf_cfg) do
-  vim.bo[k] = v
+  vim.opt[k] = v
 end
 
 require('plugins')
