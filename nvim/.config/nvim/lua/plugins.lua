@@ -15,7 +15,6 @@ packer.startup(function()
   use { 'glepnir/zephyr-nvim', config = PLUGS_CFG.colorscheme }
   use { 'glepnir/galaxyline.nvim', branch = 'main', config = PLUGS_CFG.statusline }
   use { 'nvim-treesitter/nvim-treesitter', opt = true, run = ':TSUpdate', event = 'BufRead', config = PLUGS_CFG.treesitter }
-  use { 'nvim-treesitter/nvim-treesitter-textobjects', opt = true, after = 'nvim-treesitter' }
 
   -- lsp
   use { 'neovim/nvim-lspconfig', event = 'BufReadPre', opt = true, config = function () require('plugins.lspconfig').lsp_config() end }
