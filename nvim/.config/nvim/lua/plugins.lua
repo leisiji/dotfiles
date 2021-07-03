@@ -39,11 +39,11 @@ packer.startup(function()
   use { 'glepnir/indent-guides.nvim', opt = true, event = 'BufRead', config = PLUGS_CFG.indent_guide }
   use { 'AndrewRadev/inline_edit.vim', opt = true, cmd = 'InlineEdit', setup = PLUGS_CFG.inline_edit }
   use { 'numToStr/FTerm.nvim', opt = true, cmd = 'FTermToggle', config = function () require('plugins.fterm').config() end }
-  use { 'lambdalisue/fern.vim', opt = true, cmd = 'Fern', setup = require('plugins.fern').config() }
   use { 'leisiji/interestingwords.nvim', opt = true, cmd = 'Interestingwords' }
   use { 'npxbr/glow.nvim', opt = true, cmd = 'Glow' }
   use { 'junegunn/vim-easy-align', opt = true, cmd = 'EasyAlign' }
   use { 'norcalli/nvim-colorizer.lua', opt = true, ft = { 'html', 'css', 'help', 'lua', 'vim' }, config = function () require'colorizer'.setup() end }
+  use { 'lambdalisue/fern.vim', opt = true, cmd = 'Fern', setup = function () require('plugins.fern').config() end  }
 
   if vim.fn.executable('fcitx5') then
     use { 'lilydjwg/fcitx.vim', opt = true, branch = 'fcitx5', event = 'InsertEnter' }
