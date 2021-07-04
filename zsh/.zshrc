@@ -8,13 +8,10 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of Zinit installer's chunk
 
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-	zinit-zsh/z-a-rust \
-	zinit-zsh/z-a-as-monitor \
-	zinit-zsh/z-a-patch-dl \
-	zinit-zsh/z-a-bin-gem-node
+# emacs key
+bindkey -e
+bindkey '^w' vi-backward-kill-word
+bindkey '\ew' backward-kill-word
 
 alias ni=nvim; alias t='tmux -2'; alias ta='tmux -2 a'
 alias cr='cd $(git rev-parse --show-toplevel)'
@@ -54,11 +51,11 @@ zpcompinit; zpcdreplay
 
 zinit wait="1" lucid light-mode for \
 	zsh-users/zsh-autosuggestions \
-	zsh-users/zsh-completions \
 	hlissner/zsh-autopair \
-	wfxr/forgit \
 	zdharma/fast-syntax-highlighting \
-	Aloxaf/fzf-tab
+	zsh-users/zsh-completions \
+	Aloxaf/fzf-tab \
+	wfxr/forgit
 
 bindkey '^[,' autosuggest-accept
 
