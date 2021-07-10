@@ -27,7 +27,7 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.cargo/bin"
 export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d'
-export FZF_DEFAULT_OPTS='--ansi --bind ctrl-d:half-page-down,ctrl-u:half-page-up,tab:down,ctrl-p:toggle-preview --reverse --cycle --preview-window=hidden:65%'
+export FZF_DEFAULT_OPTS='--ansi --tabstop=1 --bind ctrl-d:half-page-down,ctrl-u:half-page-up,tab:down,ctrl-p:toggle-preview --reverse --cycle --preview-window=hidden:65%'
 export GTAGSLABEL='native-pygments'
 export GOPROXY='https://goproxy.io,direct'
 

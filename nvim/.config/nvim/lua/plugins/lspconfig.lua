@@ -40,7 +40,13 @@ local diagnosticls = {
 
 local function all_lsp_config(lsp)
   lsp.diagnosticls.setup(diagnosticls)
-  lsp.ccls.setup({ init_options = { cache = { directory = '/tmp/ccls' } }, on_attach = M.on_attach, capabilities = cap })
+  --lsp.ccls.setup({ init_options = { cache = { directory = '/tmp/ccls' } }, on_attach = M.on_attach, capabilities = cap })
+  lsp.clangd.setup({
+    cmd = {
+      'clangd', '--background-index', '--clang-tidy', '--clang-tidy-checks=performance-*,bugprone-*',
+      '--all-scopes-completion', '--completion-style=detailed', '--header-insertion=iwyu'
+    }
+  })
   lsp.pyright.setup(default_cfg)
   lsp.cmake.setup(default_cfg)
   lsp.bashls.setup(default_cfg)

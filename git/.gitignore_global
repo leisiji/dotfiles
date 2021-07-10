@@ -12,3 +12,4 @@ workspace/
 .gradle/
 *.log
 .classpath
+.cache
