@@ -278,3 +278,9 @@ exec([[
     au TextYankPost * silent! lua vim.highlight.on_yank{ higroup = "IncSearch", timeout = 700 }
   augroup END
 ]])
+
+vim.g.clipboard = {
+  name = 'tmuxClipboard',
+  copy = { ['+'] = {'tmux', 'load-buffer', '-'}, ['*'] = {'tmux', 'load-buffer', '-'}, },
+  paste = { ['+'] = {'tmux', 'save-buffer', '-'}, ['*'] = {'tmux', 'save-buffer', '-'}, },
+}
