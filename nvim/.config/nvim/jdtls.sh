@@ -8,6 +8,7 @@ fi
 JDTLS_DIR="${GENTOO_PREFIX}/usr/share/java/jdtls"
 JAR="$JDTLS_DIR/plugins/org.eclipse.equinox.launcher_*.jar"
 java \
+  -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1044 \
   -Declipse.application=org.eclipse.jdt.ls.core.id1 \
   -Dosgi.bundles.defaultStartLevel=4 \
   -Declipse.product=org.eclipse.jdt.ls.core.product \

@@ -15,7 +15,7 @@ function M.start()
   require('jdtls').start_or_attach(
     {
       cmd = { 'jdtls', cache },
-      root_dir = require('jdtls.setup').find_root({'build.gradle'})
+      root_dir = require('jdtls.setup').find_root({'build.gradle', 'gradlew'})
     }
   )
 end
