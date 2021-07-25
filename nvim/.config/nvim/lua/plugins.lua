@@ -19,7 +19,7 @@ packer.startup(function()
   -- lsp
   use { 'neovim/nvim-lspconfig', event = 'BufReadPre', opt = true, config = function () require('plugins.lspconfig').lsp_config() end }
   use { 'glepnir/lspsaga.nvim', opt = true, cmd = 'Lspsaga', config = PLUGS_CFG.lspsaga }
-  use { 'mfussenegger/nvim-jdtls', opt = true, ft = { 'java' }, config = function () require('plugins.jdtls').config() end }
+  use { 'mfussenegger/nvim-jdtls', opt = true, ft = { 'java' }, config = function () require('plugins.java').config() end }
   use { 'folke/lua-dev.nvim', opt = true, ft = { 'lua' }, config = function () require('plugins.lua_dev').config() end }
   use { 'simrat39/symbols-outline.nvim', opt = true, cmd = 'SymbolsOutline' }
 

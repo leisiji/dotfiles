@@ -1,6 +1,6 @@
 local M = {}
 
-M.on_attach = function(client, _)
+local on_attach = function(client, _)
   -- cursor hightlight and hint function name in statusline
   if client.resolved_capabilities.document_highlight then
     vim.cmd([[
@@ -18,7 +18,7 @@ local cap = vim.lsp.protocol.make_client_capabilities()
 local completion = cap.textDocument.completion.completionItem
 completion.snippetSupport = true
 completion.resolveSupport = { properties = { 'documentation', 'detail', 'additionalTextEdits' } }
-local default_cfg = { on_attach = M.on_attach, capabilities = cap }
+local default_cfg = { on_attach = on_attach, capabilities = cap }
 
 local diagnosticls = {
   filetypes = { 'markdown' };
@@ -45,7 +45,7 @@ local function all_lsp_config(lsp)
       'clangd', '--background-index', '--clang-tidy', '--clang-tidy-checks=performance-*,bugprone-*',
       '--all-scopes-completion', '--completion-style=detailed', '--header-insertion=iwyu'
     },
-    on_attach = M.on_attach, capabilities = cap
+    on_attach = on_attach, capabilities = cap
   })
   lsp.pyright.setup(default_cfg)
   lsp.cmake.setup(default_cfg)
@@ -78,5 +78,7 @@ function M.lsp_config()
     all_lsp_config(lsp)
   end)();
 end
+
+M.cfg = default_cfg
 
 return M
