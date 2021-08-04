@@ -13,3 +13,4 @@ workspace/
 *.log
 .classpath
 .cache
+settings.json

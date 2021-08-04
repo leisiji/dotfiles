@@ -30,6 +30,8 @@ export FZF_ALT_C_COMMAND='fd --type d'
 export FZF_DEFAULT_OPTS='--ansi --tabstop=1 --bind ctrl-d:half-page-down,ctrl-u:half-page-up,tab:down,ctrl-p:toggle-preview,ctrl-e:preview-down,ctrl-y:preview-up --reverse --cycle --preview-window=hidden:65%'
 export GTAGSLABEL='native-pygments'
 export GOPROXY='https://goproxy.io,direct'
+#export JAVA_HOME="/usr/lib/jvm/java-16-openjdk"
+#export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
 
 # plugin config
 export ZSH_AUTOSUGGEST_USE_ASYNC="true"
