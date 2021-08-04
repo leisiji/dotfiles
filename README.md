@@ -23,7 +23,7 @@ yay -S glow
 yarn global add bash-language-server vim-language-server \
             diagnostic-languageserver markdownlint-cli pyright
 yay -S ccls kotlin-language-server lua-language-server-git \
-        groovy-language-server-git jdtls
+        groovy-language-server-git jdtls gopls
 pip3 install --user cmake-language-server
 
 pip3 install --user pynvim compiledb
@@ -60,4 +60,3 @@ git clone https://github.com/wbthomason/packer.nvim \
 # zinit
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 ```
-
