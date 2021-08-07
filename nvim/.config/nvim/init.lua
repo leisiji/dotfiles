@@ -181,16 +181,12 @@ local function init_plugins_keymaps()
   cmd('<M-j>', 'FzfCommand --lsp jump_def edit')
   cmd('<M-t>', 'FzfCommand --lsp jump_def tab drop')
   cmd('<M-v>', 'FzfCommand --lsp jump_def vsplit')
-  cmd('<leader>rr', 'FzfCommand --lsp ref tab drop')
+  cmd('<M-r>', 'FzfCommand --lsp ref tab drop')
   cmd('<leader>m', 'FzfCommand --mru')
   cmd('<leader>cm', 'FzfCommand --commit')
 
   cmd_gen('<leader>d', [[<C-U><C-R>=printf('FzfCommand --rg %s %s', expand('<cword>'), v:lua.GetFileDir())<CR>]])
   cmd_gen('<leader>fa', [[<C-U><C-R>='FzfCommand --rg '.expand('<cword>')<CR>]])
-
-  -- diffview.nvim
-  cmd('<leader><leader>d', [[exe('DiffviewOpen -uno -- '.v:lua.GetFileDir())]])
-  cmd('<leader><leader>c', 'call v:lua.DiffViewFile()')
 
   -- compe
   local expr_opts = { expr = true }
@@ -198,23 +194,16 @@ local function init_plugins_keymaps()
   mapkey('i', '<S-Tab>', 'v:lua.s_tab_complete()', expr_opts)
   mapkey('i', '<CR>', 'v:lua.completion_confirm()', { expr = true, noremap = true })
 
-  -- lspsaga
-  cmd('<M-r>', 'Lspsaga lsp_finder')
-  cmd('<M-k>', 'Lspsaga hover_doc')
-  cmd('<leader>rn', 'Lspsaga rename')
-  cmd('<leader>j', "lua require('lspsaga.action').smart_scroll_with_saga(1)")
-  cmd('<leader>ca', 'Lspsaga code_action')
-  cmd('<leader><leader>p', 'Lspsaga preview_definition')
-  cmd('<M-o>', 'Lspsaga show_line_diagnostics')
-  ino('<M-k>', '<cmd>Lspsaga signature_help<CR>')
-  cmd('<leader>a', 'Lspsaga diagnostic_jump_next')
-
   -- lsp
-  cmd('<space>wa', 'lua vim.lsp.buf.add_workspace_folder()')
-  cmd('<space>wr', 'lua vim.lsp.buf.remove_workspace_folder()')
-  cmd('<space>wl', 'lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))')
+  cmd('<M-k>', 'lua vim.lsp.buf.hover()')
+  cmd('<leader>rn', 'lua vim.lsp.buf.rename()')
+  cmd('<leader>ca', 'lua vim.lsp.buf.codeaction()')
+  cmd('<leader>a', 'lua vim.lsp.diagnostic.goto_next()')
+  cmd('<M-o>', 'lua vim.lsp.diagnostic.show_line_diagnostics()')
+  ino('<M-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
   cmd('<leader><space>f', 'lua vim.lsp.buf.formatting()')
   vn('<leader><space>f', '<cmd>lua vim.lsp.buf.range_formatting()<cr>')
+  cmd('<leader><leader>p', 'GotoPreview')
 
   cmd('<leader>v', 'SymbolsOutline')
 end
@@ -268,8 +257,11 @@ end
 
 require('plugins')
 
-exec([[
+vim.cmd([[
   set list lcs=tab:→\ ,trail:·
+  colorscheme zephyr
+  hi TabLineSel cterm=bold gui=bold guifg=#282a36 guibg=#61afef
+  hi TabLine cterm=underline ctermfg=15 ctermbg=242 guifg=#282a36 guibg=#bbc2cf
   augroup user_plugin
     autocmd!
     au TabLeave * let g:last_active_tab = tabpagenr() " tab switch

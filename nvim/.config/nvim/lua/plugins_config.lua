@@ -33,14 +33,14 @@ end
 
 -- treesitter
 function M.treesitter()
-  require'nvim-treesitter.configs'.setup {
+  require('nvim-treesitter.configs').setup {
     ensure_installed = "maintained", highlight = { enable = true },
   }
 end
 
 -- gitsigns
 function M.gitsigns()
-  require'gitsigns'.setup {
+  require('gitsigns').setup {
     signs = {
       add = {hl = 'GitGutterAdd', text = '+'},
       change = {hl = 'GitGutterChange', text = '~'},
@@ -56,33 +56,18 @@ function M.gitsigns()
       ['n <leader><leader>b'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
     }
   }
-end
-
-function M.colorscheme()
-  local exec = vim.cmd
-  exec('colorscheme zephyr')
-  exec('hi TabLineSel gui=bold guibg='..COLORS.blue..' guifg='..COLORS.bg)
-  exec('hi TabLine gui=NONE guibg='..COLORS.fg..' guifg='..COLORS.bg)
-end
-
-function M.indent_guide()
-  local c = { fg = COLORS.yellow, bg = '#2a3834' }
-  require('indent_guides').setup({ even_colors = c, odd_colors = c })
-end
-
-function M.diffview()
-  vim.cmd([[
+  vim.cmd[[
     hi DiffAdd    guibg=#26332c guifg=NONE
     hi DiffChange guibg=#273842 guifg=NONE
     hi DiffDelete guibg=#572E33 guifg=NONE
     hi DiffText   guibg=#314753 guifg=NONE
-  ]])
-  require'diffview'.setup { file_panel = { use_icons = false } }
+  ]]
 end
 
-function M.inline_edit()
-  vim.g.inline_edit_new_buffer_command = "tabedit"
-  vim.g.inline_edit_autowrite = 1
+
+function M.indent_guide()
+  local c = { fg = COLORS.yellow, bg = '#2a3834' }
+  require('indent_guides').setup({ even_colors = c, odd_colors = c, exclude_filetypes = { 'fzf', 'fern' } })
 end
 
 function M.lspsaga()
@@ -91,5 +76,9 @@ function M.lspsaga()
     finder_action_keys = { open = '<cr>', vsplit = 'v', split = 's', quit = { 'q', '<ESC>' } }
   }
 end
+
+-- inline edit
+vim.g.inline_edit_new_buffer_command = "tabedit"
+vim.g.inline_edit_autowrite = 1
 
 return M

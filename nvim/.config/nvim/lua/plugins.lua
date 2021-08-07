@@ -12,16 +12,16 @@ packer.startup(function()
   use { 'leisiji/fzf_utils', opt = true, cmd = 'FzfCommand', requires = { 'vijaymarupudi/nvim-fzf' } }
 
   -- colorscheme and statusline
-  use { 'glepnir/zephyr-nvim', config = PLUGS_CFG.colorscheme }
+  use { 'glepnir/zephyr-nvim' }
   use { 'glepnir/galaxyline.nvim', branch = 'main', config = PLUGS_CFG.statusline }
   use { 'nvim-treesitter/nvim-treesitter', opt = true, run = ':TSUpdate', event = 'BufRead', config = PLUGS_CFG.treesitter }
 
   -- lsp
   use { 'neovim/nvim-lspconfig', event = 'BufReadPre', opt = true, config = function () require('plugins.lspconfig').lsp_config() end }
-  use { 'glepnir/lspsaga.nvim', opt = true, cmd = 'Lspsaga', config = PLUGS_CFG.lspsaga }
   use { 'mfussenegger/nvim-jdtls', opt = true, ft = { 'java' }, config = function () require('plugins.java').config() end }
   use { 'folke/lua-dev.nvim', opt = true, ft = { 'lua' }, config = function () require('plugins.lua_dev').config() end }
   use { 'simrat39/symbols-outline.nvim', opt = true, cmd = 'SymbolsOutline' }
+  use { 'rmagatti/goto-preview', opt = true, cmd = 'GotoPreview', config = function () require('plugins.goto_preview').config() end }
 
   use { 'hrsh7th/nvim-compe', opt = true, event = 'InsertEnter', config = function () require('plugins.compe').config() end }
   use { 'windwp/nvim-autopairs', opt = true, event = 'InsertEnter',
@@ -34,10 +34,9 @@ packer.startup(function()
 
   -- Git
   use { 'lewis6991/gitsigns.nvim', opt = true, event = 'BufRead', config = PLUGS_CFG.gitsigns }
-  use { 'sindrets/diffview.nvim', opt = true, cmd = 'DiffviewOpen', config = PLUGS_CFG.diffview }
 
   use { 'glepnir/indent-guides.nvim', opt = true, event = 'BufRead', config = PLUGS_CFG.indent_guide }
-  use { 'AndrewRadev/inline_edit.vim', opt = true, cmd = 'InlineEdit', setup = PLUGS_CFG.inline_edit }
+  use { 'AndrewRadev/inline_edit.vim', opt = true, cmd = 'InlineEdit' }
   use { 'numToStr/FTerm.nvim', opt = true, cmd = 'FTermToggle', config = function () require('plugins.fterm').config() end }
   use { 'leisiji/interestingwords.nvim', opt = true, cmd = 'Interestingwords' }
   use { 'npxbr/glow.nvim', opt = true, cmd = 'Glow' }
