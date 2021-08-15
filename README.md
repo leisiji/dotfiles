@@ -13,11 +13,11 @@ Minimal development on terminal:
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
 # ueberzug can display image in terminal
-sudo pacman -S zsh fzf nnn tmux lua ueberzug universal-ctags global xclip
+sudo pacman -S zsh fzf tmux lua ueberzug universal-ctags global xclip
 
 # neovim related
 sudo pacman -S neovim nodejs npm bear yarn
-yay -S glow
+yay -S glow nnn-nerd
 
 # language-server, linter
 yarn global add bash-language-server vim-language-server \

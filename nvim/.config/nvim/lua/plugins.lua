@@ -42,7 +42,7 @@ packer.startup(function()
   use { 'npxbr/glow.nvim', opt = true, cmd = 'Glow' }
   use { 'junegunn/vim-easy-align', opt = true, cmd = 'EasyAlign' }
   use { 'norcalli/nvim-colorizer.lua', opt = true, ft = { 'html', 'css', 'help', 'lua', 'vim' }, config = function () require'colorizer'.setup() end }
-  use { 'lambdalisue/fern.vim', opt = true, cmd = 'Fern', setup = function () require('plugins.fern').config() end  }
+  use { 'mcchrish/nnn.vim', opt = true, cmd = 'NnnPicker', config = function () require('plugins.nnn').setup() end  }
 
   if vim.fn.executable('fcitx5') then
     use { 'lilydjwg/fcitx.vim', opt = true, branch = 'fcitx5', event = 'InsertEnter' }

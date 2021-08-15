@@ -70,12 +70,6 @@ function M.indent_guide()
   require('indent_guides').setup({ even_colors = c, odd_colors = c, exclude_filetypes = { 'fzf', 'fern' } })
 end
 
-function M.lspsaga()
-  require 'lspsaga'.init_lsp_saga {
-    max_preview_lines = 25,
-    finder_action_keys = { open = '<cr>', vsplit = 'v', split = 's', quit = { 'q', '<ESC>' } }
-  }
-end
 
 -- inline edit
 vim.g.inline_edit_new_buffer_command = "tabedit"
