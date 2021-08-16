@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup()
-  vim.g['nnn#session'] = 'global'
+  vim.g['nnn#session'] = 'local'
   require("nnn").setup({
     command = "nnn -o",
     set_default_mappings = 0,
