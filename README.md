@@ -13,17 +13,17 @@ Minimal development on terminal:
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
 # ueberzug can display image in terminal
-sudo pacman -S zsh fzf tmux lua ueberzug universal-ctags global xclip
+sudo pacman -S zsh fzf tmux lua ueberzug universal-ctags global xclip clang
 
 # neovim related
 sudo pacman -S neovim nodejs npm bear yarn
 yay -S glow nnn-nerd
 
-# language-server, linter
+# language-server, linter, formatter
 yarn global add bash-language-server vim-language-server \
             diagnostic-languageserver markdownlint-cli pyright
 yay -S ccls kotlin-language-server lua-language-server-git \
-        groovy-language-server-git jdtls gopls
+        groovy-language-server-git jdtls gopls google-java-format
 pip3 install --user cmake-language-server
 
 pip3 install --user pynvim compiledb
