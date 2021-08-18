@@ -14,7 +14,7 @@ function M.config()
   })
 
   vim.api.nvim_set_keymap('t', '<esc>',
-    [[(&ft == 'fzf') ? '<esc>' : '<C-\><C-n>:FTermToggle<CR>']],
+    [[(&ft == 'fzf' || &ft == 'nnn') ? '<esc>' : '<C-\><C-n>:FTermToggle<CR>']],
     { silent = true, noremap = true, expr = true }
   )
 end
