@@ -1,4 +1,5 @@
 local M = {}
+local original_width = nil
 
 function M.setup()
   vim.g.nvim_tree_gitignore = 0
@@ -25,7 +26,23 @@ function M.setup()
     { key = "Y",     cb = tree_cb("copy_path") },
     { key = "gy",    cb = tree_cb("copy_absolute_path") },
     { key = "q",     cb = tree_cb("close") },
+    { key = "z",     cb = [[:lua require('plugins.nvim_tree').resize()<cr>]] },
   }
+end
+
+function M.resize()
+  local w = require'nvim-tree.view'.View.width
+  if original_width == nil then
+    original_width = w
+  end
+  if w ~= original_width then
+    w = original_width
+  else
+    w = w + 50
+  end
+  require'nvim-tree.view'.View.width = w
+  vim.cmd('NvimTreeClose')
+  vim.cmd('NvimTreeToggle')
 end
 
 return M
