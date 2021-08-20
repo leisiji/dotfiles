@@ -154,8 +154,8 @@ local function init_plugins_keymaps()
   xcmd('ga', 'EasyAlign')
 
   -- nvim tree
-  cmd('<leader>tj', 'NnnPicker %:p:h')
-  cmd('<leader>tr', 'NnnPicker')
+  cmd('<leader>tj', 'NvimTreeFindFile')
+  cmd('<leader>tr', 'NvimTreeToggle')
 
   -- highlight group
   cmd('<leader>k', 'Interestingwords --toggle')
