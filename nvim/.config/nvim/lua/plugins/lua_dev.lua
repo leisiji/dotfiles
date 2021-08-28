@@ -8,7 +8,7 @@ function M.config()
     '-E', '-e', 'LANG=EN',
     '/usr/share/lua-language-server/main.lua'
   }
-  luadev.on_attach = require('plugins.lspconfig').cfg.on_attach
+  luadev.on_attach = require('plugins.lspconfig').cfg().on_attach
   lspconfig.sumneko_lua.setup(luadev)
 end
 

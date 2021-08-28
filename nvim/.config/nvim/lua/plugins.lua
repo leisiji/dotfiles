@@ -13,7 +13,7 @@ packer.startup(function()
 
   -- colorscheme and statusline
   use { 'glepnir/zephyr-nvim' }
-  use { 'glepnir/galaxyline.nvim', branch = 'main', config = PLUGS_CFG.statusline }
+  use { 'glepnir/galaxyline.nvim', config = PLUGS_CFG.statusline }
   use { 'nvim-treesitter/nvim-treesitter', opt = true, run = ':TSUpdate', event = 'BufRead', config = PLUGS_CFG.treesitter }
 
   -- lsp
@@ -23,14 +23,18 @@ packer.startup(function()
   use { 'simrat39/symbols-outline.nvim', opt = true, cmd = 'SymbolsOutline' }
   use { 'rmagatti/goto-preview', opt = true, cmd = 'GotoPreview', config = function () require('plugins.goto_preview').config() end }
 
-  use { 'hrsh7th/nvim-compe', opt = true, event = 'InsertEnter', config = function () require('plugins.compe').config() end }
-  use { 'windwp/nvim-autopairs', opt = true, event = 'InsertEnter',
-        requires = { 'hrsh7th/vim-vsnip-integ', 'hrsh7th/vim-vsnip', 'rafamadriz/friendly-snippets' },
-        config = function ()  require('plugins.pairs').config() end }
+  use {
+    'hrsh7th/nvim-cmp', opt = true, event = 'InsertEnter',
+    requires = {
+      'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-buffer',
+      'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', 'rafamadriz/friendly-snippets',
+      'windwp/nvim-autopairs', 'tpope/vim-surround'
+    },
+    config = function () require('plugins.cmp').config() end
+  }
 
   -- code format
   use { 'mhartington/formatter.nvim', opt = true, cmd = 'Format', config = function () require('plugins.formatter').config() end }
-  use { 'tpope/vim-surround', opt = true, event = 'InsertEnter' }
 
   -- Git
   use { 'lewis6991/gitsigns.nvim', opt = true, event = 'BufRead', config = PLUGS_CFG.gitsigns }
@@ -49,4 +53,3 @@ packer.startup(function()
     use { 'lilydjwg/fcitx.vim', opt = true, branch = 'fcitx5', event = 'InsertEnter' }
   end
 end)
-

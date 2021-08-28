@@ -1,6 +1,6 @@
 local M = {}
 local android_sdk_env = 'ANDROID_SDK_ROOT'
-local cfg = require('plugins.lspconfig').cfg
+local cfg = require('plugins.lspconfig').cfg()
 
 local function get_deps(path)
   local deps = {}

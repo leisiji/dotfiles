@@ -189,10 +189,10 @@ local function init_plugins_keymaps()
   cmd_gen('<leader>fa', [[<C-U><C-R>='FzfCommand --rg '.expand('<cword>')<CR>]])
 
   -- compe
-  local expr_opts = { expr = true }
-  mapkey('i', '<Tab>', 'v:lua.tab_complete()', expr_opts)
-  mapkey('i', '<S-Tab>', 'v:lua.s_tab_complete()', expr_opts)
-  mapkey('i', '<CR>', 'v:lua.completion_confirm()', { expr = true, noremap = true })
+  --local expr_opts = { expr = true }
+  --mapkey('i', '<Tab>', 'v:lua.tab_complete()', expr_opts)
+  --mapkey('i', '<S-Tab>', 'v:lua.s_tab_complete()', expr_opts)
+  --mapkey('i', '<CR>', 'v:lua.completion_confirm()', { expr = true, noremap = true })
 
   -- lsp
   cmd('<M-k>', 'lua vim.lsp.buf.hover()')

@@ -1,4 +1,5 @@
 local M = {}
+local default_cfg
 
 local on_attach = function(client, _)
   -- cursor hightlight and hint function name in statusline
@@ -14,31 +15,37 @@ local on_attach = function(client, _)
   end
 end
 
-local cap = vim.lsp.protocol.make_client_capabilities()
-local completion = cap.textDocument.completion.completionItem
-completion.snippetSupport = true
-completion.resolveSupport = { properties = { 'documentation', 'detail', 'additionalTextEdits' } }
-local default_cfg = { on_attach = on_attach, capabilities = cap }
-
-local diagnosticls = {
-  filetypes = { 'markdown' };
-  init_options = {
-    linters = {
-      markdownlint = {
-        command = 'markdownlint', rootPatterns = { '.git' },
-        isStderr = true, debounce = 1000, offsetLine = 0, offsetColumn = 0,
-        args = { '--stdin' }, sourceName = 'markdownlint', securities = { undefined = 'hint' }, formatLines = 1,
-        formatPattern = {
-          [[^.*?:\s?(\d+)(:(\d+)?)?\s(MD\d{3}\/[A-Za-z0-9-/]+)\s(.*)$]],
-          { line = 1, column = 3, message = { 4 } }
-        },
-      }
-    },
-    filetypes = { markdown = 'markdownlint' }
-  },
-}
-
 local function all_lsp_config(lsp)
+  local cap = vim.lsp.protocol.make_client_capabilities()
+  local compe = cap.textDocument.completion.completionItem
+  compe.snippetSupport = true
+  compe.preselectSupport = true
+  compe.insertReplaceSupport = true
+  compe.labelDetailsSupport = true
+  compe.deprecatedSupport = true
+  compe.commitCharactersSupport = true
+  compe.tagSupport = true
+  compe.resolveSupport = { properties = { 'documentation', 'detail', 'additionalTextEdits' } }
+  default_cfg = { on_attach = on_attach, capabilities = cap }
+
+  local diagnosticls = {
+    filetypes = { 'markdown' };
+    init_options = {
+      linters = {
+        markdownlint = {
+          command = 'markdownlint', rootPatterns = { '.git' },
+          isStderr = true, debounce = 1000, offsetLine = 0, offsetColumn = 0,
+          args = { '--stdin' }, sourceName = 'markdownlint', securities = { undefined = 'hint' }, formatLines = 1,
+          formatPattern = {
+            [[^.*?:\s?(\d+)(:(\d+)?)?\s(MD\d{3}\/[A-Za-z0-9-/]+)\s(.*)$]],
+            { line = 1, column = 3, message = { 4 } }
+          },
+        }
+      },
+      filetypes = { markdown = 'markdownlint' }
+    },
+  }
+
   lsp.diagnosticls.setup(diagnosticls)
   lsp.clangd.setup({
     cmd = { 'clangd', '--background-index', '--clang-tidy', '--clang-tidy-checks=performance-*,bugprone-*',
@@ -78,6 +85,8 @@ function M.lsp_config()
   end)();
 end
 
-M.cfg = default_cfg
+function M.cfg()
+  return default_cfg
+end
 
 return M
