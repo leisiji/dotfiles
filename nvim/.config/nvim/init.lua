@@ -188,12 +188,6 @@ local function init_plugins_keymaps()
   cmd_gen('<leader>d', [[<C-U><C-R>=printf('FzfCommand --rg %s %s', expand('<cword>'), v:lua.GetFileDir())<CR>]])
   cmd_gen('<leader>fa', [[<C-U><C-R>='FzfCommand --rg '.expand('<cword>')<CR>]])
 
-  -- compe
-  --local expr_opts = { expr = true }
-  --mapkey('i', '<Tab>', 'v:lua.tab_complete()', expr_opts)
-  --mapkey('i', '<S-Tab>', 'v:lua.s_tab_complete()', expr_opts)
-  --mapkey('i', '<CR>', 'v:lua.completion_confirm()', { expr = true, noremap = true })
-
   -- lsp
   cmd('<M-k>', 'lua vim.lsp.buf.hover()')
   cmd('<leader>rn', 'lua vim.lsp.buf.rename()')
@@ -231,7 +225,8 @@ local global_cfg = {
   updatetime = 500;
   shortmess = 'aoOTIcF';
   completeopt = 'menuone,noselect';
-  tabline = '%!v:lua.mytabline()'
+  tabline = '%!v:lua.mytabline()',
+  guifont = 'Source Code Pro:h22'
 }
 local win_cfg = {
   signcolumn = "yes";
