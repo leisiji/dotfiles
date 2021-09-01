@@ -257,6 +257,7 @@ vim.cmd([[
   colorscheme zephyr
   hi TabLineSel cterm=bold gui=bold guifg=#282a36 guibg=#61afef
   hi TabLine cterm=underline ctermfg=15 ctermbg=242 guifg=#282a36 guibg=#bbc2cf
+  hi NormalFloat guibg=#282a36
   augroup user_plugin
     autocmd!
     au TabLeave * let g:last_active_tab = tabpagenr() " tab switch
