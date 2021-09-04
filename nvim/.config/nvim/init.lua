@@ -80,7 +80,7 @@ function _G.MyshowDocument()
   end
 end
 
--- keymaps
+-------------------- keymaps ---------------------------------------
 local function cmd_gen(lhs, rhs)
   local gen_opts = { noremap = true }
   mapkey('n', lhs, format(':%s', rhs), gen_opts)
@@ -182,6 +182,7 @@ local function init_plugins_keymaps()
   cmd('<M-t>', 'FzfCommand --lsp jump_def tab drop')
   cmd('<M-v>', 'FzfCommand --lsp jump_def vsplit')
   cmd('<M-r>', 'FzfCommand --lsp ref tab drop')
+  cmd('<leader>ws', 'FzfCommand --lsp workspace_symbol')
   cmd('<leader>m', 'FzfCommand --mru')
   cmd('<leader>cm', 'FzfCommand --commit')
 
@@ -257,7 +258,7 @@ vim.cmd([[
   colorscheme zephyr
   hi TabLineSel cterm=bold gui=bold guifg=#282a36 guibg=#61afef
   hi TabLine cterm=underline ctermfg=15 ctermbg=242 guifg=#282a36 guibg=#bbc2cf
-  hi NormalFloat guibg=#282a36
+  hi NormalFloat guibg=none
   augroup user_plugin
     autocmd!
     au TabLeave * let g:last_active_tab = tabpagenr() " tab switch
