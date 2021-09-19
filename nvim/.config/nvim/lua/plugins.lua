@@ -39,7 +39,7 @@ packer.startup(function()
   -- Git
   use { 'lewis6991/gitsigns.nvim', opt = true, event = 'BufRead', config = PLUGS_CFG.gitsigns }
 
-  use { 'glepnir/indent-guides.nvim', opt = true, event = 'BufRead', config = PLUGS_CFG.indent_guide }
+  use { 'leisiji/simple_indent', opt = true, event = 'BufRead' }
   use { 'AndrewRadev/inline_edit.vim', opt = true, cmd = 'InlineEdit' }
   use { 'numToStr/FTerm.nvim', opt = true, cmd = 'FTermToggle', config = function () require('plugins.fterm').config() end }
   use { 'leisiji/interestingwords.nvim', opt = true, cmd = 'Interestingwords' }

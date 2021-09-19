@@ -64,13 +64,6 @@ function M.gitsigns()
   ]]
 end
 
-
-function M.indent_guide()
-  local c = { fg = COLORS.yellow, bg = '#2a3834' }
-  require('indent_guides').setup({ even_colors = c, odd_colors = c, exclude_filetypes = { 'fzf', 'FTerm', 'NvimTree', '' } })
-end
-
-
 -- inline edit
 vim.g.inline_edit_new_buffer_command = "tabedit"
 vim.g.inline_edit_autowrite = 1
