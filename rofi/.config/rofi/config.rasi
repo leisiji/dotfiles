@@ -7,8 +7,8 @@ configuration {
 	dpi: 200;
 	kb-primary-paste: "Control+V,Shift+Insert";
 	kb-secondary-paste: "Control+v,Insert";
-	kb-move-char-back: "Left,Control+h";
-	kb-move-char-forward: "Right,Control+l";
+	kb-move-char-back: "Left,Alt+h";
+	kb-move-char-forward: "Right,Alt+l";
 	kb-mode-next: "Tab";
 	kb-mode-previous: "Shift+Tab";
 	kb-row-up: "Up,Control+k";
@@ -18,5 +18,5 @@ configuration {
 	kb-accept-entry: "Return,KP_Enter";
 	kb-row-tab: "";
 	kb-remove-char-back: "BackSpace,Shift+BackSpace";
-	theme: "themes/gruvbox-material-dark";
+	theme: "themes/nord";
 }
