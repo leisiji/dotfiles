@@ -27,7 +27,7 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.cargo/bin"
 export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d'
-export FZF_DEFAULT_OPTS='--ansi --tabstop=1 --bind ctrl-d:half-page-down,ctrl-u:half-page-up,tab:down,ctrl-p:toggle-preview,ctrl-e:preview-down,ctrl-y:preview-up --reverse --cycle --preview-window=hidden:65%'
+export FZF_DEFAULT_OPTS='--ansi --tabstop=1 --bind ctrl-d:half-page-down,ctrl-u:half-page-up,tab:down,ctrl-p:toggle-preview,alt-j:preview-down,alt-k:preview-up --reverse --cycle --preview-window=hidden:65%'
 export GTAGSLABEL='native-pygments'
 export GOPROXY='https://goproxy.io,direct'
 #export JAVA_HOME="/usr/lib/jvm/java-16-openjdk"
@@ -66,6 +66,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -l $realpath'
 zstyle ':fzf-tab:complete:_zlua:*' query-string input
 zstyle ':fzf-tab:*' switch-group ',' '.'
 zstyle ':completion:files' sort false
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 # 补全 bat
 addBat () {
