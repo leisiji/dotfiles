@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.g.did_load_filetypes = 1
 
 local mapkey = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
