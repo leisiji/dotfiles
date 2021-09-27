@@ -6,7 +6,7 @@ function M.setup()
   vim.g.nvim_tree_git_hl = 0
   vim.g.nvim_tree_show_icons = { git = 0, folders = 1, folder_arrows = 1, }
   local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-  vim.g.nvim_tree_bindings = {
+  local list = {
     { key = "l",     cb = tree_cb("edit") },
     { key = "h",     cb = tree_cb("close_node") },
     { key = "<C-]>", cb = tree_cb("cd") },
@@ -28,6 +28,7 @@ function M.setup()
     { key = "q",     cb = tree_cb("close") },
     { key = "z",     cb = [[:lua require('plugins.nvim_tree').resize()<cr>]] },
   }
+  require'nvim-tree'.setup { view = { mappings = { custom_only = false, list = list} } }
 end
 
 function M.resize()

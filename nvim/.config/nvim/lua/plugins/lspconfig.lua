@@ -58,6 +58,7 @@ local function all_lsp_config(lsp)
   lsp.vimls.setup(default_cfg)
   lsp.kotlin_language_server.setup(default_cfg)
   lsp.gopls.setup(default_cfg)
+  lsp.rust_analyzer.setup(default_cfg)
 end
 
 local function lsp_basic()
