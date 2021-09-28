@@ -2,17 +2,16 @@ local M = {}
 local fn = vim.fn
 local a = vim.api
 
-local t = function (str)
-  return a.nvim_replace_termcodes(str, true, true, true)
-end
-
-local check_back_space = function()
-  local col = fn.col('.') - 1
-  if col == 0 or fn.getline('.'):sub(col, col):match('%s') then
-    return true
-  else
+local has_words_before = function()
+  if a.nvim_buf_get_option(0, "buftype") == "prompt" then
     return false
   end
+  local line, col = unpack(a.nvim_win_get_cursor(0))
+  return col ~= 0 and a.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local feedkey = function(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
 local function config_snip()
@@ -43,17 +42,24 @@ function M.config()
         behavior = cmp.ConfirmBehavior.Insert,
         select = true,
       }),
-      ['<Tab>'] = function(fallback)
-          if fn.pumvisible() == 1 then
-            fn.feedkeys(t('<C-n>'), 'n')
-          elseif check_back_space() then
-            fn.feedkeys(t('<Tab>'), 'n')
-          elseif vim.fn['vsnip#available']() == 1 then
-            fn.feedkeys(t('<Plug>luasnip-expand-or-jump'), '')
-          else
-            fallback()
-          end
-      end,
+      ["<Tab>"] = cmp.mapping(function(fallback)
+        if vim.fn.pumvisible() == 1 then
+          feedkey("<C-n>", "n")
+        elseif vim.fn["vsnip#available"]() == 1 then
+          require("luasnip").expand_or_jump()
+        elseif has_words_before() then
+          cmp.complete()
+        else
+          fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+        end
+      end, { "i", "s" }),
+      ["<S-Tab>"] = cmp.mapping(function()
+        if vim.fn.pumvisible() == 1 then
+          feedkey("<C-p>", "n")
+        elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+          require('luasnip').jump(-1)
+        end
+      end, { "i", "s" }),
     },
     snippet = {
       expand = function(args)
