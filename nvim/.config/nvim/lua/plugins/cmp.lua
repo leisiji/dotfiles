@@ -43,10 +43,11 @@ function M.config()
         select = true,
       }),
       ["<Tab>"] = cmp.mapping(function(fallback)
+        local luasnip = require('luasnip')
         if vim.fn.pumvisible() == 1 then
           feedkey("<C-n>", "n")
-        elseif vim.fn["vsnip#available"]() == 1 then
-          require("luasnip").expand_or_jump()
+        elseif luasnip.expand_or_jumpable() == 1 then
+          luasnip.expand_or_jump()
         elseif has_words_before() then
           cmp.complete()
         else
@@ -54,10 +55,11 @@ function M.config()
         end
       end, { "i", "s" }),
       ["<S-Tab>"] = cmp.mapping(function()
+        local luasnip = require('luasnip')
         if vim.fn.pumvisible() == 1 then
           feedkey("<C-p>", "n")
-        elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-          require('luasnip').jump(-1)
+        elseif luasnip.jumpable(-1) == 1 then
+          luasnip.jump(-1)
         end
       end, { "i", "s" }),
     },
