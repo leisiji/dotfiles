@@ -10,10 +10,6 @@ local has_words_before = function()
   return col ~= 0 and a.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-local feedkey = function(key, mode)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
-
 local function config_snip()
   --vim.g.vsnip_snippet_dir = string.format("%s/snippets", fn.stdpath('config'))
   require('nvim-autopairs').setup()
@@ -44,20 +40,20 @@ function M.config()
       }),
       ["<Tab>"] = cmp.mapping(function(fallback)
         local luasnip = require('luasnip')
-        if vim.fn.pumvisible() == 1 then
-          feedkey("<C-n>", "n")
+        if cmp.visible() then
+          cmp.select_next_item()
         elseif luasnip.expand_or_jumpable() == 1 then
           luasnip.expand_or_jump()
         elseif has_words_before() then
           cmp.complete()
         else
-          fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+          fallback()
         end
       end, { "i", "s" }),
       ["<S-Tab>"] = cmp.mapping(function()
         local luasnip = require('luasnip')
-        if vim.fn.pumvisible() == 1 then
-          feedkey("<C-p>", "n")
+        if cmp.visible() then
+          cmp.select_prev_item()
         elseif luasnip.jumpable(-1) == 1 then
           luasnip.jump(-1)
         end
