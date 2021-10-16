@@ -26,38 +26,40 @@ end
 
 function M.config()
   local cmp = require('cmp')
+
+  local sel_next = cmp.mapping(function(fallback)
+    local luasnip = require('luasnip')
+    if cmp.visible() then
+      cmp.select_next_item()
+    elseif luasnip.expand_or_jumpable() == 1 then
+      luasnip.expand_or_jump()
+    elseif has_words_before() then
+      cmp.complete()
+    else
+      fallback()
+    end
+  end, { 'i', 's' })
+
+  local sel_prev = cmp.mapping(function(fallback)
+    local luasnip = require('luasnip')
+    if cmp.visible() then
+      cmp.select_prev_item()
+    elseif luasnip.jumpable(-1) == 1 then
+      luasnip.jump(-1)
+    else
+      fallback()
+    end
+  end, { "i", "s" })
+
   cmp.setup {
     mapping = {
-      ['<C-p>'] = cmp.mapping.select_prev_item(),
-      ['<C-n>'] = cmp.mapping.select_next_item(),
       ['<C-e>'] = cmp.mapping.scroll_docs(-4),
       ['<C-y>'] = cmp.mapping.scroll_docs(4),
-      ['<C-l>'] = cmp.mapping.complete(),
       ['<C-c>'] = cmp.mapping.close(),
-      ['<CR>'] = cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Insert,
-        select = true,
-      }),
-      ["<Tab>"] = cmp.mapping(function(fallback)
-        local luasnip = require('luasnip')
-        if cmp.visible() then
-          cmp.select_next_item()
-        elseif luasnip.expand_or_jumpable() == 1 then
-          luasnip.expand_or_jump()
-        elseif has_words_before() then
-          cmp.complete()
-        else
-          fallback()
-        end
-      end, { "i", "s" }),
-      ["<S-Tab>"] = cmp.mapping(function()
-        local luasnip = require('luasnip')
-        if cmp.visible() then
-          cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) == 1 then
-          luasnip.jump(-1)
-        end
-      end, { "i", "s" }),
+      ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true, }),
+      ["<Tab>"] = sel_next,
+      ['<C-j>'] = sel_next,
+      ["<C-k>"] = sel_prev,
     },
     snippet = {
       expand = function(args)
