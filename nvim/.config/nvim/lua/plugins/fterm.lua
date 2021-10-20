@@ -1,5 +1,10 @@
 local M = {}
 
+function M.chdir()
+  local dir = vim.fn.expand('%:p:h')
+  require('FTerm').run('cd ' .. dir)
+end
+
 function M.config()
   vim.cmd[[command! -nargs=0 FTermToggle lua require("FTerm").toggle()]]
 
@@ -13,10 +18,14 @@ function M.config()
     border = 'single' -- or 'double'
   })
 
-  vim.api.nvim_set_keymap('t', '<esc>',
-    [[(&ft == 'fzf' || &ft == 'nnn') ? '<esc>' : '<C-\><C-n>:FTermToggle<CR>']],
-    { silent = true, noremap = true, expr = true }
-  )
+  vim.cmd[[
+    augroup my_fterm
+      au FileType FTerm tno <buffer> <C-m> <C-\><C-n>:FTermToggle<CR>
+    augroup END
+  ]]
+
+  vim.api.nvim_set_keymap('n', '<leader>tc',
+      [[<cmd>lua require('plugins.fterm').chdir()<cr>]], { noremap = true, silent = true })
 end
 
 return M

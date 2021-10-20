@@ -146,7 +146,7 @@ end
 
 local function init_plugins_keymaps()
   -- terminal
-  cmd('<leader>tt', 'FTermToggle')
+  cmd('<C-m>', 'FTermToggle')
 
   -- inline edit
   cmd('<leader>e', 'InlineEdit')
