@@ -185,7 +185,7 @@ default_border 1pixel
 bar {
     font pango: Source Code Pro, FontAwesome 10
     position top
-    status_command i3status-rs ~/.config/i3status-rs/config.toml
+    status_command i3status-rs
     colors {
         separator #666666
         background #222222
