@@ -20,7 +20,7 @@ function M.config()
 
   vim.cmd[[
     augroup my_fterm
-      au FileType FTerm tno <buffer> <C-m> <C-\><C-n>:FTermToggle<CR>
+      au FileType FTerm tno <buffer> <C-x> <C-\><C-n>:FTermToggle<CR>
     augroup END
   ]]
 
