@@ -1,10 +1,6 @@
 " Maintainer: Kyle Laker <kyle@laker.email>
 " Last Change: 2020 Jul 11
 
-if exists("b:current_syntax")
-    syntax clear
-endif
-
 setlocal iskeyword+=-,$,.
 syntax case match
 
@@ -103,6 +99,7 @@ syntax match riscvDirective "\<\.float\>"
 syntax match riscvDirective "\<\.double\>"
 syntax match riscvDirective "\<\.set\>"
 syntax match riscvDirective "\<\.attribute\>"
+syntax match riscvDirective "\<\.end\>"
 
 " Instructions
 " loads
