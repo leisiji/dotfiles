@@ -2,7 +2,7 @@
 local M = {}
 local lsp_util = require('vim.lsp.util')
 
-local function current_fun_cb(_, _, result, _, _)
+local function current_fun_cb(_, result, _, _)
   vim.b.current_func_name =  ''
 
   if type(result) ~= 'table' then
