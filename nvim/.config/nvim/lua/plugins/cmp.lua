@@ -11,7 +11,6 @@ local has_words_before = function()
 end
 
 local function config_snip()
-  --vim.g.vsnip_snippet_dir = string.format("%s/snippets", fn.stdpath('config'))
   require('nvim-autopairs').setup()
   require('luasnip.loaders.from_vscode').load({
     paths = {
@@ -19,9 +18,10 @@ local function config_snip()
       fn.stdpath('config').."/snippets"
     }
   })
-  require("nvim-autopairs.completion.cmp").setup(
-    { map_cr = true, map_complete = true, auto_select = true }
-  )
+
+  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+  local cmp = require('cmp')
+  cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
 end
 
 function M.config()
@@ -38,7 +38,7 @@ function M.config()
     else
       fallback()
     end
-  end, { 'i', 's' })
+  end, { 'i', 's', 'c' })
 
   local sel_prev = cmp.mapping(function(fallback)
     local luasnip = require('luasnip')
@@ -49,7 +49,7 @@ function M.config()
     else
       fallback()
     end
-  end, { "i", "s" })
+  end, { 'i', 's', 'c' })
 
   cmp.setup {
     mapping = {
