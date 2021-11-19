@@ -127,6 +127,8 @@ local function init_nvim_keys()
   cmd('<leader>z', 'call v:lua.MyWinZoomToggle()')
   cmd('<M-q>', [[exe('tabn '.g:last_active_tab)]])
   cmd('<M-s>', [[let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>]]) -- remove trailing whitespace
+  cmd('<leader>L', '20winc >')
+  cmd('<leader>H', '20winc <')
 
   ino('<C-j>', '<Down>')
   ino('<C-k>', '<Up>')
