@@ -8,6 +8,10 @@
       {
         "language": "make",
         "path": "make.json"
+      },
+      {
+        "language": "markdown",
+        "path": "markdown.json"
       }
     ]
   }

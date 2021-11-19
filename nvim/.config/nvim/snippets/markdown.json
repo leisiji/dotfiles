@@ -1,0 +1,7 @@
+{
+	"puml" : {
+		"body": "```puml\n@startuml\nhidefootbox\nautonumber\n@enduml```\n",
+		"prefix": "puml",
+		"description": "puml"
+	}
+}
