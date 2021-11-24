@@ -69,12 +69,42 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 zstyle ':completion:files' sort false
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
+my_exe() {
+	zle push-line
+	BUFFER="$1"
+	zle accept-line
+}
+
 # 补全 bat
 addBat () {
 	RBUFFER="${t} | bat"
+	zle accept-line
 }
 zle -N addBat
 bindkey '\ea' addBat
+
+my-fzf-cd() {
+	local dirs=$(fd --type d --maxdepth 1 --hidden)
+	if [[ -z "$dirs" ]]; then
+		my_exe "exa -l"
+		return 0
+	fi
+	local dir
+	if [[ $(echo ${dirs} | wc -w) -eq 1 ]]; then
+		dir=${dirs}
+	else
+		dir="$(echo ${dirs} | fzf --reverse --height 40%)"
+		if [[ -z "$dir" ]]; then
+			zle redisplay
+			return 0
+		fi
+	fi
+	my_exe "cd ${dir}"
+	unset dir
+}
+zle -N my-fzf-cd
+bindkey '\ej' my-fzf-cd
+
 bindkey -s '\eq' 'cd ..\n'
 bindkey -s '\el' 'exa -l\n'
 bindkey -s '\es' 'git status .\n'
