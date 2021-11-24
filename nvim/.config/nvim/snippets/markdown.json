@@ -1,6 +1,6 @@
 {
 	"puml" : {
-		"body": "```puml\n@startuml\nhidefootbox\nautonumber\n@enduml```\n",
+		"body": "```puml\n@startuml\nhidefootbox\nautonumber\n@enduml\n```\n",
 		"prefix": "puml",
 		"description": "puml"
 	}
