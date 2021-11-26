@@ -228,7 +228,7 @@ local global_cfg = {
   showtabline = 2;
   updatetime = 500;
   shortmess = 'aoOTIcF';
-  completeopt = 'menuone,noselect';
+  completeopt = 'menu,menuone,noselect';
   tabline = '%!v:lua.mytabline()',
   guifont = 'Source Code Pro:h22'
 }
@@ -268,6 +268,7 @@ vim.cmd([[
     au FocusGained * :checkt
     au WinEnter * if ! &cursorline | setlocal cul | endif
     au TextYankPost * silent! lua vim.highlight.on_yank{ higroup = "IncSearch", timeout = 700 }
+    au Filetype lua lua require('plugins.lua_dev').config()
   augroup END
 ]])
 

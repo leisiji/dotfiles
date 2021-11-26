@@ -20,7 +20,7 @@ packer.startup(function()
   -- lsp
   use { 'neovim/nvim-lspconfig', event = 'BufReadPre', opt = true, config = function () require('plugins.lspconfig').lsp_config() end }
   use { 'mfussenegger/nvim-jdtls', opt = true, ft = { 'java' }, config = function () require('plugins.java').config() end }
-  use { 'folke/lua-dev.nvim', opt = true, ft = { 'lua' }, config = function () require('plugins.lua_dev').config() end }
+  --use { 'folke/lua-dev.nvim', opt = true, ft = { 'lua' }, config = function () require('plugins.lua_dev').config() end }
   use { 'simrat39/symbols-outline.nvim', opt = true, cmd = 'SymbolsOutline' }
   use { 'rmagatti/goto-preview', opt = true, cmd = 'GotoPreview', config = function () require('plugins.goto_preview').config() end }
   use { 'ldelossa/calltree.nvim', opt = true, cmd = {'CallTreeI', 'CallTreeO'}, config = function () require('plugins.calltree').config() end }
@@ -28,7 +28,7 @@ packer.startup(function()
   use {
     'hrsh7th/nvim-cmp', opt = true, event = 'InsertEnter',
     requires = {
-      'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-cmdline',
       'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', 'rafamadriz/friendly-snippets',
       'windwp/nvim-autopairs', 'tpope/vim-surround'
     },

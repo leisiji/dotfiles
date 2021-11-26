@@ -66,24 +66,26 @@ function M.config()
         require('luasnip').lsp_expand(args.body)
       end,
     },
-    sources = {
-      {
-        name = 'buffer',
-        opts = {
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' },
+      { name = 'path' },
+      { name = 'buffer', option = {
           get_bufnrs = function()
             local bufs = {}
             for _, win in ipairs(vim.api.nvim_list_wins()) do
               bufs[vim.api.nvim_win_get_buf(win)] = true
             end
             return vim.tbl_keys(bufs)
-          end
-        }
+          end }
       },
-      { name = 'nvim_lsp' },
-      { name = 'path' },
-      { name = 'luasnip' },
-    },
+    })
   }
+
+  cmp.setup.cmdline('/', { sources = { { name = 'buffer' } } })
+  cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } })
+  })
 
   vim.schedule(function ()
     config_snip()
