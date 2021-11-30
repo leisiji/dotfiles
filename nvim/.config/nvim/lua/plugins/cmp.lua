@@ -56,7 +56,7 @@ function M.config()
       ['<C-e>'] = cmp.mapping.scroll_docs(-4),
       ['<C-y>'] = cmp.mapping.scroll_docs(4),
       ['<C-c>'] = cmp.mapping.close(),
-      ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true, }),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
       ["<Tab>"] = sel_next,
       ['<C-j>'] = sel_next,
       ["<C-k>"] = sel_prev,
