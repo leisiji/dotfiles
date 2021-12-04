@@ -1,9 +1,6 @@
-### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-	command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-	command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-fi
-source "$HOME/.zinit/bin/zinit.zsh"
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+source "${ZINIT_HOME}/zinit.zsh"
+
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of Zinit installer's chunk
@@ -55,7 +52,7 @@ zpcompinit; zpcdreplay
 zinit wait="1" lucid light-mode for \
 	zsh-users/zsh-autosuggestions \
 	hlissner/zsh-autopair \
-	zdharma/fast-syntax-highlighting \
+	zdharma-continuum/fast-syntax-highlighting \
 	zsh-users/zsh-completions \
 	Aloxaf/fzf-tab \
 	wfxr/forgit
@@ -117,3 +114,13 @@ precmd () {
 PROMPT='
 %~
 > '
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
+### End of Zinit's installer chunk
