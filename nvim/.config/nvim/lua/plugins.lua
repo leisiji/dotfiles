@@ -24,6 +24,7 @@ packer.startup(function()
   use { 'simrat39/symbols-outline.nvim', opt = true, cmd = 'SymbolsOutline' }
   use { 'rmagatti/goto-preview', opt = true, cmd = 'GotoPreview', config = function () require('plugins.goto_preview').config() end }
   use { 'ldelossa/calltree.nvim', opt = true, cmd = {'CallTreeI', 'CallTreeO'}, config = function () require('plugins.calltree').config() end }
+  use { 'folke/lua-dev.nvim', opt = true, ft = 'lua', config = function () require('plugins.lua_dev').config() end }
 
   use {
     'hrsh7th/nvim-cmp', opt = true, event = 'InsertEnter',

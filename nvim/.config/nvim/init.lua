@@ -268,7 +268,6 @@ vim.cmd([[
     au FocusGained * :checkt
     au WinEnter * if ! &cursorline | setlocal cul | endif
     au TextYankPost * silent! lua vim.highlight.on_yank{ higroup = "IncSearch", timeout = 700 }
-    au Filetype lua lua require('plugins.lua_dev').config()
   augroup END
 ]])
 
