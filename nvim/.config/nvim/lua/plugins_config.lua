@@ -1,28 +1,45 @@
 local M = {}
 
--- galaxyline
-COLORS = require('zephyr')
-VI_MODES = {
-  n = { COLORS.orange,   '  NORMAL ' }, i = { COLORS.green, '  INSERT ' },
-  v = { COLORS.blue,  '  VISUAL ' }, V = { COLORS.blue,  '  V-LINE ' },
-  [''] = { COLORS.blue, '  VISUAL ' }, c = { COLORS.violet, '  COMMAND ' },
-  t = { COLORS.yellow, '  TERMINAL ' },
-}
+function M.colorscheme()
+  local onedarkpro = require('onedarkpro')
+  onedarkpro.setup({
+    colors = { cursorline = '#4B4B4B' },
+    hlgroups = {
+      LspReferenceRead = { fg = "${bg}", bg = "${yellow}" },
+      LspReferenceWrite = { fg = "${bg}", bg = "${yellow}" },
+      LspReferenceText = { fg = "${bg}", bg = "${yellow}" },
+      TabLineSel = { fg = "${bg}", bg = "${blue}" }
+    },
+    options = {
+      cursorline = true,
+    },
+  })
+  onedarkpro.load()
+end
 
+-- galaxyline
 function M.statusline()
+  local colors = require("onedarkpro").get_colors("onedark")
+  local vi_modes = {
+    n = { colors.orange,   '  NORMAL ' }, i = { colors.green, '  INSERT ' },
+    v = { colors.blue,  '  VISUAL ' }, V = { colors.blue,  '  V-LINE ' },
+    [''] = { colors.blue, '  VISUAL ' }, c = { colors.purple, '  COMMAND ' },
+    t = { colors.yellow, '  TERMINAL ' },
+  }
+
   local galaxyline = require('galaxyline')
   local sec = galaxyline.section
 
   sec.left[1] = {
     ViMode = {
       provider = function()
-        local mode = VI_MODES[vim.fn.mode()]
+        local mode = vi_modes[vim.fn.mode()]
         if mode ~= nil then
           vim.cmd('hi GalaxyViMode guibg='..mode[1])
           return mode[2]
         end
       end,
-      highlight = {COLORS.bg, COLORS.bg, 'bold'}
+      highlight = {colors.bg, colors.bg, 'bold'}
     }
   }
   sec.left[2] = { func = { provider = { function() return vim.b.current_func_name end }, icon = '  λ ' } }

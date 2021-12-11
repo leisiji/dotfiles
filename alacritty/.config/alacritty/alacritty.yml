@@ -17,7 +17,7 @@ scrolling:
     multiplier: 3
 
 font:
-    size: 9.0
+    size: 12.0
     normal: 
         family: Source Code Pro
     bold:   
@@ -33,32 +33,37 @@ font:
 draw_bold_text_with_bright_colors: false
 
 colors:
-  # Default colors
   primary:
-    background: '#1c1b19'
-    foreground: '#fce8c3'
+    background: "#1e1e1e"
+    foreground: "#abb2bf"
 
-  # Normal colors
   normal:
-    black:   '#1c1b19'
-    red:     '#ef2f27'
-    green:   '#519f50'
-    yellow:  '#fbb829'
-    blue:    '#2c78bf'
-    magenta: '#e02c6d'
-    cyan:    '#0aaeb3'
-    white:   '#d0bfa1'
+    black: "#1e1e1e"
+    red: "#e06c75"
+    green: "#98c379"
+    yellow: "#e5c07b"
+    blue: "#61afef"
+    magenta: "#c678dd"
+    cyan: "#56b6c2"
+    white: "#abb2bf"
 
-  # Bright colors
   bright:
-    black:   '#918175'
-    red:     '#f75341'
-    green:   '#98bc37'
-    yellow:  '#fed06e'
-    blue:    '#68a8e4'
-    magenta: '#ff5c8f'
-    cyan:    '#53fde9'
-    white:   '#fce8c3'
+    black: "#3f3f3f"
+    red: "#e06c75"
+    green: "#98c379"
+    yellow: "#e5c07b"
+    blue: "#61afef"
+    magenta: "#c678dd"
+    cyan: "#56b6c2"
+    white: "#bfc5ce"
+
+  cursor:
+    text: CellBackground
+    cursor: CellForeground # syntax-cursor-color
+
+  selection:
+    text: CellForeground
+    background: "#3e4452"
 
 bell:
     animation: EaseOutExpo

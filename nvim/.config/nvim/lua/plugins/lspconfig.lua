@@ -62,14 +62,14 @@ local function all_lsp_config(lsp)
 end
 
 local function lsp_basic()
-  local bg = COLORS.yellow
-  local fg = COLORS.bg
-  local exec = vim.cmd
+  --local bg = COLORS.yellow
+  --local fg = COLORS.bg
+  --local exec = vim.cmd
   local lsp = vim.lsp
 
-  exec('hi LspReferenceRead guibg=' .. bg .. ' guifg=' .. fg)
-  exec('hi LspReferenceWrite guibg=' .. bg .. ' guifg=' .. fg)
-  exec('hi LspReferenceText guibg=' .. bg .. ' guifg=' .. fg)
+  --exec('hi LspReferenceRead guibg=' .. bg .. ' guifg=' .. fg)
+  --exec('hi LspReferenceWrite guibg=' .. bg .. ' guifg=' .. fg)
+  --exec('hi LspReferenceText guibg=' .. bg .. ' guifg=' .. fg)
 
   lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {

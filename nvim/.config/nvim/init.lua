@@ -258,7 +258,6 @@ require('plugins')
 
 vim.cmd([[
   set list lcs=tab:→\ ,trail:·
-  colorscheme zephyr
   hi TabLineSel cterm=bold gui=bold guifg=#282a36 guibg=#61afef
   hi TabLine cterm=underline ctermfg=15 ctermbg=242 guifg=#282a36 guibg=#bbc2cf
   augroup user_plugin
