@@ -25,6 +25,7 @@ syntax region AArch64Comment start="//" end="$" keepend contains=AArch64Special
 syntax region AArch64Comment start="/\*" end="\*/" contains=AArch64Special
 " MachO uses ; as a comment leader
 syntax region AArch64Comment start=";" end="$" contains=todo
+syntax region AArch64Comment start="@" end="$" contains=todo
 
 syntax keyword AArch64Directive .align .p2align
 syntax keyword AArch64Directive .global .globl .type
