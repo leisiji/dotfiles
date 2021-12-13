@@ -8,7 +8,7 @@ packer.startup(function()
 
   use { 'wbthomason/packer.nvim' }
   use { 'nvim-lua/plenary.nvim' }
-  use { 'nathom/filetype.nvim' }
+  use { 'nathom/filetype.nvim', config = PLUGS_CFG.filetype }
 
   use { 'leisiji/fzf_utils', opt = true, cmd = 'FzfCommand', requires = { 'vijaymarupudi/nvim-fzf' } }
 

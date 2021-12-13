@@ -81,6 +81,18 @@ function M.gitsigns()
   ]]
 end
 
+function M.filetype()
+  require("filetype").setup({
+    overrides = {
+      extensions = {
+        bp = "javascript",
+        rc = "rc",
+        hal = "hal"
+      },
+    },
+})
+end
+
 -- inline edit
 vim.g.inline_edit_new_buffer_command = "tabedit"
 vim.g.inline_edit_autowrite = 1
