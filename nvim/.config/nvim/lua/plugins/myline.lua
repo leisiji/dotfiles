@@ -15,18 +15,17 @@ local vi_modes = {
 
 function M.vi_mode()
   local mode = vi_modes[vim.fn.mode()]
-  vim.cmd('hi ViMode guifg='..mode[1])
+  vim.cmd('hi ViMode cterm=bold gui=bold guifg=' .. colors.black .. ' guibg='..mode[1])
   return mode[2]
 end
 
-function M.lsp_func()
-  return 'λ '..vim.b.current_func_name
-end
-
-function M.config()
+function M.load()
+  vim.b.current_func_name = ''
   local vi_mode = [[%#ViMode#%{luaeval('require("plugins.myline").vi_mode()')}]]
-  local current_func = [[%#MyLspFunc#%{luaeval('require("plugins.myline").lsp_func()')}]]
-  vim.wo.statusline = vi_mode .. current_func
+  local current_func = [[%#MyLspFunc#%{'  λ  '.b:current_func_name}]]
+  local buffer_type = [[%#MyBufferTypeP#%{&filetype}]]
+  local maxline = [[%#maxline#%{line('$')}]]
+  vim.wo.statusline = vi_mode .. current_func .. '%=' .. ' | ' .. buffer_type .. ' | ' .. maxline .. ' '
 end
 
 return M

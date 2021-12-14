@@ -17,37 +17,6 @@ function M.colorscheme()
   onedarkpro.load()
 end
 
--- galaxyline
-function M.statusline()
-  local colors = require("onedarkpro").get_colors("onedark")
-  local vi_modes = {
-    n = { colors.orange,   '  NORMAL ' }, i = { colors.green, '  INSERT ' },
-    v = { colors.blue,  '  VISUAL ' }, V = { colors.blue,  '  V-LINE ' },
-    [''] = { colors.blue, '  VISUAL ' }, c = { colors.purple, '  COMMAND ' },
-    t = { colors.yellow, '  TERMINAL ' },
-  }
-
-  local galaxyline = require('galaxyline')
-  local sec = galaxyline.section
-
-  sec.left[1] = {
-    ViMode = {
-      provider = function()
-        local mode = vi_modes[vim.fn.mode()]
-        if mode ~= nil then
-          vim.cmd('hi GalaxyViMode guibg='..mode[1])
-          return mode[2]
-        end
-      end,
-      highlight = {colors.bg, colors.bg, 'bold'}
-    }
-  }
-  sec.left[2] = { func = { provider = { function() return vim.b.current_func_name end }, icon = '  λ ' } }
-  sec.right[1] = { BufferType = { provider = 'FileTypeName', separator = ' | ', } }
-  sec.right[2] = { MaxLine = { provider = function () return vim.fn.line('$') end, separator = ' | ', } }
-  galaxyline.load_galaxyline()
-end
-
 -- treesitter
 function M.treesitter()
   require('nvim-treesitter.configs').setup {

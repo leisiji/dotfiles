@@ -266,8 +266,6 @@ require('plugins')
 
 vim.cmd([[
   set list lcs=tab:→\ ,trail:·
-  hi TabLineSel cterm=bold gui=bold guifg=#282a36 guibg=#61afef
-  hi TabLine cterm=underline ctermfg=15 ctermbg=242 guifg=#282a36 guibg=#bbc2cf
   augroup user_plugin
     autocmd!
     au TabLeave * let g:last_active_tab = tabpagenr() " tab switch
@@ -275,6 +273,7 @@ vim.cmd([[
     au FocusGained * :checkt
     au WinEnter * if ! &cursorline | setlocal cul | endif
     au TextYankPost * silent! lua vim.highlight.on_yank{ higroup = "IncSearch", timeout = 700 }
+    au WinEnter * lua require('plugins.myline').load()
   augroup END
 ]])
 
@@ -283,3 +282,5 @@ vim.g.clipboard = {
   copy = { ['+'] = {'tmux', 'load-buffer', '-'}, ['*'] = {'tmux', 'load-buffer', '-'}, },
   paste = { ['+'] = {'tmux', 'save-buffer', '-'}, ['*'] = {'tmux', 'save-buffer', '-'}, },
 }
+
+require('plugins.myline').load()

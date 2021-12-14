@@ -14,7 +14,6 @@ packer.startup(function()
 
   -- colorscheme and statusline
   use { 'olimorris/onedarkpro.nvim', config = PLUGS_CFG.colorscheme }
-  use { 'glepnir/galaxyline.nvim', opt = true, event = 'BufRead' , config = function () PLUGS_CFG.statusline() end }
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = PLUGS_CFG.treesitter }
 
   -- lsp
