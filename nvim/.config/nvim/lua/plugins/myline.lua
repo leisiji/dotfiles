@@ -11,12 +11,13 @@ local vi_modes = {
   t = { colors.yellow, '  TERMINAL ' },
 }
 
--- %#GalaxyViMode#%{luaeval('require("galaxyline").component_decorator')("ViMode")}%#Galaxyfunc#%{luaeval('require("galaxyline").component_decorator')("func")}%=%#BufferTypeSeparator# | %#GalaxyBufferType#%{luaeval('require("galaxyline").component_decorator')("BufferType")}%#MaxLineSeparator# | %#GalaxyMaxLine#%{luaeval('require("galaxyline").component_decorator')("MaxLine")}
-
 function M.vi_mode()
   local mode = vi_modes[vim.fn.mode()]
-  vim.cmd('hi ViMode cterm=bold gui=bold guifg=' .. colors.black .. ' guibg='..mode[1])
-  return mode[2]
+  if mode ~= nil then
+    vim.cmd('hi ViMode cterm=bold gui=bold guifg=' .. colors.black .. ' guibg='..mode[1])
+    return mode[2]
+  end
+  return ''
 end
 
 function M.load()
