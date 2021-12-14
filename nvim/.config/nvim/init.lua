@@ -273,7 +273,7 @@ vim.cmd([[
     au FocusGained * :checkt
     au WinEnter * if ! &cursorline | setlocal cul | endif
     au TextYankPost * silent! lua vim.highlight.on_yank{ higroup = "IncSearch", timeout = 700 }
-    au WinEnter * lua require('plugins.myline').load()
+    au BufWinEnter * lua require('plugins.myline').load()
   augroup END
 ]])
 
@@ -282,5 +282,3 @@ vim.g.clipboard = {
   copy = { ['+'] = {'tmux', 'load-buffer', '-'}, ['*'] = {'tmux', 'load-buffer', '-'}, },
   paste = { ['+'] = {'tmux', 'save-buffer', '-'}, ['*'] = {'tmux', 'save-buffer', '-'}, },
 }
-
-require('plugins.myline').load()
