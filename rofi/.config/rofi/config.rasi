@@ -18,5 +18,5 @@ configuration {
 	kb-accept-entry: "Return,KP_Enter";
 	kb-row-tab: "";
 	kb-remove-char-back: "BackSpace,Shift+BackSpace";
-	theme: "themes/nord";
 }
+@theme "themes/nord"
