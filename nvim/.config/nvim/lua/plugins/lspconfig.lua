@@ -58,24 +58,19 @@ local function all_lsp_config(lsp)
   lsp.vimls.setup(default_cfg)
   lsp.kotlin_language_server.setup(default_cfg)
   lsp.gopls.setup(default_cfg)
-  lsp.rust_analyzer.setup(default_cfg)
 end
 
 local function lsp_basic()
-  --local bg = COLORS.yellow
-  --local fg = COLORS.bg
-  --local exec = vim.cmd
   local lsp = vim.lsp
 
-  --exec('hi LspReferenceRead guibg=' .. bg .. ' guifg=' .. fg)
-  --exec('hi LspReferenceWrite guibg=' .. bg .. ' guifg=' .. fg)
-  --exec('hi LspReferenceText guibg=' .. bg .. ' guifg=' .. fg)
-
-  lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(
+  lsp.handlers['textDocument/publishDiagnostics'] = lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
       virtual_text = false, underline = true, signs = true,
       update_in_insert = false
     })
+
+  lsp.handlers['textDocument/hover'] = lsp.with(lsp.handlers.hover, { border = 'single' })
+  lsp.handlers['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, { border = 'single' })
 end
 
 function M.lsp_config()
