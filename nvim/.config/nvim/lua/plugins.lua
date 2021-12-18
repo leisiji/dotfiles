@@ -52,7 +52,7 @@ packer.startup(function()
   --use { 'mcchrish/nnn.vim', opt = true, cmd = 'NnnPicker', config = function () require('plugins.nnn').setup() end  }
   use { 'kyazdani42/nvim-tree.lua', opt = true, cmd = {'NvimTreeToggle', 'NvimTreeFindFile'}, config = function () require('plugins.nvim_tree').setup() end }
 
-  if vim.fn.executable('fcitx5') then
-    use { 'lilydjwg/fcitx.vim', opt = true, branch = 'fcitx5', event = 'InsertEnter' }
+  if vim.fn.executable('fcitx5') == 1 then
+    use { 'h-hg/fcitx.nvim', opt = true, event = 'InsertEnter' }
   end
 end)
