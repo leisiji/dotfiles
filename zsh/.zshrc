@@ -21,9 +21,9 @@ export SAVEHIST=$HISTSIZE
 export MANPAGER='nvim +Man!'
 export EDITOR='nvim'
 export PATH="$PATH:$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.cargo/bin"
-export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND='fd --type d'
+export FZF_ALT_C_COMMAND='fd --type d --strip-cwd-prefix'
 export FZF_DEFAULT_OPTS='--ansi --tabstop=1 --bind ctrl-d:half-page-down,ctrl-u:half-page-up,tab:down,ctrl-p:toggle-preview,alt-j:preview-down,alt-k:preview-up --reverse --cycle --preview-window=hidden:65%'
 export GTAGSLABEL='native-pygments'
 export GOPROXY='https://goproxy.io,direct'
