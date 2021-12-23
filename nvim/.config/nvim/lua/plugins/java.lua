@@ -47,6 +47,7 @@ end
 function M.jdtls_start()
   local config = {
     cmd = {
+      -- or start with 'jdtls', vim.fn.getcwd() .. '/jdtls_workspace'
       'java',
       '-Declipse.application=org.eclipse.jdt.ls.core.id1',
       '-Dosgi.bundles.defaultStartLevel=4',
