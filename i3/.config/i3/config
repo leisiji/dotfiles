@@ -53,6 +53,7 @@ bindsym $mod+h focus left
 #bindsym $mod+j focus down
 #bindsym $mod+k focus up
 bindsym $mod+l focus right
+bindsym $mod+q focus right
 # scroll window without changing focus when mouse on the other side
 bindsym $mod+j exec --no-startup-id "xdotool click 5"
 bindsym $mod+k exec --no-startup-id "xdotool click 4"
