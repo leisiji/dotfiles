@@ -4,7 +4,9 @@
 setlocal iskeyword+=-,$,.
 syntax case match
 
-syntax match   riscvComment    /#.*/
+syntax match RiscvMacro  /#[_a-zA-Z][_a-zA-Z0-9]*/
+syntax match   riscvComment    /# .*/
+syntax region  RiscvCommentRegion start="/\*" end="\*/"
 syntax match   riscvTodo       /\v\c<(fix(me)?|note[s]?|todo|issue|bug|task)[:]?/ containedin=.*Comment
 " Decimal numbers
 syntax match   riscvNumber     /\<[-]\?\d\+\>/
@@ -347,5 +349,7 @@ hi def link riscvCSRegister     Function
 hi def link riscvLabel          Label
 hi def link riscvDirective      Preproc
 hi def link riscvInstruction    Keyword
+hi def link RiscvCommentRegion  Comment
+hi def link RiscvMacro          Macro
 
 let b:current_syntax = "riscv"

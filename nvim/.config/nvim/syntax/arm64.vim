@@ -6,10 +6,6 @@
 " License:  Redistribute under the same terms as Vim itself
 " Purpose:  ARM64 Assembly Syntax Highlighting
 
-if exists("b:current_syntax")
-  finish
-endif
-
 " NOTE(compnerd) '.' is not in the default keyword, and will cause the
 " directives to not be recognised by default.  Also add '!' to ensure that the
 " increment operator is matched.
