@@ -103,53 +103,71 @@ local function tn(lhs, rhs) mapkey('t', lhs, rhs, opts) end
 local function xcmd(lhs, rhs) mapkey('x', lhs, format(':%s<cr>', rhs), {}) end
 
 local function init_nvim_keys()
-  nn('<M-a>', '<C-w>w')
-  nn('H', '^')
-  nn('L', '$')
-  nn('<C-j>', '5j')
-  nn('<C-k>', '5k')
-  nn('<M-e>', '5e')
-  nn('<M-b>', '5b')
-  nn('<M-w>', '5w')
-  nn('<M-y>', '<C-r>')
-  nn('<leader>p', '"+p')
+  local nn_maps = {
+    {'<M-a>', '<C-w>w'},
+    {'H', '^'},
+    {'L', '$'},
+    {'<C-j>', '5j'},
+    {'<C-k>', '5k'},
+    {'<M-e>', '5e'},
+    {'<M-b>', '5b'},
+    {'<M-w>', '5w'},
+    {'<M-y>', '<C-r>'},
+    {'<leader>p', '"+p'},
+  }
+  local vn_maps = {
+    {'H', '^'},
+    {'L', 'g_'},
+    {'<C-j>', '5j'},
+    {'<C-k>', '5k'},
+    {'<M-e>', '5e'},
+    {'<M-b>', '5b'},
+    {'<leader>y', '"+y'},
+  }
+  local cmd_maps = {
+    {'<leader>s', 'w'},
+    {'<M-l>', 'tabn'},
+    {'<M-h>', 'tabp'},
+    {'<leader><leader>q', 'qa'},
+    {'<leader>q', 'call v:lua.MyQuit()'},
+    {'K', 'call v:lua.MyshowDocument()'},
+    {'<leader>rt', '%retab!'},
+    {'<leader>z', 'call v:lua.MyWinZoomToggle()'},
+    {'<M-q>', [[exe('tabn '.g:last_active_tab)]]},
+    {'<M-s>', [[let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>]]}, -- remove trailing whitespace
+    {'<leader>L', '20winc >'},
+    {'<leader>H', '20winc <'},
+  }
+  local ino_maps = {
+    {'<C-j>', '<Down>'},
+    {'<C-k>', '<Up>'},
+    -- insert mode like bash
+    {'<C-b>', '<Left>'},
+    {'<C-f>', '<Right>'},
+    {'<C-a>', '<Home>'},
+    {'<C-e>', '<End>'},
+    {'<C-d>', '<Delete>'},
+    {'<C-h>', '<Backspace>'},
+    {'<M-b>', '<C-Left>'},
+    {'<M-f>', '<C-Right>'},
+    {'<M-d>', '<C-o>diw'},
+  }
+
+  for _, v in ipairs(nn_maps) do
+    nn(v[1], v[2])
+  end
   for i = 1, 9, 1 do
     nn(format('<M-%d>', i), format('%dgt', i))
   end
-
-  vn('H', '^')
-  vn('L', 'g_')
-  vn('<C-j>', '5j')
-  vn('<C-k>', '5k')
-  vn('<M-e>', '5e')
-  vn('<M-b>', '5b')
-  vn('<leader>y', '"+y')
-
-  cmd('<leader>s', 'w')
-  cmd('<M-l>', 'tabn')
-  cmd('<M-h>', 'tabp')
-  cmd('<leader><leader>q', 'qa')
-  cmd('<leader>q', 'call v:lua.MyQuit()')
-  cmd('K', 'call v:lua.MyshowDocument()')
-  cmd('<leader>rt', '%retab!')
-  cmd('<leader>z', 'call v:lua.MyWinZoomToggle()')
-  cmd('<M-q>', [[exe('tabn '.g:last_active_tab)]])
-  cmd('<M-s>', [[let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>]]) -- remove trailing whitespace
-  cmd('<leader>L', '20winc >')
-  cmd('<leader>H', '20winc <')
-
-  ino('<C-j>', '<Down>')
-  ino('<C-k>', '<Up>')
-  -- insert mode like bash
-  ino('<C-b>', '<Left>')
-  ino('<C-f>', '<Right>')
-  ino('<C-a>', '<Home>')
-  ino('<C-e>', '<End>')
-  ino('<C-d>', '<Delete>')
-  ino('<C-h>', '<Backspace>')
-  ino('<M-b>', '<C-Left>')
-  ino('<M-f>', '<C-Right>')
-  ino('<M-d>', '<C-o>diw')
+  for _, v in ipairs(vn_maps) do
+    vn(v[1], v[2])
+  end
+  for _, v in ipairs(cmd_maps) do
+    cmd(v[1], v[2])
+  end
+  for _, v in ipairs(ino_maps) do
+    ino(v[1], v[2])
+  end
 
   tn('<M-e>', '<C-\\><C-n>')
 end
