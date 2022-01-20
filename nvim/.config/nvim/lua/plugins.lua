@@ -48,7 +48,7 @@ packer.startup(function()
   use { 'lewis6991/gitsigns.nvim', opt = true, event = 'BufRead', config = PLUGS_CFG.gitsigns }
 
   use { 'leisiji/simple_indent', opt = true, event = 'BufRead' }
-  use { 'leisiji/indent-o-matic', config = function () require('indent-o-matic').setup { max_lines = 2048 } end }
+  use { 'leisiji/indent-o-matic', config = PLUGS_CFG.indent }
   use { 'AndrewRadev/inline_edit.vim', opt = true, cmd = 'InlineEdit' }
   use { 'numToStr/FTerm.nvim', opt = true, cmd = 'FTermToggle', config = function () require('plugins.fterm').config() end }
   use { 'leisiji/interestingwords.nvim', opt = true, cmd = 'Interestingwords' }

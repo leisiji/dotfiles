@@ -49,6 +49,15 @@ function M.filetype()
 })
 end
 
+function M.indent()
+  require('indent-o-matic').setup({
+    max_lines = 2048,
+    filetype_rust = { standard_widths = { 4 } },
+    filetype_python = { standard_widths = { 4 } },
+    filetype_markdown = { standard_widths = { 4 } },
+  })
+end
+
 -- inline edit
 vim.g.inline_edit_new_buffer_command = "tabedit"
 vim.g.inline_edit_autowrite = 1
