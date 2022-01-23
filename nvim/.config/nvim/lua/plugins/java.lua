@@ -31,23 +31,33 @@ local function jls_setup()
   )
 end
 
+local function find_file(path, pattern)
+  local scan = require'plenary.scandir'
+  local files = scan.scan_dir(path, { hidden = true, depth = 1 })
+  for _, jar in ipairs(files) do
+    if string.find(jar, pattern) then
+      return jar
+    end
+  end
+end
+
 function M.config()
   if vim.env[android_sdk_env] then
     jls_setup()
   else
-    vim.api.nvim_exec([[
+    local jar = find_file('/usr/share/java/jdtls/plugins', 'org.eclipse.equinox.launcher_[%w%p]+.jar')
+    vim.api.nvim_exec(string.format([[
       augroup java
         au!
-        au FileType java lua require('plugins.java').jdtls_start()
+        au FileType java lua require('plugins.java').jdtls_start('%s')
       augroup end
-    ]], false)
+    ]], jar), false)
   end
 end
 
-function M.jdtls_start()
+function M.jdtls_start(jar)
   local config = {
     cmd = {
-      -- or start with 'jdtls', vim.fn.getcwd() .. '/jdtls_workspace'
       'java',
       '-Declipse.application=org.eclipse.jdt.ls.core.id1',
       '-Dosgi.bundles.defaultStartLevel=4',
@@ -58,7 +68,7 @@ function M.jdtls_start()
       '--add-modules=ALL-SYSTEM',
       '--add-opens', 'java.base/java.util=ALL-UNNAMED',
       '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-      '-jar', '/usr/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
+      '-jar', jar,
       '-configuration', vim.fn.stdpath('cache') .. '/jdtls/config_linux',
       '-data', vim.fn.getcwd() .. '/jdtls_workspace'
     },
