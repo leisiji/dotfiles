@@ -19,7 +19,7 @@ packer.startup(function()
   -- lsp
   use { 'neovim/nvim-lspconfig', event = 'BufReadPre', opt = true, config = function () require('plugins.lspconfig').lsp_config() end }
   use { 'mfussenegger/nvim-jdtls', opt = true, ft = { 'java' }, config = function () require('plugins.java').config() end }
-  use { 'simrat39/symbols-outline.nvim', opt = true, cmd = 'SymbolsOutline' }
+  use { 'leisiji/symbols-outline.nvim', opt = true, cmd = 'SymbolsOutline' }
   use { 'rmagatti/goto-preview', opt = true, cmd = 'GotoPreview', config = function () require('plugins.goto_preview').config() end }
   use { 'folke/lua-dev.nvim', opt = true, ft = { 'lua' }, config = function () require('plugins.lua_dev').config() end }
   use { 'simrat39/rust-tools.nvim', opt = true, ft = {'rust'}, config = function () require('plugins.rust-tools').config() end }
@@ -55,7 +55,7 @@ packer.startup(function()
   use { 'npxbr/glow.nvim', opt = true, cmd = 'Glow' }
   use { 'junegunn/vim-easy-align', opt = true, cmd = 'EasyAlign' }
   use { 'norcalli/nvim-colorizer.lua', opt = true, ft = { 'html', 'css', 'help', 'lua', 'vim' }, config = function () require'colorizer'.setup() end }
-  --use { 'mcchrish/nnn.vim', opt = true, cmd = 'NnnPicker', config = function () require('plugins.nnn').setup() end  }
+
   use { 'kyazdani42/nvim-tree.lua', opt = true, cmd = {'NvimTreeToggle', 'NvimTreeFindFile'}, config = function () require('plugins.nvim_tree').setup() end }
 
   if vim.fn.executable('fcitx5') == 1 then

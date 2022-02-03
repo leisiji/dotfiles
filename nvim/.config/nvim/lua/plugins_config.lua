@@ -62,4 +62,9 @@ end
 vim.g.inline_edit_new_buffer_command = "tabedit"
 vim.g.inline_edit_autowrite = 1
 
+vim.g.symbols_outline = {
+  auto_preview = false,
+  width = 40,
+}
+
 return M
