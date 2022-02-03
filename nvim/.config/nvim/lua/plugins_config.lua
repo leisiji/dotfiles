@@ -5,9 +5,6 @@ function M.colorscheme()
   onedarkpro.setup({
     colors = { cursorline = '#4B4B4B' },
     hlgroups = {
-      LspReferenceRead = { fg = "${bg}", bg = "${yellow}" },
-      LspReferenceWrite = { fg = "${bg}", bg = "${yellow}" },
-      LspReferenceText = { fg = "${bg}", bg = "${yellow}" },
       TabLineSel = { fg = "${bg}", bg = "${blue}" }
     },
     options = {
