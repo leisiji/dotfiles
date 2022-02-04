@@ -8,7 +8,7 @@ I'm using stow to manage my dotfiles.
 
 Minimal development on terminal:
 
-```sh
+```bash
 # yay installation
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
@@ -19,22 +19,40 @@ sudo pacman -S zsh fzf tmux lua ueberzug universal-ctags global xclip clang
 sudo pacman -S neovim nodejs npm bear yarn
 yay -S glow nnn-nerd
 
-# language-server, linter, formatter
-yarn global add bash-language-server vim-language-server \
-            diagnostic-languageserver markdownlint-cli pyright
-yay -S ccls kotlin-language-server lua-language-server-git \
-        groovy-language-server-git jdtls gopls google-java-format
-pip3 install --user cmake-language-server
-
 pip3 install --user pynvim compiledb
 
 # tools based on rust
 cargo install hexyl bat ripgrep fd-find exa git-delta gitui
 ```
 
+language-server, linter, formatter
+
+```bash
+yarn global add \
+    bash-language-server \
+    vim-language-server \
+    markdownlint-cli \
+    pyright \
+    diagnostic-languageserver
+
+yay -S \
+    clang \
+    kotlin-language-server \
+    lua-language-server-git \
+    groovy-language-server-git \
+    jdtls \
+    gopls \
+    google-java-format \
+    cppcheck
+
+pip3 install --user cmake-language-server black
+
+cargo install stylua
+```
+
 Desktop:
 
-```sh
+```bash
 sudo pacman -S zathura zathura-pdf-mupdf alacritty
 yay -S vnote nerd-fonts-source-code-pro
 
@@ -45,14 +63,14 @@ yay -S alsa-utils ttf-font-awesome powerline-fonts
 
 Chinese input method:
 
-```sh
+```bash
 sudo pacman -S fcitx5 fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-chinese-addons \
         fcitx5-material-color adobe-source-han-sans-otc-fonts
 ```
 
 Plugin Manager:
 
-```sh
+```bash
 # packer.nvim
 git clone https://github.com/wbthomason/packer.nvim \
     ~/.local/share/nvim/site/pack/packer/start/packer.nvim

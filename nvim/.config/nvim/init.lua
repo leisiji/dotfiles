@@ -226,7 +226,7 @@ local function init_plugins_keymaps()
   cmd('<M-o>', 'lua vim.diagnostic.open_float()')
   ino('<M-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
   cmd('<leader><space>f', 'lua vim.lsp.buf.formatting()')
-  vn('<leader><space>f', '<cmd>lua vim.lsp.buf.range_formatting()<cr>')
+  cmd('<leader><space>f', 'Format')
   cmd('<leader><leader>p', 'GotoPreview')
 
   cmd('<leader>v', 'SymbolsOutline')

@@ -24,7 +24,6 @@ local function all_lsp_config(lsp)
   compe.labelDetailsSupport = true
   compe.deprecatedSupport = true
   compe.commitCharactersSupport = true
-  --compe.tagSupport = true
   compe.resolveSupport = { properties = { 'documentation', 'detail', 'additionalTextEdits' } }
   default_cfg = { on_attach = on_attach, capabilities = cap }
 
