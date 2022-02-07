@@ -26,7 +26,7 @@ packer.startup(function()
 
   use {
     'ldelossa/litee-calltree.nvim', opt = true,
-    requires = {'ldelossa/litee.nvim'}, cmd = {'CallTreeI', 'CallTreeO'},
+    requires = {'ldelossa/litee.nvim'}, cmd = 'CallTreeI',
     wants = 'litee.nvim',
     config = function () require('plugins.calltree').config() end
   }
@@ -46,6 +46,7 @@ packer.startup(function()
 
   -- Git
   use { 'lewis6991/gitsigns.nvim', opt = true, event = 'BufRead', config = PLUGS_CFG.gitsigns }
+  use { 'sindrets/diffview.nvim', opt = true, cmd = {'DiffviewOpen', 'DiffviewFileHistory'}, config = function () require('plugins.diffview').config() end }
 
   use { 'leisiji/simple_indent', opt = true, event = 'BufRead' }
   use { 'leisiji/indent-o-matic', config = PLUGS_CFG.indent }

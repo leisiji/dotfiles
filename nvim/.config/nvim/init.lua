@@ -57,11 +57,6 @@ function _G.GetFileDir()
   return fn.fnamemodify(fn.expand('%:p:h'), ':.')
 end
 
-function _G.DiffViewFile()
-  exec('DiffviewOpen -uno -- ' .. fn.expand('%'))
-  exec('DiffviewToggleFiles')
-end
-
 function _G.MyOpenLastplace()
   local l = fn.line("'\"")
   if l >= 1 and l <= fn.line('$') and vim.bo.filetype ~= 'commit' then
@@ -230,6 +225,8 @@ local function init_plugins_keymaps()
   cmd('<leader><leader>p', 'GotoPreview')
 
   cmd('<leader>v', 'SymbolsOutline')
+
+  cmd('<leader><leader>d', 'DiffviewOpen --untracked-files=true -- %')
 end
 
 init_nvim_keys()
