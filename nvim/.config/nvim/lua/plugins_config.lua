@@ -3,7 +3,12 @@ local M = {}
 function M.colorscheme()
   local onedarkpro = require('onedarkpro')
   onedarkpro.setup({
-    colors = { cursorline = '#4B4B4B' },
+    colors = {
+      cursorline = '#4B4B4B',
+        onedark = {
+          bg = "#1e1e1e",
+        },
+    },
     hlgroups = {
       TabLineSel = { fg = "${bg}", bg = "${blue}" }
     },
