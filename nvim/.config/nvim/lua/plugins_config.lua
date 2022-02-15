@@ -66,7 +66,7 @@ vim.g.inline_edit_autowrite = 1
 
 vim.g.symbols_outline = {
   auto_preview = false,
-  width = 40,
+  width = 25,
 }
 
 return M
