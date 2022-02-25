@@ -19,7 +19,7 @@ packer.startup(function()
   -- lsp
   use { 'neovim/nvim-lspconfig', event = 'BufReadPre', opt = true, config = function () require('plugins.lspconfig').lsp_config() end }
   use { 'mfussenegger/nvim-jdtls', opt = true, ft = { 'java' }, config = function () require('plugins.java').config() end }
-  use { 'leisiji/symbols-outline.nvim', opt = true, cmd = 'SymbolsOutline' }
+  use { 'simrat39/symbols-outline.nvim', opt = true, cmd = 'SymbolsOutline' }
   use { 'rmagatti/goto-preview', opt = true, cmd = 'GotoPreview', config = function () require('plugins.goto_preview').config() end }
   use { 'folke/lua-dev.nvim', opt = true, ft = { 'lua' }, config = function () require('plugins.lua_dev').config() end }
   use { 'simrat39/rust-tools.nvim', opt = true, ft = {'rust'}, config = function () require('plugins.rust-tools').config() end }
