@@ -32,6 +32,12 @@ function M.setup()
     git = {
       enable = false,
     },
+    actions = {
+      open_file = {
+        quit_on_open = true,
+        resize_window = true,
+      }
+    }
   })
 end
 
