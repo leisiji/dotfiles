@@ -23,7 +23,6 @@ function M.config()
     },
   }
   require('rust-tools').setup(opts)
-  vim.api.nvim_set_keymap('n', '<leader>ca', ':RustCodeAction<cr>', { noremap = true })
 end
 
 return M

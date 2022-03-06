@@ -216,7 +216,7 @@ local function init_plugins_keymaps()
   -- lsp
   cmd('<M-k>', 'lua vim.lsp.buf.hover()')
   cmd('<leader>rn', 'lua vim.lsp.buf.rename()')
-  cmd('<leader>ca', 'lua vim.lsp.buf.codeaction()')
+  cmd('<leader>ca', 'lua vim.lsp.buf.code_action()')
   cmd('<leader>a', 'lua vim.diagnostic.goto_next()')
   cmd('<M-o>', [[lua vim.diagnostic.open_float({border='single'})]])
   ino('<M-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
