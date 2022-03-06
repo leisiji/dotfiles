@@ -22,7 +22,7 @@ packer.startup(function()
   use { 'simrat39/symbols-outline.nvim', opt = true, cmd = 'SymbolsOutline' }
   use { 'rmagatti/goto-preview', opt = true, cmd = 'GotoPreview', config = function () require('plugins.goto_preview').config() end }
   use { 'folke/lua-dev.nvim', opt = true, ft = { 'lua' }, config = function () require('plugins.lua_dev').config() end }
-  use { 'simrat39/rust-tools.nvim', opt = true, ft = {'rust'}, config = function () require('plugins.rust-tools').config() end }
+  --use { 'simrat39/rust-tools.nvim', opt = true, ft = {'rust'}, config = function () require('plugins.rust-tools').config() end }
 
   use {
     'ldelossa/litee-calltree.nvim', opt = true,
