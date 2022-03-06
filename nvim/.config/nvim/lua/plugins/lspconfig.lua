@@ -25,7 +25,13 @@ local function all_lsp_config(lsp)
   compe.deprecatedSupport = true
   compe.commitCharactersSupport = true
   compe.resolveSupport = { properties = { 'documentation', 'detail', 'additionalTextEdits' } }
-  default_cfg = { on_attach = on_attach, capabilities = cap }
+  default_cfg = {
+    on_attach = on_attach,
+    capabilities = cap,
+    flags = {
+      debounce_text_changes = 500,
+    }
+  }
 
   local diagnosticls = {
     filetypes = { 'markdown' };
@@ -51,13 +57,14 @@ local function all_lsp_config(lsp)
       '--all-scopes-completion', '--completion-style=detailed', '--header-insertion=iwyu' },
     on_attach = on_attach, capabilities = cap
   })
-  lsp.pyright.setup(default_cfg)
-  lsp.cmake.setup(default_cfg)
-  lsp.bashls.setup(default_cfg)
-  lsp.vimls.setup(default_cfg)
-  lsp.kotlin_language_server.setup(default_cfg)
-  lsp.gopls.setup(default_cfg)
-  lsp.rust_analyzer.setup(default_cfg)
+
+  local servers = {
+    'pyright', 'cmake', 'bashls', 'vimls', 'kotlin_language_server',
+    'gopls', 'rust_analyzer', 'tsserver'
+  }
+  for _, server in pairs(servers) do
+    lsp[server].setup(default_cfg)
+  end
 end
 
 local function lsp_basic()

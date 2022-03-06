@@ -33,7 +33,9 @@ yarn global add \
     vim-language-server \
     markdownlint-cli \
     pyright \
-    diagnostic-languageserver
+    diagnostic-languageserver \
+    typescript-language-server \
+    typescript
 
 yay -S \
     clang \
