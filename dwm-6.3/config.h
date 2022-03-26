@@ -5,24 +5,22 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "CaskaydiaCove Nerd Font Mono:size=12" };
-static const char col_cyan[]        = "#70c0ba";
-static const char bluegray[]        = "#2e3440";
-static const char white[]           = "#eeeeee";
-static const char black[]           = "#232831";
-static const char bg_normal[]           = "#1C1F24";
-static const char bg_focus[]           = "#282C34";
-static const char fg_normal[]           = "#606672";
+static const char *fonts[]          = { "CaskaydiaCove Nerd Font Mono:size=10" };
+static const char red[]                   = "#b2265a";
+static const char black[]                 = "#232831";
+static const char bg_normal[]             = "#1C1F24";
+static const char bg_focus[]              = "#282C34";
+static const char fg_normal[]             = "#606672";
 static const char selected_border_color[] = "#6A6A6B";
 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { fg_normal, bg_normal, black },
-	[SchemeSel]  = { white, bg_focus, selected_border_color },
+	[SchemeSel]  = { red, bg_focus, selected_border_color },
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -71,8 +69,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY|ShiftMask,             XK_h,      setmfact,       {.f = -0.05} },
+	{ MODKEY|ShiftMask,             XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
@@ -88,6 +86,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|Mod1Mask,              XK_q,      quit,           {0} },
+	{ MODKEY,                       XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_space,  togglefloating, {0} },
 	//{ MODKEY,                       XK_Return, zoom,           {0} },
 	//{ MODKEY,                       XK_space,  setlayout,      {0} },
