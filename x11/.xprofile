@@ -8,6 +8,7 @@ eDP=$(xrandr | grep 'eDP[-]*[[:digit:]] connected')
 if [ ! -z "$hdmi" ]; then
 	xrandr --output ${hdmi%% *} --auto --primary --output ${eDP%% *} --off
 fi
+xmodmap ~/.Xmodmap
 
 dateblocks ()
 {
