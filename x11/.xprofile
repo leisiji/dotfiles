@@ -8,11 +8,12 @@ eDP=$(xrandr | grep 'eDP[-]*[[:digit:]] connected')
 if [ ! -z "$hdmi" ]; then
 	xrandr --output ${hdmi%% *} --auto --primary --output ${eDP%% *} --off
 fi
+
 dateblocks ()
 {
 	while :; do
-		date=$(date date "+%m-%d-%a %H:%M")
-		xsetroot -name "$(date)"
+		date=$(date "+%m-%d,%a %H:%M")
+		xsetroot -name "${date}"
 		sleep 60
 	done
 }
