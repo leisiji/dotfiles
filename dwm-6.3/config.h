@@ -6,7 +6,7 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "CaskaydiaCove Nerd Font Mono:size=10" };
-static const char red[]                   = "#b2265a";
+static const char purple[]                   = "#9a7ae1";
 static const char black[]                 = "#232831";
 static const char bg_normal[]             = "#1C1F24";
 static const char bg_focus[]              = "#282C34";
@@ -16,7 +16,7 @@ static const char selected_border_color[] = "#6A6A6B";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { fg_normal, bg_normal, black },
-	[SchemeSel]  = { red, bg_focus, selected_border_color },
+	[SchemeSel]  = { purple, bg_focus, selected_border_color },
 };
 
 /* tagging */
