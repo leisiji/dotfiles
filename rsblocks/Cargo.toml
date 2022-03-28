@@ -1,0 +1,45 @@
+[package]
+name = "rsblocks"
+version = "0.1.20"
+authors = ["mustafa salih <mustafasalih1991@gmail.com>"]
+edition = "2018"
+readme = "README.md"
+license = "MIT"
+keywords = ["linux", "dwm","statusbar"]
+repository = "https://github.com/MustafaSalih1993/rsblocks"
+description = "a multi threaded status bar for dwm window manager for linux"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+alsa = "0.5"
+chrono = "0.4"
+mpd = "0.0.12"
+nix = "0.22"
+battery = "0.7"
+dbus = "0.9"
+serde_yaml = "0.8.20"
+lazy_static = "1.4.0"
+
+# Async deps
+futures = "0.3.15"
+async-trait = "0.1.50"
+
+[dependencies.async-std]
+version = "1.9.0"
+features = ["attributes"]
+
+[dependencies.tokio]
+version = "1.6.0"
+features = ["full"]
+
+[dependencies.serde]
+version = "1.0.120"
+features = ["derive"]
+
+[dependencies.breadx]
+version = "0.2.9"
+features = ["async"]
+
+[dependencies.minreq]
+version = "2.2"
+features = ["https", "json-using-serde"]

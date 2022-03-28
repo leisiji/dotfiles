@@ -10,13 +10,5 @@ if [ ! -z "$hdmi" ]; then
 fi
 xmodmap ~/.Xmodmap
 
-dateblocks ()
-{
-	while :; do
-		date=$(date "+%m-%d,%a %H:%M")
-		xsetroot -name "${date}"
-		sleep 60
-	done
-}
-dateblocks &
+rsblocks
 # vim:tw=78:ts=4:ft=sh
