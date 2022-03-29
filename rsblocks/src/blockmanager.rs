@@ -20,12 +20,8 @@ impl BlockManager {
     // TODO let the user control the indexes of the blocks
     pub fn update(&mut self, data: ThreadsData) {
         match data {
-            ThreadsData::Spotify(x) => self.blocks[0] = x,
-            ThreadsData::Mpd(x) => self.blocks[1] = x,
             ThreadsData::Sound(x) => self.blocks[2] = x,
-            ThreadsData::Weather(x) => self.blocks[3] = x,
             ThreadsData::NetSpeed(x) => self.blocks[4] = x,
-            ThreadsData::BitCoins(x) => self.blocks[5] = x,
             ThreadsData::PubIp(x) => self.blocks[6] = x,
             ThreadsData::LocalIp(x) => self.blocks[7] = x,
             ThreadsData::Disk(x) => self.blocks[8] = x,
@@ -34,7 +30,6 @@ impl BlockManager {
             ThreadsData::LoadAvg(x) => self.blocks[11] = x,
             ThreadsData::Brightness(x) => self.blocks[12] = x,
             ThreadsData::Battery(x) => self.blocks[13] = x,
-            ThreadsData::Uptime(x) => self.blocks[14] = x,
             ThreadsData::Time(x) => self.blocks[15] = x,
         }
         let mut x = String::new();

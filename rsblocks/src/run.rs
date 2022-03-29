@@ -41,18 +41,6 @@ pub async fn run(mut blocks: BlockManager) {
         task::spawn(b);
     }
 
-    // spotify task
-    if CONFIG.spotify.enabled {
-        let b = init_block(tx.clone(), spotify::get_spotify, CONFIG.spotify.delay);
-        task::spawn(b);
-    }
-
-    // mpd task
-    if CONFIG.mpd.enabled {
-        let b = init_block(tx.clone(), mpd::get_mpd_current, CONFIG.mpd.delay);
-        task::spawn(b);
-    }
-
     // volume task
     if CONFIG.volume.enabled {
         let b = init_block(tx.clone(), volume::get_volume, CONFIG.volume.delay);
@@ -71,12 +59,6 @@ pub async fn run(mut blocks: BlockManager) {
         task::spawn(b);
     }
 
-    // Weather task
-    if CONFIG.weather.enabled {
-        let b = init_block(tx.clone(), weather::get_weather, CONFIG.weather.delay);
-        task::spawn(b);
-    }
-
     // Battery task
     if CONFIG.battery.enabled {
         let b = init_block(tx.clone(), battery::get_battery, CONFIG.battery.delay);
@@ -89,12 +71,6 @@ pub async fn run(mut blocks: BlockManager) {
         task::spawn(b);
     }
 
-    // Uptime task
-    if CONFIG.uptime.enabled {
-        let b = init_block(tx.clone(), uptime::get_uptime, CONFIG.uptime.delay);
-        task::spawn(b);
-    }
-
     // brightness task
     if CONFIG.brightness.enabled {
         let b = init_block(
@@ -102,12 +78,6 @@ pub async fn run(mut blocks: BlockManager) {
             brightness::get_brightness,
             CONFIG.brightness.delay,
         );
-        task::spawn(b);
-    }
-
-    // BTC task
-    if CONFIG.bitcoins.enabled {
-        let b = init_block(tx.clone(), bitcoins::get_price, CONFIG.bitcoins.delay);
         task::spawn(b);
     }
 

@@ -10,5 +10,5 @@ if [ ! -z "$hdmi" ]; then
 fi
 xmodmap ~/.Xmodmap
 
-rsblocks
+rsblocks&
 # vim:tw=78:ts=4:ft=sh

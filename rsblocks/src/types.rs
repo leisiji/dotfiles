@@ -1,20 +1,15 @@
 #[derive(Debug, Clone)]
 pub enum ThreadsData {
-    Mpd(String),
     Sound(String),
     Disk(String),
     Memory(String),
     Time(String),
-    Weather(String),
     Battery(String),
     CpuTemp(String),
-    Uptime(String),
-    Spotify(String),
     LoadAvg(String),
     NetSpeed(String),
     PubIp(String),
     LocalIp(String),
-    BitCoins(String),
     Brightness(String),
 }
 
@@ -25,16 +20,12 @@ pub struct Config {
     pub memory: Memory,
     pub disk: Disk,
     pub volume: Volume,
-    pub weather: Weather,
     pub battery: Battery,
     pub cpu_temperature: CpuTemp,
     pub uptime: Uptime,
-    pub mpd: Mpd,
-    pub spotify: Spotify,
     pub loadavg: LoadAvg,
     pub pub_ip: PubIp,
     pub local_ip: LocalIp,
-    pub bitcoins: BitCoins,
     pub brightness: Brightness,
 }
 
@@ -67,15 +58,6 @@ pub struct Volume {
 }
 
 #[derive(Clone)]
-pub struct Weather {
-    pub city: String,
-    pub format: String,
-    pub icon: String,
-    pub enabled: bool,
-    pub delay: f64,
-}
-
-#[derive(Clone)]
 pub struct Battery {
     pub icon: String,
     pub enabled: bool,
@@ -91,22 +73,6 @@ pub struct CpuTemp {
 
 #[derive(Clone)]
 pub struct Uptime {
-    pub icon: String,
-    pub enabled: bool,
-    pub delay: f64,
-}
-
-#[derive(Clone)]
-pub struct Mpd {
-    pub icon: String,
-    pub host: String,
-    pub port: String,
-    pub enabled: bool,
-    pub delay: f64,
-}
-
-#[derive(Clone)]
-pub struct Spotify {
     pub icon: String,
     pub enabled: bool,
     pub delay: f64,
@@ -137,14 +103,6 @@ pub struct PubIp {
 #[derive(Clone)]
 pub struct LocalIp {
     pub icon: String,
-    pub enabled: bool,
-    pub delay: f64,
-}
-
-#[derive(Clone)]
-pub struct BitCoins {
-    pub icon: String,
-    pub symbol: String,
     pub enabled: bool,
     pub delay: f64,
 }
