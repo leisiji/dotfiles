@@ -1,8 +1,8 @@
+mod blockmanager;
 mod config;
 mod run;
 mod types;
 mod utils;
-mod blockmanager;
 
 use std::env;
 use std::process;
@@ -13,7 +13,6 @@ use lazy_static::initialize;
 
 #[async_std::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    
     initialize(&config::CONFIG);
 
     // if X display is not found then exit the program

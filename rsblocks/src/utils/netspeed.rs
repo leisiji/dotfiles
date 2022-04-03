@@ -1,7 +1,7 @@
 use crate::config::CONFIG;
 use crate::types::ThreadsData;
-use std::fs::read_to_string;
 use async_std::task::sleep;
+use std::fs::read_to_string;
 use std::time::Duration;
 
 pub async fn get_netspeed() -> ThreadsData {
