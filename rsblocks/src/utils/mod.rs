@@ -1,11 +1,8 @@
 pub mod battery;
-pub mod brightness;
 pub mod cpu;
 pub mod disk;
 pub mod load_average;
-pub mod local_ip;
 pub mod memory;
 pub mod netspeed;
-pub mod pub_ip;
 pub mod time;
 pub mod volume;

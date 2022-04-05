@@ -1,36 +1,9 @@
-# This is the full configuration template available for rsblocks.
-# NOTE: the (delay) is in **SECONDS** and the float point "." is required.
-
 seperator: '┃'
 
-
-# Time always running, no enabled option for this
 time:
   delay: 60.0
   format: '%d %b, %I:%M %p'
   icon: ''
-
-# Display brightness percentage
-brightness:
-  icon: ''
-  delay: 60.0
-  enabled: false
-  # read the output of the command "ls /sys/class/backlight" to match with the path below
-  path: '/sys/class/backlight/intel_backlight'
-
-
-# public ip address
-pub_ip:
-  delay: 120.0
-  enabled: false
-  icon: ''
-
-# local ip address
-local_ip:
-  icon: ''
-  enabled: false
-  interface: 'wlo1' #network interface required for now..
-  delay: 120.0
 
 # ethernet/wifi bandwith (no delay for this since it will calculate the bandwith every second)
 netspeed:
@@ -39,34 +12,23 @@ netspeed:
   recieve_icon: ''
   transmit_icon: ''
 
-
 memory:
   delay: 60.0
   enabled: true
-  icon: '▦'
-
-
-disk:
-  delay: 1200.0
-  enabled: false
-  icon: ''
-
+  icon: ''
 
 battery:
   delay: 3000.0
   enabled: true
   icon: ''
 
-
 cpu_temperature:
   delay: 120.0
   enabled: true
   icon: ''
 
-
-# cpu load average from the last minute
 loadavg:
-  delay: 30.0
+  delay: 60.0
   enabled: true
   icon: ''
 

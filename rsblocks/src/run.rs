@@ -29,17 +29,6 @@ pub async fn run(mut blocks: BlockManager) {
         let b = init_block(tx.clone(), load_average::get_load_avg, CONFIG.loadavg.delay);
         task::spawn(b);
     }
-    // public ip task
-    if CONFIG.pub_ip.enabled {
-        let b = init_block(tx.clone(), pub_ip::get_pub_ip, CONFIG.pub_ip.delay);
-        task::spawn(b);
-    }
-
-    // local ip task
-    if CONFIG.local_ip.enabled {
-        let b = init_block(tx.clone(), local_ip::get_local_ip, CONFIG.local_ip.delay);
-        task::spawn(b);
-    }
 
     // volume task
     if CONFIG.volume.enabled {
@@ -68,16 +57,6 @@ pub async fn run(mut blocks: BlockManager) {
     // Cpu temperature task
     if CONFIG.cpu_temperature.enabled {
         let b = init_block(tx.clone(), cpu::get_cpu_temp, CONFIG.cpu_temperature.delay);
-        task::spawn(b);
-    }
-
-    // brightness task
-    if CONFIG.brightness.enabled {
-        let b = init_block(
-            tx.clone(),
-            brightness::get_brightness,
-            CONFIG.brightness.delay,
-        );
         task::spawn(b);
     }
 

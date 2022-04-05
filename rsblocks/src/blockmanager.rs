@@ -22,13 +22,10 @@ impl BlockManager {
         match data {
             ThreadsData::Sound(x) => self.blocks[2] = x,
             ThreadsData::NetSpeed(x) => self.blocks[4] = x,
-            ThreadsData::PubIp(x) => self.blocks[6] = x,
-            ThreadsData::LocalIp(x) => self.blocks[7] = x,
             ThreadsData::Disk(x) => self.blocks[8] = x,
             ThreadsData::Memory(x) => self.blocks[9] = x,
             ThreadsData::CpuTemp(x) => self.blocks[10] = x,
             ThreadsData::LoadAvg(x) => self.blocks[11] = x,
-            ThreadsData::Brightness(x) => self.blocks[12] = x,
             ThreadsData::Battery(x) => self.blocks[13] = x,
             ThreadsData::Time(x) => self.blocks[15] = x,
         }

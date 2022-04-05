@@ -16,7 +16,6 @@ chrono = "0.4"
 mpd = "0.0.12"
 nix = "0.22"
 battery = "0.7"
-dbus = "0.9"
 serde_yaml = "0.8.20"
 lazy_static = "1.4.0"
 
@@ -39,7 +38,3 @@ features = ["derive"]
 [dependencies.breadx]
 version = "0.2.9"
 features = ["async"]
-
-[dependencies.minreq]
-version = "2.2"
-features = ["https", "json-using-serde"]

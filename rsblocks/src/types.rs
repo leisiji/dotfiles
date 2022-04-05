@@ -8,9 +8,6 @@ pub enum ThreadsData {
     CpuTemp(String),
     LoadAvg(String),
     NetSpeed(String),
-    PubIp(String),
-    LocalIp(String),
-    Brightness(String),
 }
 
 #[derive(Clone)]
