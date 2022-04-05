@@ -132,6 +132,8 @@ local function init_nvim_keys()
     {'<M-s>', [[let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>]]}, -- remove trailing whitespace
     {'<leader>L', '20winc >'},
     {'<leader>H', '20winc <'},
+    {'<leader>K', '10winc +'},
+    {'<leader>J', '10winc -'},
   }
   local ino_maps = {
     {'<C-j>', '<Down>'},
@@ -183,7 +185,7 @@ local function init_plugins_keymaps()
 
   -- highlight group
   cmd('<leader>k', 'Interestingwords --toggle')
-  cmd('<leader>K', 'Interestingwords --remove_all')
+  cmd('<leader><leader>k', 'Interestingwords --remove_all')
   cmd('<leader>n', 'Interestingwords --navigate')
   cmd('<leader>N', 'Interestingwords --navigate b')
 
