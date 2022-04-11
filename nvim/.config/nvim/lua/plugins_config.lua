@@ -24,7 +24,7 @@ end
 -- treesitter
 function M.treesitter()
   require('nvim-treesitter.configs').setup {
-    ensure_installed = "maintained", highlight = { enable = true },
+    ensure_installed = "all", highlight = { enable = true },
   }
 end
 
