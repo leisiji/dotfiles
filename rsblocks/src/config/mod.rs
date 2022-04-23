@@ -12,25 +12,16 @@ mod pub_ip;
 mod spotify;
 mod time;
 mod uptime;
-mod volume;
 mod weather;
 
 use self::battery::Battery;
-use self::mpd::Mpd;
-use bitcoins::BitCoins;
-use brightness::Brightness;
 use cputemp::CpuTemp;
 use disk::Disk;
 use loadavg::LoadAvg;
-use local_ip::LocalIp;
 use memory::Memory;
 use netspeed::NetSpeed;
-use pub_ip::PubIp;
-use spotify::Spotify;
 use time::Time;
 use uptime::Uptime;
-use volume::Volume;
-use weather::Weather;
 
 use std::default::Default;
 use std::fs::File;
@@ -76,16 +67,7 @@ pub struct Config {
     pub disk: Disk,
 
     #[serde(default)]
-    pub volume: Volume,
-
-    #[serde(default)]
-    pub weather: Weather,
-
-    #[serde(default)]
     pub battery: Battery,
-
-    #[serde(default)]
-    pub brightness: Brightness,
 
     #[serde(default)]
     pub cpu_temperature: CpuTemp,
@@ -94,25 +76,10 @@ pub struct Config {
     pub uptime: Uptime,
 
     #[serde(default)]
-    pub mpd: Mpd,
-
-    #[serde(default)]
-    pub spotify: Spotify,
-
-    #[serde(default)]
     pub loadavg: LoadAvg,
 
     #[serde(default)]
     pub netspeed: NetSpeed,
-
-    #[serde(default)]
-    pub pub_ip: PubIp,
-
-    #[serde(default)]
-    pub local_ip: LocalIp,
-
-    #[serde(default)]
-    pub bitcoins: BitCoins,
 }
 
 impl Default for Config {
@@ -122,19 +89,11 @@ impl Default for Config {
             time: Default::default(),
             memory: Default::default(),
             disk: Default::default(),
-            volume: Default::default(),
-            weather: Default::default(),
             battery: Default::default(),
-            brightness: Default::default(),
             cpu_temperature: Default::default(),
             uptime: Default::default(),
-            mpd: Default::default(),
-            spotify: Default::default(),
             loadavg: Default::default(),
             netspeed: Default::default(),
-            pub_ip: Default::default(),
-            local_ip: Default::default(),
-            bitcoins: Default::default(),
         }
     }
 }

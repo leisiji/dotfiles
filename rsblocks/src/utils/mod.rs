@@ -5,4 +5,3 @@ pub mod load_average;
 pub mod memory;
 pub mod netspeed;
 pub mod time;
-pub mod volume;

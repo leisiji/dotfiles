@@ -3,7 +3,6 @@ name = "rsblocks"
 version = "0.1.20"
 authors = ["mustafa salih <mustafasalih1991@gmail.com>"]
 edition = "2018"
-readme = "README.md"
 license = "MIT"
 keywords = ["linux", "dwm","statusbar"]
 repository = "https://github.com/MustafaSalih1993/rsblocks"
@@ -11,7 +10,6 @@ description = "a multi threaded status bar for dwm window manager for linux"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-alsa = "0.5"
 chrono = "0.4"
 mpd = "0.0.12"
 nix = "0.22"

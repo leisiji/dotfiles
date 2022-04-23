@@ -20,7 +20,6 @@ impl BlockManager {
     // TODO let the user control the indexes of the blocks
     pub fn update(&mut self, data: ThreadsData) {
         match data {
-            ThreadsData::Sound(x) => self.blocks[2] = x,
             ThreadsData::NetSpeed(x) => self.blocks[4] = x,
             ThreadsData::Disk(x) => self.blocks[8] = x,
             ThreadsData::Memory(x) => self.blocks[9] = x,

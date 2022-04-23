@@ -1,6 +1,5 @@
 #[derive(Debug, Clone)]
 pub enum ThreadsData {
-    Sound(String),
     Disk(String),
     Memory(String),
     Time(String),
@@ -16,7 +15,6 @@ pub struct Config {
     pub time: Time,
     pub memory: Memory,
     pub disk: Disk,
-    pub volume: Volume,
     pub battery: Battery,
     pub cpu_temperature: CpuTemp,
     pub uptime: Uptime,
