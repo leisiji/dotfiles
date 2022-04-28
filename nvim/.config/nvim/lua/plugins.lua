@@ -1,6 +1,5 @@
 PLUGS_CFG = require('plugins_config')
 
-
 local packer = require('packer')
 local use = packer.use
 
@@ -58,6 +57,7 @@ packer.startup(function()
   use { 'norcalli/nvim-colorizer.lua', opt = true, ft = { 'html', 'css', 'help', 'lua', 'vim' }, config = function () require'colorizer'.setup() end }
 
   use { 'kyazdani42/nvim-tree.lua', opt = true, cmd = {'NvimTreeToggle', 'NvimTreeFindFile'}, config = function () require('plugins.nvim_tree').setup() end }
+  use { 'ethanholz/nvim-lastplace', config = function () require'nvim-lastplace'.setup{} end }
 
   if vim.fn.executable('fcitx5') == 1 then
     use { 'h-hg/fcitx.nvim', opt = true, event = 'InsertEnter' }

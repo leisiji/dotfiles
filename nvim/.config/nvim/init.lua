@@ -57,13 +57,6 @@ function _G.GetFileDir()
   return fn.fnamemodify(fn.expand('%:p:h'), ':.')
 end
 
-function _G.MyOpenLastplace()
-  local l = fn.line("'\"")
-  if l >= 1 and l <= fn.line('$') and vim.bo.filetype ~= 'commit' then
-    vim.cmd([[normal! g`"]])
-  end
-end
-
 function _G.MyQuit()
   local bufnrs = fn.win_findbuf(fn.bufnr())
   if #bufnrs > 1 or fn.expand('%') == '' or fn.tabpagenr('$') == 1 then
@@ -286,7 +279,6 @@ vim.cmd([[
   augroup user_plugin
     autocmd!
     au TabLeave * let g:last_active_tab = tabpagenr() " tab switch
-    au BufWinEnter * call v:lua.MyOpenLastplace()
     au FocusGained * :checkt
     au WinEnter * if ! &cursorline | setlocal cul | endif
     au TextYankPost * silent! lua vim.highlight.on_yank{ higroup = "IncSearch", timeout = 700 }
