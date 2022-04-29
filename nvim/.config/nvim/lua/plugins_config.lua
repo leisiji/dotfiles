@@ -31,7 +31,10 @@ end
 -- gitsigns
 function M.gitsigns()
   require('gitsigns').setup {
-    watch_index = { interval = 5000 },
+    watch_gitdir = {
+      interval = 5000,
+      follow_files = true
+    },
     keymaps = {
       noremap = true, buffer = true,
       ['n <leader><leader>n'] = '<cmd>lua require"gitsigns".next_hunk()<CR>',
