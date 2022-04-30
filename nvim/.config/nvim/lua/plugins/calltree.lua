@@ -1,10 +1,10 @@
 local M = {}
 
 function M.config()
-  require('litee.lib').setup({
-    panel = { orientation = "left", panel_size  = 80 },
+  require("litee.lib").setup({
+    panel = { orientation = "left", panel_size = 80 },
   })
-  require('litee.calltree').setup({
+  require("litee.calltree").setup({
     keymaps = {
       expand = "l",
       collapse = "h",
@@ -19,13 +19,12 @@ function M.config()
       close_panel_pop_out = "<Esc>",
       hide = "H",
       switch = "S",
-      focus = "f"
+      focus = "f",
     },
   })
-  vim.cmd[[
-    command! CallTreeI lua vim.lsp.buf.incoming_calls()
-    command! CallTreeO lua vim.lsp.buf.outgoing_calls()
-  ]]
+  local cmd = vim.api.nvim_create_user_command
+  cmd("CallTreeI", vim.lsp.buf.incoming_calls, {})
+  cmd("CallTreeO", vim.lsp.buf.outgoing_calls, {})
 end
 
 return M
