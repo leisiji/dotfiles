@@ -27,6 +27,8 @@ function M.config()
       a.nvim_set_keymap("t", "<C-x>", [[<C-\><C-n>:FTermToggle<CR>]], { noremap = true, silent = true })
     end,
   })
+  vim.api.nvim_set_keymap('n', '<leader>tc',
+      [[<cmd>lua require('plugins.fterm').chdir()<cr>]], { noremap = true, silent = true })
 end
 
 return M
