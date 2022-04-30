@@ -6,7 +6,8 @@ function M.chdir()
 end
 
 function M.config()
-  vim.cmd([[command! -nargs=0 FTermToggle lua require("FTerm").toggle()]])
+  local a = vim.api
+  a.nvim_create_user_command("FTermToggle", require("FTerm").toggle, { nargs = 0 })
 
   require("FTerm").setup({
     dimensions = {
@@ -19,8 +20,6 @@ function M.config()
   })
 
   local group = "my_fterm"
-  local a = vim.api
-  local bufnr = a.nvim_get_current_buf()
   a.nvim_create_augroup(group, { clear = true })
   a.nvim_create_autocmd({ "Filetype" }, {
     pattern = { "FTerm" },
