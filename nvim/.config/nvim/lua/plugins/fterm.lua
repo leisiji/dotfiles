@@ -1,13 +1,9 @@
 local M = {}
 
-function M.chdir()
-  local dir = vim.fn.expand("%:p:h")
-  require("FTerm").run("cd " .. dir)
-end
-
 function M.config()
   local a = vim.api
   a.nvim_create_user_command("FTermToggle", require("FTerm").toggle, { nargs = 0 })
+  local opts = { noremap = true, silent = true }
 
   require("FTerm").setup({
     dimensions = {
@@ -19,16 +15,11 @@ function M.config()
     border = "single", -- or 'double'
   })
 
-  local group = "my_fterm"
-  a.nvim_create_augroup(group, { clear = true })
-  a.nvim_create_autocmd({ "Filetype" }, {
-    pattern = { "FTerm" },
-    callback = function()
-      a.nvim_set_keymap("t", "<C-x>", [[<C-\><C-n>:FTermToggle<CR>]], { noremap = true, silent = true })
-    end,
-  })
-  vim.api.nvim_set_keymap('n', '<leader>tc',
-      [[<cmd>lua require('plugins.fterm').chdir()<cr>]], { noremap = true, silent = true })
+  vim.keymap.set("t", "<C-x>", require("FTerm").toggle, opts)
+  vim.keymap.set("n", "<leader>tc", function ()
+    local dir = vim.fn.expand("%:p:h")
+    require("FTerm").run("cd " .. dir)
+  end, opts)
 end
 
 return M

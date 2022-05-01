@@ -10,7 +10,7 @@ vim.g.loaded_zipPlugin = 1
 vim.g.loaded_fzf = 1
 
 local mapkey = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
+local keymap_opts = { noremap = true, silent = true }
 local format = string.format
 local fn = vim.fn
 local exec = vim.cmd
@@ -41,7 +41,7 @@ function _G.mytabline()
   return s
 end
 
-function _G.MyWinZoomToggle()
+local function zoom_toggle()
   local zoom = vim.t.zoom
   if zoom ~= nil and zoom == 1 then
     exec(vim.t.zoom_winrestcmd)
@@ -53,11 +53,7 @@ function _G.MyWinZoomToggle()
   end
 end
 
-function _G.GetFileDir()
-  return fn.fnamemodify(fn.expand("%:p:h"), ":.")
-end
-
-function _G.MyQuit()
+local function quit()
   local bufnrs = fn.win_findbuf(fn.bufnr())
   if #bufnrs > 1 or fn.expand("%") == "" or fn.tabpagenr("$") == 1 then
     exec("q")
@@ -66,7 +62,7 @@ function _G.MyQuit()
   end
 end
 
-function _G.MyshowDocument()
+local function show_documents()
   local filetype = vim.bo.filetype
   local word = fn.expand("<cword>")
 
@@ -82,24 +78,23 @@ local function cmd_gen(lhs, rhs)
   local gen_opts = { noremap = true }
   mapkey("n", lhs, format(":%s", rhs), gen_opts)
 end
-
 local function cmd(lhs, rhs)
-  mapkey("n", lhs, format("<cmd>%s<cr>", rhs), opts)
+  mapkey("n", lhs, format("<cmd>%s<cr>", rhs), keymap_opts)
 end
 local function ino(lhs, rhs)
-  mapkey("i", lhs, rhs, opts)
+  mapkey("i", lhs, rhs, keymap_opts)
 end
 local function nn(lhs, rhs)
-  mapkey("n", lhs, rhs, opts)
+  mapkey("n", lhs, rhs, keymap_opts)
 end
 local function vn(lhs, rhs)
-  mapkey("v", lhs, rhs, opts)
+  mapkey("v", lhs, rhs, keymap_opts)
 end
 local function tn(lhs, rhs)
-  mapkey("t", lhs, rhs, opts)
+  mapkey("t", lhs, rhs, keymap_opts)
 end
-local function xcmd(lhs, rhs)
-  mapkey("x", lhs, format(":%s<cr>", rhs), {})
+local function fmap(lhs, rhs)
+  vim.keymap.set("n", lhs, rhs, keymap_opts)
 end
 
 local function init_nvim_keys()
@@ -129,16 +124,23 @@ local function init_nvim_keys()
     { "<M-l>", "tabn" },
     { "<M-h>", "tabp" },
     { "<leader><leader>q", "qa" },
-    { "<leader>q", "call v:lua.MyQuit()" },
-    { "K", "call v:lua.MyshowDocument()" },
     { "<leader>rt", "%retab!" },
-    { "<leader>z", "call v:lua.MyWinZoomToggle()" },
-    { "<M-q>", [[exe('tabn '.g:last_active_tab)]] },
     { "<M-s>", [[let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>]] }, -- remove trailing whitespace
     { "<leader>L", "20winc >" },
     { "<leader>H", "20winc <" },
     { "<leader>K", "10winc +" },
     { "<leader>J", "10winc -" },
+  }
+  local func_maps = {
+    { "<leader>q", quit },
+    { "K", show_documents },
+    { "<leader>z", zoom_toggle },
+    {
+      "<M-q>",
+      function()
+        vim.cmd("tabn " .. vim.g.last_active_tab)
+      end,
+    },
   }
   local ino_maps = {
     { "<C-j>", "<Down>" },
@@ -170,70 +172,86 @@ local function init_nvim_keys()
   for _, v in ipairs(ino_maps) do
     ino(v[1], v[2])
   end
+  for _, v in ipairs(func_maps) do
+    fmap(v[1], v[2])
+  end
 
   tn("<M-e>", "<C-\\><C-n>")
 end
 
 local function init_plugins_keymaps()
-  -- terminal
-  cmd("<C-x>", "FTermToggle")
+  local cmds = {
+    -- terminal
+    { "<C-x>", "FTermToggle" },
 
-  -- inline edit
-  cmd("<leader>e", "InlineEdit")
+    -- inline edit
+    { "<leader>e", "InlineEdit" },
+
+    -- nvim tree
+    { "<leader>tj", "NvimTreeFindFile" },
+    { "<leader>tr", "NvimTreeToggle" },
+
+    -- interestingwords
+    { "<leader>k", "Interestingwords --toggle" },
+    { "<leader><leader>k", "Interestingwords --remove_all" },
+    { "<leader>n", "Interestingwords --navigate" },
+    { "<leader>N", "Interestingwords --navigate b" },
+
+    -- fzf_utils
+    { "<C-p>", "FzfCommand --files" },
+    { "<C-f>", "FzfCommand --lines" },
+    { "<C-r>", "FzfCommand --ctags" },
+    { "<leader>b", "FzfCommand --buffers" },
+    { "<leader><leader>m", "FzfCommand --man" },
+    { "<leader><leader>h", "FzfCommand --vim help" },
+    { "<leader>h", "FzfCommand --vim cmdHists" },
+    { "<leader>ft", "FzfCommand --vim filetypes" },
+    { "<leader>fu", "FzfCommand --gtags --update" },
+    { "<leader>fb", "FzfCommand --gtags --update-buffer" },
+    { "<M-f>", [[exe('FzfCommand --rg --all-buffers '.expand('<cword>'))]] },
+    { "<leader>ff", [[exe('FzfCommand --rg '.expand('<cword>')." ".expand('%'))]] },
+    { "<M-j>", "FzfCommand --lsp jump_def edit" },
+    { "<M-t>", "FzfCommand --lsp jump_def tab drop" },
+    { "<M-v>", "FzfCommand --lsp jump_def vsplit" },
+    { "<M-r>", "FzfCommand --lsp ref tab drop" },
+    { "<leader>ws", "FzfCommand --lsp workspace_symbol" },
+    { "<leader>m", "FzfCommand --mru" },
+    { "<leader>cm", "FzfCommand --commit" },
+
+    -- others
+    { "<leader><leader>p", "GotoPreview" },
+    { "<leader>v", "SymbolsOutline" },
+    { "<leader><leader>d", "DiffviewOpen --untracked-files=true -- %" },
+  }
+
+  for _, v in pairs(cmds) do
+    cmd(v[1], v[2])
+  end
 
   -- easy align
-  xcmd("ga", "EasyAlign")
-
-  -- nvim tree
-  cmd("<leader>tj", "NvimTreeFindFile")
-  cmd("<leader>tr", "NvimTreeToggle")
-
-  -- highlight group
-  cmd("<leader>k", "Interestingwords --toggle")
-  cmd("<leader><leader>k", "Interestingwords --remove_all")
-  cmd("<leader>n", "Interestingwords --navigate")
-  cmd("<leader>N", "Interestingwords --navigate b")
-
-  -- fzf_utils
-  cmd("<C-p>", "FzfCommand --files")
-  cmd("<C-f>", "FzfCommand --lines")
-  cmd("<C-r>", "FzfCommand --ctags")
-  cmd("<leader>b", "FzfCommand --buffers")
-  cmd("<leader><leader>m", "FzfCommand --man")
-  cmd("<leader><leader>h", "FzfCommand --vim help")
-  cmd("<leader>h", "FzfCommand --vim cmdHists")
-  cmd("<leader>ft", "FzfCommand --vim filetypes")
-  cmd("<leader>fd", [[exe('FzfCommand --gtags -d '.expand('<cword>'))]])
-  cmd("<leader>fr", [[exe("FzfCommand --gtags -r ".expand("<cword>"))]])
-  cmd("<leader>fu", "FzfCommand --gtags --update")
-  cmd("<leader>fb", "FzfCommand --gtags --update-buffer")
-  cmd("<M-f>", [[exe('FzfCommand --rg --all-buffers '.expand('<cword>'))]])
-  cmd("<leader>ff", [[exe('FzfCommand --rg '.expand('<cword>')." ".expand('%'))]])
-  cmd("<M-j>", "FzfCommand --lsp jump_def edit")
-  cmd("<M-t>", "FzfCommand --lsp jump_def tab drop")
-  cmd("<M-v>", "FzfCommand --lsp jump_def vsplit")
-  cmd("<M-r>", "FzfCommand --lsp ref tab drop")
-  cmd("<leader>ws", "FzfCommand --lsp workspace_symbol")
-  cmd("<leader>m", "FzfCommand --mru")
-  cmd("<leader>cm", "FzfCommand --commit")
+  mapkey("x", "ga", ":EasyAlign<cr>", {})
 
   cmd_gen("<leader>d", [[<C-U><C-R>=printf('FzfCommand --rg %s %s', expand('<cword>'), v:lua.GetFileDir())<CR>]])
   cmd_gen("<leader>fa", [[<C-U><C-R>='FzfCommand --rg '.expand('<cword>')<CR>]])
 
   -- lsp
-  cmd("<M-k>", "lua vim.lsp.buf.hover()")
-  cmd("<leader>rn", "lua vim.lsp.buf.rename()")
-  cmd("<leader>ca", "lua vim.lsp.buf.code_action()")
-  cmd("<leader>a", "lua vim.diagnostic.goto_next()")
-  cmd("<M-o>", [[lua vim.diagnostic.open_float({border='single'})]])
-  ino("<M-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
-  cmd("<leader><space>f", "lua vim.lsp.buf.formatting()")
-  cmd("<leader><space>f", "Format")
-  cmd("<leader><leader>p", "GotoPreview")
-
-  cmd("<leader>v", "SymbolsOutline")
-
-  cmd("<leader><leader>d", "DiffviewOpen --untracked-files=true -- %")
+  local lsp = {
+    { "<M-k>", vim.lsp.buf.hover },
+    { "<leader>rn", vim.lsp.buf.rename },
+    { "<leader>ca", vim.lsp.buf.code_action },
+    { "<leader>a", vim.diagnostic.goto_next },
+    {
+      "<M-o>",
+      function()
+        vim.diagnostic.open_float({ border = "single" })
+      end,
+    },
+    { "<leader><space>f", vim.lsp.buf.formatting },
+  }
+  for _, v in ipairs(lsp) do
+    fmap(v[1], v[2])
+  end
+  vim.keymap.set("i", "<M-k>", vim.lsp.buf.signature_help, keymap_opts)
 end
 
 init_nvim_keys()
@@ -261,6 +279,8 @@ local global_cfg = {
   completeopt = "menu,menuone,noselect",
   tabline = "%!v:lua.mytabline()",
   guifont = "Source Code Pro:h22",
+  -- foldmethod = "expr",
+  -- foldexpr = "nvim_treesitter#foldexpr()",
 }
 local win_cfg = {
   signcolumn = "yes",

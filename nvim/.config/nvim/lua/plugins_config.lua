@@ -1,16 +1,16 @@
 local M = {}
 
 function M.colorscheme()
-  local onedarkpro = require('onedarkpro')
+  local onedarkpro = require("onedarkpro")
   onedarkpro.setup({
     colors = {
-      cursorline = '#4B4B4B',
-        onedark = {
-          bg = "#1e1e1e",
-        },
+      cursorline = "#4B4B4B",
+      onedark = {
+        bg = "#1e1e1e",
+      },
     },
     hlgroups = {
-      TabLineSel = { fg = "${bg}", bg = "${blue}" }
+      TabLineSel = { fg = "${bg}", bg = "${blue}" },
     },
     options = {
       cursorline = true,
@@ -18,30 +18,35 @@ function M.colorscheme()
   })
   onedarkpro.load()
 
-  vim.cmd('hi link FocusedSymbol LspReferenceText')
+  vim.cmd("hi link FocusedSymbol LspReferenceText")
 end
 
 -- treesitter
 function M.treesitter()
-  require('nvim-treesitter.configs').setup {
-    ensure_installed = "all", highlight = { enable = true },
-  }
+  require("nvim-treesitter.configs").setup({
+    ensure_installed = "all",
+    highlight = { enable = true },
+    indent = {
+      enable = true,
+    },
+  })
 end
 
 -- gitsigns
 function M.gitsigns()
-  require('gitsigns').setup {
+  require("gitsigns").setup({
     watch_gitdir = {
       interval = 5000,
-      follow_files = true
+      follow_files = true,
     },
     keymaps = {
-      noremap = true, buffer = true,
-      ['n <leader><leader>n'] = '<cmd>lua require"gitsigns".next_hunk()<CR>',
-      ['n <leader><leader>N'] = '<cmd>lua require"gitsigns".prev_hunk()<CR>',
-      ['n <leader><leader>b'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
-    }
-  }
+      noremap = true,
+      buffer = true,
+      ["n <leader><leader>n"] = '<cmd>lua require"gitsigns".next_hunk()<CR>',
+      ["n <leader><leader>N"] = '<cmd>lua require"gitsigns".prev_hunk()<CR>',
+      ["n <leader><leader>b"] = '<cmd>lua require"gitsigns".blame_line()<CR>',
+    },
+  })
 end
 
 function M.filetype()
@@ -50,14 +55,14 @@ function M.filetype()
       extensions = {
         bp = "javascript",
         rc = "rc",
-        hal = "hal"
+        hal = "hal",
       },
     },
-})
+  })
 end
 
 function M.indent()
-  require('indent-o-matic').setup({
+  require("indent-o-matic").setup({
     max_lines = 2048,
     filetype_rust = { standard_widths = { 4 } },
     filetype_python = { standard_widths = { 4 } },
