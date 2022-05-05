@@ -5,7 +5,7 @@ local a = vim.api
 
 local on_attach = function(client, _)
   -- cursor hightlight and hint function name in statusline
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     local bufnr = a.nvim_get_current_buf()
     a.nvim_clear_autocmds({ group = group, buffer = bufnr })
     local autocmds = {
