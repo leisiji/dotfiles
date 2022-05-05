@@ -231,7 +231,7 @@ local function init_plugins_keymaps()
   -- easy align
   mapkey("x", "ga", ":EasyAlign<cr>", {})
 
-  cmd_gen("<leader>d", [[<C-U><C-R>=printf('FzfCommand --rg %s %s', expand('<cword>'), v:lua.GetFileDir())<CR>]])
+  cmd_gen("<leader>d", [[<C-U><C-R>=printf('FzfCommand --rg %s %s', expand('<cword>'), fnamemodify(expand("%:p:h"), ":."))<CR>]])
   cmd_gen("<leader>fa", [[<C-U><C-R>='FzfCommand --rg '.expand('<cword>')<CR>]])
 
   -- lsp
