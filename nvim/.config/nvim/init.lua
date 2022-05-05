@@ -208,6 +208,8 @@ local function init_plugins_keymaps()
     { "<leader>ft", "FzfCommand --vim filetypes" },
     { "<leader>fu", "FzfCommand --gtags --update" },
     { "<leader>fb", "FzfCommand --gtags --update-buffer" },
+    { "<leader>fr", [[exe("FzfCommand --gtags -r ".expand("<cword>"))]] },
+    { "<leader>fd", [[exe('FzfCommand --gtags -d '.expand('<cword>'))]] },
     { "<M-f>", [[exe('FzfCommand --rg --all-buffers '.expand('<cword>'))]] },
     { "<leader>ff", [[exe('FzfCommand --rg '.expand('<cword>')." ".expand('%'))]] },
     { "<M-j>", "FzfCommand --lsp jump_def edit" },
