@@ -80,7 +80,6 @@ function M.jdtls_start(jar)
     },
     root_dir = require("jdtls.setup").find_root({ "build.gradle", "mvnw", "gradlew" }),
   }
-  print(vim.inspect(config))
   require("jdtls").start_or_attach(vim.tbl_extend("force", config, cfg))
 end
 
