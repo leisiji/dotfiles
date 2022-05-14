@@ -8,11 +8,11 @@
         "interval": 60,
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": "{usage}% ",
         "interval": 30,
     },
     "memory": {
-        "format": "{}% ",
+        "format": "{}% ",
         "interval": 30,
     },
     "temperature": {
@@ -43,7 +43,6 @@
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol",
-        "interval": 300,
     },
     "tray": {
         "spacing": 10
