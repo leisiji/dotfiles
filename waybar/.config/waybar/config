@@ -1,0 +1,52 @@
+{
+    "height": 10,
+    "spacing": 4,
+    "margin": "0px 0px 0px 0px",
+    "modules-right": ["pulseaudio", "cpu", "memory", "temperature", "battery", "clock", "tray"],
+    "clock": {
+        "format": "{:%a, %m-%d %H:%M}",
+        "interval": 60,
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "interval": 30,
+    },
+    "memory": {
+        "format": "{}% ",
+        "interval": 30,
+    },
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""],
+        "interval": 60,
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""],
+        "interval": 300,
+    },
+    "pulseaudio": {
+        "scroll-step": 1,
+        "format": "{volume}% {icon}",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol",
+        "interval": 300,
+    },
+    "tray": {
+        "spacing": 10
+    }
+}
+// vim:tw=78:ts=4:ft=json
