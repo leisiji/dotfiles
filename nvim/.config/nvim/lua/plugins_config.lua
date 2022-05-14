@@ -17,8 +17,6 @@ function M.colorscheme()
     },
   })
   onedarkpro.load()
-
-  vim.cmd("hi link FocusedSymbol LspReferenceText")
 end
 
 -- treesitter
