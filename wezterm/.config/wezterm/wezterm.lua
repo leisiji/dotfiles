@@ -12,4 +12,11 @@ return {
     bottom = 0,
   },
   use_ime = true,
+  mouse_bindings = {
+    {
+      event = { Up = { streak=2, button="Left" } },
+      mods = "NONE",
+      action = wezterm.action{ CopyTo="ClipboardAndPrimarySelection" }
+    }
+  }
 }
