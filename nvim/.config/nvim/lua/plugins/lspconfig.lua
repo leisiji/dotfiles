@@ -40,32 +40,6 @@ local function all_lsp_config(lsp)
     },
   }
 
-  local diagnosticls = {
-    filetypes = { "markdown" },
-    init_options = {
-      linters = {
-        markdownlint = {
-          command = "markdownlint",
-          rootPatterns = { ".git" },
-          isStderr = true,
-          debounce = 1000,
-          offsetLine = 0,
-          offsetColumn = 0,
-          args = { "--stdin" },
-          sourceName = "markdownlint",
-          securities = { undefined = "hint" },
-          formatLines = 1,
-          formatPattern = {
-            [[^.*?:\s?(\d+)(:(\d+)?)?\s(MD\d{3}\/[A-Za-z0-9-/]+)\s(.*)$]],
-            { line = 1, column = 3, message = { 4 } },
-          },
-        },
-      },
-      filetypes = { markdown = "markdownlint" },
-    },
-  }
-
-  lsp.diagnosticls.setup(diagnosticls)
   lsp.clangd.setup({
     cmd = {
       "clangd",
