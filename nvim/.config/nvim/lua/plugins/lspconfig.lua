@@ -71,14 +71,6 @@ end
 
 local function lsp_basic()
   local lsp = vim.lsp
-
-  lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
-    underline = true,
-    signs = true,
-    update_in_insert = false,
-  })
-
   lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single" })
   lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, { border = "single" })
 end

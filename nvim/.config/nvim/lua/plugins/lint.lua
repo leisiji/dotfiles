@@ -20,6 +20,7 @@ function M.config()
       lint.try_lint()
     end,
   })
+  vim.diagnostic.config({virtual_text = false})
 end
 
 return M
