@@ -7,9 +7,11 @@ function M.config()
   enhanced_diff_hl = false,
   use_icons = false,
   file_panel = {
-    position = "left",
-    width = 35,
-    height = 10,
+    win_config = {
+      position = "left",
+      width = 35,
+      height = 10,
+    },
     listing_style = "tree",
     tree_options = {
       flatten_dirs = true,
