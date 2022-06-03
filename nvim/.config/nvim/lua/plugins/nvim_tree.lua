@@ -2,8 +2,6 @@ local M = {}
 local original_width = nil
 
 function M.setup()
-  vim.g.nvim_tree_git_hl = 0
-  vim.g.nvim_tree_show_icons = { git = 0, folders = 1, folder_arrows = 1 }
   local list = {
     { key = "l", action = "edit" },
     { key = "h", action = "close_node" },
@@ -31,6 +29,17 @@ function M.setup()
     view = { mappings = { custom_only = true, list = list } },
     git = {
       enable = false,
+    },
+    renderer = {
+      highlight_git = false,
+      icons = {
+        show = {
+          file = true,
+          folder = true,
+          folder_arrow = true,
+          git = false,
+        },
+      }
     },
     actions = {
       open_file = {
