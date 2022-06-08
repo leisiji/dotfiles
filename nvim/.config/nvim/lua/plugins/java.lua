@@ -27,16 +27,20 @@ local function find_file(path, pattern)
 end
 
 function M.config()
-  local jar = find_file("/usr/share/java/jdtls/plugins", "org.eclipse.equinox.launcher_[%w%p]+.jar")
-  local group = "user_java"
-  vim.api.nvim_create_augroup(group, { clear = true })
-  vim.api.nvim_create_autocmd({ "Filetype" }, {
-    pattern = { "java" },
-    group = group,
-    callback = function()
-      require("plugins.java").jdtls_start(jar)
-    end,
-  })
+  if vim.env[android_sdk_env] then
+    jls_setup()
+  else
+    local jar = find_file("/usr/share/java/jdtls/plugins", "org.eclipse.equinox.launcher_[%w%p]+.jar")
+    local group = "user_java"
+    vim.api.nvim_create_augroup(group, { clear = true })
+    vim.api.nvim_create_autocmd({ "Filetype" }, {
+      pattern = { "java" },
+      group = group,
+      callback = function()
+        require("plugins.java").jdtls_start(jar)
+      end,
+    })
+  end
 end
 
 function M.jdtls_start(jar)
@@ -63,15 +67,6 @@ function M.jdtls_start(jar)
     },
     root_dir = require("jdtls.setup").find_root({ "build.gradle", "mvnw", "gradlew" }),
   }
-  if vim.env[android_sdk_env] then
-    config['settings'] = {
-      java = {
-        server = {
-          launchMode = 'LightWeight'
-        }
-      }
-    }
-  end
   require("jdtls").start_or_attach(vim.tbl_extend("force", config, cfg))
 end
 
