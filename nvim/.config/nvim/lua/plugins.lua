@@ -26,6 +26,7 @@ packer.startup(function()
   use({
     "mfussenegger/nvim-jdtls",
     opt = true,
+    requires = { 'hsanson/vim-android' },
     ft = { "java" },
     config = function()
       require("plugins.java").config()
