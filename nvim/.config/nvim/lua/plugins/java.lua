@@ -3,41 +3,26 @@ local android_sdk_env = "ANDROID_SDK_ROOT"
 local cfg = require("plugins.lspconfig").cfg()
 
 local function jls_setup()
-  local android_sdk = vim.env[android_sdk_env] .. "/platforms/android-30/android.jar"
-
   require("lspconfig").java_language_server.setup(vim.tbl_extend("force", cfg, {
     cmd = { "java-language-server" },
-    settings = {
-      java = {
-        classPath = { android_sdk },
-        --externalDependencies = get_deps('settings.json')
-      },
-    },
   }))
 end
 
-local function find_file(path, pattern)
-  local scan = require("plenary.scandir")
-  local files = scan.scan_dir(path, { hidden = true, depth = 1 })
-  for _, jar in ipairs(files) do
-    if string.find(jar, pattern) then
-      return jar
-    end
-  end
-end
-
 function M.config()
-  if vim.env[android_sdk_env] then
-    jls_setup()
+  if vim.env[android_sdk_env] ~= nil then
+    if vim.env["JAVA_HOME"] ~= nil then
+      jls_setup()
+    else
+      vim.notify("Please set JAVA_HOME")
+    end
   else
-    local jar = find_file("/usr/share/java/jdtls/plugins", "org.eclipse.equinox.launcher_[%w%p]+.jar")
     local group = "user_java"
     vim.api.nvim_create_augroup(group, { clear = true })
     vim.api.nvim_create_autocmd({ "Filetype" }, {
       pattern = { "java" },
       group = group,
       callback = function()
-        require("plugins.java").jdtls_start(jar)
+        require("plugins.java").jdtls_start()
       end,
     })
   end

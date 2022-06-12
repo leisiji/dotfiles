@@ -1,4 +1,4 @@
-PLUGS_CFG = require("plugins_config")
+local plugs_cfg = require("plugins_config")
 
 local packer = require("packer")
 local use = packer.use
@@ -6,13 +6,13 @@ local use = packer.use
 packer.startup(function()
   use({ "wbthomason/packer.nvim" })
   use({ "nvim-lua/plenary.nvim" })
-  use({ "nathom/filetype.nvim", config = PLUGS_CFG.filetype })
+  use({ "nathom/filetype.nvim", config = plugs_cfg.filetype })
 
   use({ "leisiji/fzf_utils", opt = true, cmd = "FzfCommand", requires = { "vijaymarupudi/nvim-fzf" } })
 
   -- colorscheme and statusline
-  use({ "olimorris/onedarkpro.nvim", config = PLUGS_CFG.colorscheme })
-  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = PLUGS_CFG.treesitter })
+  use({ "olimorris/onedarkpro.nvim", config = plugs_cfg.colorscheme })
+  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = plugs_cfg.treesitter })
 
   -- lsp
   use({
@@ -26,6 +26,7 @@ packer.startup(function()
   use({
     "mfussenegger/nvim-jdtls",
     opt = true,
+    requires = { "leisiji/nvim-android" },
     ft = { "java" },
     config = function()
       require("plugins.java").config()
@@ -91,7 +92,7 @@ packer.startup(function()
   })
 
   -- Git
-  use({ "lewis6991/gitsigns.nvim", opt = true, event = "BufRead", config = PLUGS_CFG.gitsigns })
+  use({ "lewis6991/gitsigns.nvim", opt = true, event = "BufRead", config = plugs_cfg.gitsigns })
   use({
     "sindrets/diffview.nvim",
     opt = true,
@@ -102,7 +103,7 @@ packer.startup(function()
   })
 
   use({ "leisiji/simple_indent", opt = true, event = "BufRead" })
-  use({ "leisiji/indent-o-matic", config = PLUGS_CFG.indent })
+  use({ "leisiji/indent-o-matic", config = plugs_cfg.indent })
   use({ "AndrewRadev/inline_edit.vim", opt = true, cmd = "InlineEdit" })
   use({
     "numToStr/FTerm.nvim",
