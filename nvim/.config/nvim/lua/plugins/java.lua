@@ -4,7 +4,7 @@ local cfg = require("plugins.lspconfig").cfg()
 
 local function jls_setup()
   require("lspconfig").java_language_server.setup(vim.tbl_extend("force", cfg, {
-    cmd = { "java-language-server" },
+    cmd = { "java-language-server" }, root_dir = require("lspconfig.util").root_pattern("gradlew")
   }))
 end
 
