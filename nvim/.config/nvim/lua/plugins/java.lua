@@ -13,49 +13,48 @@ function M.config()
     if vim.env["JAVA_HOME"] ~= nil then
       jls_setup()
     else
-      vim.notify("Please set JAVA_HOME")
+      vim.notify("Please set JAVA_HOME", vim.log.levels.ERROR)
     end
   else
     local group = "user_java"
+    local jar = vim.fn.glob("/usr/share/java/jdtls/plugins/org.eclipse.equinox.launcher_*.jar")
     vim.api.nvim_create_augroup(group, { clear = true })
     vim.api.nvim_create_autocmd({ "Filetype" }, {
       pattern = { "java" },
       group = group,
       callback = function()
-        require("plugins.java").jdtls_start()
+        require("plugins.java").jdtls_start(jar)
       end,
     })
   end
 end
 
 function M.jdtls_start(jar)
-  coroutine.wrap(function ()
-    local config = {
-      cmd = {
-        "java",
-        "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-        "-Dosgi.bundles.defaultStartLevel=4",
-        "-Declipse.product=org.eclipse.jdt.ls.core.product",
-        "-Dlog.protocol=true",
-        "-Dlog.level=ALL",
-        "-Xms1g",
-        "--add-modules=ALL-SYSTEM",
-        "--add-opens",
-        "java.base/java.util=ALL-UNNAMED",
-        "--add-opens",
-        "java.base/java.lang=ALL-UNNAMED",
-        "-jar",
-        jar,
-        "-configuration",
-        vim.fn.stdpath("cache") .. "/jdtls/config_linux",
-        "-data",
-        vim.fn.getcwd() .. "/jdtls_workspace",
-      },
-      root_dir = require("jdtls.setup").find_root({ "build.gradle", "mvnw", "gradlew" }),
-    }
+  local config = {
+    cmd = {
+      "java",
+      "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+      "-Dosgi.bundles.defaultStartLevel=4",
+      "-Declipse.product=org.eclipse.jdt.ls.core.product",
+      "-Dlog.protocol=true",
+      "-Dlog.level=ALL",
+      "-Xms1g",
+      "--add-modules=ALL-SYSTEM",
+      "--add-opens",
+      "java.base/java.util=ALL-UNNAMED",
+      "--add-opens",
+      "java.base/java.lang=ALL-UNNAMED",
+      "-jar",
+      jar,
+      "-configuration",
+      vim.fn.stdpath("cache") .. "/jdtls/config_linux",
+      "-data",
+      vim.fn.getcwd() .. "/jdtls_workspace",
+    },
+    root_dir = require("jdtls.setup").find_root({ "gradlew", "build.gradle", "mvnw" }),
+  }
 
-    require("jdtls").start_or_attach(vim.tbl_extend("force", config, cfg))
-  end)()
+  require("jdtls").start_or_attach(vim.tbl_extend("force", config, cfg))
 end
 
 return M
