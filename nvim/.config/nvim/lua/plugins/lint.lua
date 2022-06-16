@@ -4,8 +4,6 @@ function M.config()
   local lint = require("lint")
   local linters = {
     markdown = { "markdownlint" },
-    cpp = { "cppcheck" },
-    c = { "cppcheck" },
     lua = { "luacheck" },
   }
   lint.linters_by_ft = linters
