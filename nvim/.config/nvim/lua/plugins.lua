@@ -61,6 +61,16 @@ packer.startup(function()
     end,
   })
 
+  -- Lua
+  use({
+    "kylechui/nvim-surround",
+    event = "BufReadPre",
+    opt = true,
+    config = function()
+      require("plugins.surround").config()
+    end,
+  })
+
   use({
     "hrsh7th/nvim-cmp",
     opt = true,
@@ -74,7 +84,6 @@ packer.startup(function()
       "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets",
       "windwp/nvim-autopairs",
-      "tpope/vim-surround",
     },
     config = function()
       require("plugins.cmp").config()
@@ -145,7 +154,9 @@ packer.startup(function()
   end
 
   use({
-    "mfussenegger/nvim-lint", opt = true, event = "BufReadPost",
+    "mfussenegger/nvim-lint",
+    opt = true,
+    event = "BufReadPost",
     config = function()
       require("plugins.lint").config()
     end,
