@@ -24,6 +24,7 @@ function M.setup()
     { key = "q", action = "close" },
     { key = "<M-k>", action = 'show_file_info' },
     { key = "z", cb = [[:lua require('plugins.nvim_tree').resize()<cr>]] },
+    { key = { "<CR>", "<2-LeftMouse>" }, action = "edit" }
   }
   require("nvim-tree").setup({
     view = { mappings = { custom_only = true, list = list } },
