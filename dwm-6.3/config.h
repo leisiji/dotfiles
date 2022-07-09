@@ -65,15 +65,16 @@ static const Layout layouts[] = {
 static const char *roficmd[] = { "rofi", "-show", "drun", "-columns 2", NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *explorercmd[]  = { "pcmanfm", NULL };
+static const char *wlogout[]  = { "wlogout", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = roficmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_F3,     spawn,          {.v = explorercmd } },
+	{ MODKEY|ShiftMask,             XK_0,      spawn,          {.v = wlogout } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_n,      focusstack,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY|ShiftMask,             XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
