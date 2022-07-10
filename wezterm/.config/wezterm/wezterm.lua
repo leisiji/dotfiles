@@ -12,6 +12,7 @@ return {
     bottom = 0,
   },
   use_ime = true,
+  enable_wayland = false,
   mouse_bindings = {
     {
       event = { Up = { streak=2, button="Left" } },

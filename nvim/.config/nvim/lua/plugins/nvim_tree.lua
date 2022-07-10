@@ -8,7 +8,6 @@ function M.setup()
     { key = "<C-]>", action = "cd" },
     { key = "<C-[>", action = "dir_up" },
     { key = "<C-v>", action = "vsplit" },
-    { key = "<C-x>", action = "split" },
     { key = "<C-t>", action = "tabnew" },
     { key = ".", action = "toggle_dotfiles" },
     { key = "R", action = "refresh" },
@@ -22,12 +21,15 @@ function M.setup()
     { key = "Y", action = "copy_path" },
     { key = "gy", action = "copy_absolute_path" },
     { key = "q", action = "close" },
-    { key = "<M-k>", action = 'show_file_info' },
-    { key = "z", cb = [[:lua require('plugins.nvim_tree').resize()<cr>]] },
-    { key = { "<CR>", "<2-LeftMouse>" }, action = "edit" }
+    { key = "<M-k>", action = "toggle_file_info" },
+    --{ key = "z", cb = [[:lua require('plugins.nvim_tree').resize()<cr>]] },
+    { key = { "<CR>", "<2-LeftMouse>" }, action = "edit" },
   }
   require("nvim-tree").setup({
-    view = { mappings = { custom_only = true, list = list } },
+    view = {
+      adaptive_size = true,
+      mappings = { custom_only = true, list = list }
+    },
     git = {
       enable = false,
     },
@@ -40,17 +42,21 @@ function M.setup()
           folder_arrow = true,
           git = false,
         },
-      }
+      },
     },
     actions = {
       open_file = {
         quit_on_open = true,
         resize_window = true,
-      }
-    }
+      },
+      change_dir = {
+        enable = false,
+      },
+    },
   })
 end
 
+--[[
 function M.resize()
   local w = require("nvim-tree.view").View.width
   if original_width == nil then
@@ -65,5 +71,6 @@ function M.resize()
   vim.cmd("NvimTreeClose")
   vim.cmd("NvimTreeToggle")
 end
+---]]
 
 return M
