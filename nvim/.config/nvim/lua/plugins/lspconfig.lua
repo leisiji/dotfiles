@@ -41,15 +41,6 @@ local function all_lsp_config(lsp)
   }
 
   lsp.clangd.setup({
-    cmd = {
-      "clangd",
-      "--background-index",
-      "--clang-tidy",
-      "--clang-tidy-checks=performance-*,bugprone-*",
-      "--all-scopes-completion",
-      "--completion-style=detailed",
-      "--header-insertion=iwyu",
-    },
     on_attach = on_attach,
     capabilities = cap,
   })
