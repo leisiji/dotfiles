@@ -21,7 +21,6 @@ impl BlockManager {
     pub fn update(&mut self, data: ThreadsData) {
         match data {
             ThreadsData::NetSpeed(x) => self.blocks[4] = x,
-            ThreadsData::Disk(x) => self.blocks[8] = x,
             ThreadsData::Memory(x) => self.blocks[9] = x,
             ThreadsData::CpuTemp(x) => self.blocks[10] = x,
             ThreadsData::LoadAvg(x) => self.blocks[11] = x,

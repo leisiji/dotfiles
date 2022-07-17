@@ -30,12 +30,6 @@ pub async fn run(mut blocks: BlockManager) {
         task::spawn(b);
     }
 
-    // Disk task
-    if CONFIG.disk.enabled {
-        let b = init_block(tx.clone(), disk::get_disk, CONFIG.disk.delay);
-        task::spawn(b);
-    }
-
     // Memory task
     if CONFIG.memory.enabled {
         let b = init_block(tx.clone(), memory::get_memory, CONFIG.memory.delay);

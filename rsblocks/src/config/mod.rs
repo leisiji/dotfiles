@@ -2,7 +2,6 @@ mod battery;
 mod bitcoins;
 mod brightness;
 mod cputemp;
-mod disk;
 mod loadavg;
 mod local_ip;
 mod memory;
@@ -16,7 +15,6 @@ mod weather;
 
 use self::battery::Battery;
 use cputemp::CpuTemp;
-use disk::Disk;
 use loadavg::LoadAvg;
 use memory::Memory;
 use netspeed::NetSpeed;
@@ -64,9 +62,6 @@ pub struct Config {
     pub memory: Memory,
 
     #[serde(default)]
-    pub disk: Disk,
-
-    #[serde(default)]
     pub battery: Battery,
 
     #[serde(default)]
@@ -88,7 +83,6 @@ impl Default for Config {
             seperator: "|".to_string(),
             time: Default::default(),
             memory: Default::default(),
-            disk: Default::default(),
             battery: Default::default(),
             cpu_temperature: Default::default(),
             uptime: Default::default(),

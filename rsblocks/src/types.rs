@@ -1,6 +1,4 @@
-#[derive(Debug, Clone)]
 pub enum ThreadsData {
-    Disk(String),
     Memory(String),
     Time(String),
     Battery(String),
@@ -14,7 +12,6 @@ pub struct Config {
     pub seperator: String,
     pub time: Time,
     pub memory: Memory,
-    pub disk: Disk,
     pub battery: Battery,
     pub cpu_temperature: CpuTemp,
     pub uptime: Uptime,
@@ -38,12 +35,6 @@ pub struct Memory {
     pub delay: f64,
 }
 
-#[derive(Clone)]
-pub struct Disk {
-    pub icon: String,
-    pub enabled: bool,
-    pub delay: f64,
-}
 #[derive(Clone)]
 pub struct Volume {
     pub icon: String,
