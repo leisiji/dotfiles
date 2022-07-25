@@ -24,6 +24,7 @@ export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d --strip-cwd-prefix'
 export FZF_DEFAULT_OPTS='--ansi --tabstop=1 --bind ctrl-d:half-page-down,ctrl-u:half-page-up,tab:down,ctrl-p:toggle-preview,alt-j:preview-down,alt-k:preview-up --reverse --cycle --preview-window=hidden:65%'
+export FZF_TMUX_OPTS="-p"
 export GTAGSLABEL='native-pygments'
 export GOPROXY='https://goproxy.io,direct'
 #export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
