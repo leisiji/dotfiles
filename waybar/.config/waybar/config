@@ -46,6 +46,19 @@
     },
     "tray": {
         "spacing": 10
+    },
+    "wlr/workspaces": {
+      "format": "{icon}",
+      "on-click": "activate",
+      "format-icons": {
+        "1": "",
+        "2": "",
+        "3": "",
+        "4": "",
+        "urgent": "",
+        "active": "",
+        "default": ""
+      }
     }
 }
 // vim:tw=78:ts=4:ft=json
