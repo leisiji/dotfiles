@@ -1,10 +1,12 @@
-#!bash
 # Reference: https://github.com/roosta/tmux-fuzzback
 tmux_fuzzyback() {
-    local line=$(tmux capture-pane -p | awk '{print NR  " " $s}' | fzf-tmux ${FZF_TMUX_OPTS})
+    local content=$(tmux capture-pane -p -S -)
+    local line=$(echo "${content}" | awk '{print NR  " " $s}' | fzf-tmux -p)
     line=$(echo ${line} | awk '{print $1}')
-    if [[ -z ${line} ]]; then
+    if [[ ! -z ${line} ]]; then
+        local rows=$(echo "${content}" | wc -l)
         tmux copy-mode
+        let line=rows-line
         tmux send-keys -X -N "$line" cursor-up
     fi
 }

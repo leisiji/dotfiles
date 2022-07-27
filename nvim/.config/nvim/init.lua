@@ -297,6 +297,7 @@ local buf_cfg = {
   softtabstop = 4,
   swapfile = false,
   undofile = true,
+  mouse = "",
 }
 for k, v in pairs(global_cfg) do
   vim.o[k] = v
