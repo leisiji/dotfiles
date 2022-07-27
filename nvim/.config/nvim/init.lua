@@ -283,6 +283,7 @@ local global_cfg = {
   shortmess = "aoOTIcF",
   completeopt = "menu,menuone,noselect",
   tabline = "%!v:lua.mytabline()",
+  expandtab = true,
   -- foldmethod = "expr",
   -- foldexpr = "nvim_treesitter#foldexpr()",
 }
