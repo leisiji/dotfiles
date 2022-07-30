@@ -134,14 +134,16 @@ packer.startup(function()
     end,
   })
 
-  use({
-    "kyazdani42/nvim-tree.lua",
-    opt = true,
-    cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
-    config = function()
-      require("plugins.nvim_tree").setup()
-    end,
-  })
+  use {
+    "nvim-neo-tree/neo-tree.nvim", opt = true, cmd = {"Neotree", ":NeoTreeFocus"},
+    branch = "v2.x",
+    requires = { "MunifTanjim/nui.nvim" },
+    wants = "nui.nvim",
+    config = function ()
+      require('plugins.neo-tree').config()
+    end
+  }
+
   use({
     "ethanholz/nvim-lastplace",
     config = function()
