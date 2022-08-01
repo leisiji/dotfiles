@@ -188,9 +188,8 @@ local function init_plugins_keymaps()
     { "<leader>e", "InlineEdit" },
 
     -- nvim tree
-    { "<leader>tj", "Neotree reveal_file=%:p" },
-    { "<leader>b", "Neotree buffers" },
-    { "<leader>tr", "Neotree" },
+    { "<leader>tj", "NvimTreeFindFile" },
+    { "<leader>tr", "NvimTreeToggle" },
 
     -- interestingwords
     { "<leader>k", "Interestingwords --toggle" },
@@ -202,6 +201,7 @@ local function init_plugins_keymaps()
     { "<C-p>", "FzfCommand --files" },
     { "<C-f>", "FzfCommand --lines" },
     { "<C-r>", "FzfCommand --ctags" },
+    { "<leader>b", "FzfCommand --buffers" },
     { "<leader><leader>m", "FzfCommand --man" },
     { "<leader><leader>h", "FzfCommand --vim help" },
     { "<leader>h", "FzfCommand --vim cmdHists" },
