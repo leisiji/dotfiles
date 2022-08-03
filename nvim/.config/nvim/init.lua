@@ -299,6 +299,7 @@ local buf_cfg = {
   swapfile = false,
   undofile = true,
   mouse = "",
+  expandtab = true,
 }
 for k, v in pairs(global_cfg) do
   vim.o[k] = v
