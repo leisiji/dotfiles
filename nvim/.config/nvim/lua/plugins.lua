@@ -113,7 +113,7 @@ packer.startup(function()
 
   use({ "leisiji/simple_indent", opt = true, event = "BufRead" })
   use({ "leisiji/indent-o-matic", config = plugs_cfg.indent })
-  use({ "AndrewRadev/inline_edit.vim", opt = true, cmd = "InlineEdit" })
+  use({ "AckslD/nvim-FeMaco.lua", opt = true, config = 'require("femaco").setup()', cmd = "FeMaco" })
   use({
     "numToStr/FTerm.nvim",
     opt = true,

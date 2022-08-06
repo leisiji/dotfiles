@@ -184,8 +184,7 @@ local function init_plugins_keymaps()
     -- terminal
     { "<C-x>", "FTermToggle" },
 
-    -- inline edit
-    { "<leader>e", "InlineEdit" },
+    { "<leader>e", "FeMaco" },
 
     -- nvim tree
     { "<leader>tj", "NvimTreeFindFile" },
