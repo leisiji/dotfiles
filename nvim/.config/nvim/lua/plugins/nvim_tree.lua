@@ -25,10 +25,21 @@ function M.setup()
     { key = "z", cb = [[:lua require('plugins.nvim_tree').resize()<cr>]] },
     { key = { "<CR>", "<2-LeftMouse>" }, action = "edit" },
   }
+  local width = 120
   require("nvim-tree").setup({
     view = {
-      width = 35,
-      mappings = { custom_only = true, list = list }
+      width = width,
+      mappings = { custom_only = true, list = list },
+      float = {
+        enable = true,
+        open_win_config = {
+          relative = "editor",
+          border = "rounded",
+          height = 50,
+          row = 1,
+          col = (vim.api.nvim_win_get_width(0) - width) / 2,
+        },
+      },
     },
     git = {
       enable = false,
