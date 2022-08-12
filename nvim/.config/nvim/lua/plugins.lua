@@ -1,18 +1,89 @@
-local plugs_cfg = require("plugins_config")
-
 local packer = require("packer")
 local use = packer.use
+
+local function colorscheme()
+  local onedarkpro = require("onedarkpro")
+  onedarkpro.setup({
+    colors = {
+      onedark = {
+        bg = "#1e1e1e",
+      },
+    },
+    hlgroups = {
+      TabLineSel = { fg = "${bg}", bg = "${blue}" },
+    },
+    options = {
+      cursorline = true,
+    },
+  })
+  onedarkpro.load()
+end
+
+-- treesitter
+local function treesitter()
+  require("nvim-treesitter.configs").setup({
+    ensure_installed = "all",
+    highlight = { enable = true },
+    indent = {
+      enable = true,
+    },
+  })
+end
+
+-- gitsigns
+local function gitsigns()
+  require("gitsigns").setup({
+    watch_gitdir = {
+      interval = 5000,
+      follow_files = true,
+    },
+    keymaps = {
+      noremap = true,
+      buffer = true,
+      ["n <leader><leader>n"] = '<cmd>lua require"gitsigns".next_hunk()<CR>',
+      ["n <leader><leader>N"] = '<cmd>lua require"gitsigns".prev_hunk()<CR>',
+      ["n <leader><leader>b"] = '<cmd>lua require"gitsigns".blame_line()<CR>',
+    },
+  })
+end
+
+local function filetype()
+  require("filetype").setup({
+    overrides = {
+      extensions = {
+        bp = "javascript",
+        rc = "rc",
+        hal = "hal",
+      },
+    },
+  })
+end
+
+local function indent()
+  require("indent-o-matic").setup({
+    max_lines = 2048,
+    filetype_rust = { standard_widths = { 4 } },
+    filetype_python = { standard_widths = { 4 } },
+    filetype_markdown = { standard_widths = { 4 } },
+  })
+end
+
+vim.g.symbols_outline = {
+  auto_preview = false,
+  auto_close = true,
+  width = 25,
+}
 
 packer.startup(function()
   use({ "wbthomason/packer.nvim" })
   use({ "nvim-lua/plenary.nvim" })
-  use({ "nathom/filetype.nvim", config = plugs_cfg.filetype })
+  use({ "nathom/filetype.nvim", config = filetype })
 
   use({ "leisiji/fzf_utils", opt = true, cmd = "FzfCommand", requires = { "vijaymarupudi/nvim-fzf" } })
 
   -- colorscheme and statusline
-  use({ "olimorris/onedarkpro.nvim", config = plugs_cfg.colorscheme })
-  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = plugs_cfg.treesitter })
+  use({ "olimorris/onedarkpro.nvim", config = colorscheme })
+  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = treesitter })
 
   -- lsp
   use({
@@ -101,7 +172,7 @@ packer.startup(function()
   })
 
   -- Git
-  use({ "lewis6991/gitsigns.nvim", opt = true, event = "BufRead", config = plugs_cfg.gitsigns })
+  use({ "lewis6991/gitsigns.nvim", opt = true, event = "BufRead", config = gitsigns })
   use({
     "sindrets/diffview.nvim",
     opt = true,
@@ -112,7 +183,7 @@ packer.startup(function()
   })
 
   use({ "leisiji/simple_indent", opt = true, event = "BufRead" })
-  use({ "leisiji/indent-o-matic", config = plugs_cfg.indent })
+  use({ "leisiji/indent-o-matic", config = indent })
   use({ "AckslD/nvim-FeMaco.lua", opt = true, config = 'require("femaco").setup()', cmd = "FeMaco" })
   use({
     "numToStr/FTerm.nvim",

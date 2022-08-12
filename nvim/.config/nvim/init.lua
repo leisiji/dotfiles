@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
 vim.g.did_load_filetypes = 1
+vim.g.loaded_gtags = 1
 
 -- avoid loading inner plugins
 vim.g.loaded_2html_plugin = 1
