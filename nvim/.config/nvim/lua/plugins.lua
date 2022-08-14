@@ -2,6 +2,10 @@ local packer = require("packer")
 local use = packer.use
 
 local function colorscheme()
+  if vim.g.vscode then
+    return
+  end
+
   local onedarkpro = require("onedarkpro")
   onedarkpro.setup({
     colors = {

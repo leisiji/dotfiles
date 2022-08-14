@@ -230,6 +230,11 @@ local function init_plugins_keymaps()
     cmd(v[1], v[2])
   end
 
+  cmd_gen(
+    "<leader>g",
+    [[<C-U><C-R>=printf('FzfCommand --live_grep %s', fnamemodify(expand("%:p:h"), ":."))<CR>]]
+  )
+
   -- easy align
   mapkey("x", "ga", ":EasyAlign<cr>", {})
 
@@ -260,9 +265,12 @@ local function init_plugins_keymaps()
 end
 
 init_nvim_keys()
-init_plugins_keymaps()
 
 -- options
+if vim.g.vscode then
+  return
+end
+
 local global_cfg = {
   hidden = true,
   backup = false,
@@ -313,6 +321,8 @@ end
 
 require("plugins")
 require("autocmds")
+
+init_plugins_keymaps()
 
 vim.cmd([[
   set list lcs=tab:→\ ,trail:·
