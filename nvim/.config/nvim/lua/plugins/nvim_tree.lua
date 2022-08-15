@@ -24,6 +24,7 @@ function M.setup()
     { key = "<M-k>", action = "toggle_file_info" },
     { key = "z", cb = [[:lua require('plugins.nvim_tree').resize()<cr>]] },
     { key = { "<CR>", "<2-LeftMouse>" }, action = "edit" },
+    { key = "f", action = "live_filter" },
   }
   local width = 120
   require("nvim-tree").setup({
@@ -38,8 +39,12 @@ function M.setup()
           height = 50,
           row = 1,
           col = (vim.api.nvim_win_get_width(0) - width) / 2,
+          zindex = 30,
         },
       },
+    },
+    filesystem_watchers = {
+      enable = false,
     },
     git = {
       enable = false,
