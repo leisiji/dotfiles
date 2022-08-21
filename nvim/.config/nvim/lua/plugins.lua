@@ -31,6 +31,19 @@ local function treesitter()
     indent = {
       enable = true,
     },
+    textobjects = {
+      select = {
+        enable = true,
+        lookahead = true,
+        keymaps = {
+          ["ap"] = "@parameter.outer",
+          ["ip"] = "@parameter.inner",
+        },
+        selection_modes = {
+          ["@parameter.outer"] = "v", -- charwise
+        },
+      },
+    },
   })
 end
 
@@ -87,7 +100,12 @@ packer.startup(function()
 
   -- colorscheme and statusline
   use({ "olimorris/onedarkpro.nvim", config = colorscheme })
-  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = treesitter })
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    requires = "nvim-treesitter/nvim-treesitter-textobjects",
+    run = ":TSUpdate",
+    config = treesitter,
+  })
 
   -- lsp
   use({
