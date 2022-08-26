@@ -13,7 +13,7 @@ local function colorscheme()
         bg = "#1e1e1e",
       },
     },
-    hlgroups = {
+    highlights = {
       TabLineSel = { fg = "${bg}", bg = "${blue}" },
     },
     options = {
