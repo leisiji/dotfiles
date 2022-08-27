@@ -1,22 +1,23 @@
 configuration {
-	mydi: "drun,window,run";
-	lines: 15;
-	columns: 1;
-	font: "mono 11";
-	show-icons: true;
-	dpi: 200;
-	kb-primary-paste: "Control+V,Shift+Insert";
-	kb-secondary-paste: "Control+v,Insert";
-	kb-move-char-back: "Left,Alt+h";
-	kb-move-char-forward: "Right,Alt+l";
-	kb-mode-next: "Tab";
-	kb-mode-previous: "Shift+Tab";
-	kb-row-up: "Up,Control+k";
-	kb-row-down: "Down,Control+j";
-	kb-cancel: "Escape,Control+c";
-	kb-remove-to-eol: "";
-	kb-accept-entry: "Return,KP_Enter";
-	kb-row-tab: "";
-	kb-remove-char-back: "BackSpace,Shift+BackSpace";
+    font: "Envy Code R 10";
+    line-margin: 10;
+
+    display-ssh:    "";
+    display-run:    "";
+    display-drun:   "";
+    display-window: "";
+    display-combi:  "";
+    show-icons:     true;
 }
-@theme "themes/nord"
+
+
+@theme "~/.config/rofi/nord.rasi"
+
+listview {
+	lines: 6;
+	columns: 2;
+}
+
+window {
+	width: 30%;
+}
