@@ -85,12 +85,6 @@ local function indent()
   })
 end
 
-vim.g.symbols_outline = {
-  auto_preview = false,
-  auto_close = true,
-  width = 25,
-}
-
 packer.startup(function()
   use({ "wbthomason/packer.nvim" })
   use({ "nvim-lua/plenary.nvim" })
@@ -125,7 +119,14 @@ packer.startup(function()
       require("plugins.java").config()
     end,
   })
-  use({ "simrat39/symbols-outline.nvim", opt = true, cmd = "SymbolsOutline" })
+  use({
+    "simrat39/symbols-outline.nvim",
+    opt = true,
+    cmd = "SymbolsOutline",
+    config = function()
+      require("plugins.symbols_outline").config()
+    end,
+  })
   use({
     "rmagatti/goto-preview",
     opt = true,

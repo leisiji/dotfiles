@@ -22,19 +22,18 @@ function M.setup()
     { key = "gy", action = "copy_absolute_path" },
     { key = "q", action = "close" },
     { key = "<M-k>", action = "toggle_file_info" },
-    { key = "z", cb = [[:lua require('plugins.nvim_tree').resize()<cr>]] },
     { key = { "<CR>", "<2-LeftMouse>" }, action = "edit" },
     { key = "f", action = "live_filter" },
   }
   local width = 120
   require("nvim-tree").setup({
     view = {
-      width = width,
       mappings = { custom_only = true, list = list },
       float = {
         enable = true,
         open_win_config = {
           relative = "editor",
+          width = width,
           border = "rounded",
           height = 50,
           row = 1,
@@ -70,21 +69,6 @@ function M.setup()
       },
     },
   })
-end
-
-function M.resize()
-  local w = require("nvim-tree.view").View.width
-  if original_width == nil then
-    original_width = w
-  end
-  if w ~= original_width then
-    w = original_width
-  else
-    w = w + 50
-  end
-  require("nvim-tree.view").View.width = w
-  vim.cmd("NvimTreeClose")
-  vim.cmd("NvimTreeToggle")
 end
 
 return M
