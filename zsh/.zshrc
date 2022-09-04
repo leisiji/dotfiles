@@ -38,7 +38,7 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
 # gentoo prefix
 GENTOO_PREFIX=""
 if [ -d $HOME/gentoo ]; then
-	GENTOO_PREFIX=$HOME/gentoo
+    GENTOO_PREFIX=$HOME/gentoo
 fi
 export GTAGSCONF="$GENTOO_PREFIX/usr/share/gtags/gtags.conf"
 zinit ice wait"1" lucid; zinit snippet $GENTOO_PREFIX/usr/share/fzf/key-bindings.zsh
@@ -50,12 +50,12 @@ zinit light skywind3000/z.lua
 zpcompinit; zpcdreplay
 
 zinit wait="1" lucid light-mode for \
-	zsh-users/zsh-autosuggestions \
-	hlissner/zsh-autopair \
-	zdharma-continuum/fast-syntax-highlighting \
-	zsh-users/zsh-completions \
-	Aloxaf/fzf-tab \
-	wfxr/forgit
+    zsh-users/zsh-autosuggestions \
+    hlissner/zsh-autopair \
+    zdharma-continuum/fast-syntax-highlighting \
+    zsh-users/zsh-completions \
+    Aloxaf/fzf-tab \
+    wfxr/forgit
 
 bindkey '^[,' autosuggest-accept
 
@@ -67,37 +67,28 @@ zstyle ':completion:files' sort false
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 my_exe() {
-	zle push-line
-	BUFFER="$1"
-	zle accept-line
+    zle push-line
+    BUFFER="$1"
+    zle accept-line
 }
 
 # 补全 bat
 addBat () {
-	RBUFFER="${t} | bat"
-	zle accept-line
+    RBUFFER="${t} | bat"
+    zle accept-line
 }
 zle -N addBat
 bindkey '\ea' addBat
 
 my-fzf-cd() {
-	local dirs=$(fd --type d --maxdepth 1 --hidden)
-	if [[ -z "$dirs" ]]; then
-		my_exe "exa -l"
-		return 0
-	fi
-	local dir
-	if [[ $(echo ${dirs} | wc -w) -eq 1 ]]; then
-		dir=${dirs}
-	else
-		dir="$(echo ${dirs} | fzf --reverse --height 40%)"
-		if [[ -z "$dir" ]]; then
-			zle redisplay
-			return 0
-		fi
-	fi
-	my_exe "cd ${dir}"
-	unset dir
+    local dirs=$(find -maxdepth 1 -type d)
+    dir=$(echo ${dirs} | fzf --reverse --height 40%)
+    if [[ ! -z ${dir} ]]; then
+        my_exe "cd ${dir}"
+    else
+        zle redisplay
+    fi
+    unset dir
 }
 zle -N my-fzf-cd
 bindkey '\ej' my-fzf-cd
@@ -108,7 +99,7 @@ bindkey -s '\es' 'git status .\n'
 
 # hint of the completion of task by tmux
 precmd () {
-	echo -n -e "\a"
+    echo -n -e "\a"
 }
 
 PROMPT='
