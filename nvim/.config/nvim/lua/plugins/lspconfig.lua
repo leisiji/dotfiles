@@ -54,6 +54,7 @@ local function all_lsp_config(lsp)
     "gopls",
     "rust_analyzer",
     "tsserver",
+    "jsonls",
   }
   for _, server in pairs(servers) do
     lsp[server].setup(default_cfg)

@@ -2,16 +2,12 @@
 local M = {}
 local lsp_util = require('vim.lsp.util')
 
-local function current_fun_cb(_, result, _, _)
-  vim.b.current_func_name =  ''
-
-  if type(result) ~= 'table' then
+local function get_current_func(items, row)
+  if type(items) ~= 'table' then
     return
   end
 
-  local cursor_pos = vim.api.nvim_win_get_cursor(0)
-
-  for _, item in ipairs(result) do
+  for _, item in ipairs(items) do
     local sym_range = nil
     if item.location then -- Item is a SymbolInformation
       sym_range = item.location.range
@@ -19,17 +15,29 @@ local function current_fun_cb(_, result, _, _)
       sym_range = item.range
     end
 
-    local line = cursor_pos[1]
     local start_line = sym_range.start.line
     local end_line = sym_range['end'].line
 
     if sym_range ~= nil then
-      if line >= start_line and line <= end_line then
-        vim.b.current_func_name = item.name
-        break
+      if row >= start_line and row <= end_line then
+        local kind = item.kind
+        -- "rust mod" and "rust impl" and "cpp namespace"
+        if kind == 2 or kind == 3 or kind == 19 then
+          return get_current_func(item.children, row)
+        else
+          return item.name
+        end
       end
     end
   end
+  return ""
+end
+
+local function current_fun_cb(_, result, _, _)
+  vim.b.current_func_name =  ''
+
+  local cursor_pos = vim.api.nvim_win_get_cursor(0)
+  vim.b.current_func_name = get_current_func(result, cursor_pos[1])
 end
 
 function M.update()
