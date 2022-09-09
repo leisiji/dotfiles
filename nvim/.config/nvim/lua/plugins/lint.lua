@@ -8,10 +8,10 @@ function M.config()
   }
   lint.linters_by_ft = linters
 
-  local md = require('lint.linters.markdownlint')
+  local md = require("lint.linters.markdownlint")
   md.args = {
     "-c",
-    vim.fn.stdpath("config") .. "/.markdownlint.jsonc"
+    vim.fn.stdpath("config") .. "/.markdownlint.jsonc",
   }
 
   local group = "nvim_lint"
@@ -19,7 +19,7 @@ function M.config()
   a.nvim_create_augroup(group, { clear = true })
   a.nvim_create_autocmd({ "BufWritePost", "BufReadPost" }, {
     group = group,
-    pattern = { "*.md", "*.c", "*.cpp", "*.lua" },
+    pattern = { "*.md", "*.lua" },
     callback = function()
       lint.try_lint()
     end,
