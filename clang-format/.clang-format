@@ -9,6 +9,7 @@ IndentCaseLabels: false
 BreakBeforeBraces: Linux
 PointerAlignment: Right
 AlignConsecutiveMacros: true
+AccessModifierOffset: -4
 
 BraceWrapping:
   AfterCaseLabel:  false
