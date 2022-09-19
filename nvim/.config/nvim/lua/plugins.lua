@@ -104,9 +104,21 @@ packer.startup(function()
   use({
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
+    requires = "theHamsta/nvim-semantic-tokens",
     opt = true,
     config = function()
       require("plugins.lspconfig").lsp_config()
+    end,
+  })
+  use({
+    "theHamsta/nvim-semantic-tokens",
+    event = "BufReadPost",
+    opt = true,
+    config = function()
+      require("nvim-semantic-tokens").setup({
+        preset = "default",
+        highlighters = { require("nvim-semantic-tokens.table-highlighter") },
+      })
     end,
   })
   use({
@@ -206,7 +218,14 @@ packer.startup(function()
 
   use({ "leisiji/simple_indent", opt = true, event = "BufRead" })
   use({ "leisiji/indent-o-matic", config = indent })
-  use({ "AckslD/nvim-FeMaco.lua", opt = true, config = 'require("femaco").setup()', cmd = "FeMaco" })
+  use({
+    "AckslD/nvim-FeMaco.lua",
+    opt = true,
+    config = function()
+      require("femaco").setup()
+    end,
+    cmd = "FeMaco",
+  })
   use({
     "numToStr/FTerm.nvim",
     opt = true,

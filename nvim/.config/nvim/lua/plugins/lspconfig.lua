@@ -3,10 +3,9 @@ local default_cfg
 local group = "lsp_document_highlight"
 local a = vim.api
 
-local on_attach = function(client, _)
-  -- cursor hightlight and hint function name in statusline
-  if client.server_capabilities.documentHighlightProvider then
-    local bufnr = a.nvim_get_current_buf()
+local on_attach = function(client, bufnr)
+  local caps = client.server_capabilities
+  if caps.documentHighlightProvider then
     a.nvim_clear_autocmds({ group = group, buffer = bufnr })
     local autocmds = {
       CursorHold = function()
@@ -18,6 +17,17 @@ local on_attach = function(client, _)
     for key, value in pairs(autocmds) do
       a.nvim_create_autocmd({ key }, { group = group, callback = value, buffer = bufnr })
     end
+  end
+  if caps.semanticTokensProvider and caps.semanticTokensProvider.full then
+    local augroup = vim.api.nvim_create_augroup("SemanticTokens", {})
+    vim.api.nvim_create_autocmd("TextChanged", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.semantic_tokens_full()
+      end,
+    })
+    vim.lsp.buf.semantic_tokens_full()
   end
 end
 
@@ -67,11 +77,30 @@ local function lsp_basic()
   lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, { border = "single" })
 end
 
+local function highlight()
+  vim.cmd[[
+    hi default link LspComment TSComment
+    hi default link LspFunction TSFunction
+    hi default link LspNumber TSNumber
+    hi default link LspMacro TSConstMacro
+    hi default link LspVariable TSVariable
+    hi default link LspKeyword TSKeyword
+    hi default link LspOperator TSOperator
+    hi default link LspTypeParameter TSType
+    hi default link LspParameter TSVariable
+    hi default link LspClass TSType
+    hi default link LspType TSType
+    hi default link LspInterface TSType
+    hi default link LspStruct TSType
+  ]]
+end
+
 function M.lsp_config()
   coroutine.wrap(function()
     local lsp = require("lspconfig")
     lsp_basic()
     all_lsp_config(lsp)
+    highlight()
   end)()
 end
 
