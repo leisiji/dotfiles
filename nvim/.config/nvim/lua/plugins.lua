@@ -8,16 +8,20 @@ local function colorscheme()
 
   local onedarkpro = require("onedarkpro")
   onedarkpro.setup({
-    colors = {
-      onedark = {
-        bg = "#1e1e1e",
-      },
-    },
-    highlights = {
-      TabLineSel = { fg = "${bg}", bg = "${blue}" },
-    },
+    theme = "onedark_dark",
     options = {
       cursorline = true,
+      bold = true,
+      italic = true,
+      window_unfocused_color = true,
+    },
+    plugins = {
+      all = false,
+      treesitter = true,
+      nvim_cmp = true,
+      native_lsp = true,
+      gitsigns = true,
+      nvim_tree = true,
     },
   })
   onedarkpro.load()
