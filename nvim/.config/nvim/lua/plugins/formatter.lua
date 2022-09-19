@@ -22,16 +22,16 @@ function M.config()
         function()
           return {
             exe = "google-java-format",
-            args = { "-i", "-a" },
-            stdin = false,
+            args = { "-a", "-" },
+            stdin = true,
           }
         end,
       },
       json = {
         function()
           return {
-            exe = "python",
-            args = { "-m", "json.tool" },
+            exe = "jq",
+            args = { "-m" },
             stdin = true,
           }
         end,

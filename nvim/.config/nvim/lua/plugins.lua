@@ -68,7 +68,6 @@ local function filetype()
   require("filetype").setup({
     overrides = {
       extensions = {
-        bp = "javascript",
         rc = "rc",
         hal = "hal",
       },
