@@ -78,21 +78,43 @@ local function lsp_basic()
 end
 
 local function highlight()
-  vim.cmd[[
-    hi default link LspComment TSComment
-    hi default link LspFunction TSFunction
-    hi default link LspNumber TSNumber
-    hi default link LspMacro TSConstMacro
-    hi default link LspVariable TSVariable
-    hi default link LspKeyword TSKeyword
-    hi default link LspOperator TSOperator
-    hi default link LspTypeParameter TSType
-    hi default link LspParameter TSVariable
-    hi default link LspClass TSType
-    hi default link LspType TSType
-    hi default link LspInterface TSType
-    hi default link LspStruct TSType
-  ]]
+  -- reference: coc.nvim
+  local hl_map = {
+    LspNamespace = { "TSNamespace", "Include" },
+    LspType = { "TSType", "Type" },
+    LspClass = { "TSConstructor", "Special" },
+    LspEnum = { "TSEnum", "Type" },
+    LspInterface = { "TSInterface", "Type" },
+    LspStruct = { "TSStruct", "Identifier" },
+    LspTypeParameter = { "TSParameter", "Identifier" },
+    LspParameter = { "TSParameter", "Identifier" },
+    LspVariable = { "TSSymbol", "Identifier" },
+    LspProperty = { "TSProperty", "Identifier" },
+    LspEnumMember = { "TSEnumMember", "Constant" },
+    LspEvent = { "TSEvent", "Keyword" },
+    LspFunction = { "TSFunction", "Function" },
+    LspMethod = { "TSMethod", "Function" },
+    LspMacro = { "TSConstMacro", "Define" },
+    LspKeyword = { "TSKeyword", "Keyword" },
+    LspModifier = { "TSModifier", "StorageClass" },
+    LspComment = { "TSComment", "Comment" },
+    LspString = { "TSString", "String" },
+    LspNumber = { "TSNumber", "Number" },
+    LspRegexp = { "TSStringRegex", "String" },
+    LspOperator = { "TSOperator", "Operator" },
+    LspDecorator = { "TSSymbol", "Identifier" },
+    LspDeprecated = { "TSStrike", "Error" },
+  }
+
+  for key, value in pairs(hl_map) do
+    local hi
+    if vim.fn.hlexists(value[1]) then
+      hi = value[1]
+    else
+      hi = value[2]
+    end
+    vim.cmd("hi default link " .. key .. " " .. hi)
+  end
 end
 
 function M.lsp_config()
