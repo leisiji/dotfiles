@@ -68,17 +68,6 @@ local function gitsigns()
   })
 end
 
-local function filetype()
-  require("filetype").setup({
-    overrides = {
-      extensions = {
-        rc = "rc",
-        hal = "hal",
-      },
-    },
-  })
-end
-
 local function indent()
   require("indent-o-matic").setup({
     max_lines = 2048,
@@ -91,7 +80,6 @@ end
 packer.startup(function()
   use({ "wbthomason/packer.nvim" })
   use({ "nvim-lua/plenary.nvim" })
-  use({ "nathom/filetype.nvim", config = filetype })
 
   use({ "leisiji/fzf_utils", opt = true, cmd = "FzfCommand", requires = { "vijaymarupudi/nvim-fzf" } })
 

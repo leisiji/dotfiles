@@ -1,5 +1,4 @@
 vim.g.mapleader = " "
-vim.g.did_load_filetypes = 1
 vim.g.loaded_gtags = 1
 
 -- avoid loading inner plugins
