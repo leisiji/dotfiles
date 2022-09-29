@@ -23,6 +23,9 @@ local function colorscheme()
       gitsigns = true,
       nvim_tree = true,
     },
+    highlights = {
+      PmenuSel = { fg = "${fg}", bg = "#303030" }
+    }
   })
   onedarkpro.load()
 end

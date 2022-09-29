@@ -2,13 +2,13 @@ local M = {}
 
 local colors = require("onedarkpro").get_colors("onedark")
 local vi_modes = {
-  n = { colors.orange, "  NORMAL " },
-  i = { colors.green, "  INSERT " },
-  v = { colors.blue, "  VISUAL " },
-  V = { colors.blue, "  V-LINE " },
-  [""] = { colors.blue, "  VISUAL " },
-  c = { colors.purple, "  COMMAND " },
-  t = { colors.yellow, "  TERMINAL " },
+  n = { "#FFA066", "  NORMAL " },
+  i = { "#98BB6C", "  INSERT " },
+  v = { "#7E9CD8", "  VISUAL " },
+  V = { "#7E9CD8", "  V-LINE " },
+  [""] = { "#7E9CD8", "  VISUAL " },
+  c = { "#957FB8", "  COMMAND " },
+  t = { "#DCA561", "  TERMINAL " },
 }
 
 function M.vi_mode()
