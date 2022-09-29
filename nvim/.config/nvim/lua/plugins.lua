@@ -1,32 +1,6 @@
 local packer = require("packer")
 local use = packer.use
 
-local function colorscheme()
-  if vim.g.vscode then
-    return
-  end
-
-  local onedarkpro = require("onedarkpro")
-  onedarkpro.setup({
-    theme = "onedark_dark",
-    options = {
-      cursorline = true,
-      bold = true,
-      italic = true,
-      window_unfocused_color = true,
-    },
-    plugins = {
-      all = false,
-      treesitter = true,
-      nvim_cmp = true,
-      native_lsp = true,
-      gitsigns = true,
-      nvim_tree = true,
-    },
-  })
-  onedarkpro.load()
-end
-
 -- treesitter
 local function treesitter()
   require("nvim-treesitter.configs").setup({
@@ -84,7 +58,12 @@ packer.startup(function()
   use({ "leisiji/fzf_utils", opt = true, cmd = "FzfCommand", requires = { "vijaymarupudi/nvim-fzf" } })
 
   -- colorscheme and statusline
-  use({ "olimorris/onedarkpro.nvim", config = colorscheme })
+  use({
+    "rebelot/kanagawa.nvim",
+    config = function()
+      vim.cmd("colorscheme kanagawa")
+    end,
+  })
   use({
     "nvim-treesitter/nvim-treesitter",
     requires = "nvim-treesitter/nvim-treesitter-textobjects",
