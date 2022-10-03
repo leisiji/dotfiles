@@ -51,7 +51,7 @@ function M.jdtls_start(jar)
   }
 
   if android then
-    root_dir = require("jdtls.setup").find_root({ "gradlew" })
+    root_dir = require("jdtls.setup").find_root({ "gradlew", ".git" })
   else
     root_dir = require("jdtls.setup").find_root({ "build.gradle", "mvnw" })
   end
@@ -64,6 +64,14 @@ function M.jdtls_start(jar)
   if android then
     lsp_config.settings = {
       java = {
+        --autobuild = { enabled = true },
+        signatureHelp = { enabled = true },
+        sources = {
+          organizeImports = {
+            starThreshold = 9999,
+            staticStarThreshold = 9999,
+          },
+        },
         home = java_home,
         jdt = {
           ls = {
@@ -71,9 +79,6 @@ function M.jdtls_start(jar)
               enabled = true,
             },
             protobufSupport = {
-              enabled = true,
-            },
-            lombokSupport = {
               enabled = true,
             },
           },
@@ -91,6 +96,22 @@ function M.jdtls_start(jar)
         },
       },
     }
+
+    -- There is a bug in jdtls, it should set GRADLE_HOME to newer version for the first time,
+    -- and then set the correct version that android declared
+    local sha = vim.fn.system("sha256sum gradle/wrapper/gradle-wrapper.jar")
+    if sha ~= nil then
+      sha = string.sub(sha, 0, string.find(sha, " "))
+      lsp_config.settings.java.imports = {
+        gradle = {
+          wrapper = {
+            checksums = {
+              { sha256 = sha, allowed = true },
+            },
+          },
+        },
+      }
+    end
   end
 
   require("jdtls").start_or_attach(vim.tbl_extend("force", lsp_config, cfg))
