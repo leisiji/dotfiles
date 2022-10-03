@@ -119,7 +119,6 @@ packer.startup(function()
   use({
     "mfussenegger/nvim-jdtls",
     opt = true,
-    requires = { "leisiji/nvim-android" },
     ft = { "java" },
     config = function()
       require("plugins.java").config()
