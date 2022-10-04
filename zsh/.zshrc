@@ -43,10 +43,8 @@ fi
 export GTAGSCONF="$GENTOO_PREFIX/usr/share/gtags/gtags.conf"
 zinit ice wait"1" lucid; zinit snippet $GENTOO_PREFIX/usr/share/fzf/key-bindings.zsh
 zinit ice wait"1" lucid; zinit snippet $GENTOO_PREFIX/usr/share/fzf/completion.zsh
-
 zinit wait="1" lucid for OMZ::plugins/extract/extract.plugin.zsh
 
-zinit light skywind3000/z.lua
 zpcompinit; zpcdreplay
 
 zinit wait="1" lucid light-mode for \
@@ -57,12 +55,14 @@ zinit wait="1" lucid light-mode for \
     Aloxaf/fzf-tab \
     wfxr/forgit
 
+eval "$(zoxide init zsh)"
+
 bindkey '^[,' autosuggest-accept
 
 zstyle ':completion:*:git-checkout:*' sort false
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -l $realpath'
-zstyle ':fzf-tab:complete:_zlua:*' query-string input
+zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':fzf-tab:*' switch-group ',' '.'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':completion:files' sort false
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
