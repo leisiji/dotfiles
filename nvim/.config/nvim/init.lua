@@ -78,23 +78,23 @@ local function cmd_gen(lhs, rhs)
   local gen_opts = { noremap = true }
   mapkey("n", lhs, format(":%s", rhs), gen_opts)
 end
-local function cmd(lhs, rhs)
-  mapkey("n", lhs, format("<cmd>%s<cr>", rhs), keymap_opts)
+local function cmd(v)
+  mapkey("n", v[1], format("<cmd>%s<cr>", v[2]), keymap_opts)
 end
-local function ino(lhs, rhs)
-  mapkey("i", lhs, rhs, keymap_opts)
+local function ino(v)
+  mapkey("i", v[1], v[2], keymap_opts)
 end
-local function nn(lhs, rhs)
-  mapkey("n", lhs, rhs, keymap_opts)
+local function nn(v)
+  mapkey("n", v[1], v[2], keymap_opts)
 end
-local function vn(lhs, rhs)
-  mapkey("v", lhs, rhs, keymap_opts)
+local function vn(v)
+  mapkey("v", v[1], v[2], keymap_opts)
 end
-local function tn(lhs, rhs)
-  mapkey("t", lhs, rhs, keymap_opts)
+local function tn(v)
+  mapkey("t", v[1], v[2], keymap_opts)
 end
-local function fmap(lhs, rhs)
-  vim.keymap.set("n", lhs, rhs, keymap_opts)
+local function fmap(v)
+  vim.keymap.set("n", v[1], v[2], keymap_opts)
 end
 
 local function init_nvim_keys()
@@ -141,6 +141,17 @@ local function init_nvim_keys()
         vim.cmd("tabn " .. vim.g.last_active_tab)
       end,
     },
+    { "<M-k>", vim.lsp.buf.hover },
+    { "<leader>rn", vim.lsp.buf.rename },
+    { "<leader>ca", vim.lsp.buf.code_action },
+    { "<leader>a", vim.diagnostic.goto_next },
+    {
+      "<M-o>",
+      function()
+        vim.diagnostic.open_float({ border = "single" })
+      end,
+    },
+    { "<leader><space>f", vim.lsp.buf.formatting },
   }
   local ino_maps = {
     { "<C-j>", "<Down>" },
@@ -156,27 +167,39 @@ local function init_nvim_keys()
     { "<M-f>", "<C-Right>" },
     { "<M-d>", "<C-o>diw" },
   }
+  local cno_maps = {
+    { "<M-b>", "<C-Left>" },
+    { "<M-f>", "<C-Right>" },
+    { "<C-b>", "<Left>" },
+    { "<C-f>", "<Right>" },
+    { "<C-d>", "<Delete>" },
+    { "<C-a>", "<Home>" },
+    { "<C-e>", "<End>" },
+  }
 
   for _, v in ipairs(nn_maps) do
-    nn(v[1], v[2])
+    nn(v)
   end
   for i = 1, 9, 1 do
-    nn(format("<M-%d>", i), format("%dgt", i))
+    nn({ format("<M-%d>", i), format("%dgt", i) })
   end
   for _, v in ipairs(vn_maps) do
-    vn(v[1], v[2])
+    vn(v)
   end
   for _, v in ipairs(cmd_maps) do
-    cmd(v[1], v[2])
+    cmd(v)
   end
   for _, v in ipairs(ino_maps) do
-    ino(v[1], v[2])
+    ino(v)
   end
   for _, v in ipairs(func_maps) do
-    fmap(v[1], v[2])
+    fmap(v)
+  end
+  for _, v in ipairs(cno_maps) do
+    vim.keymap.set("c", v[1], v[2], { noremap = true })
   end
 
-  tn("<M-e>", "<C-\\><C-n>")
+  tn({ "<M-e>", "<C-\\><C-n>" })
 end
 
 local function init_plugins_keymaps()
@@ -217,7 +240,8 @@ local function init_plugins_keymaps()
     { "<M-r>", "FzfCommand --lsp ref tab drop" },
     { "<leader>ws", "FzfCommand --lsp workspace_symbol" },
     { "<leader>m", "FzfCommand --mru" },
-    { "<leader>cm", "FzfCommand --commit" },
+    { "<leader>gc", "FzfCommand --commit" },
+    { "<leader><leader>z", "FzfCommand --zoxide" },
 
     -- others
     { "<leader><leader>p", "GotoPreview" },
@@ -226,13 +250,10 @@ local function init_plugins_keymaps()
   }
 
   for _, v in pairs(cmds) do
-    cmd(v[1], v[2])
+    cmd(v)
   end
 
-  cmd_gen(
-    "<leader>g",
-    [[<C-U><C-R>=printf('FzfCommand --live_grep %s', fnamemodify(expand("%:p:h"), ":."))<CR>]]
-  )
+  cmd_gen("<leader>gl", [[<C-U><C-R>=printf('FzfCommand --live_grep %s', fnamemodify(expand("%:p:h"), ":."))<CR>]])
 
   -- easy align
   mapkey("x", "ga", ":EasyAlign<cr>", {})
@@ -244,22 +265,6 @@ local function init_plugins_keymaps()
   cmd_gen("<leader>fa", [[<C-U><C-R>='FzfCommand --rg '.expand('<cword>')<CR>]])
 
   -- lsp
-  local lsp = {
-    { "<M-k>", vim.lsp.buf.hover },
-    { "<leader>rn", vim.lsp.buf.rename },
-    { "<leader>ca", vim.lsp.buf.code_action },
-    { "<leader>a", vim.diagnostic.goto_next },
-    {
-      "<M-o>",
-      function()
-        vim.diagnostic.open_float({ border = "single" })
-      end,
-    },
-    { "<leader><space>f", vim.lsp.buf.formatting },
-  }
-  for _, v in ipairs(lsp) do
-    fmap(v[1], v[2])
-  end
   vim.keymap.set("i", "<M-k>", vim.lsp.buf.signature_help, keymap_opts)
 end
 

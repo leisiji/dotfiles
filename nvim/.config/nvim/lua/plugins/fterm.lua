@@ -15,7 +15,11 @@ function M.config()
     border = "single", -- or 'double'
   })
 
-  vim.keymap.set("t", "<C-x>", require("FTerm").toggle, opts)
+  vim.keymap.set("t", "<C-x>", function ()
+    if vim.bo.filetype == "FTerm" then
+      require("FTerm").toggle()
+    end
+  end, opts)
   vim.keymap.set("n", "<leader>tc", function ()
     local dir = vim.fn.expand("%:p:h")
     require("FTerm").run("cd " .. dir)
