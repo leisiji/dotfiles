@@ -23,7 +23,12 @@ local function get_current_func(items, row)
         local kind = item.kind
         -- "rust mod" and "rust impl" and "cpp namespace"
         if (kind == 2 or kind == 3 or kind == 19) and item.children ~= nil then
-          return get_current_func(item.children, row)
+          local s = get_current_func(item.children, row)
+          if #s > 0 then
+            return s
+          else
+            return item.name
+          end
         else
           return item.name
         end
@@ -35,7 +40,7 @@ end
 
 local function current_fun_cb(_, result, _, _)
   local cursor_pos = vim.api.nvim_win_get_cursor(0)
-  vim.b.current_func_name = get_current_func(result, cursor_pos[1])
+  vim.b.current_func_name = get_current_func(result, cursor_pos[1] - 1)
 end
 
 function M.update()
