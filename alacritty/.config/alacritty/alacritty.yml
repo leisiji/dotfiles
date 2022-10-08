@@ -18,12 +18,12 @@ scrolling:
 
 font:
     size: 12.0
-    normal: 
-        family: CaskaydiaCove Nerd Font Mono
-    bold:   
-        family: CaskaydiaCove Nerd Font Mono
-    italic: 
-        family: CaskaydiaCove Nerd Font Mono
+    normal:
+        family: Source Code Pro
+    bold:
+        family: Source Code Pro
+    italic:
+        family: Source Code Pro
     offset:
         x: 0
         y: 0
@@ -34,11 +34,11 @@ draw_bold_text_with_bright_colors: false
 
 colors:
   primary:
-    background: "#1e1e1e"
+    background: "#282c34"
     foreground: "#abb2bf"
 
   normal:
-    black: "#1e1e1e"
+    black: "#282c34"
     red: "#e06c75"
     green: "#98c379"
     yellow: "#e5c07b"
