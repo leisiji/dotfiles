@@ -151,7 +151,6 @@ local function init_nvim_keys()
         vim.diagnostic.open_float({ border = "single" })
       end,
     },
-    { "<leader><space>f", vim.lsp.buf.formatting },
     { "<C-r>", function ()
       local bufnr = vim.api.nvim_get_current_buf()
       local client = vim.lsp.get_active_clients({bufnr = bufnr})
