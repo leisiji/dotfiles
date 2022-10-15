@@ -1,0 +1,97 @@
+@import "mocha.css";
+* {
+  font-family: Source Code Pro;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+window#waybar {
+  /* border-bottom: 2px solid @surface0; */
+  transition-property: background;
+  transition-duration: 0.5s;
+  background: rgba(30, 30, 46, 0.85);
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+#mode,
+#clock,
+#language,
+#network,
+#custom-logo,
+#custom-uptime,
+#custom-memory,
+#temperature,
+#window,
+#cpu,
+#memory,
+#disk,
+#tray {
+  padding: 0 10px;
+  margin: 1px 1px 1px 1px;
+  background-clip: padding-box;
+}
+
+#custom-sep {
+  padding: 0;
+  color: @surface0;
+}
+
+#workspaces button {
+  padding: 0 1px;
+  min-width: 20px;
+  color: @text;
+}
+
+#workspaces button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.active {
+  color: @blue;
+}
+
+#workspaces button.urgent {
+  color: @red;
+}
+
+#cpu {
+  color: @teal;
+}
+
+#memory {
+  color: @mauve;
+}
+
+#clock {
+  color: @blue;
+}
+
+#mode {
+  color: @red;
+}
+
+#window {
+  color: @text;
+}
+
+#language {
+  color: @teal;
+}
+
+#custom-uptime {
+  color: @green;
+}
+
+#custom-logo {
+  color: @blue;
+}
+
+@keyframes blink {
+  to {
+    background-color: @surface0;
+    color: @red;
+  }
+}
