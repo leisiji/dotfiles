@@ -101,12 +101,23 @@ function M.jdtls_start(jar)
     -- and then set the correct version that android declared
     local sha = vim.fn.system("sha256sum gradle/wrapper/gradle-wrapper.jar")
     if sha ~= nil then
-      sha = string.sub(sha, 0, string.find(sha, " "))
-      lsp_config.settings.java.imports = {
-        gradle = {
-          wrapper = {
-            checksums = {
-              { sha256 = sha, allowed = true },
+      sha = string.sub(sha, 0, string.find(sha, " ") - 1)
+      lsp_config.init_options = {
+        settings = {
+          java = {
+            imports = { -- <- this
+              gradle = {
+                enabled = true,
+                wrapper = {
+                  enabled = true,
+                  checksums = {
+                    {
+                      sha256 = sha,
+                      allowed = true,
+                    },
+                  },
+                },
+              },
             },
           },
         },
