@@ -1,5 +1,4 @@
 vim.g.mapleader = " "
-vim.g.loaded_gtags = 1
 
 -- avoid loading inner plugins
 vim.g.loaded_2html_plugin = 1
@@ -8,6 +7,8 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_tarPlugin = 1
 vim.g.loaded_zipPlugin = 1
 vim.g.loaded_fzf = 1
+vim.g.loaded_gtags = 1
+vim.g.loaded_gtags_cscope = 1
 
 local mapkey = vim.api.nvim_set_keymap
 local keymap_opts = { noremap = true, silent = true }

@@ -148,11 +148,11 @@ packer.startup(function()
     end,
   })
   use({
-    "folke/lua-dev.nvim",
+    "folke/neodev.nvim",
     opt = true,
     ft = { "lua" },
     config = function()
-      require("plugins.lua_dev").config()
+      require("plugins.neodev").config()
     end,
   })
 
