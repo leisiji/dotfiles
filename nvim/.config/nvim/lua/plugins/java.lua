@@ -62,43 +62,62 @@ function M.jdtls_start(jar)
   local lsp_config = {
     cmd = cmd,
     root_dir = root_dir,
-  }
-
-  if android then
-    lsp_config.settings = {
+    settings = {
       java = {
-        --autobuild = { enabled = true },
-        signatureHelp = { enabled = true },
-        sources = {
-          organizeImports = {
-            starThreshold = 9999,
-            staticStarThreshold = 9999,
-          },
-        },
-        home = java_home,
-        jdt = {
-          ls = {
-            androidSupport = {
-              enabled = true,
+        configuration = {
+          runtimes = {
+            {
+              name = "JavaSE-1.8",
+              path = "/usr/lib/jvm/java-8-openjdk/",
             },
-            protobufSupport = {
-              enabled = true,
+            {
+              name = "JavaSE-11",
+              path = "/usr/lib/jvm/java-11-openjdk/",
             },
-          },
-        },
-        import = {
-          gradle = {
-            enabled = true,
-            wrapper = {
-              enabled = true,
-            },
-            java = {
-              home = "/usr/lib/jvm/java-11-openjdk",
+            {
+              name = "JavaSE-18",
+              path = "/usr/lib/jvm/java-18-openjdk/",
             },
           },
         },
       },
+    },
+  }
+
+  if android then
+    local java_cfg = {
+      --autobuild = { enabled = true },
+      signatureHelp = { enabled = true },
+      sources = {
+        organizeImports = {
+          starThreshold = 9999,
+          staticStarThreshold = 9999,
+        },
+      },
+      home = java_home,
+      jdt = {
+        ls = {
+          androidSupport = {
+            enabled = true,
+          },
+          protobufSupport = {
+            enabled = true,
+          },
+        },
+      },
+      import = {
+        gradle = {
+          enabled = true,
+          wrapper = {
+            enabled = true,
+          },
+          java = {
+            home = "/usr/lib/jvm/java-11-openjdk",
+          },
+        },
+      },
     }
+    lsp_config.settings.java = vim.tbl_extend("force", lsp_config.settings.java, java_cfg)
 
     -- There is a bug in jdtls, it should set GRADLE_HOME to newer version for the first time,
     -- and then set the correct version that android declared
