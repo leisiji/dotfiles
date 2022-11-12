@@ -9,7 +9,10 @@ function M.config()
     pattern = { "java" },
     group = group,
     callback = function()
-      require("plugins.java").jdtls_start(jar)
+      local f = vim.fn.expand("%:p") -- for nvim.FeMaco
+      if string.find(f, "/tmp") == nil then
+        require("plugins.java").jdtls_start(jar)
+      end
     end,
   })
 end

@@ -223,7 +223,7 @@ packer.startup(function()
     "AckslD/nvim-FeMaco.lua",
     opt = true,
     config = function()
-      require("femaco").setup()
+      require("plugins.femaco").config()
     end,
     cmd = "FeMaco",
   })
