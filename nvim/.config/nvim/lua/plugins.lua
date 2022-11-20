@@ -166,6 +166,9 @@ packer.startup(function()
       require("plugins.calltree").config()
     end,
   })
+  use({
+    "smiteshp/nvim-navic" ,
+  })
 
   -- Lua
   use({

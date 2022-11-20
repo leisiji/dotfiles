@@ -5,19 +5,22 @@ local a = vim.api
 
 local on_attach = function(client, bufnr)
   local caps = client.server_capabilities
+
   if caps.documentHighlightProvider then
     a.nvim_clear_autocmds({ group = group, buffer = bufnr })
     local autocmds = {
-      CursorHold = function()
-        vim.lsp.buf.document_highlight()
-        require("plugins.current_function").update()
-      end,
       CursorMoved = vim.lsp.buf.clear_references,
+      CursorHold = vim.lsp.buf.document_highlight,
     }
     for key, value in pairs(autocmds) do
       a.nvim_create_autocmd({ key }, { group = group, callback = value, buffer = bufnr })
     end
   end
+
+  if client.server_capabilities.documentSymbolProvider then
+    require("nvim-navic").attach(client, bufnr)
+  end
+
   if caps.semanticTokensProvider and caps.semanticTokensProvider.full then
     local augroup = vim.api.nvim_create_augroup("SemanticTokens", {})
     vim.api.nvim_create_autocmd("BufWritePost", {

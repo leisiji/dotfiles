@@ -152,15 +152,18 @@ local function init_nvim_keys()
         vim.diagnostic.open_float({ border = "single" })
       end,
     },
-    { "<C-r>", function ()
-      local bufnr = vim.api.nvim_get_current_buf()
-      local client = vim.lsp.get_active_clients({bufnr = bufnr})
-      if client ~= nil and #client ~= 0 then
-        vim.cmd("FzfCommand --lsp document_symbol")
-      else
-        vim.cmd("FzfCommand --ctags")
-      end
-    end },
+    {
+      "<C-r>",
+      function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        local client = vim.lsp.get_active_clients({ bufnr = bufnr })
+        if client ~= nil and #client ~= 0 then
+          vim.cmd("FzfCommand --lsp document_symbol")
+        else
+          vim.cmd("FzfCommand --ctags")
+        end
+      end,
+    },
   }
   local ino_maps = {
     { "<C-j>", "<Down>" },
@@ -274,6 +277,8 @@ local function init_plugins_keymaps()
 
   -- lsp
   vim.keymap.set("i", "<M-k>", vim.lsp.buf.signature_help, keymap_opts)
+
+  vim.keymap.set("c", "<C-k>", "<S-Tab>", { noremap = true })
 end
 
 init_nvim_keys()
@@ -304,6 +309,7 @@ local global_cfg = {
   completeopt = "menu,menuone,noselect",
   tabline = "%!v:lua.mytabline()",
   expandtab = true,
+  cmdheight = 0,
   -- foldmethod = "expr",
   -- foldexpr = "nvim_treesitter#foldexpr()",
 }

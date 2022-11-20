@@ -3,8 +3,9 @@ local M = {}
 function M.config()
   require("neodev").setup({})
   -- then setup your lsp server as usual
+  local cfg = require("plugins.lspconfig").cfg()
   local lspconfig = require("lspconfig")
-  lspconfig.sumneko_lua.setup({
+  local neodev_cfg = {
     settings = {
       Lua = {
         completion = {
@@ -12,7 +13,8 @@ function M.config()
         },
       },
     },
-  })
+  }
+  lspconfig.sumneko_lua.setup(vim.tbl_extend("force", neodev_cfg, cfg))
 end
 
 return M

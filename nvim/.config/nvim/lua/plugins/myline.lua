@@ -23,7 +23,7 @@ end
 function M.load()
   vim.b.current_func_name = ""
   local vi_mode = [[%#ViMode#%{luaeval('require("plugins.myline").vi_mode()')}]]
-  local current_func = [[%#MyLspFunc#%{'  λ  '.b:current_func_name}]]
+  local current_func = [[%#MyLspFunc# %{%v:lua.require'nvim-navic'.get_location()%}]]
   local buffer_type = [[%#MyBufferTypeP#%{&filetype}]]
   local maxline = [[%#maxline#%{line('$')}]]
   vim.wo.statusline = vi_mode .. current_func .. "%=" .. " | " .. buffer_type .. " | " .. maxline .. " "
