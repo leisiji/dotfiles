@@ -31,3 +31,5 @@
 	file-decoration-style = none
 [init]
 	defaultBranch = main
+[http]
+	sslverify = false
