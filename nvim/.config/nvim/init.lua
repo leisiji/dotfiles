@@ -351,3 +351,5 @@ vim.g.clipboard = {
   copy = { ["+"] = { "tmux", "load-buffer", "-" }, ["*"] = { "tmux", "load-buffer", "-" } },
   paste = { ["+"] = { "tmux", "save-buffer", "-" }, ["*"] = { "tmux", "save-buffer", "-" } },
 }
+
+vim.g.unception_open_buffer_in_new_tab = true

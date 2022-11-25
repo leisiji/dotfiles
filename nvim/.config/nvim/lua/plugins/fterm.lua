@@ -15,15 +15,22 @@ function M.config()
     border = "single", -- or 'double'
   })
 
-  vim.keymap.set("t", "<C-x>", function ()
+  vim.keymap.set("t", "<C-x>", function()
     if vim.bo.filetype == "FTerm" then
       require("FTerm").toggle()
     end
   end, opts)
-  vim.keymap.set("n", "<leader>tc", function ()
+  vim.keymap.set("n", "<leader>tc", function()
     local dir = vim.fn.expand("%:p:h")
     require("FTerm").run("cd " .. dir)
   end, opts)
+
+  a.nvim_create_autocmd("User", {
+    pattern = "UnceptionEditRequestReceived",
+    callback = function()
+      require("FTerm").toggle()
+    end,
+  })
 end
 
 return M
