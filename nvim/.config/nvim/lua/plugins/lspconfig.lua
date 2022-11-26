@@ -24,18 +24,6 @@ local on_attach = function(client, bufnr)
   if client.server_capabilities.documentSymbolProvider then
     require("nvim-navic").attach(client, bufnr)
   end
-
-  if caps.semanticTokensProvider and caps.semanticTokensProvider.full then
-    local augroup = vim.api.nvim_create_augroup("SemanticTokens", {})
-    vim.api.nvim_create_autocmd("BufWritePost", {
-      group = augroup,
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.semantic_tokens_full()
-      end,
-    })
-    vim.lsp.buf.semantic_tokens_full()
-  end
 end
 
 local function all_lsp_config(lsp)
@@ -84,52 +72,11 @@ local function lsp_basic()
   lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, { border = "single" })
 end
 
-local function highlight()
-  -- reference: coc.nvim
-  local hl_map = {
-    LspNamespace = { "TSNamespace", "Include" },
-    LspType = { "TSType", "Type" },
-    LspClass = { "TSConstructor", "Special" },
-    LspEnum = { "TSEnum", "Type" },
-    LspInterface = { "TSInterface", "Type" },
-    LspStruct = { "TSStruct", "Identifier" },
-    LspTypeParameter = { "TSParameter", "Identifier" },
-    LspParameter = { "TSParameter", "Identifier" },
-    LspVariable = { "TSSymbol", "Identifier" },
-    LspProperty = { "TSProperty", "Identifier" },
-    LspEnumMember = { "TSEnumMember", "Constant" },
-    LspEvent = { "TSEvent", "Keyword" },
-    LspFunction = { "TSFunction", "Function" },
-    LspMethod = { "TSMethod", "Function" },
-    LspMacro = { "TSConstMacro", "Define" },
-    LspKeyword = { "TSKeyword", "Keyword" },
-    LspModifier = { "TSModifier", "StorageClass" },
-    LspComment = { "TSComment", "Comment" },
-    LspString = { "TSString", "String" },
-    LspNumber = { "TSNumber", "Number" },
-    LspRegexp = { "TSStringRegex", "String" },
-    LspOperator = { "TSOperator", "Operator" },
-    LspDecorator = { "TSSymbol", "Identifier" },
-    LspDeprecated = { "TSStrike", "Error" },
-  }
-
-  for key, value in pairs(hl_map) do
-    local hi
-    if vim.fn.hlexists(value[1]) then
-      hi = value[1]
-    else
-      hi = value[2]
-    end
-    vim.cmd("hi default link " .. key .. " " .. hi)
-  end
-end
-
 function M.lsp_config()
   coroutine.wrap(function()
     local lsp = require("lspconfig")
     lsp_basic()
     all_lsp_config(lsp)
-    highlight()
   end)()
 end
 

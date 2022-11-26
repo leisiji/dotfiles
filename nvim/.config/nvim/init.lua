@@ -245,14 +245,16 @@ local function init_plugins_keymaps()
     { "<leader>fd", [[exe('FzfCommand --gtags -d '.expand('<cword>'))]] },
     { "<M-f>", [[exe('FzfCommand --rg --all-buffers '.expand('<cword>'))]] },
     { "<leader>ff", [[exe('FzfCommand --rg '.expand('<cword>')." ".expand('%'))]] },
-    { "<M-j>", "FzfCommand --lsp jump_def edit" },
-    { "<M-t>", "FzfCommand --lsp jump_def tab drop" },
-    { "<M-v>", "FzfCommand --lsp jump_def vsplit" },
-    { "<M-r>", "FzfCommand --lsp ref tab drop" },
     { "<leader>ws", "FzfCommand --lsp workspace_symbol" },
     { "<leader>m", "FzfCommand --mru" },
     { "<leader>gc", "FzfCommand --commit" },
     { "<leader><leader>z", "FzfCommand --zoxide" },
+
+    { "<leader>gr", "Glance references" },
+    { "<M-r>", "FzfCommand --lsp ref tab drop" },
+    { "<M-j>", "FzfCommand --lsp jump_def edit" },
+    { "<M-t>", "FzfCommand --lsp jump_def tab drop" },
+    { "<M-v>", "FzfCommand --lsp jump_def vsplit" },
 
     -- others
     { "<leader><leader>p", "GotoPreview" },

@@ -36,13 +36,13 @@ local function treesitter()
     ensure_installed = "all",
     highlight = {
       enable = true,
-      disable = function(_, buf)
-        local max_filesize = 100 * 1024 -- 100 KB
-        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats and stats.size > max_filesize then
-          return true
-        end
-      end,
+      -- disable = function(_, buf)
+      --   local max_filesize = 100 * 1024 -- 100 KB
+      --   local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+      --   if ok and stats and stats.size > max_filesize then
+      --     return true
+      --   end
+      -- end,
     },
     indent = {
       enable = true,
@@ -115,17 +115,6 @@ packer.startup(function()
     end,
   })
   use({
-    "theHamsta/nvim-semantic-tokens",
-    event = "BufReadPost",
-    opt = true,
-    config = function()
-      require("nvim-semantic-tokens").setup({
-        preset = "default",
-        highlighters = { require("nvim-semantic-tokens.table-highlighter") },
-      })
-    end,
-  })
-  use({
     "mfussenegger/nvim-jdtls",
     opt = true,
     ft = { "java" },
@@ -157,6 +146,14 @@ packer.startup(function()
       require("plugins.neodev").config()
     end,
   })
+  use({
+    "dnlhc/glance.nvim",
+    opt = true,
+    cmd = "Glance",
+    config = function()
+      require("plugins.glance").config()
+    end,
+  })
 
   use({
     "ldelossa/litee-calltree.nvim",
@@ -169,7 +166,7 @@ packer.startup(function()
     end,
   })
   use({
-    "smiteshp/nvim-navic" ,
+    "smiteshp/nvim-navic",
   })
 
   -- Lua
@@ -252,7 +249,7 @@ packer.startup(function()
     end,
   })
 
-  use "samjwill/nvim-unception"
+  use("samjwill/nvim-unception")
 
   use({
     "kyazdani42/nvim-tree.lua",
