@@ -1,7 +1,12 @@
 local M = {}
 
 function M.config()
-  local cb = require("diffview.config").diffview_callback
+  local act = require("diffview.actions")
+
+  local quit = function()
+    vim.cmd("DiffviewClose")
+  end
+
   require("diffview").setup({
     diff_binaries = false,
     enhanced_diff_hl = false,
@@ -35,54 +40,15 @@ function M.config()
     key_bindings = {
       disable_defaults = false,
       view = {
-        ["<tab>"] = cb("select_next_entry"),
-        ["<s-tab>"] = cb("select_prev_entry"),
-        ["gf"] = cb("goto_file"),
-        ["<C-w>s"] = cb("goto_file_split"),
-        ["<C-w>t"] = cb("goto_file_tab"),
-        ["<leader>e"] = cb("focus_files"),
-        ["<leader>b"] = cb("toggle_files"),
+        ["<tab>"] = act.select_next_entry,
+        ["<S-tab>"] = act.select_prev_entry,
+        ["<leader>q"] = quit,
       },
       file_panel = {
-        ["j"] = cb("next_entry"),
-        ["k"] = cb("prev_entry"),
-        ["<cr>"] = cb("select_entry"),
-        ["-"] = cb("toggle_stage_entry"),
-        ["S"] = cb("stage_all"),
-        ["U"] = cb("unstage_all"),
-        ["X"] = cb("restore_entry"),
-        ["R"] = cb("refresh_files"),
-        ["<tab>"] = cb("select_next_entry"),
-        ["<s-tab>"] = cb("select_prev_entry"),
-        ["gf"] = cb("goto_file"),
-        ["<C-w>s"] = cb("goto_file_split"),
-        ["<C-w>t"] = cb("goto_file_tab"),
-        ["i"] = cb("listing_style"),
-        ["f"] = cb("toggle_flatten_dirs"),
-        ["<leader>e"] = cb("focus_files"),
-        ["<leader>b"] = cb("toggle_files"),
+        ["<leader>q"] = quit,
       },
       file_history_panel = {
-        ["g!"] = cb("options"),
-        ["<C-A-d>"] = cb("open_in_diffview"),
-        ["y"] = cb("copy_hash"),
-        ["zR"] = cb("open_all_folds"),
-        ["zM"] = cb("close_all_folds"),
-        ["j"] = cb("next_entry"),
-        ["k"] = cb("prev_entry"),
-        ["<cr>"] = cb("select_entry"),
-        ["o"] = cb("select_entry"),
-        ["<tab>"] = cb("select_next_entry"),
-        ["<s-tab>"] = cb("select_prev_entry"),
-        ["gf"] = cb("goto_file"),
-        ["<C-w>s"] = cb("goto_file_split"),
-        ["<C-w>t"] = cb("goto_file_tab"),
-        ["<leader>e"] = cb("focus_files"),
-        ["<leader>b"] = cb("toggle_files"),
-      },
-      option_panel = {
-        ["<tab>"] = cb("select"),
-        ["q"] = cb("close"),
+        ["<leader>q"] = quit,
       },
     },
   })
