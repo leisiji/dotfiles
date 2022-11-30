@@ -5,25 +5,35 @@ local a = vim.api
 
 local on_attach = function(client, bufnr)
   local caps = client.server_capabilities
-  local navic = require('nvim-navic')
+  local navic = require("nvim-navic")
 
-  if caps.documentHighlightProvider then
-    a.nvim_clear_autocmds({ group = group, buffer = bufnr })
-    local autocmds = {
-      CursorMoved = vim.lsp.buf.clear_references,
-      CursorHold = function ()
-        vim.lsp.buf.document_highlight()
-        vim.b.current_func_name = navic.get_location()
-      end,
-    }
-    for key, value in pairs(autocmds) do
-      a.nvim_create_autocmd({ key }, { group = group, callback = value, buffer = bufnr })
-    end
-  end
+  local highlight = caps.documentHighlightProvider
 
   if client.server_capabilities.documentSymbolProvider then
     require("nvim-navic").attach(client, bufnr)
   end
+
+  a.nvim_clear_autocmds({ group = group, buffer = bufnr })
+  a.nvim_create_autocmd({ "CursorMoved" }, {
+    group = group,
+    callback = function()
+      if highlight then
+        vim.lsp.buf.clear_references()
+      end
+    end,
+    buffer = bufnr,
+  })
+
+  a.nvim_create_autocmd({ "CursorHold" }, {
+    group = group,
+    callback = function()
+      if highlight then
+        vim.lsp.buf.document_highlight()
+      end
+      vim.b.current_func_name = navic.get_location()
+    end,
+    buffer = bufnr,
+  })
 end
 
 local function all_lsp_config(lsp)
