@@ -146,14 +146,6 @@ packer.startup(function()
       require("plugins.neodev").config()
     end,
   })
-  use({
-    "dnlhc/glance.nvim",
-    opt = true,
-    cmd = "Glance",
-    config = function()
-      require("plugins.glance").config()
-    end,
-  })
 
   use({
     "ldelossa/litee-calltree.nvim",
