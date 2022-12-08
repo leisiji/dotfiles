@@ -2,10 +2,6 @@ local packer = require("packer")
 local use = packer.use
 
 local function colorscheme()
-  if vim.g.vscode then
-    return
-  end
-
   local onedarkpro = require("onedarkpro")
   onedarkpro.setup({
     theme = "onedark_dark",
@@ -108,7 +104,6 @@ packer.startup(function()
   use({
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
-    requires = "theHamsta/nvim-semantic-tokens",
     opt = true,
     config = function()
       require("plugins.lspconfig").lsp_config()
@@ -221,6 +216,7 @@ packer.startup(function()
     end,
     cmd = "FeMaco",
   })
+
   use({
     "numToStr/FTerm.nvim",
     opt = true,
@@ -229,6 +225,8 @@ packer.startup(function()
       require("plugins.fterm").config()
     end,
   })
+  use("samjwill/nvim-unception")
+
   use({ "leisiji/interestingwords.nvim", opt = true, cmd = "Interestingwords" })
   use({ "npxbr/glow.nvim", opt = true, cmd = "Glow" })
   use({ "junegunn/vim-easy-align", opt = true, cmd = "EasyAlign" })
@@ -240,8 +238,6 @@ packer.startup(function()
       require("colorizer").setup()
     end,
   })
-
-  use("samjwill/nvim-unception")
 
   use({
     "kyazdani42/nvim-tree.lua",
