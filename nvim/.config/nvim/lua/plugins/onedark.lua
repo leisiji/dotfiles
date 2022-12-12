@@ -1,0 +1,30 @@
+local M = {}
+
+function M.config()
+  local onedarkpro = require("onedarkpro")
+  onedarkpro.setup({
+    theme = "onedark_dark",
+    options = {
+      cursorline = true,
+      bold = true,
+      italic = true,
+      highlight_inactive_windows = true,
+    },
+    plugins = {
+      all = false,
+      treesitter = true,
+      nvim_cmp = true,
+      native_lsp = true,
+      gitsigns = true,
+      nvim_tree = true,
+    },
+    highlights = {
+      PmenuSel = { fg = "${fg}", bg = "#303030" },
+      Macro = { link = "@constant.macro" },
+      Structure = { link = "@type" },
+    },
+  })
+  vim.cmd("colorscheme onedark_dark")
+end
+
+return M
