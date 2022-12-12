@@ -4,12 +4,11 @@ local use = packer.use
 local function colorscheme()
   local onedarkpro = require("onedarkpro")
   onedarkpro.setup({
-    theme = "onedark_dark",
     options = {
       cursorline = true,
       bold = true,
       italic = true,
-      window_unfocused_color = true,
+      highlight_inactive_windows = true,
     },
     plugins = {
       all = false,
@@ -23,7 +22,7 @@ local function colorscheme()
       PmenuSel = { fg = "${fg}", bg = "#303030" },
     },
   })
-  vim.cmd("colorscheme onedarkpro")
+  vim.cmd("colorscheme onedark_dark")
 end
 
 -- treesitter
