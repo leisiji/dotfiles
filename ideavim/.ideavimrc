@@ -5,7 +5,7 @@ set multiple-cursors
 set scrolloff=10
 set incsearch
 
-map <leader>r <Action>(RenameElement)
+map <leader>rn <Action>(RenameElement)
 
 nn <leader>s :w<CR>
 nn <M-a> <C-w>w
@@ -14,8 +14,8 @@ nn <M-2> 2gt
 nn <M-3> 3gt
 nn <M-4> 4gt
 nn <M-5> 5gt
-nn <M-l> <Esc>:tabnext<CR>
-nn <M-h> <Esc>:tabprevious<CR>
+nn <M-l> <Esc>:tab-next<CR>
+nn <M-h> <Esc>:previous<CR>
 " move like bash in insert mode
 ino <C-j> <Down>
 ino <C-k> <Up>
@@ -46,3 +46,4 @@ vn <C-b> 5b
 vn <M-w> 5w
 nn <M-y> <C-r>
 nn <silent> <leader>q :q<CR>
+map <C-r> <Action>(FileStructurePopup)

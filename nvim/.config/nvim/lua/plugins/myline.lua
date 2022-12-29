@@ -1,6 +1,6 @@
 local M = {}
 
-local colors = require("onedarkpro").get_colors("onedark")
+local colors = require('onedarkpro.helpers').get_colors()
 local vi_modes = {
   n = { "#FFA066", "  NORMAL " },
   i = { "#98BB6C", "  INSERT " },
