@@ -58,6 +58,7 @@ local function all_lsp_config(lsp)
   lsp.clangd.setup({
     on_attach = on_attach,
     capabilities = cap,
+    filetypes = { 'c', 'cpp' },
   })
 
   local servers = {

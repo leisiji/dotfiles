@@ -20,8 +20,11 @@ function M.config()
     },
     highlights = {
       PmenuSel = { fg = "${fg}", bg = "#303030" },
-      Macro = { link = "@constant.macro" },
-      Structure = { link = "@type" },
+    },
+    semantic_tokens = {
+      default = {
+        ["@macro"] = { fg = "${yellow}" },
+      },
     },
   })
   vim.cmd("colorscheme onedark_dark")
