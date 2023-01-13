@@ -167,12 +167,12 @@ packer.startup(function()
   })
 
   use({
-    "numToStr/FTerm.nvim",
+    "akinsho/toggleterm.nvim",
     opt = true,
-    cmd = "FTermToggle",
     config = function()
-      require("plugins.fterm").config()
+      require("plugins.toggleterm").config()
     end,
+    cmd = { "ToggleTerm", "TermExec" },
   })
   use("samjwill/nvim-unception")
 

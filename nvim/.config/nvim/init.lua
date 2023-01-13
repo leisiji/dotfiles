@@ -164,6 +164,13 @@ local function init_nvim_keys()
         end
       end,
     },
+    {
+      "<leader>tc",
+      function()
+        local dir = vim.fn.expand("%:p:h")
+        vim.cmd(string.format("TermExec cmd='cd %s'", dir))
+      end,
+    },
   }
   local ino_maps = {
     { "<C-j>", "<Down>" },
@@ -217,7 +224,7 @@ end
 local function init_plugins_keymaps()
   local cmds = {
     -- terminal
-    { "<C-x>", "FTermToggle" },
+    { "<C-x>", [[exe(v:count1 . "ToggleTerm")]] },
 
     { "<leader>e", "FeMaco" },
 
