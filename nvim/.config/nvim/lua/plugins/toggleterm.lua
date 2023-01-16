@@ -5,7 +5,7 @@ function M.config()
     winbar = {
       enabled = true,
       name_formatter = function(term)
-        return term.name
+        return tostring(term.id)
       end,
     },
     direction = "vertical",

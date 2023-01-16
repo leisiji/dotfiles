@@ -1,5 +1,4 @@
 local M = {}
-local original_width = nil
 
 function M.setup()
   local list = {

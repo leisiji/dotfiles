@@ -171,6 +171,16 @@ local function init_nvim_keys()
         vim.cmd(string.format("TermExec cmd='cd %s'", dir))
       end,
     },
+    -- terminal
+    { "<C-x>", function ()
+      local a = vim.api
+      local c = vim.v.count1
+      if a.nvim_win_get_width(a.nvim_get_current_win()) <= 100 then
+        vim.cmd.ToggleTerm(c, "direction=float")
+      else
+        vim.cmd.ToggleTerm(c)
+      end
+    end },
   }
   local ino_maps = {
     { "<C-j>", "<Down>" },
@@ -223,8 +233,6 @@ end
 
 local function init_plugins_keymaps()
   local cmds = {
-    -- terminal
-    { "<C-x>", [[exe(v:count1 . "ToggleTerm")]] },
 
     { "<leader>e", "FeMaco" },
 

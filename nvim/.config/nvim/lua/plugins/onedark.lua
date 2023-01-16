@@ -18,12 +18,18 @@ function M.config()
       gitsigns = true,
       nvim_tree = true,
     },
+    filetypes = {
+      rust = false,
+    },
     highlights = {
       PmenuSel = { fg = "${fg}", bg = "#303030" },
     },
     semantic_tokens = {
       default = {
-        ["@macro"] = { fg = "${yellow}" },
+        ["@macro"] = { fg = "${orange}" },
+        ["@struct"] = { fg = "${yellow}" },
+        ["@defaultLibrary"] = { fg = "" },
+        ["@enum"] = { fg = "${cyan}" },
       },
     },
   })
