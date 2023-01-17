@@ -30,6 +30,7 @@ function M.config()
         ["@struct"] = { fg = "${yellow}" },
         ["@defaultLibrary"] = { fg = "" },
         ["@enum"] = { fg = "${cyan}" },
+        ["@property"] = { fg = "${white}" },
       },
     },
   })

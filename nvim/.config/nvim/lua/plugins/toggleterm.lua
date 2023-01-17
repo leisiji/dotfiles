@@ -8,7 +8,6 @@ function M.config()
         return tostring(term.id)
       end,
     },
-    direction = "vertical",
     size = function(term)
       if term.direction == "horizontal" then
         return 15
@@ -39,6 +38,16 @@ function M.config()
       vim.cmd("ToggleTermToggleAll")
     end,
   })
+end
+
+function M.toggle()
+  local a = vim.api
+  local c = vim.v.count1
+  if a.nvim_win_get_width(a.nvim_get_current_win()) <= 100 then
+    vim.cmd.ToggleTerm(c, "direction=float")
+  else
+    vim.cmd.ToggleTerm(c, "direction=vertical")
+  end
 end
 
 return M

@@ -173,13 +173,7 @@ local function init_nvim_keys()
     },
     -- terminal
     { "<C-x>", function ()
-      local a = vim.api
-      local c = vim.v.count1
-      if a.nvim_win_get_width(a.nvim_get_current_win()) <= 100 then
-        vim.cmd.ToggleTerm(c, "direction=float")
-      else
-        vim.cmd.ToggleTerm(c)
-      end
+      require("plugins.toggleterm").toggle()
     end },
   }
   local ino_maps = {
