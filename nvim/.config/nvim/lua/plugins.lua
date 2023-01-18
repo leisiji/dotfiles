@@ -199,7 +199,9 @@ packer.startup(function()
   use({
     "ethanholz/nvim-lastplace",
     config = function()
-      require("nvim-lastplace").setup({})
+      require("nvim-lastplace").setup({
+        lastplace_ignore_buftype = { "terminal" },
+      })
     end,
   })
 

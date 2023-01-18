@@ -63,7 +63,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *roficmd[] = { "rofi", "-show", "drun", "-columns 2", NULL };
-static const char *termcmd[]  = { "wezterm", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 static const char *explorercmd[]  = { "pcmanfm", NULL };
 static const char *wlogout[]  = { "wlogout", NULL };
 

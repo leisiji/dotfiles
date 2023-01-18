@@ -10,7 +10,7 @@ window:
         x: 0
         y: 0
     dynamic_padding: false
-    decorations: full
+    decorations: none
 
 scrolling:
     history: 10000

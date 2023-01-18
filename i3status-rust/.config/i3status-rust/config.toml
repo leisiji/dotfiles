@@ -2,20 +2,6 @@ theme = "slick"
 icons = "awesome"
 
 [[block]]
-block = "net"
-device = "wlo1"
-format = "{ssid} {speed_down;K*b}"
-interval = 10
-
-[[block]]
-block = "disk_space"
-path = "/"
-info_type = "used"
-format = "{icon} {used}"
-alert = 210
-warning = 200
-
-[[block]]
 block = "memory"
 format_mem = "{mem_used}/{mem_total}"
 display_type = "memory"
@@ -28,20 +14,8 @@ critical_mem = 95
 critical_swap = 95
 
 [[block]]
-block = "cpu"
-interval = 5
-format = "{utilization} {frequency}"
-
-[[block]]
-block = "temperature"
-collapsed = false
-interval = 60
-format = "{max}"
-chip = "*-isa-*"
-
-[[block]]
 block = "battery"
-interval = 60
+interval = 300
 format = "{percentage}"
 
 [[block]]
