@@ -1,6 +1,6 @@
 local M = {}
 
-local colors = require('onedarkpro.helpers').get_colors()
+local colors = require("onedarkpro.helpers").get_colors()
 local vi_modes = {
   n = { "#FFA066", "  NORMAL " },
   i = { "#98BB6C", "  INSERT " },
@@ -21,12 +21,14 @@ function M.vi_mode()
 end
 
 function M.load()
-  vim.b.current_func_name = ""
+  vim.b.cur_func = ""
+
   local vi_mode = [[%#ViMode#%{luaeval('require("plugins.myline").vi_mode()')}]]
-  local current_func = [[%#MyLspFunc# %{b:current_func_name}]]
+  local cur_func = [[%#MyLspFunc# %{b:cur_func}]]
   local buffer_type = [[%#MyBufferTypeP#%{&filetype}]]
   local maxline = [[%#maxline#%{line('$')}]]
-  vim.wo.statusline = vi_mode .. current_func .. "%=" .. " | " .. buffer_type .. " | " .. maxline .. " "
+
+  vim.wo.statusline = vi_mode .. cur_func .. "%=" .. " | " .. buffer_type .. " | " .. maxline .. " "
 end
 
 return M

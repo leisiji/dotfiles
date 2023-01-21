@@ -30,7 +30,7 @@ local on_attach = function(client, bufnr)
       if highlight then
         vim.lsp.buf.document_highlight()
       end
-      vim.b.current_func_name = navic.get_location()
+      vim.b.cur_func = navic.get_location()
     end,
     buffer = bufnr,
   })

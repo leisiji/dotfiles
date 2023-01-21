@@ -348,7 +348,9 @@ for k, v in pairs(buf_cfg) do
   vim.opt[k] = v
 end
 
-require("plugins")
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+vim.opt.rtp:prepend(lazypath)
+require("modules")
 require("autocmds")
 
 init_plugins_keymaps()

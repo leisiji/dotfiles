@@ -10,7 +10,7 @@ function M.config()
     },
     size = function(term)
       if term.direction == "horizontal" then
-        return 15
+        return 10
       elseif term.direction == "vertical" then
         return vim.o.columns * 0.4
       else
@@ -29,6 +29,8 @@ function M.config()
         vim.cmd("ToggleTermToggleAll")
       end, opts)
       vim.keymap.set("t", "<M-a>", "<C-\\><C-n><C-w>w", opts)
+      vim.keymap.set("t", "<M-1>", [[<cmd>lua require("toggleterm").cycle(-1)<cr>]], opts)
+      vim.keymap.set("t", "<M-2>", [[<cmd>lua require("toggleterm").cycle(1)<cr>]], opts)
     end,
   })
 
