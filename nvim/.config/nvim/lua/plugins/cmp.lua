@@ -10,29 +10,15 @@ local has_words_before = function()
   return col ~= 0 and a.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-local function config_snip()
-  require("nvim-autopairs").setup()
-  require("luasnip.loaders.from_vscode").load({
-    paths = {
-      fn.stdpath("data") .. "/site/pack/packer/opt/friendly-snippets/",
-      fn.stdpath("config") .. "/snippets",
-    },
-  })
-
-  local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-  local cmp = require("cmp")
-  cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
-end
-
 function M.config()
   local cmp = require("cmp")
+  local snip = require("luasnip")
 
   local sel_next = cmp.mapping(function(fallback)
-    local luasnip = require("luasnip")
     if cmp.visible() then
       cmp.select_next_item()
-    elseif luasnip.expand_or_jumpable() == 1 then
-      luasnip.expand_or_jump()
+    elseif snip.expand_or_jumpable() == 1 then
+      snip.expand_or_jump()
     elseif has_words_before() then
       cmp.complete()
     else
@@ -41,11 +27,10 @@ function M.config()
   end, { "i", "s", "c" })
 
   local sel_prev = cmp.mapping(function(fallback)
-    local luasnip = require("luasnip")
     if cmp.visible() then
       cmp.select_prev_item()
-    elseif luasnip.jumpable(-1) == 1 then
-      luasnip.jump(-1)
+    elseif snip.jumpable(-1) == 1 then
+      snip.jump(-1)
     else
       fallback()
     end
@@ -67,7 +52,7 @@ function M.config()
     },
     snippet = {
       expand = function(args)
-        require("luasnip").lsp_expand(args.body)
+        snip.lsp_expand(args.body)
       end,
     },
     sources = cmp.config.sources({
@@ -103,11 +88,16 @@ function M.config()
     }),
   })
 
-  vim.schedule(function()
-    config_snip()
-  end)
-end
+  require("luasnip.loaders.from_vscode").lazy_load({
+    paths = {
+      fn.stdpath("data") .. "/lazy/friendly-snippets",
+      fn.stdpath("config") .. "/snippets",
+    },
+  })
 
-function M.config_pairs() end
+  require("nvim-autopairs").setup()
+  local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+  cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+end
 
 return M
