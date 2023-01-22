@@ -197,8 +197,8 @@ local m = {
   },
 }
 
--- if vim.fn.executable("fcitx5") == 1 then
---   m[#m+1] = { "h-hg/fcitx.nvim", event = "InsertEnter" }
--- end
+if vim.fn.executable("fcitx5") == 1 then
+  m[#m+1] = { "h-hg/fcitx.nvim", event = "InsertEnter" }
+end
 
 require("lazy").setup(m)

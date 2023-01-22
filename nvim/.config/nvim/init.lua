@@ -109,7 +109,7 @@ local function init_nvim_keys()
     { "<M-b>", "5b" },
     { "<M-w>", "5w" },
     { "<M-y>", "<C-r>" },
-    { "<leader>p", '"+p' },
+    { "<leader>p", '"*p' },
   }
   local vn_maps = {
     { "H", "^" },
@@ -118,7 +118,8 @@ local function init_nvim_keys()
     { "<C-k>", "5k" },
     { "<M-e>", "5e" },
     { "<M-b>", "5b" },
-    { "<leader>y", '"+y' },
+    { "<leader>y", '"*y' },
+    { "<leader><leader>y", '"+y' },
   }
   local cmd_maps = {
     { "<leader>s", "w" },
@@ -172,9 +173,12 @@ local function init_nvim_keys()
       end,
     },
     -- terminal
-    { "<C-x>", function ()
-      require("plugins.toggleterm").toggle()
-    end },
+    {
+      "<C-x>",
+      function()
+        require("plugins.toggleterm").toggle()
+      end,
+    },
   }
   local ino_maps = {
     { "<C-j>", "<Down>" },
@@ -352,17 +356,12 @@ local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.opt.rtp:prepend(lazypath)
 require("modules")
 require("autocmds")
+require("myclipboard")
 
 init_plugins_keymaps()
 
 vim.cmd([[
   set list lcs=tab:→\ ,trail:·
 ]])
-
-vim.g.clipboard = {
-  name = "tmuxClipboard",
-  copy = { ["+"] = { "tmux", "load-buffer", "-" }, ["*"] = { "tmux", "load-buffer", "-" } },
-  paste = { ["+"] = { "tmux", "save-buffer", "-" }, ["*"] = { "tmux", "save-buffer", "-" } },
-}
 
 vim.g.unception_open_buffer_in_new_tab = true
