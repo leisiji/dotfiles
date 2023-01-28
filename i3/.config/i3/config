@@ -36,7 +36,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec alacritty
-bindsym $mod+0 exec wlogout
+bindsym $mod+Shift+0 exec wlogout
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -120,7 +120,6 @@ bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
