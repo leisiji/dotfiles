@@ -168,8 +168,7 @@ local function init_nvim_keys()
     {
       "<leader>tc",
       function()
-        local dir = vim.fn.expand("%:p:h")
-        vim.cmd(string.format("TermExec cmd='cd %s'", dir))
+        require("plugins.toggleterm").exec()
       end,
     },
     -- terminal

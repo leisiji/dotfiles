@@ -29,8 +29,6 @@ function M.config()
         vim.cmd("ToggleTermToggleAll")
       end, opts)
       vim.keymap.set("t", "<M-a>", "<C-\\><C-n><C-w>w", opts)
-      vim.keymap.set("t", "<M-1>", [[<cmd>lua require("toggleterm").cycle(-1)<cr>]], opts)
-      vim.keymap.set("t", "<M-2>", [[<cmd>lua require("toggleterm").cycle(1)<cr>]], opts)
     end,
   })
 
@@ -42,14 +40,24 @@ function M.config()
   })
 end
 
-function M.toggle()
+local function term_dir()
   local a = vim.api
-  local c = vim.v.count1
   if a.nvim_win_get_width(a.nvim_get_current_win()) <= 100 then
-    vim.cmd.ToggleTerm(c, "direction=float")
-  else
-    vim.cmd.ToggleTerm(c, "direction=vertical")
+    return "direction=float"
   end
+  return "direction=vertical"
+end
+
+function M.toggle()
+  local c = vim.v.count1
+  vim.cmd.ToggleTerm(c, term_dir())
+end
+
+function M.exec()
+  local dir = vim.fn.expand("%:p:h")
+  local cmd = string.format("TermExec cmd='cd %s' go_back=0 ", dir)
+  cmd = cmd .. term_dir()
+  vim.cmd(cmd)
 end
 
 return M

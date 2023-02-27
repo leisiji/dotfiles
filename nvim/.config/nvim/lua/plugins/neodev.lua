@@ -14,7 +14,7 @@ function M.config()
       },
     },
   }
-  lspconfig.sumneko_lua.setup(vim.tbl_extend("force", neodev_cfg, cfg))
+  lspconfig.lua_ls.setup(vim.tbl_extend("force", neodev_cfg, cfg))
 end
 
 return M

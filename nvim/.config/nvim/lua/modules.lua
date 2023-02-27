@@ -107,7 +107,7 @@ local m = {
 
   -- markdown
   {
-    "AckslD/nvim-FeMaco.lua",
+    "leisiji/nvim-FeMaco.lua",
     config = function()
       require("plugins.femaco").config()
     end,
@@ -158,7 +158,6 @@ local m = {
   },
   "samjwill/nvim-unception",
   {
-
     "norcalli/nvim-colorizer.lua",
     ft = { "html", "css", "help", "lua", "vim" },
     config = function()
