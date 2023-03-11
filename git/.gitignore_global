@@ -13,5 +13,5 @@ workspace/
 *.log
 .classpath
 .cache
-settings.json
+.vscode
 jdtls_workspace

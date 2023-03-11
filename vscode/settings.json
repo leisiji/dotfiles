@@ -1,0 +1,129 @@
+{
+    "workbench.startupEditor": "newUntitledFile",
+    "editor.minimap.enabled": false,
+    "http.proxySupport": "off",
+    "editor.fontFamily": "Source Code Pro",
+    "vim.mouseSelectionGoesIntoVisualMode": false,
+    "editor.renderWhitespace": "boundary",
+    "extensions.ignoreRecommendations": true,
+    "explorer.confirmDelete": false,
+    "keyboard.dispatch": "keyCode",
+    "vim.leader": "<space>",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "s"
+            ],
+            "commands": [
+                "workbench.action.files.save"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "q"
+            ],
+            "commands": [
+                "workbench.action.closeActiveEditor"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "<leader>",
+                "p"
+            ],
+            "commands": [
+                "editor.action.peekDefinition"
+            ]
+        },
+        {
+            "before": [
+                "<C-j>"
+            ],
+            "after": [
+                "5",
+                "j"
+            ]
+        },
+        {
+            "before": [
+                "<C-k>"
+            ],
+            "after": [
+                "5",
+                "k"
+            ]
+        },
+        {
+            "before": [
+                "<C-f>"
+            ],
+            "commands": [
+                "actions.find"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "<leader>",
+                "b"
+            ],
+            "commands": [
+                "gitlens.toggleLineBlame"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "w",
+                "s"
+            ],
+            "commands": [
+                "workbench.action.showAllSymbols"
+            ]
+        }
+    ],
+    "vim.visualModeKeyBindings" : [
+        {
+            "before": [
+                "<C-j>"
+            ],
+            "after": [
+                "5",
+                "j"
+            ]
+        },
+        {
+            "before": [
+                "<C-k>"
+            ],
+            "after": [
+                "5",
+                "k"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "<leader>",
+                "f"
+            ],
+            "commands": [
+                "editor.action.formatSelection"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "y"
+            ],
+            "commands": [
+                "editor.action.clipboardCopyAction"
+            ]
+        }
+    ],
+    "workbench.colorTheme": "Default Dark+ Experimental",
+    "gitlens.currentLine.enabled": false
+}
