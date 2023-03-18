@@ -234,7 +234,7 @@ local function init_plugins_keymaps()
     { "<leader>e", "FeMaco" },
 
     -- nvim tree
-    { "<leader>tj", "NvimTreeFindFile" },
+    { "<leader>tj", "NvimTreeFindFileToggle" },
     { "<leader>tr", "NvimTreeToggle" },
 
     -- interestingwords

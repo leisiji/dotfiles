@@ -167,7 +167,7 @@ local m = {
 
   {
     "kyazdani42/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
+    cmd = { "NvimTreeToggle", "NvimTreeFindFileToggle" },
     config = function()
       require("plugins.nvim_tree").setup()
     end,
