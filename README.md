@@ -35,6 +35,7 @@ yarn global add \
     pyright \
     diagnostic-languageserver \
     typescript-language-server \
+    vscode-json-languageserver \
     typescript
 
 yay -S \
@@ -74,8 +75,9 @@ Plugin Manager:
 
 ```bash
 # packer.nvim
-git clone https://github.com/wbthomason/packer.nvim \
-    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+mkdir ~/.local/share/nvim/lazy/
+git clone https://github.com/folke/lazy.nvim.git \
+    ~/.local/share/nvim/lazy/lazy.nvim/
 
 # zinit
 bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"

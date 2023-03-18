@@ -14,9 +14,11 @@ function M.config()
       all = false,
       treesitter = true,
       nvim_cmp = true,
-      native_lsp = true,
       gitsigns = true,
       nvim_tree = true,
+      lsp_semantic_tokens = true,
+      nvim_lsp = true,
+      toggleterm = true,
     },
     filetypes = {
       rust = false,
