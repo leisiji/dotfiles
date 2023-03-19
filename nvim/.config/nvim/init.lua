@@ -178,6 +178,19 @@ local function init_nvim_keys()
         require("plugins.toggleterm").toggle()
       end,
     },
+    {
+      "z",
+      function()
+        if vim.w.saved_width == nil then
+          local w = vim.api.nvim_win_get_width(0)
+          vim.api.nvim_win_set_width(0, w + 20)
+          vim.w.saved_width = w
+        else
+          vim.api.nvim_win_set_width(0, vim.w.saved_width)
+          vim.w.saved_width = nil
+        end
+      end,
+    },
   }
   local ino_maps = {
     { "<C-j>", "<Down>" },
