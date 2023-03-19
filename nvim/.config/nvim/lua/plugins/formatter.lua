@@ -10,7 +10,8 @@ end
 
 function M.config()
   require("formatter").setup({
-    logging = false,
+    logging = true,
+    log_level = vim.log.levels.WARN,
     filetype = {
       c = {
         clang_format,
