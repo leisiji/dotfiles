@@ -3,32 +3,19 @@
 	name = leisiji
 [core]
 	editor = nvim --cmd 'let g:unception_block_while_host_edits=1'
-	pager = delta
+	pager = git-split-diffs --color | less -RFX
 	excludesfile = ~/.gitignore_global
 [color]
 	ui = true
 [pager]
 	show = bat
-	diff = delta
+	diff = git-split-diffs --color | less -RFX
 [alias]
 	rg = !rg $(git rev-parse --show-toplevel) --column --smart-case -e
 	cma = commit --amend
 	df = diff .
 	dfc = diff --cached
 	dfs = diff --cached --stat
-[interactive]
-	diffFilter = delta --color-only
-[delta]
-	side-by-side = true
-	features = decorations
-	line-numbers-left-format = ""
-	line-numbers-right-format = "│"
-	whitespace-error-style = 22 reverse
-	syntax-theme = Dracula
-[delta "decorations"]
-	commit-decoration-style = bold yellow box ul
-	file-style = bold yellow ul
-	file-decoration-style = none
 [init]
 	defaultBranch = main
 [http]

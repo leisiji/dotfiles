@@ -22,7 +22,7 @@ yay -S glow nnn-nerd
 pip3 install --user pynvim compiledb
 
 # tools based on rust
-cargo install hexyl bat ripgrep fd-find exa git-delta gitui
+cargo install hexyl bat ripgrep fd-find exa gitui
 ```
 
 language-server, linter, formatter
@@ -36,7 +36,8 @@ yarn global add \
     diagnostic-languageserver \
     typescript-language-server \
     vscode-json-languageserver \
-    typescript
+    typescript \
+    git-split-diffs
 
 yay -S \
     clang \
