@@ -56,6 +56,7 @@ local function all_lsp_config(lsp)
   }
 
   lsp.clangd.setup({
+    cmd = { "clangd", "-j=4" },
     on_attach = on_attach,
     capabilities = cap,
     filetypes = { 'c', 'cpp' },
