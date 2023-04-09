@@ -10,6 +10,7 @@ BreakBeforeBraces: Linux
 PointerAlignment: Right
 AlignConsecutiveMacros: true
 AccessModifierOffset: -4
+AllowShortIfStatementsOnASingleLine: false
 
 BraceWrapping:
   AfterCaseLabel:  false
