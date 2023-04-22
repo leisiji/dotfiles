@@ -1,9 +1,14 @@
 local group = "user_plugin"
 local a = vim.api
 a.nvim_create_augroup(group, { clear = true })
+
+vim.g.last_active_buf = a.nvim_get_current_buf()
+
 local autocmds = {
-  TabLeave = function()
-    vim.g.last_active_tab = a.nvim_tabpage_get_number(0)
+  BufLeave = function()
+    if a.nvim_win_get_config(a.nvim_get_current_win()).relative == '' then
+      vim.g.last_active_buf = a.nvim_get_current_buf()
+    end
   end,
   FocusGained = function()
     vim.cmd("checkt")

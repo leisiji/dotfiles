@@ -140,7 +140,7 @@ local function init_nvim_keys()
     {
       "<M-q>",
       function()
-        vim.cmd("tabn " .. vim.g.last_active_tab)
+        vim.api.nvim_set_current_buf(vim.g.last_active_buf)
       end,
     },
     { "<M-k>", vim.lsp.buf.hover },
@@ -220,7 +220,7 @@ local function init_nvim_keys()
     nn(v)
   end
   for i = 1, 9, 1 do
-    cmd({ format("<M-%d>", i), format("LualineBufferJump %d", i) })
+    cmd({ format("<M-%d>", i), format("LualineBuffersJump %d", i) })
   end
   for _, v in ipairs(vn_maps) do
     vn(v)
