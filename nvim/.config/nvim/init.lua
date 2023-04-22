@@ -42,18 +42,6 @@ function _G.mytabline()
   return s
 end
 
-local function zoom_toggle()
-  local zoom = vim.t.zoom
-  if zoom ~= nil and zoom == 1 then
-    exec(vim.t.zoom_winrestcmd)
-    vim.t.zoom = 0
-  else
-    vim.t.zoom_winrestcmd = fn.winrestcmd()
-    exec("resize | vertical resize")
-    vim.t.zoom = 1
-  end
-end
-
 local function quit()
   local bufnrs = fn.win_findbuf(fn.bufnr())
   if #bufnrs > 1 or fn.expand("%") == "" or fn.tabpagenr("$") == 1 then
@@ -136,7 +124,6 @@ local function init_nvim_keys()
   local func_maps = {
     { "<leader>q", quit },
     { "K", show_documents },
-    { "<leader>z", zoom_toggle },
     {
       "<M-q>",
       function()
@@ -179,7 +166,7 @@ local function init_nvim_keys()
       end,
     },
     {
-      "z",
+      "<leader>z",
       function()
         if vim.w.saved_width == nil then
           local w = vim.api.nvim_win_get_width(0)
