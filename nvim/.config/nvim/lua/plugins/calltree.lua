@@ -2,7 +2,7 @@ local M = {}
 
 function M.config()
   require("litee.lib").setup({
-    panel = { orientation = "left", panel_size = 80 },
+    panel = { orientation = "left", panel_size = 40 },
   })
   require("litee.calltree").setup({
     keymaps = {

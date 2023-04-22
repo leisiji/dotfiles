@@ -62,8 +62,8 @@ local m = {
     end,
   },
   {
-    "ldelossa/litee-calltree.nvim",
-    dependencies = { "ldelossa/litee.nvim" },
+    "leisiji/litee-calltree.nvim",
+    dependencies = { "leisiji/litee.nvim" },
     cmd = "CallTreeI",
     wants = "litee.nvim",
     config = function()
@@ -107,7 +107,7 @@ local m = {
 
   -- markdown
   {
-    "leisiji/nvim-FeMaco.lua",
+    "AckslD/nvim-FeMaco.lua",
     config = function()
       require("plugins.femaco").config()
     end,
@@ -193,6 +193,13 @@ local m = {
   {
     "leisiji/interestingwords.nvim",
     cmd = "Interestingwords",
+  },
+
+  {
+    "nvim-lualine/lualine.nvim",
+    config = function ()
+      require("plugins.lualine")
+    end
   },
 }
 

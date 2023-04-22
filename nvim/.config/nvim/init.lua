@@ -123,8 +123,8 @@ local function init_nvim_keys()
   }
   local cmd_maps = {
     { "<leader>s", "w" },
-    { "<M-l>", "tabn" },
-    { "<M-h>", "tabp" },
+    { "<M-l>", "bnext" },
+    { "<M-h>", "bprev" },
     { "<leader><leader>q", "qa" },
     { "<leader>rt", "%retab!" },
     { "<M-s>", [[let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>]] }, -- remove trailing whitespace
@@ -220,7 +220,7 @@ local function init_nvim_keys()
     nn(v)
   end
   for i = 1, 9, 1 do
-    nn({ format("<M-%d>", i), format("%dgt", i) })
+    cmd({ format("<M-%d>", i), format("LualineBufferJump %d", i) })
   end
   for _, v in ipairs(vn_maps) do
     vn(v)
@@ -334,7 +334,6 @@ local global_cfg = {
   updatetime = 500,
   shortmess = "aoOTIcF",
   completeopt = "menu,menuone,noselect",
-  tabline = "%!v:lua.mytabline()",
   expandtab = true,
   cmdheight = 0,
   -- foldmethod = "expr",

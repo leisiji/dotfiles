@@ -7,33 +7,28 @@ local on_attach = function(client, bufnr)
   local caps = client.server_capabilities
   local navic = require("nvim-navic")
 
-  local highlight = caps.documentHighlightProvider
-
   if client.server_capabilities.documentSymbolProvider then
     require("nvim-navic").attach(client, bufnr)
   end
 
   a.nvim_clear_autocmds({ group = group, buffer = bufnr })
-  a.nvim_create_autocmd({ "CursorMoved" }, {
-    group = group,
-    callback = function()
-      if highlight then
-        vim.lsp.buf.clear_references()
-      end
-    end,
-    buffer = bufnr,
-  })
 
-  a.nvim_create_autocmd({ "CursorHold" }, {
-    group = group,
-    callback = function()
-      if highlight then
+  if caps.documentHighlightProvider then
+    a.nvim_create_autocmd({ "CursorMoved" }, {
+      group = group,
+      callback = function()
+        vim.lsp.buf.clear_references()
+      end,
+      buffer = bufnr,
+    })
+    a.nvim_create_autocmd({ "CursorHold" }, {
+      group = group,
+      callback = function()
         vim.lsp.buf.document_highlight()
-      end
-      vim.b.cur_func = navic.get_location()
-    end,
-    buffer = bufnr,
-  })
+      end,
+      buffer = bufnr,
+    })
+  end
 end
 
 local function all_lsp_config(lsp)
@@ -59,7 +54,7 @@ local function all_lsp_config(lsp)
     cmd = { "clangd", "-j=4" },
     on_attach = on_attach,
     capabilities = cap,
-    filetypes = { 'c', 'cpp' },
+    filetypes = { "c", "cpp" },
   })
 
   local servers = {

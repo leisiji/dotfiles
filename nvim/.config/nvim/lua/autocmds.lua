@@ -16,7 +16,6 @@ local autocmds = {
   TextYankPost = function()
     vim.highlight.on_yank({ higroup = "IncSearch", timeout = 700 })
   end,
-  BufWinEnter = require("plugins.myline").load,
 }
 for key, value in pairs(autocmds) do
   a.nvim_create_autocmd({ key }, { group = group, callback = value })
