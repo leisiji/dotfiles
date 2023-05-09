@@ -29,22 +29,16 @@ function M.config()
         end,
       },
       json = {
-        function()
+        function ()
           return {
             exe = "jq",
-            args = { "-m" },
+            args = { "--indent 4", "." },
             stdin = true,
           }
-        end,
+        end
       },
       rust = {
-        function()
-          return {
-            exe = "rustfmt",
-            args = { "--emit=stdout" },
-            stdin = true,
-          }
-        end,
+        require("formatter.filetypes.rust").rustfmt
       },
       python = {
         function()
@@ -57,9 +51,14 @@ function M.config()
       },
       lua = {
         function()
+          local util = require("formatter.util")
           return {
             exe = "stylua",
             args = {
+              "--search-parent-directories",
+              "--stdin-filepath",
+              util.escape_path(util.get_current_buffer_file_path()),
+              "--",
               "-",
             },
             stdin = true,
