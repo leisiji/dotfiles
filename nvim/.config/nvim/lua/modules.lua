@@ -31,7 +31,7 @@ local m = {
     config = function()
       require("plugins.lspconfig").lsp_config()
     end,
-    dependencies = "smiteshp/nvim-navic"
+    dependencies = "smiteshp/nvim-navic",
   },
   {
     "mfussenegger/nvim-jdtls",
@@ -115,6 +115,9 @@ local m = {
   },
   {
     "npxbr/glow.nvim",
+    config = function()
+      require("glow").setup()
+    end,
     cmd = "Glow",
   },
   {
@@ -197,14 +200,14 @@ local m = {
 
   {
     "nvim-lualine/lualine.nvim",
-    config = function ()
+    config = function()
       require("plugins.lualine")
-    end
+    end,
   },
 }
 
 if vim.fn.executable("fcitx5") == 1 then
-  m[#m+1] = { "h-hg/fcitx.nvim", event = "InsertEnter" }
+  m[#m + 1] = { "h-hg/fcitx.nvim", event = "InsertEnter" }
 end
 
 require("lazy").setup(m)
