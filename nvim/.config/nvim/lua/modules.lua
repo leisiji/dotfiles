@@ -159,7 +159,13 @@ local m = {
     end,
     cmd = { "ToggleTerm", "TermExec" },
   },
-  "samjwill/nvim-unception",
+  {
+
+    "samjwill/nvim-unception",
+    init = function()
+      vim.g.unception_open_buffer_in_new_tab = true
+    end,
+  },
   {
     "norcalli/nvim-colorizer.lua",
     ft = { "html", "css", "help", "lua", "vim" },

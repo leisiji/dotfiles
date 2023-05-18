@@ -361,5 +361,3 @@ init_plugins_keymaps()
 vim.cmd([[
   set list lcs=tab:→\ ,trail:·
 ]])
-
-vim.g.unception_open_buffer_in_new_tab = true
