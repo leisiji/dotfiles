@@ -31,7 +31,6 @@ export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d --strip-cwd-prefix'
 export FZF_DEFAULT_OPTS='--ansi --tabstop=1 --bind ctrl-d:half-page-down,ctrl-u:half-page-up,tab:down,ctrl-p:toggle-preview,alt-j:preview-down,alt-k:preview-up --reverse --cycle --preview-window=hidden:65%'
-export FZF_TMUX_OPTS="-p"
 export GTAGSLABEL='native-pygments'
 export GOPROXY='https://goproxy.io,direct'
 #export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
@@ -71,7 +70,6 @@ zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':fzf-tab:*' switch-group ',' '.'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':completion:files' sort false
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 my_exe() {
     zle push-line
@@ -104,7 +102,6 @@ bindkey -s '\eq' 'cd ..\n'
 bindkey -s '\el' 'exa -l\n'
 bindkey -s '\es' 'git status .\n'
 
-# hint of the completion of task by tmux
 precmd () {
     echo -n -e "\a"
 }
