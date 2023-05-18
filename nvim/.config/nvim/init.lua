@@ -127,7 +127,7 @@ local function init_nvim_keys()
     {
       "<M-q>",
       function()
-        vim.api.nvim_set_current_buf(vim.g.last_active_buf)
+        vim.api.nvim_set_current_tabpage(vim.g.last_active)
       end,
     },
     { "<M-k>", vim.lsp.buf.hover },
