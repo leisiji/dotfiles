@@ -111,8 +111,8 @@ local function init_nvim_keys()
   }
   local cmd_maps = {
     { "<leader>s", "w" },
-    { "<M-l>", "bnext" },
-    { "<M-h>", "bprev" },
+    { "<M-l>", "tabn" },
+    { "<M-h>", "tabp" },
     { "<leader><leader>q", "qa" },
     { "<leader>rt", "%retab!" },
     { "<M-s>", [[let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>]] }, -- remove trailing whitespace
@@ -207,7 +207,7 @@ local function init_nvim_keys()
     nn(v)
   end
   for i = 1, 9, 1 do
-    cmd({ format("<M-%d>", i), format("LualineBuffersJump %d", i) })
+    cmd({ format("<M-%d>", i), format("tabn%d", i) })
   end
   for _, v in ipairs(vn_maps) do
     vn(v)

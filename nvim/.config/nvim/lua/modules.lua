@@ -204,6 +204,15 @@ local m = {
       require("plugins.lualine")
     end,
   },
+
+  {
+    "akinsho/bufferline.nvim",
+    version = "*",
+    config = function()
+      require("plugins.bufferline").config()
+    end,
+    dependencies = "nvim-tree/nvim-web-devicons",
+  },
 }
 
 if vim.fn.executable("fcitx5") == 1 then

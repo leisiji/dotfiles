@@ -23,7 +23,7 @@ function M.jdtls_start(jar)
   local config = vim.fn.stdpath("cache") .. "/jdtls/config_linux"
   local data = vim.fn.stdpath("cache") .. "/jdtls_workspace/" .. project_name
   local android = (vim.env["ANDROID_SDK_ROOT"] ~= nil)
-  local java_home = "/usr/lib/jvm/java-18-openjdk"
+  local java_home = "/usr/lib/jvm/java-20-openjdk"
 
   local cmd = {
     java_home .. "/bin/java",

@@ -4,12 +4,9 @@ require("lualine").setup({
     theme = "onedark",
     refresh = {
       tabline = 500,
-    }
+    },
   },
   sections = {
     lualine_c = { "navic" },
-  },
-  tabline = {
-    lualine_a = { "buffers" },
   },
 })
