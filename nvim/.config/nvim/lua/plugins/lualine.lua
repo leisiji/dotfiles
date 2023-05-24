@@ -3,7 +3,7 @@ require("lualine").setup({
     icons_enabled = false,
     theme = "onedark",
     refresh = {
-      tabline = 500,
+      tabline = 2000,
     },
   },
   sections = {
