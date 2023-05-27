@@ -3,7 +3,7 @@ local M = {}
 function M.config()
   require("nvim-treesitter.configs").setup({
     ensure_installed = {
-      "c", "lua", "vim", "help", "query", "rust", "java",
+      "c", "lua", "vim", "query", "rust", "java",
       "cpp", "javascript", "cmake", "make", "bash", "markdown",
       "markdown_inline", "kotlin", "python", "typescript", "json",
       "json5", "jsonc", "vue", "devicetree", "go", "html", "gitcommit",

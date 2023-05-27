@@ -13,16 +13,17 @@ Minimal development on terminal:
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
 # ueberzug can display image in terminal
-sudo pacman -S zsh fzf tmux lua ueberzug universal-ctags global xclip clang
+sudo pacman -S \
+    zsh fzf tmux universal-ctags \
+    global glow \
+    neovim nodejs npm bear yarn \
+    lua-language-server clang rust-analyzer gopls \
+    stylua jq
 
-# neovim related
-sudo pacman -S neovim nodejs npm bear yarn
-yay -S glow nnn-nerd
-
-pip3 install --user pynvim compiledb
+pip3 install --user pynvim scan-build
 
 # tools based on rust
-cargo install hexyl bat ripgrep fd-find exa gitui
+sudo pacman -S hexyl bat ripgrep fd-find exa gitui joshuto
 ```
 
 language-server, linter, formatter
@@ -42,27 +43,12 @@ yarn global add \
 yay -S \
     clang \
     kotlin-language-server \
-    lua-language-server-git \
     groovy-language-server-git \
     jdtls \
-    gopls \
     google-java-format \
     cppcheck
 
 pip3 install --user cmake-language-server black
-
-cargo install stylua
-```
-
-Desktop:
-
-```bash
-sudo pacman -S zathura zathura-pdf-mupdf alacritty
-yay -S vnote nerd-fonts-source-code-pro
-
-# i3
-sudo pacman -S i3 i3status-rust xdotool rofi
-yay -S alsa-utils ttf-font-awesome powerline-fonts
 ```
 
 Chinese input method:
