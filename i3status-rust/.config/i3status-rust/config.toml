@@ -1,12 +1,5 @@
-theme = "slick"
-icons = "awesome"
-
 [[block]]
 block = "memory"
-format_mem = "{mem_used}/{mem_total}"
-display_type = "memory"
-icons = true
-clickable = true
 interval = 60
 warning_mem = 80
 warning_swap = 80
@@ -24,4 +17,3 @@ block = "sound"
 [[block]]
 block = "time"
 interval = 60
-format = "%a %d/%m %R"
