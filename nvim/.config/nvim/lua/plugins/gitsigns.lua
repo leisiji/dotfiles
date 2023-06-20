@@ -6,13 +6,39 @@ function M.config()
       interval = 5000,
       follow_files = true,
     },
-    keymaps = {
-      noremap = true,
-      buffer = true,
-      ["n <leader><leader>n"] = '<cmd>lua require"gitsigns".next_hunk()<CR>',
-      ["n <leader><leader>N"] = '<cmd>lua require"gitsigns".prev_hunk()<CR>',
-      ["n <leader><leader>b"] = '<cmd>lua require"gitsigns".blame_line()<CR>',
-    },
+    on_attach = function(bufnr)
+      local gs = package.loaded.gitsigns
+
+      local function map(mode, l, r, opts)
+        opts = opts or {}
+        opts.buffer = bufnr
+        vim.keymap.set(mode, l, r, opts)
+      end
+
+      -- Navigation
+      map("n", "<leader><leader>n", function()
+        if vim.wo.diff then
+          return "<leader><leader>n"
+        end
+        vim.schedule(function()
+          gs.next_hunk()
+        end)
+        return "<Ignore>"
+      end, { expr = true })
+
+      map("n", "<leader><leader>N", function()
+        if vim.wo.diff then
+          return "[c"
+        end
+        vim.schedule(function()
+          gs.prev_hunk()
+        end)
+        return "<Ignore>"
+      end, { expr = true })
+      map("n", "<leader><leader>b", function()
+        gs.blame_line({ full = true })
+      end)
+    end,
   })
 end
 
