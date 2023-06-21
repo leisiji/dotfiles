@@ -18,17 +18,11 @@
     },
     "temperature": {
         "critical-threshold": 80,
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""],
+        "format": "{temperatureC}°C ",
         "interval": 60
     },
     "battery": {
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-icons": ["", "", "", "", ""],
+        "format": "{capacity}% ",
         "interval": 300
     },
     "tray": {

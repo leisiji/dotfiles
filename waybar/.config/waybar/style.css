@@ -1,6 +1,6 @@
 @import "mocha.css";
 * {
-  font-family: Source Code Pro;
+  font-family: CaskaydiaCove Nerd Font;
   font-size: 14px;
   font-weight: bold;
 }
@@ -29,7 +29,7 @@ window#waybar.hidden {
 #memory,
 #disk,
 #tray {
-  padding: 0 10px;
+  padding: 0 6px;
   margin: 1px 1px 1px 1px;
   background-clip: padding-box;
 }
@@ -63,6 +63,14 @@ window#waybar.hidden {
 
 #memory {
   color: @mauve;
+}
+
+#temperature {
+  color: @green;
+}
+
+#battery {
+  color: @peach;
 }
 
 #clock {
