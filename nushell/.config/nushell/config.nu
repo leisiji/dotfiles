@@ -489,13 +489,13 @@ let-env config = {
       }
     }
     {
-        name: exa
+        name: lsd
         modifier: alt
         keycode: char_l
         mode: [emacs, vi_normal, vi_insert]
         event: {
             send: executehostcommand
-            cmd: "exa -l"
+            cmd: "lsd -l"
         }
     }
     {
@@ -546,9 +546,14 @@ let-env config = {
         modifier: alt
         keycode: "char_,"
         mode: [emacs, vi_normal, vi_insert]
-        event: {
-            send: historyhintcomplete
-        }
+        event: { send: historyhintcomplete }
+    }
+    {
+        name: delete_word
+        modifier: alt
+        keycode: char_w
+        mode: emacs
+        event: { edit: cutbigwordleft }
     }
   ]
 }

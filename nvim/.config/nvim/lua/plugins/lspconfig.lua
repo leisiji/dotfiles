@@ -29,6 +29,10 @@ local on_attach = function(client, bufnr)
       buffer = bufnr,
     })
   end
+
+  if caps.inlayHintProvider then
+    vim.lsp.buf.inlay_hint(bufnr, true)
+  end
 end
 
 local function all_lsp_config(lsp)
