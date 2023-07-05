@@ -6,7 +6,4 @@ require("lualine").setup({
       tabline = 2000,
     },
   },
-  sections = {
-    lualine_c = { "navic" },
-  },
 })

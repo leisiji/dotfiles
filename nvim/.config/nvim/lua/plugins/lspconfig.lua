@@ -5,11 +5,6 @@ local a = vim.api
 
 local on_attach = function(client, bufnr)
   local caps = client.server_capabilities
-  local navic = require("nvim-navic")
-
-  if client.server_capabilities.documentSymbolProvider then
-    require("nvim-navic").attach(client, bufnr)
-  end
 
   a.nvim_clear_autocmds({ group = group, buffer = bufnr })
 

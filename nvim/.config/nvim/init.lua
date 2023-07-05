@@ -107,7 +107,6 @@ local function init_nvim_keys()
     { "<M-e>", "5e" },
     { "<M-b>", "5b" },
     { "<leader>y", '"*y' },
-    { "<leader><leader>y", '"+y' },
   }
   local cmd_maps = {
     { "<leader>s", "w" },

@@ -31,7 +31,6 @@ local m = {
     config = function()
       require("plugins.lspconfig").lsp_config()
     end,
-    dependencies = "smiteshp/nvim-navic",
   },
   {
     "mfussenegger/nvim-jdtls",
@@ -218,6 +217,24 @@ local m = {
       require("plugins.bufferline").config()
     end,
     dependencies = "nvim-tree/nvim-web-devicons",
+  },
+
+  {
+    "ojroques/nvim-osc52",
+    event = "BufReadPost",
+    config = function()
+      require("osc52").setup({
+        max_length = 0,
+        silent = false,
+        trim = false,
+      })
+      vim.keymap.set("v", "<leader><leader>y", require("osc52").copy_visual)
+    end,
+  },
+
+  {
+    "Bekaboo/dropbar.nvim",
+    event = "BufReadPost",
   },
 }
 
