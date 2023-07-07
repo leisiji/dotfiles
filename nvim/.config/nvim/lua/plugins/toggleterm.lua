@@ -42,9 +42,10 @@ end
 
 local function term_dir()
   local a = vim.api
-  local floating = a.nvim_win_get_config(a.nvim_get_current_win()).relative ~= ''
+  local w = a.nvim_get_current_win()
+  local floating = a.nvim_win_get_config(w).relative ~= ''
   local wins = a.nvim_tabpage_list_wins(0)
-  if floating or #wins > 1 then
+  if floating or #wins > 1 or a.nvim_win_get_width(w) <= 150 then
     return "direction=float"
   end
   return "direction=vertical"

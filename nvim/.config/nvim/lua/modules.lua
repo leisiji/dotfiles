@@ -235,6 +235,9 @@ local m = {
   {
     "Bekaboo/dropbar.nvim",
     event = "BufReadPost",
+    config = function()
+      require("plugins.dropbar").config()
+    end,
   },
 }
 

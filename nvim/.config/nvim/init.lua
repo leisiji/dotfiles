@@ -177,6 +177,12 @@ local function init_nvim_keys()
         end
       end,
     },
+    {
+      "<leader>u",
+      function()
+        require("dropbar.api").pick()
+      end,
+    },
   }
   local ino_maps = {
     { "<C-j>", "<Down>" },
