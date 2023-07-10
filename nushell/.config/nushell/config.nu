@@ -495,7 +495,7 @@ let-env config = {
         mode: [emacs, vi_normal, vi_insert]
         event: {
             send: executehostcommand
-            cmd: "lsd -l"
+            cmd: "ls"
         }
     }
     {
