@@ -4,7 +4,6 @@ function M.config()
   local lint = require("lint")
   local linters = {
     markdown = { "markdownlint" },
-    lua = { "luacheck" },
   }
   lint.linters_by_ft = linters
 
@@ -19,7 +18,7 @@ function M.config()
   a.nvim_create_augroup(group, { clear = true })
   a.nvim_create_autocmd({ "BufWritePost", "BufReadPost" }, {
     group = group,
-    pattern = { "*.md", "*.lua" },
+    pattern = { "*.md" },
     callback = function()
       lint.try_lint()
     end,

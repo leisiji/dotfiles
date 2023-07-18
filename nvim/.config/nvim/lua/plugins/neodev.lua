@@ -2,7 +2,6 @@ local M = {}
 
 function M.config()
   require("neodev").setup({})
-  -- then setup your lsp server as usual
   local cfg = require("plugins.lspconfig").cfg()
   local lspconfig = require("lspconfig")
   local neodev_cfg = {
@@ -14,7 +13,8 @@ function M.config()
       },
     },
   }
-  lspconfig.lua_ls.setup(vim.tbl_extend("force", neodev_cfg, cfg))
+  cfg = vim.tbl_extend("force", neodev_cfg, cfg)
+  lspconfig.lua_ls.setup(cfg)
 end
 
 return M
