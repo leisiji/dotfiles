@@ -40,13 +40,6 @@ local m = {
     end,
   },
   {
-    "simrat39/symbols-outline.nvim",
-    cmd = "SymbolsOutline",
-    config = function()
-      require("plugins.symbols_outline").config()
-    end,
-  },
-  {
     "rmagatti/goto-preview",
     cmd = "GotoPreview",
     config = function()
@@ -58,15 +51,6 @@ local m = {
     ft = "lua",
     config = function()
       require("plugins.neodev").config()
-    end,
-  },
-  {
-    "leisiji/litee-calltree.nvim",
-    dependencies = { "leisiji/litee.nvim" },
-    cmd = "CallTreeI",
-    wants = "litee.nvim",
-    config = function()
-      require("plugins.calltree").config()
     end,
   },
 
@@ -237,6 +221,14 @@ local m = {
     event = "BufReadPost",
     config = function()
       require("plugins.dropbar").config()
+    end,
+  },
+
+  {
+    'nvimdev/lspsaga.nvim',
+    cmd = "Lspsaga",
+    config = function()
+      require("plugins.lspsaga").config()
     end,
   },
 }
