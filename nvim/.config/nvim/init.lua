@@ -129,6 +129,9 @@ local function init_nvim_keys()
         vim.api.nvim_set_current_tabpage(vim.g.last_active)
       end,
     },
+    { "<M-k>", vim.lsp.buf.hover },
+    { "<leader>rn", vim.lsp.buf.rename },
+    { "<leader>ca", vim.lsp.buf.code_action },
     { "<leader>a", vim.diagnostic.goto_next },
     {
       "<M-o>",
@@ -264,10 +267,7 @@ local function init_plugins_keymaps()
     { "<leader>gc", "FzfCommand --commit" },
     { "<leader><leader>z", "FzfCommand --zoxide" },
 
-    { "<M-r>", "Lspsaga finder" },
-    { "<M-k>", "Lspsaga hover_doc" },
-    { "<leader>rn", "Lspsaga rename" },
-    { "<leader>ca", "Lspsaga code_action" },
+    { "<M-r>", "FzfCommand --lsp ref tab drop" },
     { "<M-j>", "FzfCommand --lsp jump_def edit" },
     { "<M-t>", "FzfCommand --lsp jump_def tab drop" },
     { "<M-v>", "FzfCommand --lsp jump_def vsplit" },
