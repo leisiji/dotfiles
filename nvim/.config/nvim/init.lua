@@ -132,7 +132,12 @@ local function init_nvim_keys()
     { "<M-k>", vim.lsp.buf.hover },
     { "<leader>rn", vim.lsp.buf.rename },
     { "<leader>ca", vim.lsp.buf.code_action },
-    { "<leader>a", vim.diagnostic.goto_next },
+    {
+      "<leader>a",
+      function()
+        vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+      end,
+    },
     {
       "<M-o>",
       function()
