@@ -223,14 +223,6 @@ local m = {
       require("plugins.dropbar").config()
     end,
   },
-
-  {
-    'nvimdev/lspsaga.nvim',
-    cmd = "Lspsaga",
-    config = function()
-      require("plugins.lspsaga").config()
-    end,
-  },
 }
 
 if vim.fn.executable("fcitx5") == 1 then
