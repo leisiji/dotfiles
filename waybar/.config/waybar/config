@@ -1,7 +1,7 @@
 {
     "height": 10,
     "spacing": 4,
-    "modules-left": ["wlr/workspaces"],
+    "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
     "modules-right": ["cpu", "memory", "temperature", "battery", "tray"],
     "clock": {
@@ -28,8 +28,17 @@
     "tray": {
         "spacing": 10
     },
-    "wlr/workspaces": {
-      "on-click": "activate"
+    "hyprland/workspaces": {
+        "on-click": "activate",
+        "format": "{icon}",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "󰓓",
+            "4": "",
+            "urgent": "",
+            "default": ""
+        },
+        "sort-by-number": true
     }
 }
-// vim:tw=78:ts=4:ft=jsonc

@@ -1,8 +1,8 @@
 local wezterm = require 'wezterm';
 
 return {
-  font = wezterm.font_with_fallback({"CaskaydiaCove Nerd Font Mono", "WenQuanYi Micro Hei"}),
-  font_size = 13.0,
+  font = wezterm.font_with_fallback({"CaskaydiaCove Nerd Font", "WenQuanYi Micro Hei"}),
+  font_size = 12.0,
   enable_tab_bar = false,
   window_padding = {
     left = 0,
