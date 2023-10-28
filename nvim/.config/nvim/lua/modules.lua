@@ -223,6 +223,21 @@ local m = {
       require("plugins.dropbar").config()
     end,
   },
+
+  {
+    "stevearc/aerial.nvim",
+    lazy = true,
+    cmd = "AerialOpen",
+    opts = {
+      keymaps = {
+        ["<CR>"] = "actions.jump",
+        ["<C-v>"] = "actions.jump_vsplit",
+        ["<C-j>"] = false,
+        ["<C-k>"] = false,
+      },
+      close_on_select = true,
+    },
+  },
 }
 
 if vim.fn.executable("fcitx5") == 1 then

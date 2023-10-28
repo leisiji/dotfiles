@@ -4,7 +4,7 @@ function M.config()
   require("bufferline").setup({
     options = {
       mode = "tabs",
-      buffer_close_icon = '',
+      buffer_close_icon = "",
       name_formatter = function(buf)
         return buf.name
       end,

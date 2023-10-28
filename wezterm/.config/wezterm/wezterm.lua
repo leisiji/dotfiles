@@ -1,8 +1,8 @@
 local wezterm = require 'wezterm';
 
 return {
-  font = wezterm.font_with_fallback({"CaskaydiaCove Nerd Font", "WenQuanYi Micro Hei"}),
-  font_size = 12.0,
+  font = wezterm.font_with_fallback({"FiraCode Nerd Font", "WenQuanYi Micro Hei"}),
+  font_size = 10.0,
   enable_tab_bar = false,
   window_padding = {
     left = 0,
@@ -24,16 +24,16 @@ return {
     },
   },
   window_decorations = "NONE",
-  window_frame = {
-      border_left_width = '0.1cell',
-      border_right_width = '0.1cell',
-      border_bottom_height = '0.1cell',
-      border_top_height = '0.1cell',
-      border_left_color = 'grey',
-      border_right_color = 'grey',
-      border_bottom_color = 'grey',
-      border_top_color = 'grey',
-  },
+  --window_frame = {
+  --    border_left_width = '0.1cell',
+  --    border_right_width = '0.1cell',
+  --    border_bottom_height = '0.1cell',
+  --    border_top_height = '0.1cell',
+  --    border_left_color = 'grey',
+  --    border_right_color = 'grey',
+  --    border_bottom_color = 'grey',
+  --    border_top_color = 'grey',
+  --},
   force_reverse_video_cursor = true,
   colors = {
     foreground = "#dcd7ba",

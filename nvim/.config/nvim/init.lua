@@ -279,7 +279,7 @@ local function init_plugins_keymaps()
 
     -- others
     { "<leader><leader>p", "GotoPreview" },
-    { "<leader>v", "Lspsaga outline" },
+    { "<leader>v", "AerialOpen" },
     { "<leader><leader>d", "DiffviewOpen --untracked-files=true -- %" },
   }
 
