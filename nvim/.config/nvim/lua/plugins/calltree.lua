@@ -2,7 +2,7 @@ local M = {}
 
 function M.config()
   require("litee.lib").setup({
-    panel = { orientation = "left", panel_size = 40 },
+    panel = { orientation = "left", panel_size = 60 },
   })
   require("litee.calltree").setup({
     keymaps = {
@@ -21,6 +21,8 @@ function M.config()
       switch = "S",
       focus = "f",
     },
+    auto_highlight = false,
+    no_hls = true,
   })
   local cmd = vim.api.nvim_create_user_command
   cmd("CallTreeI", vim.lsp.buf.incoming_calls, {})

@@ -238,6 +238,15 @@ local m = {
       close_on_select = true,
     },
   },
+  {
+    "ldelossa/litee-calltree.nvim",
+    lazy = true,
+    cmd = "CallTreeI",
+    dependencies = "ldelossa/litee.nvim",
+    config = function ()
+      require("plugins.calltree").config()
+    end
+  }
 }
 
 if vim.fn.executable("fcitx5") == 1 then
