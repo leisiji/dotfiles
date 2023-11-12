@@ -17,7 +17,7 @@ bindkey -e
 bindkey '^w' vi-backward-kill-word
 bindkey '\ew' backward-kill-word
 
-alias ni=nvim; alias t='tmux -2'; alias ta='tmux -2 a'
+alias ni=nvim; alias j=joshuto; alias t='tmux -2'; alias ta='tmux -2 a'
 alias cr='cd $(git rev-parse --show-toplevel)'
 export TERM=xterm-256color
 export TERM_ITALICS=true

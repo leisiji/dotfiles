@@ -16,32 +16,6 @@ local format = string.format
 local fn = vim.fn
 local exec = vim.cmd
 
--------------------- Global Function ---------------------------------------
-function _G.mytabline()
-  local pagenum = fn.tabpagenr("$")
-  local s = ""
-  local i = 1
-  while i <= pagenum do
-    if i == fn.tabpagenr() then
-      s = s .. "%#TabLineSel#"
-    else
-      s = s .. "%#TabLine#"
-    end
-    s = s .. " " .. tostring(i) .. "."
-    local bufnr = fn.tabpagebuflist(i)[vim.fn.tabpagewinnr(i)]
-    local path = fn.bufname(bufnr)
-    s = s .. fn.fnamemodify(path, ":t")
-    if fn.getbufvar(bufnr, "&modified") == 1 then
-      s = s .. "+"
-    else
-      s = s .. " "
-    end
-    s = s .. "%#TabLineFill#%T"
-    i = i + 1
-  end
-  return s
-end
-
 local function quit()
   local bufnrs = fn.win_findbuf(fn.bufnr())
   if #bufnrs > 1 or fn.expand("%") == "" or fn.tabpagenr("$") == 1 then
@@ -98,6 +72,7 @@ local function init_nvim_keys()
     { "<M-w>", "5w" },
     { "<M-y>", "<C-r>" },
     { "<leader>p", '"*p' },
+    { "<M-q>", 'g<Tab>' },
   }
   local vn_maps = {
     { "H", "^" },
@@ -123,12 +98,6 @@ local function init_nvim_keys()
   local func_maps = {
     { "<leader>q", quit },
     { "K", show_documents },
-    {
-      "<M-q>",
-      function()
-        vim.api.nvim_set_current_tabpage(vim.g.last_active)
-      end,
-    },
     { "<M-k>", vim.lsp.buf.hover },
     { "<leader>rn", vim.lsp.buf.rename },
     { "<leader>ca", vim.lsp.buf.code_action },

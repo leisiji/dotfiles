@@ -23,20 +23,6 @@ function M.config()
         folder_statuses = "only_folded",
       },
     },
-    file_history_panel = {
-      log_options = {
-        single_file = {
-          diff_merges = "combined",
-        },
-        multi_file = {
-          diff_merges = "first-parent",
-        },
-      },
-      win_config = {
-        position = "bottom",
-        height = 16,
-      },
-    },
     key_bindings = {
       disable_defaults = false,
       view = {

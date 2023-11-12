@@ -1,16 +1,11 @@
 [default_view]
 
 keymap = [
-	{ keys = [ "T" ],		command = "new_tab" },
-	{ keys = [ "ctrl+t" ],		command = "new_tab" },
-	{ keys = [ "W" ],		command = "close_tab" },
-	{ keys = [ "ctrl+w" ],		command = "close_tab" },
 	{ keys = [ "q" ],		command = "close_tab" },
 	{ keys = [ "Q" ],		command = "quit --output-current-directory" },
 
 	{ keys = [ "R" ],		command = "reload_dirlist" },
-	{ keys = [ "z", "h" ],		command = "toggle_hidden" },
-	{ keys = [ "ctrl+h" ],		command = "toggle_hidden" },
+	{ keys = [ "." ],		command = "toggle_hidden" },
 	{ keys = [ "\t" ],		command = "tab_switch 1" },
 	{ keys = [ "backtab" ],		command = "tab_switch -1" },
 
@@ -40,70 +35,22 @@ keymap = [
 	{ keys = [ "l" ],		command = "open" },
 	{ keys = [ "g", "g" ],		command = "cursor_move_home" },
 	{ keys = [ "G" ],		command = "cursor_move_end" },
-	{ keys = [ "r" ],		command = "open_with" },
 
-	{ keys = [ "H" ],		command = "cursor_move_page_home" },
-	{ keys = [ "L" ],		command = "cursor_move_page_middle" },
-	{ keys = [ "M" ],		command = "cursor_move_page_end" },
-
-	{ keys = [ "[" ],		command = "parent_cursor_move_up" },
-	{ keys = [ "]" ],		command = "parent_cursor_move_down" },
-
-	{ keys = [ "c", "d" ],		command = ":cd " },
-	{ keys = [ "d", "d" ],		command = "cut_files" },
 	{ keys = [ "y", "y" ],		command = "copy_files" },
-	{ keys = [ "p", "p" ],		command = "paste_files" },
-	{ keys = [ "p", "o" ],		command = "paste_files --overwrite=true" },
+	{ keys = [ "p" ],		command = "paste_files" },
 
-	{ keys = [ "y", "n" ],		command = "copy_filename" },
-	{ keys = [ "y", "." ],		command = "copy_filename_without_extension" },
-	{ keys = [ "y", "p" ],		command = "copy_filepath" },
-	{ keys = [ "y", "d" ],		command = "copy_dirpath" },
+	{ keys = [ "D" ],		command = "delete_files" },
 
-	{ keys = [ "delete" ],		command = "delete_files" },
-	{ keys = [ "d", "D" ],		command = "delete_files" },
-
-	{ keys = [ "a" ],		command = "rename_append" },
-	{ keys = [ "A" ],		command = "rename_prepend" },
-
-	{ keys = [ "f", "t" ],		command = ":touch " },
-
-	{ keys = [ " " ],		command = "select --toggle=true" },
-	{ keys = [ "t" ],		command = "select --all=true --toggle=true" },
-
-	{ keys = [ "w" ],		command = "show_tasks --exit-key=w" },
-	{ keys = [ "b", "b" ],		command = "bulk_rename" },
-	{ keys = [ "=" ],		command = "set_mode" },
-
-	{ keys = [ ":" ],		command = ":" },
-	{ keys = [ ";" ],		command = ":" },
-
-	{ keys = [ "'" ],		command = ":shell " },
-	{ keys = [ "m", "k" ],		command = ":mkdir " },
-	{ keys = [ "c", "w" ],		command = ":rename " },
+	{ keys = [ "a" ],		command = ":touch " },
+	{ keys = [ "A" ],		command = ":mkdir " },
+	{ keys = [ "r" ],		command = ":rename " },
 
 	{ keys = [ "/" ],		command = ":search " },
-	{ keys = [ "|" ],		command = ":search_inc " },
-	{ keys = [ "\\" ],		command = ":search_glob " },
-	{ keys = [ "S" ],		command = "search_fzf" },
-	{ keys = [ "C" ],		command = "subdir_fzf" },
-
+	{ keys = [ "f" ],		command = "search_fzf" },
+	{ keys = [ "alt+c" ],		command = "subdir_fzf" },
+	{ keys = [ "z" ],		command = "zi" },
 	{ keys = [ "n" ],		command = "search_next" },
 	{ keys = [ "N" ],		command = "search_prev" },
-
-	{ keys = [ "s", "r" ],		command = "sort reverse" },
-	{ keys = [ "s", "l" ],		command = "sort lexical" },
-	{ keys = [ "s", "m" ],		command = "sort mtime" },
-	{ keys = [ "s", "n" ],		command = "sort natural" },
-	{ keys = [ "s", "s" ],		command = "sort size" },
-	{ keys = [ "s", "e" ],		command = "sort ext" },
-
-	{ keys = [ "g", "r" ],		command = "cd /" },
-	{ keys = [ "g", "c" ],		command = "cd ~/.config" },
-	{ keys = [ "g", "d" ],		command = "cd ~/Downloads" },
-	{ keys = [ "g", "e" ],		command = "cd /etc" },
-	{ keys = [ "g", "h" ],		command = "cd ~/" },
-	{ keys = [ "?" ],		command = "help" }
 ]
 
 [task_view]

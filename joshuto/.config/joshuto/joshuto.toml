@@ -28,7 +28,7 @@ reverse = false
 
 [preview]
 max_preview_size = 2097152 # 2MB
-preview_script = "bat --color always"
+preview_script = "~/.config/joshuto/preview_file.sh"
 
 [tab]
 # inherit, home, root
