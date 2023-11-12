@@ -330,7 +330,7 @@ local global_cfg = {
   updatetime = 500,
   shortmess = "aoOTIcF",
   completeopt = "menu,menuone,noselect",
-  expandtab = true,
+  --expandtab = true,
   cmdheight = 0,
   -- foldmethod = "expr",
   -- foldexpr = "nvim_treesitter#foldexpr()",
@@ -347,7 +347,7 @@ local buf_cfg = {
   swapfile = false,
   undofile = true,
   mouse = "",
-  expandtab = true,
+  --expandtab = true,
 }
 for k, v in pairs(global_cfg) do
   vim.o[k] = v

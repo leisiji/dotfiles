@@ -128,10 +128,7 @@ local m = {
   {
     "leisiji/simple_indent",
     event = "BufReadPre",
-    dependencies = "leisiji/indent-o-matic",
-    config = function()
-      require("plugins.indent").config()
-    end,
+    dependencies = "'vidocqh/auto-indent.nvim",
   },
 
   -- terminal
@@ -142,13 +139,14 @@ local m = {
     end,
     cmd = { "ToggleTerm", "TermExec" },
   },
-  {
 
+  {
     "samjwill/nvim-unception",
     init = function()
       vim.g.unception_open_buffer_in_new_tab = true
     end,
   },
+
   {
     "norcalli/nvim-colorizer.lua",
     ft = { "html", "css", "help", "lua", "vim" },
@@ -243,10 +241,10 @@ local m = {
     lazy = true,
     cmd = "CallTreeI",
     dependencies = "ldelossa/litee.nvim",
-    config = function ()
+    config = function()
       require("plugins.calltree").config()
-    end
-  }
+    end,
+  },
 }
 
 if vim.fn.executable("fcitx5") == 1 then
