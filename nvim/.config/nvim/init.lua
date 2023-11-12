@@ -145,18 +145,6 @@ local function init_nvim_keys()
       end,
     },
     {
-      "<C-r>",
-      function()
-        local bufnr = vim.api.nvim_get_current_buf()
-        local client = vim.lsp.get_active_clients({ bufnr = bufnr })
-        if client ~= nil and #client ~= 0 then
-          vim.cmd("FzfCommand --lsp document_symbol")
-        else
-          vim.cmd("FzfCommand --ctags")
-        end
-      end,
-    },
-    {
       "<leader>tc",
       function()
         require("plugins.toggleterm").exec()
@@ -256,6 +244,7 @@ local function init_plugins_keymaps()
     -- fzf_utils
     { "<C-p>", "FzfCommand --files" },
     { "<C-f>", "FzfCommand --lines" },
+    { "<C-r>", "FzfCommand --lsp document_symbol" },
     { "<leader>b", "FzfCommand --buffers" },
     { "<leader><leader>m", "FzfCommand --man" },
     { "<leader><leader>h", "FzfCommand --vim help" },
