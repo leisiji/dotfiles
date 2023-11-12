@@ -126,11 +126,15 @@ local m = {
 
   -- indent
   {
-    "leisiji/simple_indent",
+    "nvimdev/indentmini.nvim",
     event = "BufReadPre",
     dependencies = "NMAC427/guess-indent.nvim",
     config = function()
       require("guess-indent").setup({})
+      require('indentmini').setup({
+        char = "│",
+      })
+      vim.cmd.highlight("default link IndentLine Comment")
     end,
   },
 
