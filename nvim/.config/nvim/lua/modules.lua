@@ -128,7 +128,10 @@ local m = {
   {
     "leisiji/simple_indent",
     event = "BufReadPre",
-    dependencies = "'vidocqh/auto-indent.nvim",
+    dependencies = "NMAC427/guess-indent.nvim",
+    config = function()
+      require("guess-indent").setup({})
+    end,
   },
 
   -- terminal
