@@ -42,13 +42,8 @@ export ZSH_AUTOSUGGEST_USE_ASYNC="true"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
 
 # gentoo prefix
-GENTOO_PREFIX=""
-if [ -d $HOME/gentoo ]; then
-    GENTOO_PREFIX=$HOME/gentoo
-fi
-export GTAGSCONF="$GENTOO_PREFIX/usr/share/gtags/gtags.conf"
-zinit ice wait"1" lucid; zinit snippet $GENTOO_PREFIX/usr/share/fzf/key-bindings.zsh
-zinit ice wait"1" lucid; zinit snippet $GENTOO_PREFIX/usr/share/fzf/completion.zsh
+zinit ice wait"1" lucid; zinit snippet $HOME/fzf-key-bindings.zsh
+zinit ice wait"1" lucid; zinit snippet $HOME/fzf-completion.zsh
 zinit wait="1" lucid for OMZ::plugins/extract/extract.plugin.zsh
 
 zpcompinit; zpcdreplay
@@ -109,6 +104,10 @@ precmd () {
 PROMPT='
 %~
 > '
+
+if [[ -n $TERMUX_APP_PID ]]; then
+    sshd
+fi
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
