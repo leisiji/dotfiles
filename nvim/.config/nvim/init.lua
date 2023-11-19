@@ -72,7 +72,7 @@ local function init_nvim_keys()
     { "<M-w>", "5w" },
     { "<M-y>", "<C-r>" },
     { "<leader>p", '"*p' },
-    { "<M-q>", 'g<Tab>' },
+    { "<M-q>", "g<Tab>" },
   }
   local vn_maps = {
     { "H", "^" },
@@ -82,6 +82,7 @@ local function init_nvim_keys()
     { "<M-e>", "5e" },
     { "<M-b>", "5b" },
     { "<leader>y", '"*y' },
+    { "<leader>y", '"+y' },
   }
   local cmd_maps = {
     { "<leader>s", "w" },

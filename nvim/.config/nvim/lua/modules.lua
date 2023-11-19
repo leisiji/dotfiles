@@ -209,19 +209,6 @@ local m = {
   },
 
   {
-    "ojroques/nvim-osc52",
-    event = "BufReadPost",
-    config = function()
-      require("osc52").setup({
-        max_length = 0,
-        silent = false,
-        trim = false,
-      })
-      vim.keymap.set("v", "<leader><leader>y", require("osc52").copy_visual)
-    end,
-  },
-
-  {
     "Bekaboo/dropbar.nvim",
     event = "BufReadPost",
     config = function()
