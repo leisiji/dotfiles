@@ -8,15 +8,6 @@ function M.config()
         return tostring(term.id)
       end,
     },
-    size = function(term)
-      if term.direction == "horizontal" then
-        return 10
-      elseif term.direction == "vertical" then
-        return vim.o.columns * 0.4
-      else
-        return 20
-      end
-    end,
   })
   local group = "user_term"
   vim.api.nvim_create_augroup(group, { clear = true })
@@ -40,26 +31,15 @@ function M.config()
   })
 end
 
-local function term_dir()
-  local a = vim.api
-  local w = a.nvim_get_current_win()
-  local floating = a.nvim_win_get_config(w).relative ~= ''
-  local wins = a.nvim_tabpage_list_wins(0)
-  if floating or #wins > 1 or a.nvim_win_get_width(w) <= 150 then
-    return "direction=float"
-  end
-  return "direction=vertical"
-end
-
 function M.toggle()
   local c = vim.v.count1
-  vim.cmd.ToggleTerm(c, term_dir())
+  vim.cmd.ToggleTerm(c, "direction=float")
 end
 
 function M.exec()
   local dir = vim.fn.expand("%:p:h")
   local cmd = string.format("TermExec cmd='cd %s' go_back=0 ", dir)
-  cmd = cmd .. term_dir()
+  cmd = cmd .. "direction=float"
   vim.cmd(cmd)
 end
 

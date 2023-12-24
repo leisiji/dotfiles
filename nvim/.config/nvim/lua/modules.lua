@@ -148,10 +148,14 @@ local m = {
   },
 
   {
-    "samjwill/nvim-unception",
-    init = function()
-      vim.g.unception_open_buffer_in_new_tab = true
-    end,
+    "willothy/flatten.nvim",
+    opts = {
+      window = {
+        open = "tab"
+      }
+    },
+    lazy = false,
+    priority = 1001,
   },
 
   {
