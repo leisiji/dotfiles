@@ -31,6 +31,7 @@ function M.config()
       "git_rebase",
       "toml",
       "yaml",
+      "vimdoc",
     },
     highlight = {
       enable = true,
