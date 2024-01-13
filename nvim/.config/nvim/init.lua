@@ -201,9 +201,8 @@ local function init_plugins_keymaps()
 
     { "<leader>e", "FeMaco" },
 
-    -- nvim tree
-    { "<leader>tj", "NvimTreeFindFileToggle" },
-    { "<leader>tr", "NvimTreeToggle" },
+    { "<leader>tr", "Neotree" },
+    { "<leader>tj", "Neotree reveal reveal_force_cwd" },
 
     -- interestingwords
     { "<leader>k", "Interestingwords --toggle" },

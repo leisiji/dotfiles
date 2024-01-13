@@ -42,13 +42,13 @@ export ZSH_AUTOSUGGEST_USE_ASYNC="true"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
 
 # gentoo prefix
-zinit ice wait"1" lucid; zinit snippet $HOME/fzf-key-bindings.zsh
-zinit ice wait"1" lucid; zinit snippet $HOME/fzf-completion.zsh
-zinit wait="1" lucid for OMZ::plugins/extract/extract.plugin.zsh
+zinit snippet $HOME/fzf-key-bindings.zsh
+zinit snippet $HOME/fzf-completion.zsh
+zinit wait="1" lucid for OMZP::extract
 
 zpcompinit; zpcdreplay
 
-zinit wait="1" lucid light-mode for \
+zinit wait lucid light-mode for \
     zsh-users/zsh-autosuggestions \
     hlissner/zsh-autopair \
     zdharma-continuum/fast-syntax-highlighting \

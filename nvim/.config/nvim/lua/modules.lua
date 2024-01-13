@@ -167,11 +167,15 @@ local m = {
   },
 
   {
-    "kyazdani42/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFindFileToggle" },
-    config = function()
-      require("plugins.nvim_tree").setup()
-    end,
+    "nvim-neo-tree/neo-tree.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+    lazy = true,
+    cmd = "Neotree",
+    config = function ()
+      require("plugins.neotree").config()
+    end
   },
 
   {
