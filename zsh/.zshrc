@@ -19,6 +19,7 @@ bindkey '\ew' backward-kill-word
 
 alias ni=nvim; alias j=joshuto; alias t='tmux -2'; alias ta='tmux -2 a'
 alias cr='cd $(git rev-parse --show-toplevel)'
+alias gt='gitui -t macchiato.ron'
 export TERM=xterm-256color
 export TERM_ITALICS=true
 export HISTFILE="$HOME/.zsh_history"
