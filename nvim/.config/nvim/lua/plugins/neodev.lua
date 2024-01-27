@@ -10,6 +10,10 @@ function M.config()
         completion = {
           callSnippet = "Replace",
         },
+        hint = {
+          enable = true,
+          setType = true,
+        },
       },
     },
   }

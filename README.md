@@ -16,14 +16,14 @@ git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 sudo pacman -S \
     zsh fzf tmux universal-ctags \
     global glow \
-    neovim nodejs npm bear yarn \
+    neovim nodejs bear yarn \
     lua-language-server clang rust-analyzer gopls \
     stylua jq
 
 pip3 install --user pynvim scan-build
 
 # tools based on rust
-sudo pacman -S hexyl bat ripgrep fd-find exa gitui joshuto
+sudo pacman -S hexyl bat ripgrep fd-find eza gitui joshuto zoxide
 ```
 
 language-server, linter, formatter
@@ -34,7 +34,6 @@ yarn global add \
     vim-language-server \
     markdownlint-cli \
     pyright \
-    diagnostic-languageserver \
     typescript-language-server \
     vscode-json-languageserver \
     typescript \
@@ -45,8 +44,7 @@ yay -S \
     kotlin-language-server \
     groovy-language-server-git \
     jdtls \
-    google-java-format \
-    cppcheck
+    google-java-format
 
 pip3 install --user cmake-language-server black
 ```
@@ -55,7 +53,7 @@ Chinese input method:
 
 ```bash
 sudo pacman -S fcitx5 fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-chinese-addons \
-        fcitx5-material-color adobe-source-han-sans-otc-fonts
+        fcitx5-material-color ttf-cascadia-code-nerd
 ```
 
 Plugin Manager:
