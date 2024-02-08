@@ -17,7 +17,7 @@ bindkey -e
 bindkey '^w' vi-backward-kill-word
 bindkey '\ew' backward-kill-word
 
-alias ni=nvim; alias j=joshuto; alias t='tmux -2'; alias ta='tmux -2 a'
+alias ni=nvim; alias j=joshuto; alias t='tmux -2 -u'; alias ta='tmux -2 -u a'
 alias cr='cd $(git rev-parse --show-toplevel)'
 alias gt='gitui -t macchiato.ron'
 export TERM=xterm-256color
@@ -95,7 +95,7 @@ zle -N my-fzf-cd
 bindkey '\ej' my-fzf-cd
 
 bindkey -s '\eq' 'cd ..\n'
-bindkey -s '\el' 'exa -l\n'
+bindkey -s '\el' 'eza -l\n'
 bindkey -s '\es' 'git status .\n'
 
 precmd () {

@@ -9,7 +9,7 @@
 	ui = true
 [pager]
 	show = bat
-	diff = git-split-diffs --color | less -RFX
+	diff = git-split-diffs --color | bat --decorations never
 [alias]
 	rg = !rg $(git rev-parse --show-toplevel) --column --smart-case -e
 	cma = commit --amend
