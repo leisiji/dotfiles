@@ -67,32 +67,9 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':completion:files' sort false
 
-my_exe() {
-    zle push-line
-    BUFFER="$1"
-    zle accept-line
+gs() {
+    git show $1 | git-split-diffs --color | bat --decorations never
 }
-
-# 补全 bat
-addBat () {
-    RBUFFER="${t} | bat"
-    zle accept-line
-}
-zle -N addBat
-bindkey '\ea' addBat
-
-my-fzf-cd() {
-    local dirs=$(find -maxdepth 1 -type d)
-    dir=$(echo ${dirs} | fzf --reverse --height 40%)
-    if [[ ! -z ${dir} ]]; then
-        my_exe "cd ${dir}"
-    else
-        zle redisplay
-    fi
-    unset dir
-}
-zle -N my-fzf-cd
-bindkey '\ej' my-fzf-cd
 
 bindkey -s '\eq' 'cd ..\n'
 bindkey -s '\el' 'eza -l\n'
