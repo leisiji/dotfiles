@@ -67,9 +67,11 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':completion:files' sort false
 
-gs() {
-    git show $1 | git-split-diffs --color | bat --decorations never
+git_show() {
+    git show $1 | git-split-diffs --color | less -RFX
 }
+
+alias gs=git_show
 
 bindkey -s '\eq' 'cd ..\n'
 bindkey -s '\el' 'eza -l\n'
