@@ -20,10 +20,10 @@ function M.config()
     group = group,
     pattern = { "*.md" },
     callback = function()
-      lint.try_lint()
+      lint.try_lint(nil, { ignore_errors = true })
     end,
   })
-  vim.diagnostic.config({ virtual_text = false, underline=false })
+  vim.diagnostic.config({ virtual_text = false, underline = false })
 end
 
 return M
