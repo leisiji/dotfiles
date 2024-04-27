@@ -1,0 +1,4 @@
+[install]
+registry = "https://registry.npmmirror.com/"
+globalDir = "~/.bun/install/global"
+globalBinDir = "~/.local/bin"

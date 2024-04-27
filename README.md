@@ -18,7 +18,7 @@ sudo pacman -S \
     global glow \
     neovim nodejs bear yarn \
     lua-language-server clang rust-analyzer gopls \
-    stylua jq
+    clang tylua jq
 
 pip3 install --user pynvim scan-build
 
@@ -29,7 +29,7 @@ sudo pacman -S hexyl bat ripgrep fd-find eza gitui joshuto zoxide
 language-server, linter, formatter
 
 ```bash
-yarn global add \
+bun add --global \
     bash-language-server \
     vim-language-server \
     markdownlint-cli \
@@ -39,8 +39,7 @@ yarn global add \
     typescript \
     git-split-diffs
 
-yay -S \
-    clang \
+paru -S \
     kotlin-language-server \
     groovy-language-server-git \
     jdtls \

@@ -72,6 +72,8 @@ git_show() {
 }
 
 alias gs=git_show
+alias vscode-json-language-server=vscode-json-languageserver
+alias node=bun
 
 bindkey -s '\eq' 'cd ..\n'
 bindkey -s '\el' 'eza -l\n'
