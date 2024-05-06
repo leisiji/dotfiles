@@ -209,7 +209,6 @@ local m = {
 
   {
     "akinsho/bufferline.nvim",
-    version = "*",
     config = function()
       require("plugins.bufferline").config()
     end,
