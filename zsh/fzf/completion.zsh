@@ -4,12 +4,12 @@
 #  / __/ / /_/ __/
 # /_/   /___/_/ completion.zsh
 #
-# - $FZF_TMUX               (default: 0)
-# - $FZF_TMUX_OPTS          (default: '-d 40%')
-# - $FZF_COMPLETION_TRIGGER (default: '**')
-# - $FZF_COMPLETION_OPTS    (default: empty)
-
-[[ -o interactive ]] || return 0
+# - $FZF_TMUX                 (default: 0)
+# - $FZF_TMUX_OPTS            (default: empty)
+# - $FZF_COMPLETION_TRIGGER   (default: '**')
+# - $FZF_COMPLETION_OPTS      (default: empty)
+# - $FZF_COMPLETION_PATH_OPTS (default: empty)
+# - $FZF_COMPLETION_DIR_OPTS  (default: empty)
 
 
 # Both branches of the following `if` do the same thing -- define
@@ -75,26 +75,34 @@ fi
 # This brace is the start of try-always block. The `always` part is like
 # `finally` in lesser languages. We use it to *always* restore user options.
 {
+# The 'emulate' command should not be placed inside the interactive if check;
+# placing it there fails to disable alias expansion. See #3731.
+if [[ -o interactive ]]; then
 
 # To use custom commands instead of find, override _fzf_compgen_{path,dir}
-if ! declare -f _fzf_compgen_path > /dev/null; then
-  _fzf_compgen_path() {
-    echo "$1"
-    command find -L "$1" \
-      -name .git -prune -o -name .hg -prune -o -name .svn -prune -o \( -type d -o -type f -o -type l \) \
-      -a -not -path "$1" -print 2> /dev/null | sed 's@^\./@@'
-  }
-fi
-
-if ! declare -f _fzf_compgen_dir > /dev/null; then
-  _fzf_compgen_dir() {
-    command find -L "$1" \
-      -name .git -prune -o -name .hg -prune -o -name .svn -prune -o -type d \
-      -a -not -path "$1" -print 2> /dev/null | sed 's@^\./@@'
-  }
-fi
+#
+#   _fzf_compgen_path() {
+#     echo "$1"
+#     command find -L "$1" \
+#       -name .git -prune -o -name .hg -prune -o -name .svn -prune -o \( -type d -o -type f -o -type l \) \
+#       -a -not -path "$1" -print 2> /dev/null | sed 's@^\./@@'
+#   }
+#
+#   _fzf_compgen_dir() {
+#     command find -L "$1" \
+#       -name .git -prune -o -name .hg -prune -o -name .svn -prune -o -type d \
+#       -a -not -path "$1" -print 2> /dev/null | sed 's@^\./@@'
+#   }
 
 ###########################################################
+
+__fzf_defaults() {
+  # $1: Prepend to FZF_DEFAULT_OPTS_FILE and FZF_DEFAULT_OPTS
+  # $2: Append to FZF_DEFAULT_OPTS_FILE and FZF_DEFAULT_OPTS
+  echo "--height ${FZF_TMUX_HEIGHT:-40%} --bind=ctrl-z:ignore $1"
+  command cat "${FZF_DEFAULT_OPTS_FILE-}" 2> /dev/null
+  echo "${FZF_DEFAULT_OPTS-} $2"
+}
 
 __fzf_comprun() {
   if [[ "$(type _fzf_comprun 2>&1)" =~ function ]]; then
@@ -148,10 +156,25 @@ __fzf_generic_path_completion() {
       leftover=${leftover/#\/}
       [ -z "$dir" ] && dir='.'
       [ "$dir" != "/" ] && dir="${dir/%\//}"
-      matches=$(eval "$compgen $(printf %q "$dir")" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse --scheme=path --bind=ctrl-z:ignore ${FZF_DEFAULT_OPTS-} ${FZF_COMPLETION_OPTS-}" __fzf_comprun "$cmd" ${(Q)${(Z+n+)fzf_opts}} -q "$leftover" | while read item; do
-        item="${item%$suffix}$suffix"
-        echo -n "${(q)item} "
-      done)
+      matches=$(
+        export FZF_DEFAULT_OPTS=$(__fzf_defaults "--reverse --scheme=path" "${FZF_COMPLETION_OPTS-}")
+        unset FZF_DEFAULT_COMMAND FZF_DEFAULT_OPTS_FILE
+        if declare -f "$compgen" > /dev/null; then
+          eval "$compgen $(printf %q "$dir")" | __fzf_comprun "$cmd" ${(Q)${(Z+n+)fzf_opts}} -q "$leftover"
+        else
+          if [[ $compgen =~ dir ]]; then
+            walker=dir,follow
+            rest=${FZF_COMPLETION_DIR_OPTS-}
+          else
+            walker=file,dir,follow,hidden
+            rest=${FZF_COMPLETION_PATH_OPTS-}
+          fi
+          __fzf_comprun "$cmd" ${(Q)${(Z+n+)fzf_opts}} -q "$leftover" --walker "$walker" --walker-root="$dir" ${(Q)${(Z+n+)rest}} < /dev/tty
+        fi | while read item; do
+          item="${item%$suffix}$suffix"
+          echo -n "${(q)item} "
+        done
+      )
       matches=${matches% }
       if [ -n "$matches" ]; then
         LBUFFER="$lbuf$matches$tail"
@@ -211,7 +234,10 @@ _fzf_complete() {
   type $post > /dev/null 2>&1 || post=cat
 
   _fzf_feed_fifo "$fifo"
-  matches=$(FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse --bind=ctrl-z:ignore ${FZF_DEFAULT_OPTS-} ${FZF_COMPLETION_OPTS-} $str_arg" __fzf_comprun "$cmd" "${args[@]}" -q "${(Q)prefix}" < "$fifo" | $post | tr '\n' ' ')
+  matches=$(
+    FZF_DEFAULT_OPTS=$(__fzf_defaults "--reverse" "${FZF_COMPLETION_OPTS-} $str_arg") \
+    FZF_DEFAULT_OPTS_FILE='' \
+      __fzf_comprun "$cmd" "${args[@]}" -q "${(Q)prefix}" < "$fifo" | $post | tr '\n' ' ')
   if [ -n "$matches" ]; then
     LBUFFER="$lbuf$matches"
   fi
@@ -226,8 +252,8 @@ if ! declare -f __fzf_list_hosts > /dev/null; then
     setopt localoptions nonomatch
     command cat <(command tail -n +1 ~/.ssh/config ~/.ssh/config.d/* /etc/ssh/ssh_config 2> /dev/null | command grep -i '^\s*host\(name\)\? ' | awk '{for (i = 2; i <= NF; i++) print $1 " " $i}' | command grep -v '[*?%]') \
       <(command grep -oE '^[[a-z0-9.,:-]+' ~/.ssh/known_hosts 2> /dev/null | tr ',' '\n' | tr -d '[' | awk '{ print $1 " " $1 }') \
-      <(command grep -v '^\s*\(#\|$\)' /etc/hosts 2> /dev/null | command grep -Fv '0.0.0.0') |
-      awk '{if (length($2) > 0) {print $2}}' | sort -u
+      <(command grep -v '^\s*\(#\|$\)' /etc/hosts 2> /dev/null | command grep -Fv '0.0.0.0' | command sed 's/#.*//') |
+      awk '{for (i = 2; i <= NF; i++) print $i}' | sort -u
   }
 fi
 
@@ -309,7 +335,7 @@ fzf-completion() {
 
   # Trigger sequence given
   if [ ${#tokens} -gt 1 -a "$tail" = "$trigger" ]; then
-    d_cmds=(${=FZF_COMPLETION_DIR_COMMANDS:-cd pushd rmdir})
+    d_cmds=(${=FZF_COMPLETION_DIR_COMMANDS-cd pushd rmdir})
 
     [ -z "$trigger"      ] && prefix=${tokens[-1]} || prefix=${tokens[-1]:0:-${#trigger}}
     if [[ $prefix = *'$('* ]] || [[ $prefix = *'<('* ]] || [[ $prefix = *'>('* ]] || [[ $prefix = *':='* ]] || [[ $prefix = *'`'* ]]; then
@@ -339,6 +365,7 @@ fzf-completion() {
 
 zle     -N   fzf-completion
 bindkey '^I' fzf-completion
+fi
 
 } always {
   # Restore the original options.

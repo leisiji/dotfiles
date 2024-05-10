@@ -43,9 +43,9 @@ export ZSH_AUTOSUGGEST_USE_ASYNC="true"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
 
 # gentoo prefix
-zinit snippet $HOME/fzf-key-bindings.zsh
-zinit snippet $HOME/fzf-completion.zsh
-zinit wait="1" lucid for OMZP::extract
+zinit snippet $HOME/fzf/key-bindings.zsh
+zinit snippet $HOME/fzf/completion.zsh
+source $HOME/fzf/extract.zsh
 
 zpcompinit; zpcdreplay
 
