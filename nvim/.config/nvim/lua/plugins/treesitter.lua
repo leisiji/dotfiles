@@ -32,6 +32,7 @@ function M.config()
       "toml",
       "yaml",
       "vimdoc",
+      "vala",
     },
     highlight = {
       enable = true,

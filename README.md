@@ -9,14 +9,11 @@ I'm using stow to manage my dotfiles.
 Minimal development on terminal:
 
 ```bash
-# ueberzug can display image in terminal
 sudo pacman -S \
     zsh fzf tmux universal-ctags \
-    global glow \
-    neovim nodejs bear yarn \
+    global glow bear \
     lua-language-server clang rust-analyzer gopls \
-    clang stylua jq \
-    hexyl bat ripgrep fd-find eza gitui joshuto zoxide \
+    clang stylua jq hexyl bat ripgrep fd eza gitui joshuto zoxide bottom \
     duf dust
 
 pip3 install --user pynvim scan-build
@@ -26,16 +23,12 @@ language-server, linter, formatter
 
 ```bash
 bun add --global \
-    bash-language-server \
-    vim-language-server \
-    markdownlint-cli \
-    pyright \
-    typescript-language-server \
-    vscode-json-languageserver \
-    typescript \
-    git-split-diffs
+    bash-language-server vim-language-server \
+    markdownlint-cli pyright typescript git-split-diffs \
+    typescript-language-server vscode-json-languageserver
 
 paru -S \
+    neovim-nightly-bin bun \
     kotlin-language-server \
     groovy-language-server-git \
     jdtls \
