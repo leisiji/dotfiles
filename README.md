@@ -10,13 +10,9 @@ Minimal development on terminal:
 
 ```bash
 sudo pacman -S \
-    zsh fzf tmux universal-ctags \
-    global glow bear \
-    lua-language-server clang rust-analyzer gopls \
+    zsh fzf tmux universal-ctags duf dust nodejs \
+    global glow bear lua-language-server clang rust-analyzer gopls ccls \
     clang stylua jq hexyl bat ripgrep fd eza gitui joshuto zoxide bottom \
-    duf dust
-
-pip3 install --user pynvim scan-build
 ```
 
 language-server, linter, formatter

@@ -62,7 +62,7 @@ local function all_lsp_config(lsp)
     "rust_analyzer",
     "tsserver",
     "jsonls",
-    "vala_ls"
+    "vala_ls",
   }
   for _, server in pairs(servers) do
     lsp[server].setup(default_cfg)
