@@ -6,6 +6,7 @@ function M.config()
       interval = 5000,
       follow_files = true,
     },
+    signs_staged_enable = false,
     on_attach = function(bufnr)
       local gs = package.loaded.gitsigns
 

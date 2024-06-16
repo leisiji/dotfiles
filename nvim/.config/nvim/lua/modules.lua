@@ -74,6 +74,7 @@ local m = {
       "L3MON4D3/LuaSnip",
       "rafamadriz/friendly-snippets",
       "windwp/nvim-autopairs",
+      "onsails/lspkind.nvim",
     },
     config = function()
       require("plugins.cmp").config()

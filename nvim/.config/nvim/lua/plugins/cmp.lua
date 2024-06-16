@@ -13,6 +13,7 @@ end
 function M.config()
   local cmp = require("cmp")
   local snip = require("luasnip")
+  local lspkind = require('lspkind')
 
   local sel_next = cmp.mapping(function(fallback)
     if cmp.visible() then
@@ -72,6 +73,17 @@ function M.config()
         },
       },
     }),
+    formatting = {
+      format = lspkind.cmp_format({
+        mode = "symbol",
+        maxwidth = 50,
+        ellipsis_char = "...",
+        show_labelDetails = true,
+        before = function(entry, vim_item)
+          return vim_item
+        end,
+      }),
+    },
   })
 
   cmp.setup.cmdline({ "/", "?" }, {
