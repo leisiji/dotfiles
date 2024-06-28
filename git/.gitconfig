@@ -8,7 +8,7 @@
 	ui = true
 [pager]
 	show = bat
-	diff = git-split-diffs --color | bat --decorations never
+	diff = git-split-diffs --color | less -RFX
 [alias]
 	rg = !rg $(git rev-parse --show-toplevel) --column --smart-case -e
 	cma = commit --amend
