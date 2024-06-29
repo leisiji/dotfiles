@@ -82,12 +82,21 @@ local m = {
   },
 
   {
-    'stevearc/conform.nvim',
+    "mhartington/formatter.nvim",
+    cmd = "Format",
     config = function()
-      require("plugins.conform").config()
+      require("plugins.formatter").config()
     end,
   },
+
   -- markdown
+  {
+    "AckslD/nvim-FeMaco.lua",
+    config = function()
+      require("plugins.femaco").config()
+    end,
+    cmd = "FeMaco",
+  },
   {
     "npxbr/glow.nvim",
     config = function()
@@ -165,7 +174,7 @@ local m = {
     },
     lazy = true,
     cmd = "Neotree",
-    config = function()
+    config = function ()
       require("plugins.neotree").config()
     end
   },

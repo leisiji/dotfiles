@@ -11,6 +11,7 @@ PointerAlignment: Right
 AlignConsecutiveMacros: true
 AccessModifierOffset: -4
 AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
 
 BraceWrapping:
   AfterCaseLabel:  false
