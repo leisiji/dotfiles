@@ -73,6 +73,7 @@ local function init_nvim_keys()
     { "<M-y>", "<C-r>" },
     { "<leader>p", '"*p' },
     { "<M-q>", "g<Tab>" },
+    { "<leader>e", "g<Tab>" },
   }
   local vn_maps = {
     { "H", "^" },
@@ -83,6 +84,7 @@ local function init_nvim_keys()
     { "<M-b>", "5b" },
     { "<leader>y", '"*y' },
     { "<leader>y", '"+y' },
+    { "<leader>e", 'Format' },
   }
   local cmd_maps = {
     { "<leader>s", "w" },
@@ -199,7 +201,7 @@ end
 local function init_plugins_keymaps()
   local cmds = {
 
-    { "<leader>e", "FeMaco" },
+    { "<leader><leader>e", "FeMaco" },
 
     { "<leader>tr", "Neotree" },
     { "<leader>tj", "Neotree reveal reveal_force_cwd" },

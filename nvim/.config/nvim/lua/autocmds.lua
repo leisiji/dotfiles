@@ -12,7 +12,7 @@ local autocmds = {
     end
   end,
   TextYankPost = function()
-    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 700 })
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 500 })
   end,
 }
 for key, value in pairs(autocmds) do

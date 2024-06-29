@@ -132,10 +132,7 @@ local m = {
     dependencies = "NMAC427/guess-indent.nvim",
     config = function()
       require("guess-indent").setup({})
-      require('indentmini').setup({
-        char = "│",
-      })
-      vim.cmd.highlight("default link IndentLine Comment")
+      require("indentmini").setup({})
     end,
   },
 
@@ -152,8 +149,8 @@ local m = {
     "willothy/flatten.nvim",
     opts = {
       window = {
-        open = "tab"
-      }
+        open = "tab",
+      },
     },
     lazy = false,
     priority = 1001,
@@ -174,9 +171,9 @@ local m = {
     },
     lazy = true,
     cmd = "Neotree",
-    config = function ()
+    config = function()
       require("plugins.neotree").config()
-    end
+    end,
   },
 
   {
@@ -245,6 +242,17 @@ local m = {
     dependencies = "ldelossa/litee.nvim",
     config = function()
       require("plugins.calltree").config()
+    end,
+  },
+
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require("plugins.noice").config()
     end,
   },
 }
