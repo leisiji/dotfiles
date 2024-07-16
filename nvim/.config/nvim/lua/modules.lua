@@ -98,11 +98,15 @@ local m = {
     cmd = "FeMaco",
   },
   {
-    "npxbr/glow.nvim",
+    "OXY2DEV/markview.nvim",
+    ft = "markdown",
     config = function()
-      require("glow").setup()
+      local markview = require("markview")
+      markview.state.enable = false
+      markview.setup({
+        buf_ignore = { "noice" },
+      })
     end,
-    cmd = "Glow",
   },
   {
     "junegunn/vim-easy-align",
