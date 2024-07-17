@@ -100,6 +100,7 @@ local m = {
   {
     "OXY2DEV/markview.nvim",
     ft = "markdown",
+    lazy = true,
     config = function()
       local markview = require("markview")
       markview.state.enable = false
@@ -226,19 +227,20 @@ local m = {
   },
 
   {
-    "stevearc/aerial.nvim",
+    "hedyhli/outline.nvim",
     lazy = true,
-    cmd = "AerialOpen",
+    cmd = { "Outline" },
     opts = {
+      auto_close = true,
       keymaps = {
-        ["<CR>"] = "actions.jump",
-        ["<C-v>"] = "actions.jump_vsplit",
-        ["<C-j>"] = false,
-        ["<C-k>"] = false,
+        down_and_jump = "<M-j>",
+        up_and_jump = "<M-o>",
+        peek_location = 'p',
+        hover_symbol = '<M-k>',
       },
-      close_on_select = true,
     },
   },
+
   {
     "ldelossa/litee-calltree.nvim",
     lazy = true,

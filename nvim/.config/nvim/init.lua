@@ -239,7 +239,7 @@ local function init_plugins_keymaps()
 
     -- others
     { "<leader><leader>p", "GotoPreview" },
-    { "<leader>v", "AerialOpen" },
+    { "<leader>v", "Outline" },
     { "<leader><leader>d", "DiffviewOpen --untracked-files=true -- %" },
   }
 
