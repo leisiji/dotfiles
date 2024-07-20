@@ -199,8 +199,14 @@ local m = {
   },
 
   {
-    "leisiji/interestingwords.nvim",
-    cmd = "Interestingwords",
+    "Mr-LLLLL/interestingwords.nvim",
+    lazy = true,
+    keys = {
+      { "<leader>k" },
+    },
+    config = function()
+      require("plugins.words").config()
+    end,
   },
 
   {
@@ -235,8 +241,8 @@ local m = {
       keymaps = {
         down_and_jump = "<M-j>",
         up_and_jump = "<M-o>",
-        peek_location = 'p',
-        hover_symbol = '<M-k>',
+        peek_location = "p",
+        hover_symbol = "<M-k>",
       },
     },
   },

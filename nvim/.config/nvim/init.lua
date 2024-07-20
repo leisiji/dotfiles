@@ -206,12 +206,6 @@ local function init_plugins_keymaps()
     { "<leader>tr", "Neotree" },
     { "<leader>tj", "Neotree reveal reveal_force_cwd" },
 
-    -- interestingwords
-    { "<leader>k", "Interestingwords --toggle" },
-    { "<leader><leader>k", "Interestingwords --remove_all" },
-    { "<leader>n", "Interestingwords --navigate" },
-    { "<leader>N", "Interestingwords --navigate b" },
-
     -- fzf_utils
     { "<C-p>", "FzfCommand --files" },
     { "<C-f>", "FzfCommand --lines" },
