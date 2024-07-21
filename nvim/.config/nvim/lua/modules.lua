@@ -98,16 +98,12 @@ local m = {
     cmd = "FeMaco",
   },
   {
-    "OXY2DEV/markview.nvim",
+    "MeanderingProgrammer/markdown.nvim",
     ft = "markdown",
-    lazy = true,
-    config = function()
-      local markview = require("markview")
-      markview.state.enable = false
-      markview.setup({
-        buf_ignore = { "noice" },
-      })
-    end,
+    cmd = "RenderMarkdown",
+    opts = {
+      enabled = false,
+    },
   },
   {
     "junegunn/vim-easy-align",
