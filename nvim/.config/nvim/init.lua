@@ -278,7 +278,6 @@ local global_cfg = {
   incsearch = true,
   ignorecase = true,
   smartcase = true,
-  termguicolors = true,
   laststatus = 2,
   showtabline = 2,
   updatetime = 500,
