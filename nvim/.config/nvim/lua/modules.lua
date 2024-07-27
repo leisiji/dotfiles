@@ -197,9 +197,7 @@ local m = {
   {
     "Mr-LLLLL/interestingwords.nvim",
     lazy = true,
-    keys = {
-      { "<leader>k" },
-    },
+    keys = { { "<leader>k" } },
     config = function()
       require("plugins.words").config()
     end,
@@ -261,6 +259,15 @@ local m = {
     },
     config = function()
       require("plugins.noice").config()
+    end,
+  },
+
+  {
+    "MagicDuck/grug-far.nvim",
+    config = function()
+      require("grug-far").setup({
+        startInInsertMode = false,
+      })
     end,
   },
 }

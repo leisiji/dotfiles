@@ -148,6 +148,14 @@ local function init_nvim_keys()
         require("dropbar.api").pick()
       end,
     },
+    {
+      "<leader>d",
+      function()
+        require("grug-far").grug_far({
+          prefills = { search = vim.fn.expand("<cword>"), paths = vim.fn.fnamemodify(vim.fn.expand("%:p:h"), ":.") },
+        })
+      end,
+    },
   }
   local ino_maps = {
     { "<C-j>", "<Down>" },
@@ -246,10 +254,6 @@ local function init_plugins_keymaps()
   -- easy align
   mapkey("x", "ga", ":EasyAlign<cr>", {})
 
-  cmd_gen(
-    "<leader>d",
-    [[<C-U><C-R>=printf('FzfCommand --rg %s %s', expand('<cword>'), fnamemodify(expand("%:p:h"), ":."))<CR>]]
-  )
   cmd_gen("<leader>fa", [[<C-U><C-R>='FzfCommand --rg '.expand('<cword>')<CR>]])
 
   -- lsp
