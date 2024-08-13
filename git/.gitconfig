@@ -1,5 +1,5 @@
 [user]
-	email = xuelinye9@gmail.com
+	email = 2265215145@qq.com
 	name = leisiji
 [core]
 	editor = nvim --cmd 'let g:unception_block_while_host_edits=1'

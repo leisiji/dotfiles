@@ -128,12 +128,29 @@ local m = {
 
   -- indent
   {
-    "nvimdev/indentmini.nvim",
-    event = "BufReadPre",
-    dependencies = "NMAC427/guess-indent.nvim",
+    "nmac427/guess-indent.nvim",
     config = function()
       require("guess-indent").setup({})
-      require("indentmini").setup({})
+    end,
+  },
+  {
+    "shellRaining/hlchunk.nvim",
+    lazy = true,
+    event = "VeryLazy",
+    config = function()
+      require("hlchunk").setup({
+        chunk = {
+          enable = true,
+        },
+        indent = {
+          enable = true,
+          delay = 800,
+        },
+        exclude_filetypes = {
+          "neo-tree",
+          "toggleterm",
+        },
+      })
     end,
   },
 
