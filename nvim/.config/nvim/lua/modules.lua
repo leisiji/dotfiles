@@ -149,6 +149,7 @@ local m = {
         exclude_filetypes = {
           "neo-tree",
           "toggleterm",
+          "grug-far",
         },
       })
     end,
@@ -281,10 +282,10 @@ local m = {
 
   {
     "MagicDuck/grug-far.nvim",
+    lazy = true,
+    keys = { { "<leader>d" } },
     config = function()
-      require("grug-far").setup({
-        startInInsertMode = false,
-      })
+      require("plugins.grug-far").config()
     end,
   },
 }

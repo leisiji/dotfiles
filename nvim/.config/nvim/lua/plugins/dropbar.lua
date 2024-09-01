@@ -25,9 +25,10 @@ function M.config()
       },
     },
     menu = {
+      preview = false,
       keymaps = {
         ["l"] = function()
-          local menu = require("dropbar.api").get_current_dropbar_menu()
+          local menu = require("dropbar.utils.menu").get_current()
           if not menu then
             return
           end
@@ -46,12 +47,15 @@ function M.config()
   require("dropbar").setup(opts)
 
   vim.keymap.set("n", "<leader>i", function()
-    local api = require("dropbar.api")
-    local bar = api.get_current_dropbar()
+    local bar = require("dropbar.utils.bar")
+    local b = bar.get_current()
     local f = vim.fn.expand("%:t")
-    for i, component in ipairs(bar.components) do
+    if b == nil then
+      return
+    end
+    for i, component in ipairs(b.components) do
       if component.name == f then
-        api.pick(i)
+        b:pick(i)
         return
       end
     end

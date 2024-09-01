@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 -- avoid loading inner plugins
 vim.g.loaded_2html_plugin = 1
@@ -146,14 +147,6 @@ local function init_nvim_keys()
       "<leader>u",
       function()
         require("dropbar.api").pick()
-      end,
-    },
-    {
-      "<leader>d",
-      function()
-        require("grug-far").grug_far({
-          prefills = { search = vim.fn.expand("<cword>"), paths = vim.fn.fnamemodify(vim.fn.expand("%:p:h"), ":.") },
-        })
       end,
     },
   }
