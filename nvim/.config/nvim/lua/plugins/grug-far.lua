@@ -4,6 +4,9 @@ function M.config()
   require("grug-far").setup({
     startInInsertMode = false,
     debounceMs = 1000,
+    resultLocation = {
+      showNumberLabel = false,
+    },
   })
   vim.keymap.set("n", "<leader>d", function()
     require("grug-far").open({
