@@ -284,6 +284,7 @@ local m = {
     "MagicDuck/grug-far.nvim",
     lazy = true,
     keys = { { "<leader>d" } },
+    cmd = "MyGrugFar",
     config = function()
       require("plugins.grug-far").config()
     end,

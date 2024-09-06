@@ -60,7 +60,7 @@ local function all_lsp_config(lsp)
     "kotlin_language_server",
     "gopls",
     "rust_analyzer",
-    "tsserver",
+    "ts_ls",
     "jsonls",
     "vala_ls",
   }

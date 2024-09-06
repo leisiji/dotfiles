@@ -247,7 +247,7 @@ local function init_plugins_keymaps()
   -- easy align
   mapkey("x", "ga", ":EasyAlign<cr>", {})
 
-  cmd_gen("<leader>fa", [[<C-U><C-R>='FzfCommand --rg '.expand('<cword>')<CR>]])
+  cmd_gen("<leader>fa", [[<C-U><C-R>='MyGrugFar '.expand('<cword>')<CR>]])
 
   -- lsp
   vim.keymap.set("i", "<M-k>", vim.lsp.buf.signature_help, keymap_opts)
