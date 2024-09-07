@@ -7,6 +7,9 @@ function M.config()
     resultLocation = {
       showNumberLabel = false,
     },
+    prefills = {
+      flags = "-w",
+    },
   })
   vim.keymap.set("n", "<leader>d", function()
     require("grug-far").open({
@@ -18,7 +21,6 @@ function M.config()
     require("grug-far").open({
       windowCreationCommand = "tabe",
       prefills = {
-        flags = "-w",
         search = param.fargs[1],
       },
     })
