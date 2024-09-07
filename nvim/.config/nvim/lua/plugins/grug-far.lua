@@ -22,11 +22,11 @@ function M.config()
         search = param.fargs[1],
       },
     })
+    vim.api.nvim_set_option_value("number", true, { win = 0 })
   end, {
     nargs = 1,
     range = true,
   })
-  vim.api.nvim_set_option_value("number", true, { win = 0 })
 end
 
 return M
