@@ -37,7 +37,7 @@ Chinese input method:
 
 ```bash
 sudo pacman -S fcitx5 fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-chinese-addons \
-        fcitx5-material-color ttf-cascadia-code-nerd
+     ttf-cascadia-code-nerd
 ```
 
 Plugin Manager:
