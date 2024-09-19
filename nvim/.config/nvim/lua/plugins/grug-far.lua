@@ -1,5 +1,16 @@
 local M = {}
 
+local function open(paths, search)
+  require("grug-far").open({
+    windowCreationCommand = "tabe",
+    prefills = {
+      paths = paths,
+      search = search,
+    },
+  })
+  vim.api.nvim_set_option_value("number", true, { win = 0 })
+end
+
 function M.config()
   require("grug-far").setup({
     startInInsertMode = false,
@@ -18,13 +29,18 @@ function M.config()
   end, { noremap = true, silent = true })
 
   vim.api.nvim_create_user_command("MyGrugFar", function(param)
-    require("grug-far").open({
-      windowCreationCommand = "tabe",
-      prefills = {
-        search = param.fargs[1],
-      },
-    })
-    vim.api.nvim_set_option_value("number", true, { win = 0 })
+    local args = param.fargs[1]
+    if args == "--zoxide" then
+      coroutine.wrap(function()
+        local choices = require("fzf").fzf("zoxide query --list", "--preview='eza -l --color=always {1}'")
+        if choices == nil then
+          return
+        end
+        open(choices[1], nil)
+      end)()
+    else
+      open(nil, args)
+    end
   end, {
     nargs = 1,
     range = true,

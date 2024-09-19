@@ -36,7 +36,7 @@ function M.toggle()
   vim.cmd.ToggleTerm(c, "direction=float")
 end
 
-function M.exec()
+function M.cd()
   local dir = vim.fn.expand("%:p:h")
   local cmd = string.format("TermExec cmd='cd %s' go_back=0 ", dir)
   cmd = cmd .. "direction=float"
