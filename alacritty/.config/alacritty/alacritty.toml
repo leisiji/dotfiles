@@ -95,8 +95,7 @@ mods = "Command"
 
 [[keyboard.bindings]]
 action = "ToggleFullscreen"
-key = "Return"
-mods = "Command"
+key = "F11"
 
 [[keyboard.bindings]]
 chars = "\u001BOH"
