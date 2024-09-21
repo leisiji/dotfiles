@@ -225,6 +225,7 @@ local function init_plugins_keymaps()
     { "<leader>ws", "FzfCommand --lsp workspace_symbol" },
     { "<leader>m", "FzfCommand --mru" },
     { "<leader>gc", "FzfCommand --commit" },
+    { "<leader><leader>c", "FzfCommand --zoxide" },
     { "<leader><leader>z", "MyGrugFar --zoxide" },
 
     { "<M-r>", "FzfCommand --lsp ref tab drop" },
