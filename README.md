@@ -11,7 +11,7 @@ Minimal development on terminal:
 ```bash
 sudo pacman -S \
     zsh fzf tmux universal-ctags duf dust global glow \
-    bear lua-language-server clang rust-analyzer gopls \
+    bear lua-language-server rust-analyzer gopls \
     clang stylua jq hexyl bat ripgrep fd eza gitui joshuto zoxide bottom
 ```
 
@@ -24,7 +24,6 @@ bun add --global \
     typescript-language-server vscode-json-languageserver
 
 paru -S \
-    neovim-nightly-bin bun \
     kotlin-language-server \
     groovy-language-server-git \
     jdtls bun \
