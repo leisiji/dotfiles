@@ -35,15 +35,14 @@ pip3 install --user cmake-language-server black
 Chinese input method:
 
 ```bash
-sudo pacman -S fcitx5 fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-chinese-addons \
-     ttf-cascadia-code-nerd
+sudo pacman -S fcitx5-im fcitx5-rime fcitx5-chinese-addons ttf-cascadia-code-nerd
 ```
 
 Plugin Manager:
 
 ```bash
 # packer.nvim
-mkdir ~/.local/share/nvim/lazy/
+mkdir -p ~/.local/share/nvim/lazy/
 git clone https://github.com/folke/lazy.nvim.git \
     ~/.local/share/nvim/lazy/lazy.nvim/
 ```
