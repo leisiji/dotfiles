@@ -10,9 +10,10 @@ Minimal development on terminal:
 
 ```bash
 sudo pacman -S \
-    zsh fzf tmux universal-ctags duf dust global glow \
-    bear lua-language-server rust-analyzer gopls \
-    clang stylua jq hexyl bat ripgrep fd eza gitui joshuto zoxide bottom
+    zsh fzf universal-ctags duf dust global glow rust-analyzer gopls \
+    jq bat ripgrep fd eza hexyl gitui joshuto zoxide bottom starship \
+    cmake-language-server stylua clang tmux bear lua-language-server \
+    neovim bun
 ```
 
 language-server, linter, formatter
@@ -28,8 +29,6 @@ paru -S \
     groovy-language-server-git \
     jdtls bun \
     google-java-format
-
-pip3 install --user cmake-language-server black
 ```
 
 Chinese input method:
