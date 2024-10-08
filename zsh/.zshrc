@@ -75,7 +75,7 @@ alias gs=git_show
 alias vscode-json-language-server=vscode-json-languageserver
 
 bindkey -s '\eq' 'cd ..\n'
-bindkey -s '\el' 'eza -l\n'
+bindkey -s '\el' 'eza -l --icons=always\n'
 bindkey -s '\es' 'git status .\n'
 
 precmd () {
