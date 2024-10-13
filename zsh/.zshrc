@@ -67,11 +67,14 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':completion:files' sort false
 
-git_show() {
+gs() {
     git show $1 | git-split-diffs --color | less -RFX
 }
 
-alias gs=git_show
+nd() {
+    nvim -c "DiffviewFileHistory $1"
+}
+
 alias vscode-json-language-server=vscode-json-languageserver
 
 bindkey -s '\eq' 'cd ..\n'

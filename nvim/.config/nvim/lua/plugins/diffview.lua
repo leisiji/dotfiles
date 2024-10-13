@@ -35,6 +35,19 @@ function M.config()
       },
       file_history_panel = {
         ["<leader>q"] = quit,
+        ["<M-k>"] = act.open_commit_log,
+      },
+    },
+    file_history_panel = {
+      log_options = {
+        git = {
+          single_file = {
+            no_merges = true,
+          },
+          multi_file = {
+            no_merges = true,
+          },
+        },
       },
     },
   })
