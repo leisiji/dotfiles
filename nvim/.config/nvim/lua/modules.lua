@@ -62,23 +62,61 @@ local m = {
       require("plugins.surround").config()
     end,
   },
+  -- {
+  --   "hrsh7th/nvim-cmp",
+  --   event = "InsertEnter",
+  --   dependencies = {
+  --     "hrsh7th/cmp-nvim-lsp",
+  --     "hrsh7th/cmp-path",
+  --     "hrsh7th/cmp-buffer",
+  --     "hrsh7th/cmp-cmdline",
+  --     "saadparwaiz1/cmp_luasnip",
+  --     "L3MON4D3/LuaSnip",
+  --     "rafamadriz/friendly-snippets",
+  --     "onsails/lspkind.nvim",
+  --   },
+  --   config = function()
+  --     require("plugins.cmp").config()
+  --   end,
+  -- },
   {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-cmdline",
-      "saadparwaiz1/cmp_luasnip",
-      "L3MON4D3/LuaSnip",
-      "rafamadriz/friendly-snippets",
-      "windwp/nvim-autopairs",
-      "onsails/lspkind.nvim",
+    "saghen/blink.cmp",
+    lazy = false,
+    dependencies = { "rafamadriz/friendly-snippets" },
+
+    build = "cargo build --release",
+
+    opts = {
+      highlight = {
+        use_nvim_cmp_as_default = true,
+      },
+      accept = { auto_brackets = { enabled = true } },
+      nerd_font_variant = "normal",
+      keymap = {
+        show = "<C-q>",
+        hide = "<C-e>",
+        accept = "<Enter>",
+        select_and_accept = {},
+        select_prev = { "<S-Tab>", "<C-k>" },
+        select_next = { "<Tab>", "<C-j>" },
+
+        show_documentation = "<M-k>",
+        hide_documentation = "<M-k>",
+        scroll_documentation_up = "<M-k>",
+        scroll_documentation_down = "<M-j>",
+
+        snippet_forward = "<Tab>",
+        snippet_backward = "<S-Tab>",
+      },
+      sources = {
+        providers = {
+          { "blink.cmp.sources.lsp", name = "LSP", score_offset = 4 },
+          { "blink.cmp.sources.path", name = "Path", score_offset = 3 },
+          { "blink.cmp.sources.snippets", name = "Snippets", score_offset = -3 },
+          { "blink.cmp.sources.buffer", name = "Buffer", fallback_for = { "LSP" } },
+        },
+      },
     },
-    config = function()
-      require("plugins.cmp").config()
-    end,
   },
 
   {
