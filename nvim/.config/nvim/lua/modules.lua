@@ -80,6 +80,13 @@ local m = {
   --   end,
   -- },
   {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = { map_cr = true },
+    -- use opts = {} for passing setup options
+    -- this is equivalent to setup({}) function
+  },
+  {
     "saghen/blink.cmp",
     lazy = false,
     dependencies = { "rafamadriz/friendly-snippets" },
