@@ -17,15 +17,15 @@ function M.config()
       lua = { "stylua" },
       rust = { "rustfmt", lsp_format = "fallback" },
       json = { "jq" },
-      c = { "clang_format" },
-      cpp = { "clang_format" },
+      c = { "clang-format" },
+      cpp = { "clang-format" },
     },
   })
-  require("conform").formatters.jq = {
+  require("conform").formatters["jq"] = {
     prepend_args = { "--indent", "4" },
   }
-  require("conform").formatters.clang_format = {
-    prepend_args = { "--style=file" },
+  require("conform").formatters["clang-format"] = {
+    args = { "--style=file" },
   }
 end
 
