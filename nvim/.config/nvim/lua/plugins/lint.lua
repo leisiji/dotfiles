@@ -9,7 +9,7 @@ function M.config()
 
   local md = require("lint.linters.markdownlint-cli2")
   md.args = {
-    "-c",
+    "--config",
     vim.fn.stdpath("config") .. "/.markdownlint.jsonc",
   }
 
