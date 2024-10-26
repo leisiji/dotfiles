@@ -84,7 +84,6 @@ local function init_nvim_keys()
     { "<M-b>", "5b" },
     { "<leader>y", '"*y' },
     { "<leader>y", '"+y' },
-    { "<leader>e", "Format" },
   }
   local cmd_maps = {
     { "<leader>s", "w" },
@@ -97,7 +96,6 @@ local function init_nvim_keys()
     { "<leader>H", "20winc <" },
     { "<leader>K", "10winc +" },
     { "<leader>J", "10winc -" },
-    { "<leader>e", "Format" },
   }
   local func_maps = {
     { "<leader>q", quit },

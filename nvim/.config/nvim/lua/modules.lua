@@ -116,21 +116,26 @@ local m = {
         snippet_backward = "<S-Tab>",
       },
       sources = {
-        providers = {
-          { "blink.cmp.sources.lsp", name = "LSP", score_offset = 4 },
-          { "blink.cmp.sources.path", name = "Path", score_offset = 3 },
-          { "blink.cmp.sources.snippets", name = "Snippets", score_offset = -3 },
-          { "blink.cmp.sources.buffer", name = "Buffer", fallback_for = { "LSP" } },
+        completion = {
+          enabled_providers = { "lsp", "path", "snippets", "buffer" },
         },
       },
     },
   },
 
   {
-    "mhartington/formatter.nvim",
-    cmd = "Format",
+    "stevearc/conform.nvim",
+    keys = {
+      {
+        "<leader>e",
+        function()
+          require("plugins.conform").format()
+        end,
+        mode = "",
+      },
+    },
     config = function()
-      require("plugins.formatter").config()
+      require("plugins.conform").config()
     end,
   },
 

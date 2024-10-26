@@ -21,7 +21,7 @@ language-server, linter, formatter
 ```bash
 bun add --global \
     bash-language-server vim-language-server \
-    markdownlint-cli pyright typescript git-split-diffs \
+    markdownlint-cli2 pyright typescript git-split-diffs \
     typescript-language-server vscode-json-languageserver
 
 paru -S \
