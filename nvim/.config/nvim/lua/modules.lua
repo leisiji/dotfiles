@@ -148,11 +148,10 @@ local m = {
     cmd = "FeMaco",
   },
   {
-    "MeanderingProgrammer/markdown.nvim",
+    "OXY2DEV/markview.nvim",
     ft = "markdown",
-    cmd = "RenderMarkdown",
     opts = {
-      enabled = false,
+      initial_state = false
     },
   },
   {
