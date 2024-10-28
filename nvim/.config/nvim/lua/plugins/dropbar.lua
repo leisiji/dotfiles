@@ -2,11 +2,11 @@ local M = {}
 
 function M.config()
   local opts = {
-    general = {
+    bar = {
       enable = function(buf, win)
         return vim.bo[buf].buftype == "" and vim.api.nvim_buf_get_name(buf) ~= "" and not vim.wo[win].diff
       end,
-      update_interval = 500,
+      update_debounce = 500,
       update_events = {
         win = {
           "CursorHold",
