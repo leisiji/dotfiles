@@ -100,24 +100,31 @@ local m = {
       accept = { auto_brackets = { enabled = true } },
       nerd_font_variant = "normal",
       keymap = {
-        show = "<C-q>",
-        hide = "<C-e>",
-        accept = "<Enter>",
-        select_and_accept = {},
-        select_prev = { "<S-Tab>", "<C-k>" },
-        select_next = { "<Tab>", "<C-j>" },
-
-        show_documentation = "<M-k>",
-        hide_documentation = "<M-k>",
-        scroll_documentation_up = "<M-k>",
-        scroll_documentation_down = "<M-j>",
-
-        snippet_forward = "<Tab>",
-        snippet_backward = "<S-Tab>",
+        ["<M-k>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<C-k>"] = { "select_prev", "fallback" },
+        ["<C-j>"] = { "select_next", "fallback" },
+        ["<Tab>"] = {
+          function(cmp)
+            if cmp.is_in_snippet() then
+              return cmp.accept()
+            else
+              return cmp.select_next()
+            end
+          end,
+          "snippet_forward",
+          "fallback",
+        },
+        ["<S-Tab>"] = { "snippet_backward", "fallback" },
+        ["<Enter>"] = { "select_and_accept", "fallback" },
       },
       sources = {
         completion = {
           enabled_providers = { "lsp", "path", "snippets", "buffer" },
+        },
+      },
+      windows = {
+        autocomplete = {
+          selection = "manual",
         },
       },
     },
@@ -151,7 +158,7 @@ local m = {
     "OXY2DEV/markview.nvim",
     ft = "markdown",
     opts = {
-      initial_state = false
+      initial_state = false,
     },
   },
   {
