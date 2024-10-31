@@ -63,9 +63,10 @@ bindkey '^[,' autosuggest-accept
 
 zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':completion:*:descriptions' format '[%d]'
-zstyle ':fzf-tab:*' switch-group ',' '.'
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
-zstyle ':completion:files' sort false
+zstyle ':fzf-tab:*' switch-group '<' '>'
+zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=ctrl-d:half-page-down,ctrl-u:half-page-up
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':completion:*' menu no
 
 gs() {
     git show $1 | git-split-diffs --color | less -RFX
