@@ -39,7 +39,14 @@ function M.config()
         open(choices[1], nil)
       end)()
     else
-      open(nil, args)
+      local paths = nil
+      local cwd = vim.fn.getcwd(0)
+      local dir = vim.fn.expand("%:p:h")
+      if string.sub(dir, 0, #cwd) ~= cwd then
+        paths = vim.fn.system("cd " .. dir .. " && git rev-parse --show-toplevel")
+        print(paths)
+      end
+      open(paths, args)
     end
   end, {
     nargs = 1,
