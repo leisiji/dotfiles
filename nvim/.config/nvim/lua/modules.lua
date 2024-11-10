@@ -124,7 +124,7 @@ local m = {
       },
       windows = {
         autocomplete = {
-          selection = "manual",
+          selection = "auto_insert",
         },
       },
     },
