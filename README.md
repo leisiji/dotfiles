@@ -45,3 +45,10 @@ mkdir -p ~/.local/share/nvim/lazy/
 git clone https://github.com/folke/lazy.nvim.git \
     ~/.local/share/nvim/lazy/lazy.nvim/
 ```
+
+hyprland
+
+```bash
+sudo pacman -S xdg-desktop-portal-hyprland xdg-desktop-portal-hyprland hyprpaper dunst \
+               wofi wlogout
+```
