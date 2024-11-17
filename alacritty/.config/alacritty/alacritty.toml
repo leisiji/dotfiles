@@ -370,6 +370,7 @@ semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
 [window]
 dynamic_padding = false
+decorations = "None"
 
 [window.dimensions]
 columns = 100

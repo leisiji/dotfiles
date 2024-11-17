@@ -115,7 +115,7 @@ local m = {
           "fallback",
         },
         ["<S-Tab>"] = { "snippet_backward", "fallback" },
-        ["<Enter>"] = { "select_and_accept", "fallback" },
+        ["<CR>"] = { "accept", "fallback" },
       },
       sources = {
         completion = {
