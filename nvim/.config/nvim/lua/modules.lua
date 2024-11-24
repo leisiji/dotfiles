@@ -62,23 +62,6 @@ local m = {
       require("plugins.surround").config()
     end,
   },
-  -- {
-  --   "hrsh7th/nvim-cmp",
-  --   event = "InsertEnter",
-  --   dependencies = {
-  --     "hrsh7th/cmp-nvim-lsp",
-  --     "hrsh7th/cmp-path",
-  --     "hrsh7th/cmp-buffer",
-  --     "hrsh7th/cmp-cmdline",
-  --     "saadparwaiz1/cmp_luasnip",
-  --     "L3MON4D3/LuaSnip",
-  --     "rafamadriz/friendly-snippets",
-  --     "onsails/lspkind.nvim",
-  --   },
-  --   config = function()
-  --     require("plugins.cmp").config()
-  --   end,
-  -- },
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
@@ -93,41 +76,7 @@ local m = {
 
     build = "cargo build --release",
 
-    opts = {
-      highlight = {
-        use_nvim_cmp_as_default = true,
-      },
-      accept = { auto_brackets = { enabled = true } },
-      nerd_font_variant = "normal",
-      keymap = {
-        ["<M-k>"] = { "show", "show_documentation", "hide_documentation" },
-        ["<C-k>"] = { "select_prev", "fallback" },
-        ["<C-j>"] = { "select_next", "fallback" },
-        ["<Tab>"] = {
-          function(cmp)
-            if cmp.is_in_snippet() then
-              return cmp.accept()
-            else
-              return cmp.select_next()
-            end
-          end,
-          "snippet_forward",
-          "fallback",
-        },
-        ["<S-Tab>"] = { "snippet_backward", "fallback" },
-        ["<CR>"] = { "accept", "fallback" },
-      },
-      sources = {
-        completion = {
-          enabled_providers = { "lsp", "path", "snippets", "buffer" },
-        },
-      },
-      windows = {
-        autocomplete = {
-          selection = "auto_insert",
-        },
-      },
-    },
+    opts = require("plugins.blink").config
   },
 
   {

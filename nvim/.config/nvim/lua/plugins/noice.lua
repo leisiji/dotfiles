@@ -30,6 +30,9 @@ function M.config()
           height = "auto",
         },
       },
+      messages = {
+        enabled = false,
+      },
       popupmenu = {
         relative = "editor",
         position = {
