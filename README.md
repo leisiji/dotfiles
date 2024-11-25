@@ -23,6 +23,7 @@ bun add --global \
     bash-language-server vim-language-server \
     markdownlint-cli2 pyright typescript git-split-diffs \
     typescript-language-server vscode-json-languageserver
+cd $HOME/.bun/bin/ && ls | xargs sed -i "1s/\/usr\/bin\/env node/\/usr\/bin\/env bun/"
 
 paru -S \
     kotlin-language-server \

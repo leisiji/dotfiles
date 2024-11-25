@@ -7,9 +7,9 @@ wezterm.on("gui-startup", function()
 end)
 
 return {
-  font = wezterm.font_with_fallback({ "Cascadia Next SC" }),
+  font = wezterm.font_with_fallback({ "CaskaydiaCove Nerd Font" }),
   font_size = 10.0,
-  color_scheme = "One Half Black (Gogh)",
+  color_scheme = "Kanagawa (Gogh)",
   enable_tab_bar = false,
   window_padding = {
     left = 0,
