@@ -10,6 +10,9 @@ function M.config()
       italic = true,
       highlight_inactive_windows = true,
     },
+    colors = {
+      my_new_red = "require('onedarkpro.helpers').darken('red', 15, 'onedark')"
+    },
     plugins = {
       all = false,
       treesitter = true,
@@ -28,6 +31,8 @@ function M.config()
       Macro = { fg = "${orange}" },
       Enum = { fg = "${cyan}" },
       ["@property"] = { fg = "${white}" },
+      ["@variable"] = { fg = "${red}" },
+      ["@parameter"] = { fg = "${my_new_red}" },
     },
   })
   vim.cmd("colorscheme onedark_dark")
