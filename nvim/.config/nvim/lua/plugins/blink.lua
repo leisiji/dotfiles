@@ -22,7 +22,7 @@ M.config = {
     ["<Tab>"] = {
       function(cmp)
         if autocomplete == nil then
-          autocomplete = require("blink.cmp.windows.autocomplete")
+          autocomplete = require('blink.cmp.completion.windows.menu')
         end
         if autocomplete.win:is_open() then
           return cmp.select_next()
@@ -40,10 +40,10 @@ M.config = {
       enabled_providers = { "lsp", "path", "snippets", "buffer" },
     },
   },
-  windows = {
-    autocomplete = {
+  completion = {
+    list = {
       selection = "auto_insert",
-    },
+    }
   },
 }
 
