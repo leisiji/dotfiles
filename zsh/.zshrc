@@ -72,8 +72,13 @@ gs() {
     git show $1 | git-split-diffs --color | less -RFX
 }
 
+# create tmp file to compatible with flattern.nvim
 nd() {
-    nvim -c "DiffviewFileHistory $1"
+    nvim +"bdelete $PWD/tmp_file | DiffviewFileHistory $1" tmp_file
+}
+
+ng() {
+    nvim +"bdelete $PWD/tmp_file | chdir $PWD | MyGrugFar $1" tmp_file
 }
 
 alias vscode-json-language-server=vscode-json-languageserver

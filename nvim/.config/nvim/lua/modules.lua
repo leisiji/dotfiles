@@ -76,7 +76,7 @@ local m = {
 
     build = "cargo build --release",
 
-    opts = require("plugins.blink").config
+    opts = require("plugins.blink").config,
   },
 
   {
