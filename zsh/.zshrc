@@ -34,7 +34,7 @@ export FZF_ALT_C_COMMAND='fd --type d --strip-cwd-prefix'
 export FZF_DEFAULT_OPTS='--ansi --tabstop=1 --bind ctrl-d:half-page-down,ctrl-u:half-page-up,tab:down,ctrl-p:toggle-preview,alt-j:preview-down,alt-k:preview-up --reverse --cycle --preview-window=hidden:65%'
 export GTAGSLABEL='native-pygments'
 export GOPROXY='https://goproxy.io,direct'
-export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 #export JAVA_HOME="/usr/lib/jvm/java-16-openjdk"
 #export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
 
