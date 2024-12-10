@@ -134,30 +134,30 @@ local m = {
   -- indent
   {
     "nmac427/guess-indent.nvim",
-    config = function()
-      require("guess-indent").setup({})
-    end,
+    opts = {
+      filetype_exclude = {
+        "markdown",
+      },
+    },
   },
   {
     "shellRaining/hlchunk.nvim",
     lazy = true,
     event = "VeryLazy",
-    config = function()
-      require("hlchunk").setup({
-        chunk = {
-          enable = true,
-        },
-        indent = {
-          enable = true,
-          delay = 800,
-        },
-        exclude_filetypes = {
-          "neo-tree",
-          "toggleterm",
-          "grug-far",
-        },
-      })
-    end,
+    opts = {
+      chunk = {
+        enable = true,
+      },
+      indent = {
+        enable = true,
+        delay = 800,
+      },
+      exclude_filetypes = {
+        "neo-tree",
+        "toggleterm",
+        "grug-far",
+      },
+    },
   },
 
   -- terminal
@@ -183,9 +183,6 @@ local m = {
   {
     "norcalli/nvim-colorizer.lua",
     ft = { "html", "css", "help", "lua", "vim" },
-    config = function()
-      require("colorizer").setup()
-    end,
   },
 
   {
