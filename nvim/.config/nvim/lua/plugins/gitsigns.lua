@@ -7,6 +7,9 @@ function M.config()
       follow_files = true,
     },
     signs_staged_enable = false,
+    diff_opts = {
+      vertical = true,
+    },
     on_attach = function(bufnr)
       local gs = package.loaded.gitsigns
 

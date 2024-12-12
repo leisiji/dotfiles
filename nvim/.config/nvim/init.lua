@@ -234,7 +234,8 @@ local function init_plugins_keymaps()
     -- others
     { "<leader><leader>p", "GotoPreview" },
     { "<leader>v", "Outline" },
-    { "<leader><leader>d", "DiffviewOpen --untracked-files=true -- %" },
+    { "<leader><leader>d", "DiffviewOpen -uno" },
+    { "<leader><leader>o", "vertical Gitsigns diffthis" },
   }
 
   for _, v in pairs(cmds) do
