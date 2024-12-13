@@ -11,10 +11,6 @@ end
 local autocomplete
 
 M.config = {
-  highlight = {
-    use_nvim_cmp_as_default = true,
-  },
-  nerd_font_variant = "normal",
   keymap = {
     ["<M-k>"] = { "show", "show_documentation", "hide_documentation" },
     ["<C-k>"] = { "select_prev", "fallback" },
