@@ -38,20 +38,23 @@ function M.config()
         end
         open(choices[1], nil)
       end)()
+    elseif args == "--nogit" then
+      open(nil, param.fargs[2])
     else
       local paths = vim.fn.getcwd(0, 0)
       local is_file = vim.fn.filereadable(vim.fn.expand("%:p")) == 1
       if is_file then
-        local cwd = vim.fn.getcwd(0)
         local dir = vim.fn.expand("%:p:h")
-        if string.sub(dir, 0, #cwd) ~= cwd then
-          paths = vim.fn.system("cd " .. dir .. " && git rev-parse --show-toplevel")
+        local ret = vim.system({ "git", "rev-parse", "--show-toplevel" }, { cwd = dir, text = true }):wait()
+        local git_dir = ret.stdout
+        if git_dir ~= nil and paths ~= git_dir then
+          paths = git_dir
         end
       end
       open(paths, args)
     end
   end, {
-    nargs = 1,
+    nargs = "*",
     range = true,
   })
 end

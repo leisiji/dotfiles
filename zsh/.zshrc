@@ -78,7 +78,7 @@ nd() {
 }
 
 ng() {
-    nvim +"bdelete $PWD/tmp_file | chdir $PWD | MyGrugFar $1" tmp_file
+    nvim +"bdelete $PWD/tmp_file | chdir $PWD | MyGrugFar --nogit $1" tmp_file
 }
 
 alias vscode-json-language-server=vscode-json-languageserver
