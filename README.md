@@ -11,7 +11,7 @@ Minimal development on terminal:
 ```bash
 sudo pacman -S \
     zsh fzf universal-ctags duf dust global glow rust-analyzer gopls \
-    jq bat ripgrep fd eza hexyl gitui joshuto zoxide bottom starship \
+    jq bat ripgrep fd eza hexyl gitui yazi zoxide bottom starship \
     cmake-language-server stylua clang tmux bear lua-language-server \
     neovim bun termusic
 ```

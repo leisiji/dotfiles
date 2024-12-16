@@ -1,0 +1,9 @@
+[[manager.prepend_keymap]]
+on   = "<C-j>"
+run  = "arrow 5"
+desc = "down 5 lines"
+
+[[manager.prepend_keymap]]
+on   = "<C-k>"
+run  = "arrow -5"
+desc = "up 5 lines"
