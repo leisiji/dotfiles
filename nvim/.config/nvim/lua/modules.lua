@@ -186,15 +186,14 @@ local m = {
   },
 
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-    },
+    "echasnovski/mini.files",
     lazy = true,
-    cmd = "Neotree",
-    config = function()
-      require("plugins.neotree").config()
-    end,
+    event = "VeryLazy",
+    opts = {
+      windows = {
+        preview = true,
+      },
+    },
   },
 
   {

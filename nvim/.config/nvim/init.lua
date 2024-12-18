@@ -104,6 +104,19 @@ local function init_nvim_keys()
     { "<leader>rn", vim.lsp.buf.rename },
     { "<leader>ca", vim.lsp.buf.code_action },
     {
+      "<leader>tr",
+      function()
+        MiniFiles.open()
+      end,
+    },
+    {
+      "<leader>tj",
+      function()
+        MiniFiles.open(vim.api.nvim_buf_get_name(0))
+      end,
+    },
+
+    {
       "<leader>a",
       function()
         vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
@@ -201,9 +214,6 @@ local function init_plugins_keymaps()
   local cmds = {
 
     { "<leader><leader>e", "FeMaco" },
-
-    { "<leader>tr", "Neotree" },
-    { "<leader>tj", "Neotree reveal reveal_force_cwd" },
 
     -- fzf_utils
     { "<C-p>", "FzfCommand --files" },
