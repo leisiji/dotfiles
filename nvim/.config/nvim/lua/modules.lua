@@ -190,6 +190,11 @@ local m = {
     lazy = true,
     event = "VeryLazy",
     opts = {
+      content = {
+        filter = function (res)
+          return require("plugins.mini").filter(res.name) ~= true
+        end
+      },
       windows = {
         preview = true,
       },
