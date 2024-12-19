@@ -189,16 +189,9 @@ local m = {
     "echasnovski/mini.files",
     lazy = true,
     event = "VeryLazy",
-    opts = {
-      content = {
-        filter = function (res)
-          return require("plugins.mini").filter(res.name) ~= true
-        end
-      },
-      windows = {
-        preview = true,
-      },
-    },
+    config = function ()
+      require("plugins.mini").config()
+    end
   },
 
   {
