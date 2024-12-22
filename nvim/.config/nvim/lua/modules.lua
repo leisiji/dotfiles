@@ -153,7 +153,7 @@ local m = {
         delay = 800,
       },
       exclude_filetypes = {
-        "neo-tree",
+        "minifiles",
         "toggleterm",
         "grug-far",
       },
@@ -188,10 +188,26 @@ local m = {
   {
     "echasnovski/mini.files",
     lazy = true,
-    event = "VeryLazy",
-    config = function ()
+    config = function()
       require("plugins.mini").config()
-    end
+    end,
+    keys = {
+      {
+        "<leader>tj",
+        function()
+          require("plugins.conform").format()
+          MiniFiles.open(vim.api.nvim_buf_get_name(0))
+        end,
+        mode = "n",
+      },
+      {
+        "<leader>tr",
+        function()
+          MiniFiles.open()
+        end,
+        mode = "n",
+      },
+    },
   },
 
   {

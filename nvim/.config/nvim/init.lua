@@ -104,19 +104,6 @@ local function init_nvim_keys()
     { "<leader>rn", vim.lsp.buf.rename },
     { "<leader>ca", vim.lsp.buf.code_action },
     {
-      "<leader>tr",
-      function()
-        MiniFiles.open()
-      end,
-    },
-    {
-      "<leader>tj",
-      function()
-        MiniFiles.open(vim.api.nvim_buf_get_name(0))
-      end,
-    },
-
-    {
       "<leader>a",
       function()
         vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
@@ -233,8 +220,7 @@ local function init_plugins_keymaps()
     { "<leader>ws", "FzfCommand --lsp workspace_symbol" },
     { "<leader>m", "FzfCommand --mru" },
     { "<leader>gc", "FzfCommand --commit" },
-    { "<leader><leader>c", "FzfCommand --zoxide" },
-    { "<leader><leader>z", "MyGrugFar --zoxide" },
+    { "z", "FzfCommand --zoxide" },
 
     { "<M-r>", "FzfCommand --lsp ref tab drop" },
     { "<M-j>", "FzfCommand --lsp jump_def edit" },

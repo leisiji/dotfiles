@@ -30,15 +30,7 @@ function M.config()
 
   vim.api.nvim_create_user_command("MyGrugFar", function(param)
     local args = param.fargs[1]
-    if args == "--zoxide" then
-      coroutine.wrap(function()
-        local choices = require("fzf").fzf("zoxide query --list", "--preview='eza -l --color=always {1}'")
-        if choices == nil then
-          return
-        end
-        open(choices[1], nil)
-      end)()
-    elseif args == "--nogit" then
+    if args == "--nogit" then
       open(nil, param.fargs[2])
     else
       local paths = vim.fn.getcwd(0, 0)
