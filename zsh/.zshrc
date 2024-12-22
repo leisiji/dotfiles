@@ -17,7 +17,7 @@ bindkey -e
 bindkey '^w' vi-backward-kill-word
 bindkey '\ew' backward-kill-word
 
-alias ni=nvim; alias y=yazi; alias t='tmux -2 -u'; alias ta='tmux -2 -u a'
+alias ni=nvim; alias t='tmux -2 -u'; alias ta='tmux -2 -u a'
 alias cr='cd $(git rev-parse --show-toplevel)'
 alias gt='gitui -t macchiato.ron'
 export TERM=xterm-256color
