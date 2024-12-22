@@ -181,8 +181,10 @@ local m = {
   },
 
   {
-    "norcalli/nvim-colorizer.lua",
+    "catgoose/nvim-colorizer.lua",
+    lazy = true,
     ft = { "html", "css", "help", "lua", "vim" },
+    opts = {},
   },
 
   {
