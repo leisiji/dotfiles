@@ -81,11 +81,11 @@ keymap = [
 	{ on = ";",         run = "shell --interactive",         desc = "Run a shell command" },
 	{ on = ":",         run = "shell --block --interactive", desc = "Run a shell command (block until finishes)" },
 	{ on = ".",         run = "hidden toggle",               desc = "Toggle the visibility of hidden files" },
-	{ on = "<C-t>",         run = "search --via=fd",             desc = "Search files by name via fd" },
+	{ on = "<C-t>",     run = "plugin fg --args='fzf'",      desc = "Search files by name via fd" },
 	{ on = "<C-s>",     run = "escape --search",             desc = "Cancel the ongoing search" },
-	{ on = "<C-f>",         run = "search --via=rg",             desc = "Search files by content via ripgrep" },
+	{ on = "<C-f>",     run = "plugin fg --args='rg'",       desc = "Search files by content via ripgrep" },
 	{ on = "z",         run = "plugin zoxide",               desc = "Jump to a directory via zoxide" },
-	{ on = "<A-c>",         run = "plugin fzf",                  desc = "Jump to a file/directory via fzf" },
+	{ on = "<A-c>",     run = "plugin fzf",                  desc = "Jump to a file/directory via fzf" },
 
 	# Linemode
 	{ on = [ "m", "s" ], run = "linemode size",        desc = "Linemode: size" },
