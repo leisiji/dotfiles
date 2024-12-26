@@ -197,7 +197,6 @@ local m = {
       {
         "<leader>tj",
         function()
-          require("plugins.conform").format()
           MiniFiles.open(vim.api.nvim_buf_get_name(0))
         end,
         mode = "n",

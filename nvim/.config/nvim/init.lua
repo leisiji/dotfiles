@@ -220,7 +220,7 @@ local function init_plugins_keymaps()
     { "<leader>ws", "FzfCommand --lsp workspace_symbol" },
     { "<leader>m", "FzfCommand --mru" },
     { "<leader>gc", "FzfCommand --commit" },
-    { "z", "FzfCommand --zoxide" },
+    { "<leader><leader>z", "FzfCommand --zoxide" },
 
     { "<M-r>", "FzfCommand --lsp ref tab drop" },
     { "<M-j>", "FzfCommand --lsp jump_def edit" },

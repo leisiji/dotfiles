@@ -51,5 +51,5 @@ hyprland
 
 ```bash
 sudo pacman -S xdg-desktop-portal-hyprland xdg-desktop-portal-hyprland hyprpaper dunst \
-               wofi wlogout
+               wofi wlogout ghostty
 ```

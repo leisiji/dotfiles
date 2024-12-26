@@ -14,6 +14,15 @@ local function filter(name)
   return false
 end
 
+local set_cwd = function()
+  local path = (MiniFiles.get_fs_entry() or {}).path
+  if path == nil then
+    return vim.notify("Cursor is not on valid entry")
+  end
+  vim.fn.chdir(vim.fs.dirname(path))
+  MiniFiles.close()
+end
+
 function M.config()
   require("mini.files").setup({
     content = {
@@ -51,6 +60,7 @@ function M.config()
       map_split(buf_id, "<C-s>", "belowright horizontal")
       map_split(buf_id, "<C-v>", "belowright vertical")
       map_split(buf_id, "<C-t>", "belowright tab")
+      vim.keymap.set("n", "<C-c>", set_cwd, { buffer = buf_id })
     end,
   })
 end

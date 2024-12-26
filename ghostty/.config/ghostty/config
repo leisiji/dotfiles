@@ -1,0 +1,8 @@
+# font-family = CaskaydiaCove Nerd Font
+# theme = GitHub Dark
+font-size = 10
+copy-on-select = clipboard
+fullscreen = true
+window-decoration = false
+
+keybind = alt+enter=toggle_fullscreen
