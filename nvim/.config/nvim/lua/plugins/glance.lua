@@ -9,24 +9,30 @@ function M.config()
     folds = {
       folded = false,
     },
+    detached = true,
     preview_win_opts = {
       number = false,
     },
-    height = 50,
+    height = 40,
     border = {
       enable = true,
+      top_char = "─",
+      bottom_char = "─",
     },
     mappings = {
       list = {
-        ["<M-k>"] = actions.preview_scroll_win(5), -- Scroll up the preview window
-        ["<M-j>"] = actions.preview_scroll_win(-5), -- Scroll down the preview window
-        ["<C-v>"] = actions.jump_vsplit, -- Open location in vertical split
-        ["<C-s>"] = actions.jump_split, -- Open location in horizontal split
-        ["<C-t>"] = actions.jump_tab, -- Open in new tab
-        ["<M-a>"] = actions.enter_win("preview"), -- Focus preview window
+        ["<M-k>"] = actions.preview_scroll_win(5),
+        ["<M-j>"] = actions.preview_scroll_win(-5),
+        ["<C-v>"] = actions.jump_vsplit,
+        ["<C-s>"] = actions.jump_split,
+        ["<C-t>"] = actions.jump_tab,
+        ["<M-a>"] = actions.enter_win("preview"),
+        ["<C-u>"] = false,
+        ["<C-d>"] = false,
       },
       preview = {
-        ["<leader>l"] = actions.enter_win("list"), -- Focus list window
+        ["<M-a>"] = actions.enter_win("list"),
+        ["q"] = actions.close,
       },
     },
   })
