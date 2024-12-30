@@ -73,9 +73,7 @@ local m = {
     "saghen/blink.cmp",
     lazy = false,
     dependencies = { "rafamadriz/friendly-snippets" },
-
     build = "cargo build --release",
-
     opts = require("plugins.blink").config,
   },
 
@@ -303,6 +301,15 @@ local m = {
     cmd = "MyGrugFar",
     config = function()
       require("plugins.grug-far").config()
+    end,
+  },
+
+  {
+    "dnlhc/glance.nvim",
+    lazy = true,
+    cmd = "Glance",
+    config = function()
+      require("plugins.glance").config()
     end,
   },
 }

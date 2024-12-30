@@ -222,7 +222,7 @@ local function init_plugins_keymaps()
     { "<leader>gc", "FzfCommand --commit" },
     { "<leader><leader>z", "FzfCommand --zoxide" },
 
-    { "<M-r>", "FzfCommand --lsp ref tab drop" },
+    { "<M-r>", "Glance references" },
     { "<M-j>", "FzfCommand --lsp jump_def edit" },
     { "<M-t>", "FzfCommand --lsp jump_def tab drop" },
     { "<M-v>", "FzfCommand --lsp jump_def vsplit" },
