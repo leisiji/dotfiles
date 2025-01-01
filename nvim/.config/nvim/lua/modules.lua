@@ -109,6 +109,14 @@ local m = {
     },
   },
   {
+    "3rd/image.nvim",
+    ft = "markdown",
+    opts = {
+      tmux_show_only_in_active_window = true,
+      window_overlap_clear_enabled = true,
+    },
+  },
+  {
     "junegunn/vim-easy-align",
     cmd = "EasyAlign",
   },
@@ -311,6 +319,12 @@ local m = {
     config = function()
       require("plugins.glance").config()
     end,
+  },
+
+  {
+    "ej-shafran/compile-mode.nvim",
+    lazy = true,
+    cmd = "Compile",
   },
 }
 

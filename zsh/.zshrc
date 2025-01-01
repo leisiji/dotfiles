@@ -99,6 +99,13 @@ if [[ -n $TERMUX_APP_PID ]]; then
     sshd
 fi
 
+if [[ -n $NVIM ]]; then
+    make ()
+    {
+        nvim +"chdir $PWD | bdelete $PWD/tmp_file | belowright Compile make -C $PWD $@" tmp_file
+    }
+fi
+
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
