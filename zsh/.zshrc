@@ -102,7 +102,11 @@ fi
 if [[ -n $NVIM ]]; then
     make ()
     {
-        nvim +"chdir $PWD | bdelete $PWD/tmp_file | belowright Compile make -C $PWD $@" tmp_file
+        if [[ $1 != "clean" ]]; then
+            nvim +"chdir $PWD | bdelete $PWD/tmp_file | belowright Compile make -C $PWD $@" tmp_file
+        else
+            env make clean
+        fi
     }
 fi
 

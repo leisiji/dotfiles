@@ -201,6 +201,7 @@ local function init_plugins_keymaps()
   local cmds = {
 
     { "<leader><leader>e", "FeMaco" },
+    { "<Tab>", "nohl" },
 
     -- fzf_utils
     { "<C-p>", "FzfCommand --files" },

@@ -109,14 +109,6 @@ local m = {
     },
   },
   {
-    "3rd/image.nvim",
-    ft = "markdown",
-    opts = {
-      tmux_show_only_in_active_window = true,
-      window_overlap_clear_enabled = true,
-    },
-  },
-  {
     "junegunn/vim-easy-align",
     cmd = "EasyAlign",
   },
@@ -330,6 +322,18 @@ local m = {
 
 if vim.fn.executable("fcitx5") == 1 then
   m[#m + 1] = { "h-hg/fcitx.nvim", event = "InsertEnter" }
+end
+
+if vim.env.TERMUX_APP_PID == nil then
+  m[#m + 1] = {
+    "3rd/image.nvim",
+    ft = "markdown",
+    lazy = true,
+    opts = {
+      tmux_show_only_in_active_window = true,
+      window_overlap_clear_enabled = true,
+    },
+  }
 end
 
 require("lazy").setup(m)

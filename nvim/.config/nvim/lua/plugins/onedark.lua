@@ -27,7 +27,8 @@ function M.config()
       rust = false,
     },
     highlights = {
-      PmenuSel = { fg = "${fg}", bg = "#303030" },
+      PmenuSel = { fg = "${fg}", bg = "#404040" },
+      Pmenu = { bg = "#202020" },
       Macro = { fg = "${orange}" },
       Enum = { fg = "${cyan}" },
       ["@property"] = { fg = "${white}" },
