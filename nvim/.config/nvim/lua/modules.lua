@@ -317,6 +317,20 @@ local m = {
     "ej-shafran/compile-mode.nvim",
     lazy = true,
     cmd = "Compile",
+    config = function()
+      vim.g.compile_mode = {
+        -- baleia_setup = true,
+      }
+    end,
+    keys = {
+      {
+        "<M-o>",
+        function()
+          require("plugins.compile").parse()
+        end,
+        mode = "t",
+      },
+    },
   },
 }
 

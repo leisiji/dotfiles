@@ -85,6 +85,7 @@ alias vscode-json-language-server=vscode-json-languageserver
 
 bindkey -s '\eq' 'cd ..\n'
 bindkey -s '\el' 'eza -l --icons=always\n'
+bindkey -s '^l' 'clear\n'
 bindkey -s '\es' 'git status .\n'
 
 precmd () {
@@ -97,17 +98,6 @@ PROMPT='
 
 if [[ -n $TERMUX_APP_PID ]]; then
     sshd
-fi
-
-if [[ -n $NVIM ]]; then
-    make ()
-    {
-        if [[ $1 != "clean" ]]; then
-            nvim +"chdir $PWD | bdelete $PWD/tmp_file | belowright Compile make -C $PWD $@" tmp_file
-        else
-            env make clean
-        fi
-    }
 fi
 
 # Load a few important annexes, without Turbo

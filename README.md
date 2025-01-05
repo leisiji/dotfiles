@@ -35,7 +35,8 @@ paru -S \
 Chinese input method:
 
 ```bash
-sudo pacman -S fcitx5-im fcitx5-rime fcitx5-chinese-addons ttf-cascadia-code-nerd
+sudo pacman -S fcitx5-im fcitx5-rime fcitx5-chinese-addons
+# font: https://github.com/subframe7536/maple-font
 ```
 
 Plugin Manager:
