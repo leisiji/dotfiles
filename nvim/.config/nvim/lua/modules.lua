@@ -338,7 +338,7 @@ if vim.fn.executable("fcitx5") == 1 then
   m[#m + 1] = { "h-hg/fcitx.nvim", event = "InsertEnter" }
 end
 
-if vim.env.TERMUX_APP_PID == nil then
+if vim.fn.executable("magick") == 1 then
   m[#m + 1] = {
     "3rd/image.nvim",
     ft = "markdown",
