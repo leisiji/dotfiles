@@ -33,11 +33,12 @@ M.config = {
   },
   sources = {
     default = { "lsp", "path", "snippets", "buffer" },
+    cmdline = {},
   },
+  signature = { enabled = true },
   completion = {
-    list = {
-      selection = "auto_insert",
-    },
+    accept = { auto_brackets = { enabled = false } },
+    list = { selection = { preselect = false, auto_insert = true } },
   },
 }
 
