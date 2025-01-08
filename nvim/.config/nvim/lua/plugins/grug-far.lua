@@ -30,8 +30,9 @@ function M.config()
 
   vim.api.nvim_create_user_command("MyGrugFar", function(param)
     local args = param.fargs[1]
-    if args == "--nogit" then
-      open(nil, param.fargs[2])
+    local _, i = string.find(args, "--nogit=")
+    if i ~= nil then
+      open(nil, string.sub(args, i + 1))
     else
       local paths = vim.fn.getcwd(0, 0)
       local is_file = vim.fn.filereadable(vim.fn.expand("%:p")) == 1
@@ -46,7 +47,7 @@ function M.config()
       open(paths, args)
     end
   end, {
-    nargs = "*",
+    nargs = 1,
     range = true,
   })
 end
