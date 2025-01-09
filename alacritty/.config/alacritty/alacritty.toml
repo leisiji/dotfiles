@@ -46,20 +46,20 @@ TERM = "xterm-256color-italic"
 [font]
 size = 10.0
 
-[font.bold]
-family = "CaskaydiaCove Nerd Font"
-style = "Bold"
-
 [font.glyph_offset]
 x = 0
 y = 0
 
 [font.italic]
-family = "CaskaydiaCove Nerd Font"
+family = "Maple Mono NF CN"
 style = "Italic"
 
+[font.bold]
+family = "Maple Mono NF CN"
+style = "Bold"
+
 [font.normal]
-family = "CaskaydiaCove Nerd Font"
+family = "Maple Mono NF CN"
 
 [font.offset]
 x = 0

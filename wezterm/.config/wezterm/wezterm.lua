@@ -7,7 +7,7 @@ wezterm.on("gui-startup", function()
 end)
 
 return {
-  font = wezterm.font_with_fallback({ "CaskaydiaCove Nerd Font" }),
+  font = wezterm.font_with_fallback({ "Maple Mono NF CN" }),
   font_size = 10.0,
   color_scheme = "Kanagawa (Gogh)",
   enable_tab_bar = false,
