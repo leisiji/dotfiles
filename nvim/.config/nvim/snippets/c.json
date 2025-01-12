@@ -1,29 +1,16 @@
 {
     "if": {
-        "prefix": "ifm",
+        "prefix": "im",
         "body": [
             "if (${1:true})",
             "{",
             "$0",
             "}"
         ],
-        "description": "my 'if' snippet"
-    },
-    "if else": {
-        "prefix": "ifem",
-        "body": [
-            "if (${1:true})",
-            "{",
-            "$0",
-            "}",
-            "else",
-            "{$0",
-            "}"
-        ],
-        "description": "my 'if' with 'else'"
+        "description": "'if' snippet"
     },
     "else": {
-        "prefix": "el",
+        "prefix": "em",
         "body": [
             "else",
             "{",
@@ -33,33 +20,33 @@
         "description": "my 'else' snippet"
     },
     "else if": {
-        "prefix": "elifm",
+        "prefix": "eim",
         "body": [
             "else if (${1:true})",
             "{",
             "$0",
             "}"
         ],
-        "description": "my else-if snippet"
+        "description": "else-if snippet"
     },
     "for": {
-        "prefix": "form",
+        "prefix": "fm",
         "body": [
             "for (${2:i} = 0; $2 < ${1:count}; $2++)",
             "{",
             "$0",
             "}"
         ],
-        "description": "my 'for' loop"
+        "description": "'for' loop"
     },
     "while": {
-        "prefix": "whilem",
+        "prefix": "whm",
         "body": [
             "while (${1:true})",
             "{",
             "$0",
             "}"
         ],
-        "description": "my while"
+        "description": "while"
     }
 }
