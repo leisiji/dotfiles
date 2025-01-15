@@ -40,6 +40,11 @@ M.config = {
     accept = { auto_brackets = { enabled = false } },
     list = { selection = { preselect = false, auto_insert = true } },
   },
+  fuzzy = {
+    prebuilt_binaries = {
+      ignore_version_mismatch = true,
+    },
+  },
 }
 
 return M

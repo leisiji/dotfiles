@@ -42,6 +42,19 @@ function M.config()
       map("n", "<leader><leader>b", function()
         gs.blame_line({ full = true })
       end)
+
+      map("n", "<leader><leader>s", function()
+        local wins = vim.api.nvim_tabpage_list_wins(0)
+        for _, win in ipairs(wins) do
+          if vim.w[win].gitsigns_preview == "blame" then
+            local buffer = vim.api.nvim_win_get_buf(win)
+            local line = vim.api.nvim_buf_get_lines(buffer, 0, 1, false)
+            local commit = string.sub(line[1], 1, 8)
+            vim.cmd(string.format("DiffviewOpen %s^!", commit))
+            break
+          end
+        end
+      end)
     end,
   })
 end

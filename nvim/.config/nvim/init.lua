@@ -13,52 +13,33 @@ vim.g.loaded_gtags_cscope = 1
 
 local mapkey = vim.api.nvim_set_keymap
 local keymap_opts = { noremap = true, silent = true }
-local format = string.format
-local fn = vim.fn
-local exec = vim.cmd
 
 local function quit()
-  local bufnrs = fn.win_findbuf(fn.bufnr())
-  if #bufnrs > 1 or fn.expand("%") == "" or fn.tabpagenr("$") == 1 then
-    exec("q")
+  local bufnrs = vim.fn.win_findbuf(vim.fn.bufnr())
+  if #bufnrs > 1 or vim.fn.expand("%") == "" or vim.fn.tabpagenr("$") == 1 then
+    vim.cmd("q")
   else
-    exec("bd")
+    vim.cmd("bd")
   end
 end
 
 local function show_documents()
   local filetype = vim.bo.filetype
-  local word = fn.expand("<cword>")
+  local word = vim.fn.expand("<cword>")
 
   if filetype == "vim" or filetype == "lua" or filetype == "help" then
-    exec("vertical h " .. word)
+    vim.cmd("vertical h " .. word)
   else
-    exec("vertical Man " .. word)
+    vim.cmd("vertical Man " .. word)
   end
 end
 
 -------------------- keymaps ---------------------------------------
 local function cmd_gen(lhs, rhs)
-  local gen_opts = { noremap = true }
-  mapkey("n", lhs, format(":%s", rhs), gen_opts)
+  mapkey("n", lhs, string.format(":%s", rhs), { noremap = true })
 end
 local function cmd(v)
-  mapkey("n", v[1], format("<cmd>%s<cr>", v[2]), keymap_opts)
-end
-local function ino(v)
-  mapkey("i", v[1], v[2], keymap_opts)
-end
-local function nn(v)
-  mapkey("n", v[1], v[2], keymap_opts)
-end
-local function vn(v)
-  mapkey("v", v[1], v[2], keymap_opts)
-end
-local function tn(v)
-  mapkey("t", v[1], v[2], keymap_opts)
-end
-local function fmap(v)
-  vim.keymap.set("n", v[1], v[2], keymap_opts)
+  mapkey("n", v[1], string.format("<cmd>%s<cr>", v[2]), keymap_opts)
 end
 
 local function init_nvim_keys()
@@ -74,6 +55,7 @@ local function init_nvim_keys()
     { "<M-y>", "<C-r>" },
     { "<leader>p", '"*p' },
     { "<M-q>", "g<Tab>" },
+    { "<CR>", "<C-w>gF" },
   }
   local vn_maps = {
     { "H", "^" },
@@ -173,28 +155,28 @@ local function init_nvim_keys()
   }
 
   for _, v in ipairs(nn_maps) do
-    nn(v)
+    mapkey("n", v[1], v[2], keymap_opts)
   end
   for i = 1, 9, 1 do
-    cmd({ format("<M-%d>", i), format("tabn%d", i) })
+    cmd({ string.format("<M-%d>", i), string.format("tabn%d", i) })
   end
   for _, v in ipairs(vn_maps) do
-    vn(v)
+    mapkey("v", v[1], v[2], keymap_opts)
   end
   for _, v in ipairs(cmd_maps) do
     cmd(v)
   end
   for _, v in ipairs(ino_maps) do
-    ino(v)
+    mapkey("i", v[1], v[2], keymap_opts)
   end
   for _, v in ipairs(func_maps) do
-    fmap(v)
+    vim.keymap.set("n", v[1], v[2], keymap_opts)
   end
   for _, v in ipairs(cno_maps) do
     vim.keymap.set("c", v[1], v[2], { noremap = true })
   end
 
-  tn({ "<M-e>", "<C-\\><C-n>" })
+  mapkey("t", "<M-e>", "<C-\\><C-n>", keymap_opts)
 end
 
 local function init_plugins_keymaps()
@@ -232,6 +214,7 @@ local function init_plugins_keymaps()
     { "<leader><leader>p", "GotoPreview" },
     { "<leader>v", "Outline" },
     { "<leader><leader>d", "DiffviewOpen -uno" },
+    { "<leader><leader>c", "DiffviewOpen --cached" },
     { "<leader><leader>o", "vertical Gitsigns diffthis" },
   }
 

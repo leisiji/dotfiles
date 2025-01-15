@@ -23,19 +23,21 @@ function M.config()
         folder_statuses = "only_folded",
       },
     },
-    key_bindings = {
+    keymaps = {
       disable_defaults = false,
       view = {
-        ["<tab>"] = act.select_next_entry,
-        ["<S-tab>"] = act.select_prev_entry,
-        ["<leader>q"] = quit,
+        { "n", "<tab>", act.select_next_entry, { desc = "next" } },
+        { "n", "<S-tab>", act.select_prev_entry, { desc = "prev" } },
+        { "n", "<leader>q", quit, { desc = "quit" } },
+        { "n", "<C-b>", act.toggle_files, { desc = "Toggle" } },
       },
       file_panel = {
-        ["<leader>q"] = quit,
+        { "n", "<leader>q", quit, { desc = "quit" } },
+        { "n", "<C-b>", act.toggle_files, { desc = "Toggle" } },
       },
       file_history_panel = {
-        ["<leader>q"] = quit,
-        ["<M-k>"] = act.open_commit_log,
+        { "n", "<leader>q", quit, { desc = "quit" } },
+        { "n", "<M-k>", act.open_commit_log, { desc = "log" } },
       },
     },
     file_history_panel = {
