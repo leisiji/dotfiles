@@ -12,6 +12,7 @@ local autocomplete
 
 M.config = {
   keymap = {
+    preset = "none",
     ["<M-k>"] = { "show", "show_documentation", "hide_documentation" },
     ["<C-k>"] = { "select_prev", "fallback" },
     ["<C-j>"] = { "select_next", "fallback" },
