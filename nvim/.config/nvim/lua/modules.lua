@@ -107,6 +107,9 @@ local m = {
     opts = {
       initial_state = false,
     },
+    keys = {
+      { "<leader><leader>p", "<cmd>Markview toggle<cr>" },
+    },
   },
   {
     "junegunn/vim-easy-align",
@@ -338,16 +341,23 @@ if vim.fn.executable("fcitx5") == 1 then
   m[#m + 1] = { "h-hg/fcitx.nvim", event = "InsertEnter" }
 end
 
--- if vim.fn.executable("magick") == 1 then
---   m[#m + 1] = {
---     "3rd/image.nvim",
---     ft = "markdown",
---     lazy = true,
---     opts = {
---       tmux_show_only_in_active_window = true,
---       window_overlap_clear_enabled = true,
---     },
---   }
--- end
+if vim.fn.executable("magick") == 1 then
+  m[#m + 1] = {
+    "3rd/image.nvim",
+    ft = "markdown",
+    lazy = true,
+    opts = {
+      tmux_show_only_in_active_window = true,
+      window_overlap_clear_enabled = true,
+      integrations = {
+        markdown = {
+          only_render_image_at_cursor = true,
+          clear_in_insert_mode = true,
+          floating_windows = true,
+        },
+      },
+    },
+  }
+end
 
 require("lazy").setup(m)
