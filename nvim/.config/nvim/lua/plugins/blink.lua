@@ -40,6 +40,7 @@ M.config = {
   completion = {
     accept = { auto_brackets = { enabled = true } },
     list = { selection = { preselect = false, auto_insert = true } },
+    keyword = { range = "full" },
   },
   fuzzy = {
     prebuilt_binaries = {

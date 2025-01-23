@@ -115,6 +115,7 @@ zinit light-mode for \
 
 eval "$(starship init zsh)"
 
+# if don't want to change cwd, use Q to exit
 function y() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
     yazi "$@" --cwd-file="$tmp"
