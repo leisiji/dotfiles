@@ -124,3 +124,7 @@ function y() {
     fi
     rm -f -- "$tmp"
 }
+
+# zinit ice depth=1
+# zinit light jeffreytse/zsh-vi-mode
+# ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_ZLE

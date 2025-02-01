@@ -105,7 +105,9 @@ local m = {
     "OXY2DEV/markview.nvim",
     ft = "markdown",
     opts = {
-      initial_state = false,
+      preview = {
+        enable = false,
+      },
     },
     keys = {
       { "<leader><leader>p", "<cmd>Markview toggle<cr>" },

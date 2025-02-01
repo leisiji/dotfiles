@@ -6,11 +6,14 @@ $character"""
 
 [directory]
 style = "blue"
+repo_root_style = "italic blue"
+before_repo_root_style = "white"
+truncation_length = 1000
+truncate_to_repo = false
 
 [character]
-success_symbol = "[❯](purple)"
-error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
+success_symbol = '[➜](bold green) '
+error_symbol = '[✗](bold red) '
 
 [git_branch]
 format = "[$branch]($style)"
