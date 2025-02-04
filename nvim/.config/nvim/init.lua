@@ -205,13 +205,11 @@ local function init_plugins_keymaps()
     { "<leader>gc", "FzfCommand --commit" },
     { "<leader><leader>z", "FzfCommand --zoxide" },
 
-    { "<M-r>", "Glance references" },
     { "<M-j>", "FzfCommand --lsp jump_def edit" },
     { "<M-t>", "FzfCommand --lsp jump_def tab drop" },
     { "<M-v>", "FzfCommand --lsp jump_def vsplit" },
 
     -- others
-    { "<leader><leader>p", "GotoPreview" },
     { "<leader>v", "Outline" },
     { "<leader><leader>d", "DiffviewOpen -uno" },
     { "<leader><leader>c", "DiffviewOpen --cached" },

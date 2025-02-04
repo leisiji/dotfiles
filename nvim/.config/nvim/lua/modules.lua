@@ -45,6 +45,9 @@ local m = {
     config = function()
       require("plugins.goto_preview").config()
     end,
+    keys = {
+      { "<leader><leader>p", "<cmd>GotoPreview<cr>" },
+    },
   },
   {
     "folke/neodev.nvim",
@@ -110,7 +113,7 @@ local m = {
       },
     },
     keys = {
-      { "<leader><leader>p", "<cmd>Markview toggle<cr>" },
+      { "<leader><leader>m", "<cmd>Markview toggle<cr>" },
     },
   },
   {
@@ -276,6 +279,9 @@ local m = {
         hover_symbol = "<M-k>",
       },
     },
+    keys = {
+      { "<leader>v", "Outline" },
+    },
   },
 
   {
@@ -316,6 +322,9 @@ local m = {
     config = function()
       require("plugins.glance").config()
     end,
+    keys = {
+      { "<M-r>", "<cmd>Glance references<cr>" },
+    },
   },
 
   {
