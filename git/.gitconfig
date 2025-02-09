@@ -19,3 +19,8 @@
 	defaultBranch = main
 [http]
 	sslverify = false
+
+
+[delta]
+	syntax-theme = "gruvbox-dark"
+    dark = true
