@@ -252,9 +252,14 @@ local m = {
 
   {
     "akinsho/bufferline.nvim",
-    config = function()
-      require("plugins.bufferline").config()
-    end,
+    opts = {
+      options = {
+        mode = "tabs",
+        numbers = function(opts)
+          return string.format("%s", opts.ordinal)
+        end,
+      },
+    },
     dependencies = "nvim-tree/nvim-web-devicons",
   },
 
