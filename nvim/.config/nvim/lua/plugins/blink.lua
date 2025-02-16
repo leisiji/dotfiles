@@ -34,7 +34,6 @@ M.config = {
   },
   sources = {
     default = { "lsp", "path", "snippets", "buffer" },
-    cmdline = {},
   },
   signature = { enabled = true },
   completion = {
