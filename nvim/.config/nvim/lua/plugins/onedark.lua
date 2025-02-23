@@ -34,6 +34,8 @@ function M.config()
       ["@property"] = { fg = "${white}" },
       ["@variable"] = { fg = "${red}" },
       ["@parameter"] = { fg = "${my_new_red}" },
+      BlinkCmpMenuBorder = { fg = "${blue}" },
+      BlinkCmpDocBorder = { fg = "${blue}" },
     },
   })
   vim.cmd("colorscheme onedark_dark")

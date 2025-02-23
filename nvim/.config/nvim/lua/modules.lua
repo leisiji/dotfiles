@@ -276,7 +276,9 @@ local m = {
     lazy = true,
     cmd = { "Outline" },
     opts = {
-      auto_close = true,
+      outline_window = {
+        auto_close = true,
+      },
       keymaps = {
         down_and_jump = "<M-j>",
         up_and_jump = "<M-o>",
@@ -333,22 +335,13 @@ local m = {
   },
 
   {
-    "ej-shafran/compile-mode.nvim",
-    lazy = true,
-    cmd = "Compile",
+    "Kurama622/llm.nvim",
+    cmd = { "LLMSessionToggle", "LLMSelectedTextHandler", "LLMAppHandler" },
     config = function()
-      vim.g.compile_mode = {
-        -- baleia_setup = true,
-      }
+      require("plugins.llm").config()
     end,
     keys = {
-      {
-        "<M-o>",
-        function()
-          require("plugins.compile").parse()
-        end,
-        mode = "t",
-      },
+      { "<leader>ac", mode = "n", "<cmd>LLMSessionToggle<cr>" },
     },
   },
 }

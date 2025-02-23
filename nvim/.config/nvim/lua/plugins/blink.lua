@@ -40,6 +40,8 @@ M.config = {
     accept = { auto_brackets = { enabled = true } },
     list = { selection = { preselect = false, auto_insert = true } },
     keyword = { range = "full" },
+    menu = { border = "rounded" },
+    documentation = { window = { border = "rounded" } },
   },
   fuzzy = {
     prebuilt_binaries = {
