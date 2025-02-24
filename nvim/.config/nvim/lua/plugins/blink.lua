@@ -50,4 +50,28 @@ M.config = {
   },
 }
 
+-- if require("plugins.llm").llm_api == "ollama" then
+--   local config = M.config
+--   config.sources.default[#config.sources.default] = "llm"
+--   config.sources.providers = {
+--     llm = {
+--       name = "llm",
+--       module = "llm.common.completion.frontends.blink",
+--       timeout_ms = 10000,
+--       score_offset = 100,
+--       async = true,
+--     },
+--   }
+--   config.keymap["<C-y>"] = {
+--     function(cmp)
+--       cmp.show({ providers = { "llm" } })
+--     end,
+--   }
+--   config.completion.trigger = {
+--     prefetch_on_insert = false,
+--     -- allow triggering by white space
+--     show_on_blocked_trigger_characters = {},
+--   }
+-- end
+
 return M

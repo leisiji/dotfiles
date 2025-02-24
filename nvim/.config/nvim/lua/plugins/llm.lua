@@ -122,6 +122,50 @@ Based on this format, generate appropriate commit messages. Respond with message
           apply_visual_selection = false,
         },
       },
+      Completion = {
+        handler = tools.completion_handler,
+        opts = {
+          -------------------------------------------------
+          ---                   ollama
+          -------------------------------------------------
+          url = llm_url,
+          model = llm_model,
+          api_type = llm_api,
+
+          n_completions = 3,
+          context_window = 512,
+          max_tokens = 256,
+          filetypes = { sh = false },
+          default_filetype_enabled = true,
+          auto_trigger = true,
+          only_trigger_by_keywords = true,
+          style = "blink.cmp",
+          timeout = 10,
+          throttle = 1000,
+          debounce = 400,
+
+          keymap = {
+            virtual_text = {
+              accept = {
+                mode = "i",
+                keys = "<A-a>",
+              },
+              next = {
+                mode = "i",
+                keys = "<A-n>",
+              },
+              prev = {
+                mode = "i",
+                keys = "<A-p>",
+              },
+              toggle = {
+                mode = "n",
+                keys = "<leader>cp",
+              },
+            },
+          },
+        },
+      },
     },
 
     -- history_path = "/tmp/llm-history",
@@ -149,5 +193,7 @@ Based on this format, generate appropriate commit messages. Respond with message
     },
   })
 end
+
+M.llm_api = llm_api
 
 return M
