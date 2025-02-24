@@ -342,6 +342,10 @@ local m = {
     end,
     keys = {
       { "<leader>ac", mode = "n", "<cmd>LLMSessionToggle<cr>" },
+      { "<leader>ae", mode = "v", "<cmd>LLMAppHandler CodeExplain<cr>" },
+      { "<leader>tc", mode = "x", "<cmd>LLMAppHandler TestCode<cr>" },
+      { "<leader>ag", mode = "n", "<cmd>LLMAppHandler CommitMsg<cr>" },
+      { "<leader>at", mode = "n", "<cmd>LLMAppHandler Translate<cr>" },
     },
   },
 }
