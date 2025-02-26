@@ -1,5 +1,6 @@
 local m = {
   { "nvim-lua/plenary.nvim" },
+  { "MunifTanjim/nui.nvim" },
 
   {
     "olimorris/onedarkpro.nvim",
@@ -304,9 +305,6 @@ local m = {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-    },
     config = function()
       require("plugins.noice").config()
     end,
@@ -335,17 +333,19 @@ local m = {
   },
 
   {
-    "Kurama622/llm.nvim",
-    cmd = { "LLMSessionToggle", "LLMSelectedTextHandler", "LLMAppHandler" },
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     config = function()
-      require("plugins.llm").config()
+      require("plugins.avante").config()
     end,
+    build = "make BUILD_FROM_SOURCE=true",
+    dependencies = {
+      "stevearc/dressing.nvim",
+    },
     keys = {
-      { "<leader>ac", mode = "n", "<cmd>LLMSessionToggle<cr>" },
-      { "<leader>ae", mode = "v", "<cmd>LLMAppHandler CodeExplain<cr>" },
-      { "<leader>tc", mode = "x", "<cmd>LLMAppHandler TestCode<cr>" },
-      { "<leader>ag", mode = "n", "<cmd>LLMAppHandler CommitMsg<cr>" },
-      { "<leader>at", mode = "n", "<cmd>LLMAppHandler Translate<cr>" },
+      { "<C-c>", "<cmd>AvanteToggle<cr>" },
     },
   },
 }

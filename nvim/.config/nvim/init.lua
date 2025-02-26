@@ -11,6 +11,8 @@ vim.g.loaded_fzf = 1
 vim.g.loaded_gtags = 1
 vim.g.loaded_gtags_cscope = 1
 
+vim.opt.laststatus = 3
+
 local mapkey = vim.api.nvim_set_keymap
 local keymap_opts = { noremap = true, silent = true }
 
