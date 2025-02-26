@@ -15,7 +15,7 @@ function M.config()
       siliconflow = {
         __inherited_from = "openai",
         endpoint = "https://api.siliconflow.cn/v1",
-        model = "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+        model = "deepseek-ai/DeepSeek-R1",
         api_key_name = "SILICONFLOW_API_KEY",
         disable_tools = true,
       },
