@@ -345,7 +345,7 @@ local m = {
       "stevearc/dressing.nvim",
     },
     keys = {
-      { "<C-c>", "<cmd>AvanteToggle<cr>" },
+      { "<C-a>", "<cmd>AvanteToggle<cr>" },
     },
   },
 }
