@@ -10,8 +10,6 @@ vim.g.loaded_zipPlugin = 1
 vim.g.loaded_fzf = 1
 vim.g.loaded_gtags = 1
 vim.g.loaded_gtags_cscope = 1
--- for treesitter off, and grug-far, as grug-far will destroy treesitter and trigger syntax.vim's syntaxset
-vim.g.syntax_on = false
 
 vim.opt.laststatus = 3
 
@@ -139,29 +137,23 @@ local function init_nvim_keys()
       end,
     },
   }
-  local ino_maps = {
-    { "<C-j>", "<Down>" },
-    { "<C-k>", "<Up>" },
-    -- insert mode like bash
+
+  local emacs_maps = {
+    { "<M-b>", "<C-Left>" },
+    { "<M-f>", "<C-Right>" },
     { "<C-b>", "<Left>" },
     { "<C-f>", "<Right>" },
+    { "<C-d>", "<Delete>" },
     { "<C-a>", "<Home>" },
     { "<C-e>", "<End>" },
-    { "<C-d>", "<Delete>" },
     { "<C-h>", "<Backspace>" },
     { "<M-b>", "<C-Left>" },
     { "<M-f>", "<C-Right>" },
-    { "<M-d>", "<C-o>diw" },
   }
-  local cno_maps = {
-    { "<M-b>", "<C-Left>" },
-    { "<M-f>", "<C-Right>" },
-    { "<C-b>", "<Left>" },
-    { "<C-f>", "<Right>" },
-    { "<C-d>", "<Delete>" },
-    { "<C-a>", "<Home>" },
-    { "<C-e>", "<End>" },
-  }
+  vim.keymap.set("i", "<M-d>", '<C-g>u<Cmd>normal! "_dw<CR>', { noremap = true })
+  for _, v in ipairs(emacs_maps) do
+    vim.keymap.set({ "c", "i" }, v[1], v[2], { noremap = true })
+  end
 
   for _, v in ipairs(nn_maps) do
     mapkey("n", v[1], v[2], keymap_opts)
@@ -175,14 +167,8 @@ local function init_nvim_keys()
   for _, v in ipairs(cmd_maps) do
     cmd(v)
   end
-  for _, v in ipairs(ino_maps) do
-    mapkey("i", v[1], v[2], keymap_opts)
-  end
   for _, v in ipairs(func_maps) do
     vim.keymap.set("n", v[1], v[2], keymap_opts)
-  end
-  for _, v in ipairs(cno_maps) do
-    vim.keymap.set("c", v[1], v[2], { noremap = true })
   end
 
   mapkey("t", "<M-e>", "<C-\\><C-n>", keymap_opts)

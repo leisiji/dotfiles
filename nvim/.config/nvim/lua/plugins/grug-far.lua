@@ -55,6 +55,10 @@ function M.config()
     nargs = 1,
     range = true,
   })
+  -- if treesitter off, as grug-far will destroy treesitter highlighter and trigger syntax.vim's syntaxset group event to `set syntax=`
+  vim.api.nvim_create_augroup("syntaxset", {
+    clear = true,
+  })
 end
 
 return M

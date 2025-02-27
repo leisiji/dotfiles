@@ -8,8 +8,6 @@ local has_words_before = function()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-local autocomplete
-
 M.config = {
   keymap = {
     preset = "none",
@@ -18,10 +16,7 @@ M.config = {
     ["<C-j>"] = { "select_next", "fallback" },
     ["<Tab>"] = {
       function(cmp)
-        if autocomplete == nil then
-          autocomplete = require("blink.cmp.completion.windows.menu")
-        end
-        if autocomplete.win:is_open() then
+        if cmp.is_menu_visible() then
           return cmp.select_next()
         elseif has_words_before() then
           return cmp.show()
@@ -46,6 +41,24 @@ M.config = {
   fuzzy = {
     prebuilt_binaries = {
       ignore_version_mismatch = true,
+    },
+  },
+  cmdline = {
+    keymap = {
+      preset = "none",
+      ["<Tab>"] = {
+        function(cmp)
+          if cmp.is_menu_visible() then
+            return cmp.select_next()
+          elseif has_words_before() then
+            return cmp.show()
+          end
+        end,
+        "show_and_insert",
+      },
+      ["<S-Tab>"] = { "show_and_insert", "select_prev" },
+      ["<C-j>"] = { "select_next" },
+      ["<C-k>"] = { "select_prev" },
     },
   },
 }
