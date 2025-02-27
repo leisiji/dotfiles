@@ -21,6 +21,11 @@ function M.config()
     prefills = {
       flags = "-w",
     },
+    history = {
+      autoSave = {
+        enabled = false,
+      },
+    },
   })
   vim.keymap.set("n", "<leader>d", function()
     require("grug-far").open({

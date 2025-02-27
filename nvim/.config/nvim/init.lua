@@ -10,6 +10,8 @@ vim.g.loaded_zipPlugin = 1
 vim.g.loaded_fzf = 1
 vim.g.loaded_gtags = 1
 vim.g.loaded_gtags_cscope = 1
+-- for treesitter off, and grug-far, as grug-far will destroy treesitter and trigger syntax.vim's syntaxset
+vim.g.syntax_on = false
 
 vim.opt.laststatus = 3
 
