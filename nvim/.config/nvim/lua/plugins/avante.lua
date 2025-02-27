@@ -11,6 +11,7 @@ function M.config()
         api_key_name = "",
         endpoint = vim.env.LLM_URL,
         model = vim.env.LLM_MODEL,
+        disable_tools = true,
       },
       siliconflow = {
         __inherited_from = "openai",
