@@ -288,7 +288,7 @@ local m = {
       },
     },
     keys = {
-      { "<leader>v", "Outline" },
+      { "<leader>v", "<cmd>Outline<cr>" },
     },
   },
 

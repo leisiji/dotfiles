@@ -205,7 +205,6 @@ local function init_plugins_keymaps()
     { "<M-v>", "FzfCommand --lsp jump_def vsplit" },
 
     -- others
-    { "<leader>v", "Outline" },
     { "<leader><leader>d", "DiffviewOpen -uno" },
     { "<leader><leader>c", "DiffviewOpen --cached" },
     { "<leader><leader>o", "vertical Gitsigns diffthis" },
