@@ -59,6 +59,10 @@ function M.config()
   vim.api.nvim_create_augroup("syntaxset", {
     clear = true,
   })
+  vim.api.nvim_create_autocmd("BufReadPost", {
+    group = "syntaxset",
+    command = "set syntax=on",
+  })
 end
 
 return M
