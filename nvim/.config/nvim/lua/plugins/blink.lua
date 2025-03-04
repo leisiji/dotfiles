@@ -60,6 +60,19 @@ M.config = {
       ["<C-j>"] = { "select_next" },
       ["<C-k>"] = { "select_prev" },
     },
+    completion = {
+      list = {
+        selection = {
+          preselect = false,
+          auto_insert = true,
+        },
+      },
+      menu = {
+        auto_show = function(_)
+          return vim.fn.getcmdtype() == ":"
+        end,
+      },
+    },
   },
 }
 
