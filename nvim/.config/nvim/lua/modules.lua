@@ -335,8 +335,7 @@ local m = {
   {
     "yetone/avante.nvim",
     event = "VeryLazy",
-    lazy = false,
-    version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+    lazy = true,
     config = function()
       require("plugins.avante").config()
     end,
@@ -348,7 +347,18 @@ local m = {
       { "<C-a>", "<cmd>AvanteToggle<cr>", mode = { "n", "i" } },
     },
   },
+  {
+    "ZSaberLv0/ZFVimDirDiff",
+    lazy = true,
+    cmd = "ZFDirDiff",
+    dependencies = {
+      "ZSaberLv0/ZFVimJob",
+    },
+  },
 }
+
+vim.g.ZFDirDiffKeymap_open = { "<cr>", "l" }
+vim.g.ZFDirDiffKeymap_quit = { "<leader>q", "q" }
 
 if vim.fn.executable("fcitx5") == 1 then
   m[#m + 1] = { "h-hg/fcitx.nvim", event = "InsertEnter" }
