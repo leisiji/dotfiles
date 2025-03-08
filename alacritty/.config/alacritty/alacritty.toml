@@ -87,7 +87,8 @@ mods = "Command"
 
 [[keyboard.bindings]]
 action = "ToggleFullscreen"
-key = "F11"
+mods = "alt"
+key = "Enter"
 
 [[keyboard.bindings]]
 chars = "\u001BOH"
@@ -165,7 +166,7 @@ mods = "Control"
 [[keyboard.bindings]]
 chars = "\u001B[1;3D"
 key = "Left"
-mods = "Alt"
+mods = "alt"
 
 [[keyboard.bindings]]
 chars = "\u001B[D"
