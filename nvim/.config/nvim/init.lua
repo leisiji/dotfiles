@@ -147,6 +147,8 @@ local function init_nvim_keys()
     { "<C-a>", "<Home>" },
     { "<C-e>", "<End>" },
     { "<C-h>", "<Backspace>" },
+    { "<C-j>", "<Down>" },
+    { "<C-k>", "<Up>" },
     { "<M-b>", "<C-Left>" },
     { "<M-f>", "<C-Right>" },
   }
