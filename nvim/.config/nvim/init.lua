@@ -203,6 +203,7 @@ local function init_plugins_keymaps()
     { "<M-j>", "FzfCommand --lsp jump_def edit" },
     { "<M-t>", "FzfCommand --lsp jump_def tab drop" },
     { "<M-v>", "FzfCommand --lsp jump_def vsplit" },
+    { "<leader><leader>r", "FzfCommand --lsp ref" },
 
     -- others
     { "<leader><leader>d", "DiffviewOpen -uno" },

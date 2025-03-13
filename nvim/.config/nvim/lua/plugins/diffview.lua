@@ -40,6 +40,12 @@ function M.config()
         { "n", "<M-k>", act.open_commit_log, { desc = "log" } },
       },
     },
+    commit_log_panel = {
+      win_config = {
+        width = 120,
+        height = 40,
+      },
+    },
     file_history_panel = {
       log_options = {
         git = {
