@@ -334,7 +334,6 @@ local m = {
 
   {
     "yetone/avante.nvim",
-    event = "VeryLazy",
     lazy = true,
     config = function()
       require("plugins.avante").config()
