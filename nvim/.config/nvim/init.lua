@@ -201,6 +201,7 @@ local function init_plugins_keymaps()
     { "<leader>m", "FzfCommand --mru" },
     { "<leader>gc", "FzfCommand --commit" },
     { "<leader><leader>z", "FzfCommand --zoxide" },
+    { "<leader><leader>g", "FzfCommand --git_files" },
 
     { "<M-j>", "FzfCommand --lsp jump_def edit" },
     { "<M-t>", "FzfCommand --lsp jump_def tab drop" },

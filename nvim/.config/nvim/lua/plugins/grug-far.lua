@@ -11,6 +11,11 @@ local function open(paths, search)
   vim.api.nvim_set_option_value("number", true, { win = 0 })
 end
 
+function M.git_dir(cwd)
+  local ret = vim.system({ "git", "rev-parse", "--show-toplevel" }, { cwd = cwd, text = true }):wait().stdout
+  return ret
+end
+
 function M.config()
   require("grug-far").setup({
     startInInsertMode = false,
@@ -43,8 +48,7 @@ function M.config()
       local is_file = vim.fn.filereadable(vim.fn.expand("%:p")) == 1
       if is_file then
         local dir = vim.fn.expand("%:p:h")
-        local ret = vim.system({ "git", "rev-parse", "--show-toplevel" }, { cwd = dir, text = true }):wait()
-        local git_dir = ret.stdout
+        local git_dir = M.git_dir(dir)
         if git_dir ~= nil and paths ~= git_dir then
           paths = git_dir
         end

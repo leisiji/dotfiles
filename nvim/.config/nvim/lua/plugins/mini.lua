@@ -23,6 +23,20 @@ local set_cwd = function()
   MiniFiles.close()
 end
 
+local set_git_cwd = function()
+  local path = (MiniFiles.get_fs_entry() or {}).path
+  if path == nil then
+    return vim.notify("Cursor is not on valid entry")
+  end
+  local cwd = vim.fs.dirname(path)
+  local git_path = require("plugins.grug-far").git_dir()
+  if #git_path ~= 0 then
+    cwd = git_path:sub(1, -2)
+  end
+  vim.fn.chdir(cwd)
+  MiniFiles.close()
+end
+
 function M.config()
   require("mini.files").setup({
     content = {
@@ -61,6 +75,7 @@ function M.config()
       map_split(buf_id, "<C-v>", "belowright vertical")
       map_split(buf_id, "<C-t>", "belowright tab")
       vim.keymap.set("n", "<C-c>", set_cwd, { buffer = buf_id })
+      vim.keymap.set("n", "<M-c>", set_git_cwd, { buffer = buf_id })
     end,
   })
 end
