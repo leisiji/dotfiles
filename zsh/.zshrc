@@ -96,6 +96,32 @@ bindkey -s '\el' 'eza -l --icons=always\n'
 bindkey -s '^l' 'clear\n'
 bindkey -s '\es' 'git status .\n'
 
+__my_git_status() {
+    setopt localoptions pipefail no_aliases 2> /dev/null
+    local item
+    FZF_DEFAULT_COMMAND="git status -uno -s" \
+    FZF_DEFAULT_OPTS=$(__fzf_defaults "--reverse --walker=file,dir,follow,hidden --scheme=path" "${FZF_CTRL_T_OPTS-} -m") \
+    FZF_DEFAULT_OPTS_FILE='' $(__fzfcmd) "$@" < /dev/tty | while read item; do
+        item=$(echo ${item} | awk '{print $2}')
+        echo -n "${(q)item} "
+    done
+    local ret=$?
+    echo
+    return $ret
+}
+
+function _git_status_fzf() {
+    LBUFFER="${LBUFFER}$(__my_git_status)"
+    local ret=$?
+    zle reset-prompt
+    zle autosuggest-clear
+    return $ret
+}
+zle -N _git_status_fzf
+bindkey -M emacs '\et' _git_status_fzf
+bindkey -M vicmd '\et' _git_status_fzf
+bindkey -M viins '\et' _git_status_fzf
+
 precmd () {
     echo -n -e "\a"
 }
