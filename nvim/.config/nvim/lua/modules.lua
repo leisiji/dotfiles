@@ -17,9 +17,11 @@ local m = {
     dependencies = { "vijaymarupudi/nvim-fzf" },
   },
 
+  { "echasnovski/mini.ai", version = false, config = {
+  } },
+
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
     config = function()
       require("plugins.treesitter").config()
     end,

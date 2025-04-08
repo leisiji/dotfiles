@@ -48,29 +48,6 @@ function M.config()
     indent = {
       enable = true,
     },
-    textobjects = {
-      select = {
-        enable = true,
-        lookahead = true,
-        keymaps = {
-          ["ap"] = "@parameter.outer",
-          ["ip"] = "@parameter.inner",
-        },
-        selection_modes = {
-          ["@parameter.outer"] = "v", -- charwise
-        },
-      },
-      move = {
-        enable = true,
-        set_jumps = true, -- whether to set jumps in the jumplist
-        goto_next_end = {
-          ["]f"] = "@function.outer",
-        },
-        goto_previous_start = {
-          ["[f"] = "@function.outer",
-        },
-      },
-    },
   })
 end
 
