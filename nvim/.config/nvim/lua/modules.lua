@@ -295,7 +295,7 @@ local m = {
   },
 
   {
-    "ldelossa/litee-calltree.nvim",
+    "leisiji/litee-calltree.nvim",
     lazy = true,
     cmd = "CallTreeI",
     dependencies = "ldelossa/litee.nvim",
@@ -323,7 +323,7 @@ local m = {
   },
 
   {
-    "dnlhc/glance.nvim",
+    "leisiji/glance.nvim",
     lazy = true,
     cmd = "Glance",
     config = function()
