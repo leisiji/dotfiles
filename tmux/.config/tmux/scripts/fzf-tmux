@@ -161,7 +161,7 @@ set -e
 # Clean up named pipes on exit
 id=$RANDOM
 if [[ -z "$TERMUX_APP_PID" ]]; then
-    TMPDIR:=/tmp
+    TMPDIR=/tmp
 fi
 argsf="${TMPDIR:-/data/data/com.termux/files/usr/tmp}/fzf-args-$id"
 fifo1="${TMPDIR:-/data/data/com.termux/files/usr/tmp}/fzf-fifo1-$id"
