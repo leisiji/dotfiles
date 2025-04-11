@@ -17,8 +17,7 @@ local m = {
     dependencies = { "vijaymarupudi/nvim-fzf" },
   },
 
-  { "echasnovski/mini.ai", version = false, config = {
-  } },
+  { "echasnovski/mini.ai", version = false, config = {} },
 
   {
     "nvim-treesitter/nvim-treesitter",
@@ -354,6 +353,32 @@ local m = {
     cmd = "ZFDirDiff",
     dependencies = {
       "ZSaberLv0/ZFVimJob",
+    },
+  },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    ---@type Flash.Config
+    opts = {},
+    keys = {
+      {
+        "s",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump({
+            search = { forward = true, wrap = false, multi_window = false },
+          })
+        end,
+      },
+      {
+        "S",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump({
+            search = { forward = false, wrap = false, multi_window = false },
+          })
+        end,
+      },
     },
   },
 }
