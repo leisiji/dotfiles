@@ -189,7 +189,6 @@ local function init_plugins_keymaps()
     { "<leader>b", "FzfCommand --buffers" },
     { "<leader><leader>m", "FzfCommand --man" },
     { "<leader><leader>h", "FzfCommand --vim help" },
-    { "<leader>h", "FzfCommand --vim cmdHists" },
     { "<leader>ft", "FzfCommand --vim filetypes" },
     { "<leader>fu", "FzfCommand --gtags --update" },
     { "<leader>fb", "FzfCommand --gtags --update-buffer" },
@@ -209,9 +208,9 @@ local function init_plugins_keymaps()
     { "<leader><leader>r", "FzfCommand --lsp ref" },
 
     -- others
-    { "<leader><leader>d", "DiffviewOpen -uno" },
-    { "<leader><leader>c", "DiffviewOpen --cached" },
-    { "<leader><leader>o", "vertical Gitsigns diffthis" },
+    -- { "<leader><leader>d", "DiffviewOpen -uno" },
+    -- { "<leader><leader>c", "DiffviewOpen --cached" },
+    -- { "<leader><leader>o", "vertical Gitsigns diffthis" },
   }
 
   for _, v in pairs(cmds) do

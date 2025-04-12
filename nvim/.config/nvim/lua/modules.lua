@@ -124,20 +124,20 @@ local m = {
   },
 
   -- Git
-  {
-    "lewis6991/gitsigns.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("plugins.gitsigns").config()
-    end,
-  },
-  {
-    "sindrets/diffview.nvim",
-    cmd = { "DiffviewOpen", "DiffviewFileHistory" },
-    config = function()
-      require("plugins.diffview").config()
-    end,
-  },
+  -- {
+  --   "lewis6991/gitsigns.nvim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("plugins.gitsigns").config()
+  --   end,
+  -- },
+  -- {
+  --   "sindrets/diffview.nvim",
+  --   cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+  --   config = function()
+  --     require("plugins.diffview").config()
+  --   end,
+  -- },
 
   -- indent
   {
@@ -378,6 +378,40 @@ local m = {
             search = { forward = false, wrap = false, multi_window = false },
           })
         end,
+      },
+    },
+  },
+  {
+    "tanvirtin/vgit.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+    -- Lazy loading on 'VimEnter' event is necessary.
+    event = "VeryLazy",
+    opts = {
+      keymaps = {
+        ["n <leader><leader>b"] = "buffer_blame_preview",
+        ["n <leader><leader>n"] = function()
+          require("vgit").hunk_up()
+        end,
+        ["n <leader><leader>o"] = function()
+          require("vgit").buffer_diff_preview()
+        end,
+        ["n <leader><leader>d"] = function()
+          require("vgit").project_diff_preview()
+        end,
+        ["n <leader>h"] = function()
+          require("vgit").buffer_history_preview()
+        end,
+        ["n <leader>gu"] = function()
+          require("vgit").buffer_reset()
+        end,
+        ["n <leader>gr"] = function()
+          require("vgit").buffer_hunk_reset()
+        end,
+      },
+      settings = {
+        live_blame = {
+          enabled = false,
+        },
       },
     },
   },
