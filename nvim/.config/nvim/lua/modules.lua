@@ -362,7 +362,7 @@ local m = {
     opts = {},
     keys = {
       {
-        "s",
+        "r",
         mode = { "n", "x", "o" },
         function()
           require("flash").jump({
@@ -371,7 +371,7 @@ local m = {
         end,
       },
       {
-        "S",
+        "R",
         mode = { "n", "x", "o" },
         function()
           require("flash").jump({

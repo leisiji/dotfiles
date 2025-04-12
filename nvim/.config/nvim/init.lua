@@ -197,9 +197,9 @@ local function init_plugins_keymaps()
     { "<leader>fd", [[exe('FzfCommand --gtags -d '.expand('<cword>'))]] },
     { "<M-f>", [[exe('FzfCommand --rg --all-buffers '.expand('<cword>'))]] },
     { "<leader>ff", [[exe('FzfCommand --rg '.expand('<cword>')." ".expand('%'))]] },
+    { "<leader>gc", [[exe('FzfCommand --commit '.expand('%:p'))]] },
     { "<leader>ws", "FzfCommand --lsp workspace_symbol" },
     { "<leader>m", "FzfCommand --mru" },
-    { "<leader>gc", "FzfCommand --commit" },
     { "<leader><leader>z", "FzfCommand --zoxide" },
     { "<leader><leader>g", "FzfCommand --git_files" },
 

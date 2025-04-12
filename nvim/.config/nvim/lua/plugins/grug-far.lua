@@ -12,8 +12,7 @@ local function open(paths, search)
 end
 
 function M.git_dir(cwd)
-  local ret = vim.system({ "git", "rev-parse", "--show-toplevel" }, { cwd = cwd, text = true }):wait().stdout
-  return ret
+  return vim.system({ "git", "rev-parse", "--show-toplevel" }, { cwd = cwd, text = true }):wait().stdout
 end
 
 function M.config()
