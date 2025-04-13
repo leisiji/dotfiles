@@ -54,3 +54,18 @@ hyprland
 sudo pacman -S xdg-desktop-portal-hyprland xdg-desktop-portal-hyprland hyprpaper dunst \
                wofi wlogout ghostty
 ```
+
+software can also be downloaded from below links:
+
+- [fzf](https://github.com/junegunn/fzf/releases)
+- [duf](https://github.com/muesli/duf/releases)
+- [ripgrep](https://github.com/BurntSushi/ripgrep/releases)
+- [fd](https://github.com/sharkdp/fd/releases)
+- [eza](https://github.com/eza-community/eza/releases)
+- [yazi](https://github.com/sxyazi/yazi/releases/)
+- [zoxide](https://github.com/ajeetdsouza/zoxide/releases)
+- [starship](https://github.com/starship/starship/releases)
+- [neovim](https://github.com/neovim/neovim/releases)
+- [tmux](https://github.com/kiyoon/tmux-appimage/releases)
+- [clang](https://github.com/llvm/llvm-project/releases)
+- [patchelf](https://github.com/NixOS/patchelf/releases/)
