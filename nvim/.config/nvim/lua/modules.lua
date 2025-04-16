@@ -410,6 +410,28 @@ local m = {
       { "<leader><leader>l", "<cmd>VGit project_logs_preview<CR>" },
     },
   },
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+      bigfile = { enabled = true },
+      dashboard = { enabled = true },
+      explorer = { enabled = false },
+      indent = { enabled = false },
+      input = { enabled = true },
+      picker = { enabled = true },
+      notifier = { enabled = true },
+      quickfile = { enabled = true },
+      scope = { enabled = false },
+      scroll = { enabled = false },
+      statuscolumn = { enabled = false },
+    },
+  },
 }
 
 vim.g.ZFDirDiffKeymap_open = { "<cr>", "l" }
@@ -417,25 +439,6 @@ vim.g.ZFDirDiffKeymap_quit = { "<leader>q", "q" }
 
 if vim.fn.executable("fcitx5") == 1 then
   m[#m + 1] = { "h-hg/fcitx.nvim", event = "InsertEnter" }
-end
-
-if vim.fn.executable("magick") == 1 then
-  m[#m + 1] = {
-    "3rd/image.nvim",
-    ft = "markdown",
-    lazy = true,
-    opts = {
-      tmux_show_only_in_active_window = true,
-      window_overlap_clear_enabled = true,
-      integrations = {
-        markdown = {
-          only_render_image_at_cursor = true,
-          clear_in_insert_mode = true,
-          floating_windows = true,
-        },
-      },
-    },
-  }
 end
 
 require("lazy").setup(m)
