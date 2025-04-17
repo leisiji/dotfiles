@@ -206,11 +206,6 @@ local function init_plugins_keymaps()
     { "<M-t>", "FzfCommand --lsp jump_def tab drop" },
     { "<M-v>", "FzfCommand --lsp jump_def vsplit" },
     { "<leader><leader>r", "FzfCommand --lsp ref" },
-
-    -- others
-    -- { "<leader><leader>d", "DiffviewOpen -uno" },
-    -- { "<leader><leader>c", "DiffviewOpen --cached" },
-    -- { "<leader><leader>o", "vertical Gitsigns diffthis" },
   }
 
   for _, v in pairs(cmds) do
