@@ -398,8 +398,16 @@ local m = {
         },
         live_gutter = {
           enabled = false,
-        }
+        },
       },
+      keymaps = {
+        ["n <leader><leader>n"] = function()
+          require("vgit").hunk_down()
+        end,
+      },
+    },
+    keys = {
+      { "<leader><leader>l", "<cmd>VGit project_logs_preview<CR>" },
     },
   },
 }
