@@ -17,7 +17,22 @@ local m = {
     dependencies = { "vijaymarupudi/nvim-fzf" },
   },
 
-  { "echasnovski/mini.ai", version = false, config = {} },
+  {
+    "echasnovski/mini.ai",
+    version = false,
+    event = "VeryLazy",
+    config = function()
+      require("mini.ai").setup({
+        custom_textobjects = {
+          p = require("mini.ai").gen_spec.argument({ brackets = { "%b()" } }),
+        },
+        mappings = {
+          goto_left = "M",
+          goto_right = "m",
+        },
+      })
+    end,
+  },
 
   {
     "nvim-treesitter/nvim-treesitter",
