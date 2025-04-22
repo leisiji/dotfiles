@@ -159,3 +159,12 @@ function y() {
 # zinit ice depth=1
 # zinit light jeffreytse/zsh-vi-mode
 # ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_ZLE
+
+gb() {
+    git stash && git pull orgin $(git branch --show-current) --rebase && git stash pop --quiet
+}
+
+gp() {
+    local branch=$(git branch --show-current)
+    git push origin ${branch}:${branch}
+}
