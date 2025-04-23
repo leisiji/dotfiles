@@ -319,7 +319,7 @@ local m = {
     "leisiji/litee-calltree.nvim",
     lazy = true,
     cmd = "CallTreeI",
-    dependencies = "ldelossa/litee.nvim",
+    dependencies = "leisiji/litee.nvim",
     config = function()
       require("plugins.calltree").config()
     end,
