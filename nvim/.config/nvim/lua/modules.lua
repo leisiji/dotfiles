@@ -139,27 +139,27 @@ local m = {
   },
 
   -- Git
-  {
-    "lewis6991/gitsigns.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("plugins.gitsigns").config()
-    end,
-    keys = {
-      { "<leader><leader>o", "<cmd>vertical Gitsigns diffthis<CR>" },
-    },
-  },
-  {
-    "sindrets/diffview.nvim",
-    cmd = { "DiffviewOpen", "DiffviewFileHistory" },
-    config = function()
-      require("plugins.diffview").config()
-    end,
-    keys = {
-      { "<leader><leader>d", "<cmd>DiffviewOpen -uno<CR>" },
-      { "<leader><leader>c", "<cmd>DiffviewOpen --cached<CR>" },
-    },
-  },
+  -- {
+  --   "lewis6991/gitsigns.nvim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("plugins.gitsigns").config()
+  --   end,
+  --   keys = {
+  --     { "<leader><leader>o", "<cmd>vertical Gitsigns diffthis<CR>" },
+  --   },
+  -- },
+  -- {
+  --   "sindrets/diffview.nvim",
+  --   cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+  --   config = function()
+  --     require("plugins.diffview").config()
+  --   end,
+  --   keys = {
+  --     { "<leader><leader>d", "<cmd>DiffviewOpen -uno<CR>" },
+  --     { "<leader><leader>c", "<cmd>DiffviewOpen --cached<CR>" },
+  --   },
+  -- },
 
   -- indent
   {
@@ -404,16 +404,18 @@ local m = {
     },
   },
   {
-    "tanvirtin/vgit.nvim",
-    cmd = "VGit",
+    "leisiji/vgit.nvim",
+    event = "VeryLazy",
+    branch = "develop",
     opts = {
       settings = {
         live_blame = {
           enabled = false,
+          debounce_ms = 5000,
         },
-        live_gutter = {
-          enabled = false,
-        },
+        -- live_gutter = {
+        --   enabled = false,
+        -- },
       },
       keymaps = {
         ["n <leader><leader>n"] = function()
@@ -423,6 +425,8 @@ local m = {
     },
     keys = {
       { "<leader><leader>l", "<cmd>VGit project_logs_preview<CR>" },
+      { "<leader><leader>o", "<cmd>VGit buffer_diff_preview<CR>" },
+      { "<leader><leader>b", "<cmd>VGit buffer_blame_preview<CR>" },
     },
   },
   {
