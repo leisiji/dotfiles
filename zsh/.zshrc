@@ -161,7 +161,7 @@ function y() {
 # ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_ZLE
 
 gb() {
-    git stash && git pull orgin $(git branch --show-current) --rebase && git stash pop --quiet
+    git stash && git pull origin $(git branch --show-current) --rebase && git stash pop --quiet
 }
 
 gp() {

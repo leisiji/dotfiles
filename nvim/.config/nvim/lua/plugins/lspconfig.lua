@@ -70,16 +70,9 @@ local function all_lsp_config(lsp)
   vim.lsp.inlay_hint.enable(true)
 end
 
-local function lsp_basic()
-  local lsp = vim.lsp
-  lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single" })
-  lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, { border = "single" })
-end
-
 function M.lsp_config()
   coroutine.wrap(function()
     local lsp = require("lspconfig")
-    lsp_basic()
     all_lsp_config(lsp)
   end)()
 end
