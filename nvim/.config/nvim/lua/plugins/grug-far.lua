@@ -37,6 +37,17 @@ function M.config()
     })
   end, { noremap = true, silent = true })
 
+  vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("grug-far-keybindings", { clear = true }),
+    pattern = { "grug-far" },
+    callback = function()
+      vim.keymap.set("n", "<C-o>", function()
+        require("grug-far").get_instance(0):open_location()
+        require("grug-far").get_instance(0):close()
+      end, { buffer = true })
+    end,
+  })
+
   vim.api.nvim_create_user_command("MyGrugFar", function(param)
     local args = param.fargs[1]
     local _, i = string.find(args, "--nogit=")

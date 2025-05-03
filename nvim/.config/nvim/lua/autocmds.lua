@@ -1,6 +1,5 @@
 local group = "user_plugin"
-local a = vim.api
-a.nvim_create_augroup(group, { clear = true })
+vim.api.nvim_create_augroup(group, { clear = true })
 
 local autocmds = {
   FocusGained = function()
@@ -16,5 +15,5 @@ local autocmds = {
   end,
 }
 for key, value in pairs(autocmds) do
-  a.nvim_create_autocmd({ key }, { group = group, callback = value })
+  vim.api.nvim_create_autocmd({ key }, { group = group, callback = value })
 end

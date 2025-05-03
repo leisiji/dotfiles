@@ -269,9 +269,15 @@ local m = {
 
   {
     "nvim-lualine/lualine.nvim",
-    config = function()
-      require("plugins.lualine")
-    end,
+    opts = {
+      options = {
+        icons_enabled = true,
+        theme = "onedark",
+        refresh = {
+          tabline = 2000,
+        },
+      },
+    },
   },
 
   {
