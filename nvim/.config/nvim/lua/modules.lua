@@ -409,6 +409,10 @@ local m = {
     branch = "develop",
     opts = {
       settings = {
+        libgit2 = {
+          enabled = true,
+          path = "/usr/lib/libgit2.so",
+        },
         live_blame = {
           enabled = false,
           debounce_ms = 5000,
@@ -427,6 +431,7 @@ local m = {
       { "<leader><leader>l", "<cmd>VGit project_logs_preview<CR>" },
       { "<leader><leader>o", "<cmd>VGit buffer_diff_preview<CR>" },
       { "<leader><leader>b", "<cmd>VGit buffer_blame_preview<CR>" },
+      { "<leader><leader>d", "<cmd>VGit project_diff_preview<CR>" },
     },
   },
   {
