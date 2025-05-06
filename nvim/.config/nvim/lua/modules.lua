@@ -460,6 +460,11 @@ local m = {
       scope = { enabled = false },
       scroll = { enabled = false },
       statuscolumn = { enabled = false },
+      styles = {
+        notification = {
+          focusable = false,
+        },
+      },
     },
   },
 }
