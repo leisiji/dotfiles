@@ -1,3 +1,11 @@
+local libgit2 = "/usr/lib/libgit2.so"
+
+if vim.env.TERMUX_APP_PID then
+  libgit2 = vim.env.HOME .. "/.." .. libgit2
+elseif vim.loop.fs_stat(libgit2) then
+  libgit2 = vim.env.HOME .. "/bin/lib/libgit2.so"
+end
+
 local m = {
   { "nvim-lua/plenary.nvim" },
   { "MunifTanjim/nui.nvim" },
@@ -417,7 +425,7 @@ local m = {
       settings = {
         libgit2 = {
           enabled = true,
-          path = "/usr/lib/libgit2.so",
+          path = libgit2
         },
         live_blame = {
           enabled = false,
