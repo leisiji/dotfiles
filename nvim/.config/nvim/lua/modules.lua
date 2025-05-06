@@ -2,7 +2,7 @@ local libgit2 = "/usr/lib/libgit2.so"
 
 if vim.env.TERMUX_APP_PID then
   libgit2 = vim.env.HOME .. "/.." .. libgit2
-elseif vim.loop.fs_stat(libgit2) then
+elseif vim.loop.fs_stat(libgit2) == nil then
   libgit2 = vim.env.HOME .. "/bin/lib/libgit2.so"
 end
 
