@@ -9,6 +9,7 @@ end
 local m = {
   { "nvim-lua/plenary.nvim" },
   { "MunifTanjim/nui.nvim" },
+  { "nvim-tree/nvim-web-devicons" },
 
   {
     "olimorris/onedarkpro.nvim",
@@ -298,7 +299,6 @@ local m = {
         end,
       },
     },
-    dependencies = "nvim-tree/nvim-web-devicons",
   },
 
   {
@@ -425,7 +425,7 @@ local m = {
       settings = {
         libgit2 = {
           enabled = true,
-          path = libgit2
+          path = libgit2,
         },
         live_blame = {
           enabled = false,
