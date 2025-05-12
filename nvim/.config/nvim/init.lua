@@ -71,8 +71,8 @@ local function init_nvim_keys()
   }
   local cmd_maps = {
     { "<leader>s", "w" },
-    --{ "<M-l>", "tabn" },
-    --{ "<M-h>", "tabp" },
+    { "<M-l>", "tabn" },
+    { "<M-h>", "tabp" },
     { "<leader><leader>q", "qa" },
     { "<leader>rt", "%retab!" },
     { "<M-s>", [[let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>]] }, -- remove trailing whitespace
