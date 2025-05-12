@@ -1,21 +1,18 @@
 {
   "name": "dotfiles",
-  "engines": {
-    "vscode": "^1.11.0"
-  },
   "contributes": {
     "snippets": [
       {
         "language": "make",
-        "path": "make.json"
+        "path": "./make.json"
       },
       {
-        "language": "c",
-        "path": "c.json"
+        "language": ["c", "cpp"],
+        "path": "./c.json"
       },
       {
         "language": "markdown",
-        "path": "markdown.json"
+        "path": "./markdown.json"
       }
     ]
   }
