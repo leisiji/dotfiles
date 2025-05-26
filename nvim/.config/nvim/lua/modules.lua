@@ -358,7 +358,7 @@ local m = {
   },
 
   {
-    "leisiji/glance.nvim",
+    "dnlhc/glance.nvim",
     lazy = true,
     cmd = "Glance",
     config = function()
