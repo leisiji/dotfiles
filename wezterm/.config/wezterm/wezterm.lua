@@ -30,4 +30,5 @@ return {
       action = wezterm.action({ CompleteSelectionOrOpenLinkAtMouseCursor = "Clipboard" }),
     },
   },
+  default_prog = { "nu" },
 }

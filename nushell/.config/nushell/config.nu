@@ -88,6 +88,7 @@ $env.config = {
     use_ls_colors: true # use the LS_COLORS environment variable to colorize output
     clickable_links: true # enable or disable clickable links. Your terminal has to support links.
   }
+  shell_integration : { osc133 : false }
   rm: {
     always_trash: false
   }
