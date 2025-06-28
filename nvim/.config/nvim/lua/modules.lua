@@ -420,7 +420,6 @@ local m = {
   {
     "leisiji/vgit.nvim",
     event = "VeryLazy",
-    branch = "develop",
     opts = {
       settings = {
         libgit2 = {
