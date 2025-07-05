@@ -252,8 +252,8 @@ local global_cfg = {
   completeopt = "menu,menuone,noselect",
   --expandtab = true,
   cmdheight = 0,
-  tabclose = "uselast"
-  --jumpoptions = "stack",
+  -- tabclose = "uselast"
+  -- jumpoptions = "stack",
   -- foldmethod = "expr",
   -- foldexpr = "nvim_treesitter#foldexpr()",
 }

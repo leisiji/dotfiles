@@ -240,13 +240,6 @@ local m = {
         end,
         mode = "n",
       },
-      {
-        "<leader>tr",
-        function()
-          MiniFiles.open()
-        end,
-        mode = "n",
-      },
     },
   },
 
@@ -458,7 +451,7 @@ local m = {
       -- refer to the configuration section below
       bigfile = { enabled = true },
       dashboard = { enabled = true },
-      explorer = { enabled = false },
+      explorer = { enabled = true },
       indent = { enabled = false },
       input = { enabled = true },
       picker = { enabled = true },
@@ -472,7 +465,17 @@ local m = {
           focusable = false,
         },
       },
+
     },
+    keys = {
+      {
+        "<leader>tr",
+        function()
+          Snacks.explorer()
+        end,
+        mode = "n",
+      },
+    }
   },
 }
 
