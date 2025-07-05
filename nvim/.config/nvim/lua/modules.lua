@@ -362,20 +362,20 @@ local m = {
     },
   },
 
-  {
-    "yetone/avante.nvim",
-    lazy = true,
-    config = function()
-      require("plugins.avante").config()
-    end,
-    build = "make BUILD_FROM_SOURCE=true",
-    dependencies = {
-      "stevearc/dressing.nvim",
-    },
-    keys = {
-      { "<C-a>", "<cmd>AvanteToggle<cr>", mode = { "n", "i" } },
-    },
-  },
+  -- {
+  --   "yetone/avante.nvim",
+  --   lazy = true,
+  --   config = function()
+  --     require("plugins.avante").config()
+  --   end,
+  --   build = "make BUILD_FROM_SOURCE=true",
+  --   dependencies = {
+  --     "stevearc/dressing.nvim",
+  --   },
+  --   keys = {
+  --     { "<C-a>", "<cmd>AvanteToggle<cr>", mode = { "n", "i" } },
+  --   },
+  -- },
   {
     "ZSaberLv0/ZFVimDirDiff",
     lazy = true,
