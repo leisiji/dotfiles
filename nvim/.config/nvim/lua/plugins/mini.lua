@@ -19,7 +19,9 @@ local set_cwd = function()
   if path == nil then
     return vim.notify("Cursor is not on valid entry")
   end
-  vim.fn.chdir(vim.fs.dirname(path))
+  local stdout = require("plugins.grug-far").git_dir(vim.fs.dirname(path))
+  local git_dir = string.gsub(stdout, "[\r\n]+$", "")
+  vim.fn.chdir(git_dir)
   MiniFiles.close()
 end
 
