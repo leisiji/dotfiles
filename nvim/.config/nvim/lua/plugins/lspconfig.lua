@@ -45,13 +45,6 @@ local function all_lsp_config(lsp)
     },
   }
 
-  lsp.clangd.setup({
-    cmd = { "clangd", "-j=4", "--header-insertion=never" },
-    on_attach = on_attach,
-    capabilities = cap,
-    filetypes = { "c", "cpp" },
-  })
-
   local servers = {
     "pyright",
     "cmake",
@@ -63,10 +56,16 @@ local function all_lsp_config(lsp)
     "ts_ls",
     "jsonls",
     "vala_ls",
+    "clangd",
   }
   for _, server in pairs(servers) do
-    lsp[server].setup(default_cfg)
+    vim.lsp.enable(server, true)
   end
+
+  vim.lsp.config("clangd", {
+    cmd = { "clangd", "--header-insertion=never" },
+  })
+
   vim.lsp.inlay_hint.enable(true)
 end
 
