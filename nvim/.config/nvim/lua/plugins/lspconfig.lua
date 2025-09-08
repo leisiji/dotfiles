@@ -1,50 +1,6 @@
 local M = {}
-local default_cfg
-local group = "lsp_document_highlight"
-local a = vim.api
 
-local on_attach = function(client, bufnr)
-  local caps = client.server_capabilities
-
-  a.nvim_clear_autocmds({ group = group, buffer = bufnr })
-
-  if caps.documentHighlightProvider then
-    a.nvim_create_autocmd({ "CursorMoved" }, {
-      group = group,
-      callback = function()
-        vim.lsp.buf.clear_references()
-      end,
-      buffer = bufnr,
-    })
-    a.nvim_create_autocmd({ "CursorHold" }, {
-      group = group,
-      callback = function()
-        vim.lsp.buf.document_highlight()
-      end,
-      buffer = bufnr,
-    })
-  end
-end
-
-local function all_lsp_config(lsp)
-  a.nvim_create_augroup(group, { clear = true })
-  local cap = vim.lsp.protocol.make_client_capabilities()
-  local compe = cap.textDocument.completion.completionItem
-  compe.snippetSupport = true
-  compe.preselectSupport = true
-  compe.insertReplaceSupport = true
-  compe.labelDetailsSupport = true
-  compe.deprecatedSupport = true
-  compe.commitCharactersSupport = true
-  compe.resolveSupport = { properties = { "documentation", "detail", "additionalTextEdits" } }
-  default_cfg = {
-    on_attach = on_attach,
-    capabilities = cap,
-    flags = {
-      debounce_text_changes = 500,
-    },
-  }
-
+function M.lsp_config()
   local servers = {
     "pyright",
     "cmake",
@@ -62,22 +18,35 @@ local function all_lsp_config(lsp)
     vim.lsp.enable(server, true)
   end
 
+  -- vim.lsp.config("*", default_cfg)
   vim.lsp.config("clangd", {
     cmd = { "clangd", "--header-insertion=never" },
   })
 
   vim.lsp.inlay_hint.enable(true)
-end
-
-function M.lsp_config()
-  coroutine.wrap(function()
-    local lsp = require("lspconfig")
-    all_lsp_config(lsp)
-  end)()
-end
-
-function M.cfg()
-  return default_cfg
+  local group = vim.api.nvim_create_augroup("my.lsp", { clear = true })
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = group,
+    callback = function(args)
+      local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+      if client:supports_method("textDocument/documentHighlight") then
+        vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+          group = group,
+          callback = function()
+            vim.lsp.buf.clear_references()
+          end,
+          buffer = args.buf,
+        })
+        vim.api.nvim_create_autocmd({ "CursorHold" }, {
+          group = group,
+          callback = function()
+            vim.lsp.buf.document_highlight()
+          end,
+          buffer = args.buf,
+        })
+      end
+    end,
+  })
 end
 
 return M

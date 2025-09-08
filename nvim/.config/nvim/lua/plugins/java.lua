@@ -1,5 +1,4 @@
 local M = {}
-local cfg = require("plugins.lspconfig").cfg()
 
 function M.config()
   local group = "user_java"
@@ -147,7 +146,7 @@ function M.jdtls_start(jar)
     end
   end
 
-  require("jdtls").start_or_attach(vim.tbl_extend("force", lsp_config, cfg))
+  require("jdtls").start_or_attach(vim.tbl_extend("force", lsp_config, {}))
 end
 
 return M
