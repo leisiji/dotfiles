@@ -474,6 +474,12 @@ local m = {
       },
     },
   },
+  {
+    "brianhuster/live-preview.nvim",
+    dependencies = {
+      "folke/snacks.nvim",
+    },
+  },
   -- {
   --   "chrisgrieser/nvim-lsp-endhints",
   --   event = "LspAttach",
