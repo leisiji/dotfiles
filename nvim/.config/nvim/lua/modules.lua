@@ -76,11 +76,15 @@ local m = {
     },
   },
   {
-    "folke/neodev.nvim",
-    ft = "lua",
-    config = function()
-      require("plugins.neodev").config()
-    end,
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
   },
 
   -- completion
@@ -475,10 +479,10 @@ local m = {
     },
   },
   {
-    "brianhuster/live-preview.nvim",
-    dependencies = {
-      "folke/snacks.nvim",
-    },
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = "cd app && bun install",
   },
   -- {
   --   "chrisgrieser/nvim-lsp-endhints",
