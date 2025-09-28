@@ -32,7 +32,7 @@ function M.config()
       "toml",
       "yaml",
       "vimdoc",
-      "vala",
+      "mermaid",
     },
     highlight = {
       enable = true,

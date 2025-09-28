@@ -434,9 +434,10 @@ local m = {
           enabled = false,
           debounce_ms = 5000,
         },
-        -- live_gutter = {
-        --   enabled = false,
-        -- },
+        live_gutter = {
+          enabled = true,
+          debounce_ms = 1000,
+        },
       },
       keymaps = {
         ["n <leader><leader>n"] = function()

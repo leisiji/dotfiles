@@ -11,14 +11,13 @@ function M.lsp_config()
     "rust_analyzer",
     "ts_ls",
     "jsonls",
-    "vala_ls",
     "clangd",
+    "lua_ls",
   }
   for _, server in pairs(servers) do
     vim.lsp.enable(server, true)
   end
 
-  -- vim.lsp.config("*", default_cfg)
   vim.lsp.config("clangd", {
     cmd = { "clangd", "--header-insertion=never" },
   })
