@@ -42,8 +42,10 @@ function M.config()
     pattern = { "grug-far" },
     callback = function()
       vim.keymap.set("n", "<C-o>", function()
-        require("grug-far").get_instance(0):open_location()
-        require("grug-far").get_instance(0):close()
+        local grug = require("grug-far")
+        local instance = grug.get_instance(0)
+        instance:goto_location()
+        instance:close()
       end, { buffer = true })
     end,
   })
