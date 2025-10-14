@@ -48,7 +48,37 @@ function M.config()
     indent = {
       enable = true,
     },
+    textobjects = {
+      select = {
+        enable = true,
+
+        -- Automatically jump forward to textobj, similar to targets.vim
+        lookahead = true,
+
+        keymaps = {
+          -- You can use the capture groups defined in textobjects.scm
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["as"] = { query = "@local.scope", query_group = "locals", desc = "Select language scope" },
+        },
+      },
+      move = {
+        enable = true,
+        set_jumps = true,
+        goto_next_end = {
+          ["]f"] = "@function.outer",
+          ["]i"] = "@conditional.inner",
+        },
+        goto_previous_start = {
+          ["[f"] = "@function.outer",
+          ["[i"] = "@conditional.inner",
+        },
+      },
+    },
   })
+  vim.keymap.set({ "x", "o" }, "ik", function()
+    require("nvim-treesitter.textobjects.select").select_textobject("@block.inner", "textobjects")
+  end, { desc = "Treesitter: inside block" })
 end
 
 return M
