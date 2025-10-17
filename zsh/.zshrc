@@ -168,3 +168,9 @@ gp() {
     local branch=$(git branch --show-current)
     git push origin ${branch}:${branch}
 }
+
+autoload -Uz add-zsh-hook
+function _starship_osc133_precmd() {
+    printf "\033]133;A\007"
+}
+add-zsh-hook preexec _starship_osc133_precmd
