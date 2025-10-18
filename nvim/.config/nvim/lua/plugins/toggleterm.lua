@@ -54,7 +54,7 @@ function M.config()
       end, opts)
 
       vim.keymap.set("t", "<M-a>", "<C-\\><C-n><C-w>w", opts)
-      vim.keymap.set("t", "<M-t>", toggle_direction, opts)
+      vim.keymap.set("t", "<M-z>", toggle_direction, opts)
 
       local term = require("toggleterm.terminal").get(vim.b.toggle_number)
       if term then
