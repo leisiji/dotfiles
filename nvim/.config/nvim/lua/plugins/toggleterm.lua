@@ -111,9 +111,13 @@ end
 
 function M.cd()
   local dir = vim.fn.expand("%:p:h")
-  local cmd = string.format("TermExec cmd='cd %s' go_back=0 ", dir)
-  cmd = cmd .. "direction=float"
-  vim.cmd(cmd)
+  if last_active_terminal then
+    local cmd = string.format("%dTermExec cmd='cd %s' go_back=0", last_active_terminal.id, dir)
+    vim.cmd(cmd)
+  else
+    local cmd = string.format("TermExec cmd='cd %s' go_back=0", dir)
+    vim.cmd(cmd)
+  end
 end
 
 return M

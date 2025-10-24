@@ -62,7 +62,6 @@ zinit wait lucid light-mode for \
     Aloxaf/fzf-tab \
     wfxr/forgit
 
-eval "$(zoxide init zsh)"
 
 bindkey '^[,' autosuggest-accept
 
@@ -145,6 +144,8 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 
 eval "$(starship init zsh)"
+eval "$(atuin init zsh)"
+eval "$(zoxide init zsh)"
 
 # if don't want to change cwd, use Q to exit
 function y() {
