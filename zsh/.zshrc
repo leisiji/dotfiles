@@ -144,7 +144,7 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 
 eval "$(starship init zsh)"
-eval "$(atuin init zsh)"
+# eval "$(atuin init zsh)"
 eval "$(zoxide init zsh)"
 
 # if don't want to change cwd, use Q to exit
