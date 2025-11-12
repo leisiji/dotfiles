@@ -35,7 +35,11 @@ export PATH="$PATH:$HOME/.bun/bin"
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d --strip-cwd-prefix'
-export FZF_DEFAULT_OPTS='--ansi --tabstop=1 --bind ctrl-d:half-page-down,ctrl-u:half-page-up,tab:down,ctrl-p:toggle-preview,alt-j:preview-down,alt-k:preview-up --reverse --cycle --preview-window=hidden:65%'
+export FZF_DEFAULT_OPTS='
+--ansi --tabstop=1
+--bind="ctrl-d:half-page-down,ctrl-u:half-page-up,tab:down,ctrl-p:toggle-preview,alt-j:preview-down,alt-k:preview-up,ctrl-o:execute-silent($HOME/fzf/tmuxn.zsh {})"
+--reverse --cycle --preview-window=hidden:65%
+'
 export FORGIT_FZF_DEFAULT_OPTS="-m --bind alt-w:select"
 export GTAGSLABEL='native-pygments'
 export GOPROXY='https://goproxy.io,direct'
