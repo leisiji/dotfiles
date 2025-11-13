@@ -8,4 +8,4 @@ local input_line rootdir
 input_line=$1
 rootdir=$(git rev-parse --show-toplevel)
 filename=$(echo "$input_line" | _forgit_get_single_file_from_diff_line)
-tmux popup -w 90% -h 90% -E "cd $rootdir && nvim $rootdir/$filename"
+tmux popup -w 90% -h 90% -E "nvim $rootdir/$filename"

@@ -285,9 +285,6 @@ local m = {
 
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = {
-      "vimpostor/vim-tpipeline",
-    },
     opts = {
       options = {
         icons_enabled = true,
