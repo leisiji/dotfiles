@@ -284,19 +284,6 @@ local m = {
   },
 
   {
-    "nvim-lualine/lualine.nvim",
-    opts = {
-      options = {
-        icons_enabled = true,
-        theme = "onedark",
-        refresh = {
-          tabline = 2000,
-        },
-      },
-    },
-  },
-
-  {
     "akinsho/bufferline.nvim",
     opts = {
       options = {
