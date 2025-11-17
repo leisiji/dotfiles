@@ -89,7 +89,7 @@ local function init_nvim_keys()
     {
       "<leader>a",
       function()
-        vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+        vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
       end,
     },
     {
