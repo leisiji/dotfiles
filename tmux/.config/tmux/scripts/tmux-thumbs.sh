@@ -1,9 +1,6 @@
-copy2osc52() {
-    if IFS= read -r input; then
-        local ENCODED_DATA
-        ENCODED_DATA=$(printf "%s" "$input" | base64 | tr -d '\n')
-        printf '\033]52;c;%s\007' "$ENCODED_DATA"
-    fi
-}
-
-tmux capture -p | $HOME/.cargo/bin/thumbs -u -r | copy2osc52
+res=$(tmux list-panes -F \"#{pane_id}:#{pane_height}\")
+id=${res%:*}
+pane_height=${res#*:}
+thumbs_pane_id=$(tmux new-window -P -F "#{pane_id}" -d -n "[thumbs]" "tmux capture-pane -t ${id} -p | tail -n ${pane_height} | thumbs -f '%U:%H' -t /tmp/thumbs-last; tmux swap-pane -t ${id}; tmux wait-for -S thumbs-finished")
+echo ${id} ${thumbs_pane_id}
+tmux swap-pane -d -s ${id} -t ${thumbs_pane_id}
