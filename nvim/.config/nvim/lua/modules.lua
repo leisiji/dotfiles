@@ -437,7 +437,6 @@ local m = {
     },
     keys = {
       { "<leader><leader>l", "<cmd>VGit project_logs_preview<CR>" },
-      { "<leader><leader>o", "<cmd>VGit buffer_diff_preview<CR>" },
       { "<leader><leader>b", "<cmd>VGit buffer_blame_preview<CR>" },
       { "<leader><leader>d", "<cmd>VGit project_diff_preview<CR>" },
     },
@@ -474,6 +473,18 @@ local m = {
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
     build = "cd app && bun install",
+  },
+  {
+    "esmuellert/vscode-diff.nvim",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    cmd = "CodeDiff",
+    build = "cmake -B build && cmake --build build",
+    config = function()
+      require("plugins.vscode-diff").config()
+    end,
+    keys = {
+      { "<leader><leader>o", "<cmd>CodeDiff file HEAD<CR>" },
+    },
   },
   -- {
   --   "chrisgrieser/nvim-lsp-endhints",
