@@ -2,9 +2,6 @@ local group = "user_plugin"
 vim.api.nvim_create_augroup(group, { clear = true })
 
 local autocmds = {
-  FocusGained = function()
-    vim.cmd("checkt")
-  end,
   WinEnter = function()
     if vim.wo.cursorline == false then
       vim.wo.cursorline = true
@@ -17,3 +14,10 @@ local autocmds = {
 for key, value in pairs(autocmds) do
   vim.api.nvim_create_autocmd({ key }, { group = group, callback = value })
 end
+
+vim.api.nvim_create_autocmd({ "FocusGained", "TermLeave" }, {
+  group = group,
+  callback = function()
+    vim.cmd("checkt")
+  end,
+})
