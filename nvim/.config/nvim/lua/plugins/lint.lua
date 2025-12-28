@@ -23,7 +23,9 @@ function M.config()
       lint.try_lint()
     end,
   })
-  vim.diagnostic.config({ virtual_text = false, underline = false })
+  vim.diagnostic.config({ signs = {
+    priority = 10,
+  }, virtual_text = false, underline = false })
 end
 
 return M

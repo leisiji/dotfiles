@@ -11,7 +11,7 @@ function M.config()
       highlight_inactive_windows = true,
     },
     colors = {
-      my_new_red = "require('onedarkpro.helpers').darken('red', 15, 'onedark')"
+      my_new_red = "require('onedarkpro.helpers').darken('red', 15, 'onedark')",
     },
     plugins = {
       all = false,

@@ -416,6 +416,9 @@ local m = {
     event = "VeryLazy",
     opts = {
       settings = {
+        signs = {
+          priority = 9,
+        },
         libgit2 = {
           enabled = true,
           path = libgit2,
