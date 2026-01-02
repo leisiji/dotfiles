@@ -178,7 +178,6 @@ local function init_plugins_keymaps()
     -- fzf_utils
     { "<C-p>", "FzfCommand --files" },
     { "<C-f>", "FzfCommand --lines" },
-    { "<C-r>", "FzfCommand --lsp document_symbol" },
     { "<leader>b", "FzfCommand --buffers" },
     { "<leader><leader>m", "FzfCommand --man" },
     { "<leader><leader>h", "FzfCommand --vim help" },
@@ -190,7 +189,6 @@ local function init_plugins_keymaps()
     { "<M-f>", [[exe('FzfCommand --rg --all-buffers '.expand('<cword>'))]] },
     { "<leader>ff", [[exe('FzfCommand --rg '.expand('<cword>')." ".expand('%'))]] },
     { "<leader>gc", [[exe('FzfCommand --commit '.expand('%:p'))]] },
-    { "<leader>ws", "FzfCommand --lsp workspace_symbol" },
     { "<leader>m", "FzfCommand --mru" },
     { "<leader><leader>z", "FzfCommand --zoxide" },
     { "<M-t>", "FzfCommand --git_files" },

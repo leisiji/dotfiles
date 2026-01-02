@@ -291,6 +291,9 @@ local m = {
         numbers = function(opts)
           return string.format("%s", opts.ordinal)
         end,
+        indicator = {
+          style = "underline",
+        },
       },
     },
   },
@@ -487,6 +490,25 @@ local m = {
     end,
     keys = {
       { "<leader><leader>o", "<cmd>CodeDiff file HEAD<CR>" },
+    },
+  },
+  {
+    "leisiji/namu.nvim",
+    opts = {
+      global = {
+        movement = {
+          next = { "<C-j>", "Tab" },
+          previous = { "<C-k>", "<S-Tab>" },
+          close = { "<ESC>" },
+          select = { "<CR>" },
+        },
+      },
+    },
+    cmd = "Namu",
+    keys = {
+      { "<C-r>", "<cmd>Namu symbols<CR>" },
+      { "<M-c>", "<cmd>Namu call in<CR>" },
+      { "<leader>ws", "<cmd>Namu workspace<CR>" },
     },
   },
   -- {
