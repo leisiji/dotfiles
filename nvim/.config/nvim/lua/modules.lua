@@ -493,11 +493,22 @@ local m = {
     },
   },
   {
-    "leisiji/namu.nvim",
+    "bassamsdata/namu.nvim",
     opts = {
       global = {
+        multiselect = {
+          enabled = false,
+          indicator = "●", -- or "✓"◉
+          keymaps = {
+            toggle = "<M-w>",
+            select_all = "<C-a>",
+            clear_all = "<C-l>",
+            untoggle = "<M-y>",
+          },
+          max_items = nil, -- No limit by default
+        },
         movement = {
-          next = { "<C-j>", "Tab" },
+          next = { "<C-j>", "<Tab>" },
           previous = { "<C-k>", "<S-Tab>" },
           close = { "<ESC>" },
           select = { "<CR>" },
