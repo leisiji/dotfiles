@@ -6,6 +6,7 @@ function M.config()
   local actions = glance.actions
 
   glance.setup({
+    zindex = 30,
     folds = {
       folded = false,
     },
