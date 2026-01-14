@@ -13,6 +13,7 @@ function M.lsp_config()
     "jsonls",
     "clangd",
     "lua_ls",
+    "dartls",
   }
   for _, server in pairs(servers) do
     vim.lsp.enable(server, true)

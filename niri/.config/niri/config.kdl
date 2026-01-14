@@ -305,9 +305,9 @@ animations {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
 
-window-rule {
-    open-maximized true
-}
+// window-rule {
+//     open-maximized true
+// }
 
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
@@ -399,7 +399,7 @@ binds {
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
     // or do a four-finger swipe up on a touchpad.
-    Mod+O repeat=false { toggle-overview; }
+    Mod+Tab repeat=false { toggle-overview; }
 
     Mod+Shift+Q repeat=false { close-window; }
 
@@ -623,6 +623,12 @@ binds {
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
+}
+
+gestures {
+    hot-corners {
+        off
+    }
 }
 
 environment {

@@ -43,6 +43,7 @@ export FZF_DEFAULT_OPTS='
 export FORGIT_FZF_DEFAULT_OPTS="-m --bind alt-w:select"
 export GTAGSLABEL='native-pygments'
 export GOPROXY='https://goproxy.io,direct'
+export FLUTTER_STORAGE_BASE_URL="https://mirrors.tuna.tsinghua.edu.cn/flutter"
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 #export JAVA_HOME="/usr/lib/jvm/java-16-openjdk"
 #export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
