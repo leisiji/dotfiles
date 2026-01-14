@@ -11,6 +11,9 @@ function M.config()
     diff_opts = {
       vertical = true,
     },
+    preview_config = {
+      border = "rounded",
+    },
     on_attach = function(bufnr)
       local gs = package.loaded.gitsigns
 
@@ -51,7 +54,7 @@ function M.config()
             local buffer = vim.api.nvim_win_get_buf(win)
             local line = vim.api.nvim_buf_get_lines(buffer, 0, 1, false)
             local commit = string.sub(line[1], 1, 8)
-            vim.cmd(string.format("DiffviewOpen %s^!", commit))
+            vim.cmd(string.format("CodeDiff %s %s~1", commit, commit))
             break
           end
         end
