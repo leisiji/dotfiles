@@ -381,14 +381,6 @@ local m = {
   --   },
   -- },
   {
-    "ZSaberLv0/ZFVimDirDiff",
-    lazy = true,
-    cmd = "ZFDirDiff",
-    dependencies = {
-      "ZSaberLv0/ZFVimJob",
-    },
-  },
-  {
     "folke/flash.nvim",
     event = "VeryLazy",
     ---@type Flash.Config
