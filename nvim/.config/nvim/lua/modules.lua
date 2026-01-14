@@ -155,16 +155,16 @@ local m = {
   },
 
   -- Git
-  -- {
-  --   "lewis6991/gitsigns.nvim",
-  --   event = "VeryLazy",
-  --   config = function()
-  --     require("plugins.gitsigns").config()
-  --   end,
-  --   keys = {
-  --     { "<leader><leader>o", "<cmd>vertical Gitsigns diffthis<CR>" },
-  --   },
-  -- },
+  {
+    "lewis6991/gitsigns.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("plugins.gitsigns").config()
+    end,
+    keys = {
+      { "<leader><leader>o", "<cmd>vertical Gitsigns diffthis<CR>" },
+    },
+  },
   -- {
   --   "sindrets/diffview.nvim",
   --   cmd = { "DiffviewOpen", "DiffviewFileHistory" },
@@ -414,6 +414,7 @@ local m = {
       },
     },
   },
+  --[[
   {
     "leisiji/vgit.nvim",
     event = "VeryLazy",
@@ -447,11 +448,12 @@ local m = {
       { "<leader><leader>d", "<cmd>VGit project_diff_preview<CR>" },
     },
   },
+  ]]
+  --
   {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
-    ---@type snacks.Config
     opts = {
       -- your configuration comes here
       -- or leave it empty to use the default settings

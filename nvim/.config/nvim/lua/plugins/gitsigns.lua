@@ -7,6 +7,7 @@ function M.config()
       follow_files = true,
     },
     signs_staged_enable = false,
+    sign_priority = 9,
     diff_opts = {
       vertical = true,
     },
