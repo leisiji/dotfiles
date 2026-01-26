@@ -23,30 +23,6 @@ function M.config()
         vim.keymap.set(mode, l, r, opts)
       end
 
-      -- Navigation
-      map("n", "<leader><leader>n", function()
-        if vim.wo.diff then
-          return "<leader><leader>n"
-        end
-        vim.schedule(function()
-          gs.next_hunk()
-        end)
-        return "<Ignore>"
-      end, { expr = true })
-
-      map("n", "<leader><leader>N", function()
-        if vim.wo.diff then
-          return "[c"
-        end
-        vim.schedule(function()
-          gs.prev_hunk()
-        end)
-        return "<Ignore>"
-      end, { expr = true })
-      map("n", "<leader><leader>b", function()
-        gs.blame_line({ full = true })
-      end)
-
       map("n", "<leader><leader>s", function()
         local wins = vim.api.nvim_tabpage_list_wins(0)
         for _, win in ipairs(wins) do

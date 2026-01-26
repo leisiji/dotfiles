@@ -1,11 +1,3 @@
-local libgit2 = "/usr/lib/libgit2.so"
-
-if vim.env.TERMUX_APP_PID then
-  libgit2 = vim.env.HOME .. "/.." .. libgit2
-elseif vim.loop.fs_stat(libgit2) == nil then
-  libgit2 = vim.env.HOME .. "/bin/lib/libgit2.so"
-end
-
 local m = {
   { "nvim-lua/plenary.nvim" },
   { "MunifTanjim/nui.nvim" },
@@ -162,21 +154,11 @@ local m = {
       require("plugins.gitsigns").config()
     end,
     keys = {
-      { "<leader><leader>o", "<cmd>vertical Gitsigns diffthis<CR>" },
+      { "<leader><leader>n", "<cmd>Gitsigns next_hunk<CR>" },
+      { "<leader><leader>N", "<cmd>Gitsigns prev_hunk<CR>" },
+      { "<leader><leader>b", "<cmd>Gitsigns blame_line<CR>" },
     },
   },
-  -- {
-  --   "sindrets/diffview.nvim",
-  --   cmd = { "DiffviewOpen", "DiffviewFileHistory" },
-  --   config = function()
-  --     require("plugins.diffview").config()
-  --   end,
-  --   keys = {
-  --     { "<leader><leader>d", "<cmd>DiffviewOpen -uno<CR>" },
-  --     { "<leader><leader>c", "<cmd>DiffviewOpen --cached<CR>" },
-  --   },
-  -- },
-
   -- indent
   {
     "nmac427/guess-indent.nvim",
@@ -366,20 +348,6 @@ local m = {
     },
   },
 
-  -- {
-  --   "yetone/avante.nvim",
-  --   lazy = true,
-  --   config = function()
-  --     require("plugins.avante").config()
-  --   end,
-  --   build = "make BUILD_FROM_SOURCE=true",
-  --   dependencies = {
-  --     "stevearc/dressing.nvim",
-  --   },
-  --   keys = {
-  --     { "<C-a>", "<cmd>AvanteToggle<cr>", mode = { "n", "i" } },
-  --   },
-  -- },
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -406,42 +374,6 @@ local m = {
       },
     },
   },
-  --[[
-  {
-    "leisiji/vgit.nvim",
-    event = "VeryLazy",
-    opts = {
-      settings = {
-        signs = {
-          priority = 9,
-        },
-        libgit2 = {
-          enabled = true,
-          path = libgit2,
-        },
-        live_blame = {
-          enabled = false,
-          debounce_ms = 5000,
-        },
-        live_gutter = {
-          enabled = true,
-          debounce_ms = 1000,
-        },
-      },
-      keymaps = {
-        ["n <leader><leader>n"] = function()
-          require("vgit").hunk_down()
-        end,
-      },
-    },
-    keys = {
-      { "<leader><leader>l", "<cmd>VGit project_logs_preview<CR>" },
-      { "<leader><leader>b", "<cmd>VGit buffer_blame_preview<CR>" },
-      { "<leader><leader>d", "<cmd>VGit project_diff_preview<CR>" },
-    },
-  },
-  ]]
-  --
   {
     "folke/snacks.nvim",
     priority = 1000,
@@ -484,6 +416,7 @@ local m = {
     end,
     keys = {
       { "<leader><leader>o", "<cmd>CodeDiff file HEAD<CR>" },
+      { "<leader><leader>l", "<cmd>CodeDiff history %<CR>" },
     },
   },
   {
@@ -522,9 +455,6 @@ local m = {
   --   opts = {}, -- required, even if empty
   -- },
 }
-
-vim.g.ZFDirDiffKeymap_open = { "<cr>", "l" }
-vim.g.ZFDirDiffKeymap_quit = { "<leader>q", "q" }
 
 if vim.fn.executable("fcitx5") == 1 then
   m[#m + 1] = { "h-hg/fcitx.nvim", event = "InsertEnter" }
