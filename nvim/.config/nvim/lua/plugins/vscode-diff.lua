@@ -1,7 +1,7 @@
 local M = {}
 
 function M.config()
-  require("vscode-diff").setup({
+  require("codediff").setup({
     keymaps = {
       view = {
         quit = "<leader>q",

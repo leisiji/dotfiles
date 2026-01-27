@@ -407,8 +407,7 @@ local m = {
     build = "cd app && bun install",
   },
   {
-    "esmuellert/vscode-diff.nvim",
-    dependencies = { "MunifTanjim/nui.nvim" },
+    "esmuellert/codediff.nvim",
     cmd = "CodeDiff",
     build = "cmake -B build && cmake --build build",
     config = function()
