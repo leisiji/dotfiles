@@ -156,7 +156,12 @@ local m = {
     keys = {
       { "<leader><leader>n", "<cmd>Gitsigns next_hunk<CR>" },
       { "<leader><leader>N", "<cmd>Gitsigns prev_hunk<CR>" },
-      { "<leader><leader>b", "<cmd>Gitsigns blame_line<CR>" },
+      {
+        "<leader><leader>b",
+        function()
+          require("plugins.gitsigns").blame_line()
+        end,
+      },
     },
   },
   -- indent
