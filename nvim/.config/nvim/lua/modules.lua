@@ -294,26 +294,6 @@ local m = {
   },
 
   {
-    "hedyhli/outline.nvim",
-    lazy = true,
-    cmd = { "Outline" },
-    opts = {
-      outline_window = {
-        auto_close = true,
-      },
-      keymaps = {
-        down_and_jump = "<M-j>",
-        up_and_jump = "<M-o>",
-        peek_location = "p",
-        hover_symbol = "<M-k>",
-      },
-    },
-    keys = {
-      { "<leader>v", "<cmd>Outline<cr>" },
-    },
-  },
-
-  {
     "leisiji/litee-calltree.nvim",
     lazy = true,
     cmd = "CallTreeI",
