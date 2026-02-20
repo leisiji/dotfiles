@@ -85,10 +85,6 @@ gs() {
 }
 
 # create tmp file to compatible with flattern.nvim
-nd() {
-    nvim +"bdelete $PWD/tmp_file | DiffviewFileHistory $1" tmp_file
-}
-
 ng() {
     nvim +"bdelete $PWD/tmp_file | chdir $PWD | MyGrugFar --nogit=$1" tmp_file
 }
