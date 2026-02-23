@@ -86,9 +86,7 @@ local m = {
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
-    config = function()
-      require("plugins.surround").config()
-    end,
+    opts = {}
   },
   {
     "windwp/nvim-autopairs",
