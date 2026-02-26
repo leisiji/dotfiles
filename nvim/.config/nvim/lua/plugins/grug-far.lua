@@ -4,6 +4,7 @@ local function open(paths, search)
   require("grug-far").open({
     windowCreationCommand = "tabe",
     prefills = {
+      flags = "-w",
       paths = paths,
       search = search,
     },
@@ -15,6 +16,45 @@ function M.git_dir(cwd)
   return vim.system({ "git", "rev-parse", "--show-toplevel" }, { cwd = cwd, text = true }):wait().stdout
 end
 
+function M.find_refs()
+  local dir = M.git_dir(vim.fn.expand("%:p:h"))
+  local word = vim.fn.expand("<cword>")
+  local filetype = vim.bo.filetype
+
+  -- Map filetype to rule file
+  local rule_map = {
+    c = "find-references-c.yml",
+    cpp = "find-references-c.yml",
+    lua = "find-references-lua.yml",
+  }
+
+  local rule_file = rule_map[filetype] or "find-references-c.yml"
+  local rule_path = vim.fn.stdpath("config") .. "/ast-grep/" .. rule_file
+
+  local rules = vim.fn.readfile(vim.fn.expand(rule_path))
+  local rule_text = table.concat(rules, "\n")
+  local rules_word = rule_text:gsub("FUNC_NAME", word)
+
+  require("grug-far").open({
+    engine = "astgrep-rules",
+    windowCreationCommand = "tabe",
+    prefills = {
+      -- paths = dir,
+      rules = rules_word,
+    },
+  })
+end
+
+function M.search_cur_dir()
+  require("grug-far").open({
+    prefills = {
+      flags = "-w",
+      search = vim.fn.expand("<cword>"),
+      paths = vim.fn.fnamemodify(vim.fn.expand("%:p:h"), ":."),
+    },
+  })
+end
+
 function M.config()
   require("grug-far").setup({
     startInInsertMode = false,
@@ -22,20 +62,12 @@ function M.config()
     resultLocation = {
       showNumberLabel = false,
     },
-    prefills = {
-      flags = "-w",
-    },
     history = {
       autoSave = {
         enabled = false,
       },
     },
   })
-  vim.keymap.set("n", "<leader>d", function()
-    require("grug-far").open({
-      prefills = { search = vim.fn.expand("<cword>"), paths = vim.fn.fnamemodify(vim.fn.expand("%:p:h"), ":.") },
-    })
-  end, { noremap = true, silent = true })
 
   vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("grug-far-keybindings", { clear = true }),

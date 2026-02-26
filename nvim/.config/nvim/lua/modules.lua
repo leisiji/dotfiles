@@ -86,7 +86,7 @@ local m = {
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
-    opts = {}
+    opts = {},
   },
   {
     "windwp/nvim-autopairs",
@@ -312,7 +312,20 @@ local m = {
   {
     "MagicDuck/grug-far.nvim",
     lazy = true,
-    keys = { { "<leader>d" } },
+    keys = {
+      {
+        "<leader>d",
+        function()
+          require("plugins.grug-far").search_cur_dir()
+        end,
+      },
+      {
+        "<leader>e",
+        function()
+          require("plugins.grug-far").find_refs()
+        end,
+      },
+    },
     cmd = "MyGrugFar",
     config = function()
       require("plugins.grug-far").config()
