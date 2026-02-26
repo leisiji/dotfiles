@@ -1,0 +1,9 @@
+id: find-defs
+language: c
+rule:
+  kind: function_definition
+  has:
+    kind: function_declarator
+    stopBy: end
+    has:
+      pattern: FUNC_NAME

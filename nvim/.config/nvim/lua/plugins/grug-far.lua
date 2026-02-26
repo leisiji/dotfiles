@@ -16,21 +16,14 @@ function M.git_dir(cwd)
   return vim.system({ "git", "rev-parse", "--show-toplevel" }, { cwd = cwd, text = true }):wait().stdout
 end
 
-function M.find_refs()
-  local dir = M.git_dir(vim.fn.expand("%:p:h"))
-  local word = vim.fn.expand("<cword>")
-  local filetype = vim.bo.filetype
-
-  -- Map filetype to rule file
-  local rule_map = {
-    c = "find-references-c.yml",
-    cpp = "find-references-c.yml",
-    lua = "find-references-lua.yml",
-  }
-
-  local rule_file = rule_map[filetype] or "find-references-c.yml"
+local function ast_grep(rule_file)
   local rule_path = vim.fn.stdpath("config") .. "/ast-grep/" .. rule_file
 
+  if not vim.fn.filereadable(rule_path) then
+    return
+  end
+
+  local word = vim.fn.expand("<cword>")
   local rules = vim.fn.readfile(vim.fn.expand(rule_path))
   local rule_text = table.concat(rules, "\n")
   local rules_word = rule_text:gsub("FUNC_NAME", word)
@@ -39,10 +32,19 @@ function M.find_refs()
     engine = "astgrep-rules",
     windowCreationCommand = "tabe",
     prefills = {
-      -- paths = dir,
       rules = rules_word,
     },
   })
+end
+
+function M.find_defs()
+  local rule_file = "find-defs-" .. vim.bo.filetype .. ".yml"
+  ast_grep(rule_file)
+end
+
+function M.find_refs()
+  local rule_file = "find-references-" .. vim.bo.filetype .. ".yml"
+  ast_grep(rule_file)
 end
 
 function M.search_cur_dir()

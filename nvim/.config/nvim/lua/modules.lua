@@ -325,6 +325,12 @@ local m = {
           require("plugins.grug-far").find_refs()
         end,
       },
+      {
+        "<leader>c",
+        function()
+          require("plugins.grug-far").find_defs()
+        end,
+      },
     },
     cmd = "MyGrugFar",
     config = function()

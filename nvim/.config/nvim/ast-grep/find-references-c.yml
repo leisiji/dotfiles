@@ -13,7 +13,6 @@ rule:
         kind: init_declarator
         field: value
         stopBy: end
-    # 匹配赋值表达式中的标识符（如 h = c）
     - kind: identifier
       regex: "^FUNC_NAME$"
       inside:
@@ -21,7 +20,6 @@ rule:
         field: right
         stopBy: end
   not:
-    # 排除函数定义中的函数名
     inside:
       kind: function_declarator
       stopBy: end
