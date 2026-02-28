@@ -171,6 +171,14 @@ gp() {
     git push origin ${branch}:${branch}
 }
 
+nh() {
+    nvim --noplugin --headless \
+      -c "lua for _, f in ipairs(vim.v.oldfiles) do if vim.fn.filereadable(f) == 1 then io.write(f .. '\n') end end" \
+      -c "qa" | \
+      fzf | xargs -r nvim
+}
+bindkey -s '\er' 'nh\n'
+
 autoload -Uz add-zsh-hook
 function _starship_osc133_precmd() {
     printf "\033]133;A\007"
