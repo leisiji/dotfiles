@@ -179,6 +179,28 @@ nh() {
 }
 bindkey -s '\er' 'nh\n'
 
+# repo command start
+_repo_fzf() {
+    local root=$(while [ ! -d .repo ] && [ "$PWD" != "/" ]; do cd ..; done; pwd)
+    [[ "$root" == "/" ]] && return 1
+    local cache_file=$HOME/.cache/zinit/$(echo ${root} | md5sum | awk '{print $1}').${1}.zsh
+    local fzf_opts="--bind=ctrl-r:execute-silent(rm -f ${cache_file})+reload(${HOME}/fzf/repo_list.sh ${1} ${root} | tee ${cache_file})"
+    if [[ -f ${cache_file} ]]; then
+        REPLY=$(cat ${cache_file} | fzf ${fzf_opts})
+    else
+        REPLY=$(${HOME}/fzf/repo_list.sh ${1} ${root} | tee ${cache_file} | fzf ${fzf_opts})
+    fi
+}
+repo_dir() {
+    _repo_fzf directory && cd ${REPLY}
+}
+bindkey -s '\ej' 'repo_dir\n'
+repo_files() {
+    _repo_fzf file && nvim ${REPLY}
+}
+bindkey -s '\eu' 'repo_files\n'
+# repo command end
+
 autoload -Uz add-zsh-hook
 function _starship_osc133_precmd() {
     printf "\033]133;A\007"
