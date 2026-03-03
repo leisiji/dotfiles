@@ -320,7 +320,7 @@ local m = {
         end,
       },
       {
-        "<leader>e",
+        "<leader>x",
         function()
           require("plugins.grug-far").find_refs()
         end,
