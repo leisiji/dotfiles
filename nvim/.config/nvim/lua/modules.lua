@@ -16,6 +16,38 @@ local m = {
     "leisiji/fzf_utils",
     cmd = "FzfCommand",
     dependencies = { "vijaymarupudi/nvim-fzf" },
+    keys = {
+      { "<C-p>", "<cmd>FzfCommand --files<CR>" },
+      { "<C-f>", "<cmd>FzfCommand --lines<CR>" },
+      { "<leader>b", "<cmd>FzfCommand --buffers<CR>" },
+      { "<leader><leader>m", "<cmd>FzfCommand --man<CR>" },
+      { "<leader><leader>h", "<cmd>FzfCommand --vim help<CR>" },
+      { "<leader>ft", "<cmd>FzfCommand --vim filetypes<CR>" },
+      {
+        "<M-f>",
+        function()
+          vim.cmd("FzfCommand --rg --all-buffers " .. vim.fn.expand("<cword>"))
+        end,
+      },
+      {
+        "<leader>ff",
+        function()
+          vim.cmd("FzfCommand --rg " .. vim.fn.expand("<cword>") .. " " .. vim.fn.expand("%"))
+        end,
+      },
+      { "<leader>m", "<cmd>FzfCommand --mru<CR>" },
+      { "<leader><leader>z", "<cmd>FzfCommand --zoxide<CR>" },
+      { "<M-j>", "<cmd>FzfCommand --lsp jump_def edit<CR>" },
+      { "<M-t>", "<cmd>FzfCommand --lsp jump_def tab drop<CR>" },
+      { "<M-v>", "<cmd>FzfCommand --lsp jump_def vsplit<CR>" },
+      { "<leader><leader>r", "<cmd>FzfCommand --lsp ref<CR>" },
+      {
+        "<leader>fa",
+        function()
+          vim.fn.feedkeys(":MyGrugFar " .. vim.fn.expand("<cword>"), "n")
+        end,
+      },
+    },
   },
 
   {
@@ -59,16 +91,6 @@ local m = {
     config = function()
       require("plugins.java").config()
     end,
-  },
-  {
-    "rmagatti/goto-preview",
-    cmd = "GotoPreview",
-    config = function()
-      require("plugins.goto_preview").config()
-    end,
-    keys = {
-      { "<leader><leader>p", "<cmd>GotoPreview<cr>" },
-    },
   },
   {
     "folke/lazydev.nvim",
@@ -126,7 +148,11 @@ local m = {
       require("plugins.femaco").config()
     end,
     cmd = "FeMaco",
+    keys = {
+      { "<leader><leader>e", "<cmd>FeMaco<CR>" },
+    },
   },
+
   {
     "OXY2DEV/markview.nvim",
     ft = "markdown",
@@ -347,6 +373,7 @@ local m = {
     end,
     keys = {
       { "<M-r>", "<cmd>Glance references<cr>" },
+      { "<leader><leader>p", "<cmd>Glance definitions<cr>" },
     },
   },
 

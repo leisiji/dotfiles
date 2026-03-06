@@ -37,11 +37,7 @@ local function show_documents()
 end
 
 -------------------- keymaps ---------------------------------------
-local function cmd_gen(lhs, rhs)
-  mapkey("n", lhs, string.format(":%s", rhs), { noremap = true })
-end
 local function cmd(v)
-  mapkey("n", v[1], string.format("<cmd>%s<cr>", v[2]), keymap_opts)
 end
 
 local function init_nvim_keys()
@@ -80,6 +76,7 @@ local function init_nvim_keys()
     { "<leader>H", "20winc <" },
     { "<leader>K", "10winc +" },
     { "<leader>J", "10winc -" },
+    { "<Tab>", "nohl" },
   }
   local func_maps = {
     { "<leader>q", quit },
@@ -154,13 +151,13 @@ local function init_nvim_keys()
     mapkey("n", v[1], v[2], keymap_opts)
   end
   for i = 1, 9, 1 do
-    cmd({ string.format("<M-%d>", i), string.format("tabn%d", i) })
+    mapkey("n", string.format("<M-%d>", i), string.format("<cmd>tabn%d<cr>", i), keymap_opts)
   end
   for _, v in ipairs(vn_maps) do
     mapkey("v", v[1], v[2], keymap_opts)
   end
   for _, v in ipairs(cmd_maps) do
-    cmd(v)
+    mapkey("n", v[1], "<cmd>" .. v[2] .. "<cr>", keymap_opts)
   end
   for _, v in ipairs(func_maps) do
     vim.keymap.set("n", v[1], v[2], keymap_opts)
@@ -170,45 +167,8 @@ local function init_nvim_keys()
 end
 
 local function init_plugins_keymaps()
-  local cmds = {
-
-    { "<leader><leader>e", "FeMaco" },
-    { "<Tab>", "nohl" },
-
-    -- fzf_utils
-    { "<C-p>", "FzfCommand --files" },
-    { "<C-f>", "FzfCommand --lines" },
-    { "<leader>b", "FzfCommand --buffers" },
-    { "<leader><leader>m", "FzfCommand --man" },
-    { "<leader><leader>h", "FzfCommand --vim help" },
-    { "<leader>ft", "FzfCommand --vim filetypes" },
-    { "<leader>fu", "FzfCommand --gtags --update" },
-    { "<leader>fb", "FzfCommand --gtags --update-buffer" },
-    { "<leader>fr", [[exe("FzfCommand --gtags -r ".expand("<cword>"))]] },
-    { "<leader>fd", [[exe('FzfCommand --gtags -d '.expand('<cword>'))]] },
-    { "<M-f>", [[exe('FzfCommand --rg --all-buffers '.expand('<cword>'))]] },
-    { "<leader>ff", [[exe('FzfCommand --rg '.expand('<cword>')." ".expand('%'))]] },
-    { "<leader>gc", [[exe('FzfCommand --commit '.expand('%:p'))]] },
-    { "<leader>m", "FzfCommand --mru" },
-    { "<leader><leader>z", "FzfCommand --zoxide" },
-    { "<M-t>", "FzfCommand --git_files" },
-
-    { "<M-j>", "FzfCommand --lsp jump_def edit" },
-    { "<M-t>", "FzfCommand --lsp jump_def tab drop" },
-    { "<M-v>", "FzfCommand --lsp jump_def vsplit" },
-    { "<leader><leader>r", "FzfCommand --lsp ref" },
-  }
-
-  for _, v in pairs(cmds) do
-    cmd(v)
-  end
-
-  cmd_gen("<leader>gl", [[<C-U><C-R>=printf('FzfCommand --live_grep %s', fnamemodify(expand("%:p:h"), ":."))<CR>]])
-
   -- easy align
   mapkey("x", "ga", ":EasyAlign<cr>", {})
-
-  cmd_gen("<leader>fa", [[<C-U><C-R>='MyGrugFar '.expand('<cword>')<CR>]])
 
   -- lsp
   vim.keymap.set("i", "<M-k>", vim.lsp.buf.signature_help, keymap_opts)

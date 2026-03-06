@@ -81,6 +81,11 @@ function M.config()
         instance:goto_location()
         instance:close()
       end, { buffer = true })
+      vim.keymap.set("n", "<C-c>", function()
+        local grug = require("grug-far")
+        local instance = grug.get_instance(0)
+        instance:toggle_flags({ "-w" })
+      end, { buffer = true })
     end,
   })
 
