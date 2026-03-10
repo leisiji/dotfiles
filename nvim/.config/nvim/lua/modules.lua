@@ -95,13 +95,7 @@ local m = {
   {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
-    opts = {
-      library = {
-        -- See the configuration section for more details
-        -- Load luvit types when the `vim.uv` word is found
-        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-      },
-    },
+    opts = {},
   },
 
   -- completion
@@ -155,12 +149,7 @@ local m = {
 
   {
     "OXY2DEV/markview.nvim",
-    ft = "markdown",
-    opts = {
-      preview = {
-        enable = false,
-      },
-    },
+    lazy = true,
     keys = {
       { "<leader><leader>m", "<cmd>Markview toggle<cr>" },
     },
@@ -373,7 +362,13 @@ local m = {
     end,
     keys = {
       { "<M-r>", "<cmd>Glance references<cr>" },
-      { "<leader><leader>p", "<cmd>Glance definitions<cr>" },
+      {
+        "<leader><leader>p",
+        function()
+          vim.cmd("Glance definitions")
+          vim.defer_fn(require("glance").actions.enter_win("preview"), 300)
+        end,
+      },
     },
   },
 

@@ -36,10 +36,6 @@ local function show_documents()
   end
 end
 
--------------------- keymaps ---------------------------------------
-local function cmd(v)
-end
-
 local function init_nvim_keys()
   local nn_maps = {
     { "<M-a>", "<C-w>w" },
