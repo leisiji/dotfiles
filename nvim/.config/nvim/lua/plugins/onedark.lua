@@ -12,6 +12,7 @@ function M.config()
     },
     colors = {
       my_new_red = "require('onedarkpro.helpers').darken('red', 15, 'onedark')",
+      my_new_yellow = "require('onedarkpro.helpers').darken('yellow', 30, 'onedark')",
     },
     plugins = {
       all = false,
@@ -32,7 +33,7 @@ function M.config()
       -- Pmenu = { bg = "#202020" },
       Macro = { fg = "${orange}" },
       Enum = { fg = "${cyan}" },
-      ["@property"] = { fg = "${white}" },
+      ["@property"] = { fg = "${my_new_yellow}" },
       ["@variable"] = { fg = "${red}" },
       ["@parameter"] = { fg = "${my_new_red}" },
       BlinkCmpMenuBorder = { fg = "${blue}" },
