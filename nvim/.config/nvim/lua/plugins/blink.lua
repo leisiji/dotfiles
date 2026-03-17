@@ -42,7 +42,22 @@ M.config = {
     accept = { auto_brackets = { enabled = true } },
     list = { selection = { preselect = false, auto_insert = true } },
     keyword = { range = "full" },
-    menu = { border = "rounded" },
+    menu = {
+      border = "rounded",
+      draw = {
+        columns = { { "kind_icon" }, { "label", gap = 1 } },
+        components = {
+          label = {
+            text = function(ctx)
+              return require("colorful-menu").blink_components_text(ctx)
+            end,
+            highlight = function(ctx)
+              return require("colorful-menu").blink_components_highlight(ctx)
+            end,
+          },
+        },
+      },
+    },
     documentation = { window = { border = "rounded" } },
   },
   fuzzy = {
