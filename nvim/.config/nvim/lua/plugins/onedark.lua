@@ -29,6 +29,7 @@ function M.config()
     },
     highlights = {
       PmenuSel = { fg = "${fg}", bg = "#404040" },
+      CursorLine = { bg = "#202020" },
 
       -- Pmenu = { bg = "#202020" },
       Macro = { fg = "${orange}" },
@@ -38,6 +39,7 @@ function M.config()
       ["@parameter"] = { fg = "${my_new_red}" },
       BlinkCmpMenuBorder = { fg = "${blue}" },
       BlinkCmpDocBorder = { fg = "${blue}" },
+      DiffAdd = { fg = "#10180e" }
     },
   })
   vim.cmd("colorscheme onedark_dark")
