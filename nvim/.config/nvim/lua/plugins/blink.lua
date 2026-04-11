@@ -22,6 +22,7 @@ M.config = {
           return cmp.show()
         end
       end,
+      "snippet_forward",
       "fallback",
     },
     ["<S-Tab>"] = { "snippet_backward", "fallback" },
