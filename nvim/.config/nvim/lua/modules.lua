@@ -69,6 +69,7 @@ local m = {
 
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     config = function()
       require("plugins.treesitter").config()
     end,
@@ -138,7 +139,7 @@ local m = {
 
   -- markdown
   {
-    "AckslD/nvim-FeMaco.lua",
+    "gen4438/nvim-FeMaco.lua",
     config = function()
       require("plugins.femaco").config()
     end,
