@@ -77,6 +77,7 @@ local m = {
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     branch = "main",
+    opts = {},
   },
 
   -- LSP
