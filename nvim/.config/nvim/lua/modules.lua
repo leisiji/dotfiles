@@ -335,14 +335,6 @@ local m = {
   },
 
   {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("plugins.noice").config()
-    end,
-  },
-
-  {
     "MagicDuck/grug-far.nvim",
     lazy = true,
     keys = {
@@ -489,6 +481,12 @@ local m = {
       { "<M-c>", "<cmd>Namu call in<CR>" },
       { "<leader>ws", "<cmd>Namu workspace<CR>" },
     },
+  },
+  {
+    "rachartier/tiny-cmdline.nvim",
+    init = function()
+      vim.o.cmdheight = 0
+    end,
   },
   -- {
   --   "chrisgrieser/nvim-lsp-endhints",

@@ -15,9 +15,7 @@ function M.lsp_config()
     "lua_ls",
     "dartls",
   }
-  for _, server in pairs(servers) do
-    vim.lsp.enable(server, true)
-  end
+  vim.lsp.enable(servers)
 
   vim.lsp.config("clangd", {
     cmd = { "clangd", "--header-insertion=never" },
@@ -25,6 +23,22 @@ function M.lsp_config()
 
   vim.lsp.inlay_hint.enable(true)
   local group = vim.api.nvim_create_augroup("my.lsp", { clear = true })
+
+  vim.api.nvim_create_autocmd("LspProgress", {
+    group = group,
+    callback = function(ev)
+      local value = ev.data.params.value
+      vim.api.nvim_echo({ { value.message or "done" } }, false, {
+        id = "lsp." .. ev.data.client_id,
+        kind = "progress",
+        source = "vim.lsp",
+        title = value.title,
+        status = value.kind ~= "end" and "running" or "success",
+        percent = value.percentage,
+      })
+    end,
+  })
+
   vim.api.nvim_create_autocmd("LspAttach", {
     group = group,
     callback = function(args)
