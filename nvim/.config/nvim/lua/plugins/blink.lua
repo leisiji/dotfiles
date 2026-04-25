@@ -1,11 +1,12 @@
 local M = {}
 
 local has_words_before = function()
-  if vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt" then
+  local col = vim.api.nvim_win_get_cursor(0)[2]
+  if col == 0 then
     return false
   end
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  local line = vim.api.nvim_get_current_line()
+  return line:sub(col, col):match("%s") == nil
 end
 
 M.config = {
@@ -16,13 +17,10 @@ M.config = {
     ["<C-j>"] = { "select_next", "fallback" },
     ["<Tab>"] = {
       function(cmp)
-        if cmp.is_menu_visible() then
-          return cmp.select_next()
-        elseif has_words_before() then
-          return cmp.show()
+        if has_words_before() then
+          return cmp.insert_next()
         end
       end,
-      "snippet_forward",
       "fallback",
     },
     ["<S-Tab>"] = { "snippet_backward", "fallback" },
@@ -61,11 +59,7 @@ M.config = {
     },
     documentation = { window = { border = "rounded" } },
   },
-  fuzzy = {
-    prebuilt_binaries = {
-      ignore_version_mismatch = true,
-    },
-  },
+  fuzzy = { implementation = "rust" },
   cmdline = {
     keymap = {
       preset = "none",

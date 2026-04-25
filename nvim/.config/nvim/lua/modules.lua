@@ -117,8 +117,14 @@ local m = {
   {
     "saghen/blink.cmp",
     lazy = false,
-    dependencies = { { "rafamadriz/friendly-snippets" }, { "xzbdmw/colorful-menu.nvim", opts = {} } },
-    build = "cargo build --release",
+    dependencies = {
+      { "saghen/blink.lib" },
+      { "rafamadriz/friendly-snippets" },
+      { "xzbdmw/colorful-menu.nvim", opts = {} },
+    },
+    build = function()
+      require("blink.cmp").build():wait(60000)
+    end,
     opts = require("plugins.blink").config,
   },
 

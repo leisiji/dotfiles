@@ -239,3 +239,23 @@ init_plugins_keymaps()
 vim.cmd([[
   set list lcs=tab:→\ ,trail:·
 ]])
+
+require('vim._core.ui2').enable({
+  enable = true, -- Whether to enable or disable the UI.
+  msg = {
+    targets = 'cmd',
+    cmd = {
+      height = 0.5
+    },
+    dialog = {
+      height = 0.5,
+    },
+    msg = {
+      height = 0.5,
+      timeout = 4000, -- Time a message is visible in the message window.
+    },
+    pager = { -- Options related to message window.
+      height = 1, -- Maximum height.
+    },
+  },
+})
