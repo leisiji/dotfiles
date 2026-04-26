@@ -215,7 +215,6 @@ local buf_cfg = {
   softtabstop = 4,
   swapfile = false,
   undofile = true,
-  mouse = "",
   --expandtab = true,
 }
 for k, v in pairs(global_cfg) do
