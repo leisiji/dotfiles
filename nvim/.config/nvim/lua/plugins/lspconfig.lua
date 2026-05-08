@@ -27,6 +27,9 @@ function M.lsp_config()
   vim.api.nvim_create_autocmd("LspProgress", {
     group = group,
     callback = function(ev)
+      if vim.fn.mode() ~= 'n' then
+        return
+      end
       local value = ev.data.params.value
       vim.api.nvim_echo({ { value.message or "done" } }, false, {
         id = "lsp." .. ev.data.client_id,
