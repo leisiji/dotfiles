@@ -1,7 +1,7 @@
 local M = {}
 
 function M.config()
-  require("nvim-treesitter").setup({
+  require("tree-sitter-manager").setup({
     ensure_installed = {
       "c",
       "lua",
@@ -16,12 +16,10 @@ function M.config()
       "bash",
       "markdown",
       "markdown_inline",
-      "kotlin",
       "python",
       "typescript",
       "json",
       "json5",
-      "jsonc",
       "vue",
       "devicetree",
       "go",
@@ -33,20 +31,7 @@ function M.config()
       "yaml",
       "vimdoc",
       "mermaid",
-    },
-    highlight = {
-      enable = true,
-      additional_vim_regex_highlighting = false,
-      disable = function(_, buf)
-        local max_filesize = 500 * 1024 -- 100 KB
-        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats and stats.size > max_filesize then
-          return true
-        end
-      end,
-    },
-    indent = {
-      enable = true,
+      "zsh",
     },
   })
   vim.keymap.set({ "x", "o" }, "ik", function()

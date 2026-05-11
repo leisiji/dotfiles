@@ -14,7 +14,7 @@ sudo pacman -S \
     jq bat ripgrep fd eza hexyl lazygit yazi zoxide bottom starship atuin \
     cmake-language-server stylua clang tmux bear lua-language-server \
     neovim bun termusic
-cargo install flash_tmux
+cargo install flash_tmux tree-sitter-cli
 ```
 
 language-server, linter, formatter

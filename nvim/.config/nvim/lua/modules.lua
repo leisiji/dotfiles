@@ -68,16 +68,17 @@ local m = {
   },
 
   {
-    "nvim-treesitter/nvim-treesitter",
-    branch = "main",
+    "romus204/tree-sitter-manager.nvim",
     config = function()
       require("plugins.treesitter").config()
     end,
-  },
-  {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    branch = "main",
-    opts = {},
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        branch = "main",
+        opts = {},
+      },
+    },
   },
 
   -- LSP
