@@ -56,6 +56,12 @@ sudo pacman -S xdg-desktop-portal-hyprland xdg-desktop-portal-hyprland hyprpaper
                wofi wlogout ghostty
 ```
 
+fish
+
+```bash
+fisher install wfxr/forgit
+```
+
 software can also be downloaded from below links:
 
 - [fzf](https://github.com/junegunn/fzf/releases)
