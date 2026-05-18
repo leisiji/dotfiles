@@ -238,7 +238,6 @@ init_plugins_keymaps()
 -- vim.o.mouse not work: https://github.com/neovim/neovim/issues/28992
 vim.cmd([[
   set list lcs=tab:→\ ,trail:·
-  set mouse="nv"
 ]])
 
 require("vim._core.ui2").enable({})
