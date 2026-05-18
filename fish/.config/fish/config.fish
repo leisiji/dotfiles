@@ -20,7 +20,12 @@ alias t 'tmux -2 -u'
 alias ta 'tmux -2 -u a'
 alias cr 'cd (git rev-parse --show-toplevel)'
 alias gt 'gitui -t macchiato.ron'
+alias claude '$HOME/.bun/bin/claude --dangerously-skip-permissions'
 alias vscode-json-language-server vscode-json-languageserver
+
+if test -f ~/local_path.fish
+    source ~/local_path.fish
+end
 
 # ========== fzf integration ==========
 if type -q fzf
@@ -69,8 +74,7 @@ function __bind_git_status_fzf
 end
 
 # ========== Key Bindings ==========
-bind \cw backward-kill-word
-bind \ew backward-kill-word
+bind \ew backward-kill-bigword
 bind \e, accept-autosuggestion
 
 bind \eq __bind_cd_up
