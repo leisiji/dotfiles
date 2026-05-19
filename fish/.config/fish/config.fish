@@ -13,6 +13,7 @@ set -gx GTAGSLABEL native-pygments
 set -gx GOPROXY https://goproxy.io,direct
 set -gx FLUTTER_STORAGE_BASE_URL https://mirrors.tuna.tsinghua.edu.cn/flutter
 set -gx RUSTUP_DIST_SERVER https://mirrors.ustc.edu.cn/rust-static
+set -gx fish_prompt_pwd_dir_length 0
 
 # ========== Aliases ==========
 alias ni nvim
@@ -33,7 +34,7 @@ if type -q fzf
 end
 
 # ========== Shell integrations ==========
-starship init fish | source
+# starship init fish | source
 # atuin init fish | source
 zoxide init fish | source
 
