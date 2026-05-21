@@ -86,7 +86,7 @@ local function init_nvim_keys()
       end,
     },
     {
-      "<M-o>",
+      "<M-g>",
       function()
         vim.diagnostic.open_float({ border = "single" })
       end,
