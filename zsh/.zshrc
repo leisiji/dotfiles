@@ -53,8 +53,7 @@ export ZSH_AUTOSUGGEST_USE_ASYNC="true"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
 
 # gentoo prefix
-zinit snippet $HOME/fzf/key-bindings.zsh
-zinit snippet $HOME/fzf/completion.zsh
+eval "$(fzf --zsh)"
 source $HOME/fzf/extract.zsh
 
 zpcompinit; zpcdreplay
