@@ -19,6 +19,7 @@ function extract --description 'Extract various archive formats'
 
         set -l full_path (realpath "$file")
         set -l basename (basename "$file")
+        set -l rand (random)
 
         # Extract directory name (remove extension(s))
         set -l extract_dir (string replace -r '\.[^.]*$' '' "$basename")
@@ -27,7 +28,7 @@ function extract --description 'Extract various archive formats'
         end
 
         if test -e "$extract_dir"
-            set extract_dir "$extract_dir-"(random)
+            set extract_dir "$extract_dir-$rand"
         end
 
         command mkdir -p "$extract_dir"
@@ -146,9 +147,9 @@ function extract --description 'Extract various archive formats'
             case 1
                 if test -e "$contents[1]"
                     if test (basename "$contents[1]") = "$extract_dir"
-                        command mv "$contents[1]" "$extract_dir-"(random)
+                        command mv "$contents[1]" "$extract_dir-$rand"
                         command rmdir "$extract_dir"
-                        command mv "$extract_dir-"(random) "$extract_dir"
+                        command mv "$extract_dir-$rand" "$extract_dir"
                     else if not test -e (basename "$contents[1]")
                         command mv "$contents[1]" .
                         command rmdir "$extract_dir"
