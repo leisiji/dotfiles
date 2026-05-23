@@ -66,7 +66,6 @@ end
 
 function __bind_git_status_fzf
     set -lx FZF_DEFAULT_COMMAND "git status -uno -s"
-    set -lx FZF_DEFAULT_OPTS "--reverse --cycle"
     set -l item (fzf -m < /dev/tty | awk '{print $2}')
     if test -n "$item"
         commandline -i " $item"

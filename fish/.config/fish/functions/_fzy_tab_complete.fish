@@ -1,9 +1,4 @@
 function _fzy_tab_complete --description 'fzy-powered tab completion'
-    if test "$FZY_TAB_ENABLE" != 1
-        commandline -f complete
-        return
-    end
-
     # Get command line state
     set -l cmd (commandline -c)
     set -l token (commandline -ct)

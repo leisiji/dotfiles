@@ -32,6 +32,7 @@ function M.config()
       "vimdoc",
       "mermaid",
       "zsh",
+      "fish",
     },
   })
   vim.keymap.set({ "x", "o" }, "ik", function()
