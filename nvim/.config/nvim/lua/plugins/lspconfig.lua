@@ -14,6 +14,7 @@ function M.lsp_config()
     "clangd",
     "lua_ls",
     "dartls",
+    "fish_lsp",
   }
   vim.lsp.enable(servers)
 
@@ -27,7 +28,7 @@ function M.lsp_config()
   vim.api.nvim_create_autocmd("LspProgress", {
     group = group,
     callback = function(ev)
-      if vim.fn.mode() ~= 'n' then
+      if vim.fn.mode() ~= "n" then
         return
       end
       local value = ev.data.params.value
