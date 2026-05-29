@@ -13,7 +13,7 @@ set -gx GTAGSLABEL native-pygments
 set -gx GOPROXY https://goproxy.io,direct
 set -gx FLUTTER_STORAGE_BASE_URL https://mirrors.tuna.tsinghua.edu.cn/flutter
 set -gx RUSTUP_DIST_SERVER https://mirrors.ustc.edu.cn/rust-static
-set -gx fish_prompt_pwd_dir_length 0
+set -gx fish_prompt_pwd_dir_length 1000
 
 # ========== Aliases ==========
 alias ni nvim
@@ -21,7 +21,7 @@ alias t 'tmux -2 -u'
 alias ta 'tmux -2 -u a'
 alias cr 'cd (git rev-parse --show-toplevel)'
 alias gt 'gitui -t macchiato.ron'
-alias claude '$HOME/.bun/bin/claude --dangerously-skip-permissions'
+alias claude 'claude --dangerously-skip-permissions'
 alias vscode-json-language-server vscode-json-languageserver
 
 if test -f ~/local_path.fish
@@ -85,6 +85,14 @@ bind \er nh
 bind \ej repo_dir
 bind \eu repo_files
 bind \et __bind_git_status_fzf
+
+# ========== Hydro prompt ==========
+set -g hydro_symbol_prompt '➜'
+set -g hydro_color_pwd blue
+set -g hydro_color_git brblack
+set -g hydro_color_prompt green
+set -g hydro_color_error red
+set -g hydro_multiline true
 
 # ========== Conditional ==========
 if set -q TERMUX_APP_PID
