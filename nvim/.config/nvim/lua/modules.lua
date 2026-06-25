@@ -285,13 +285,13 @@ local m = {
     end,
   },
 
-  {
-    "mfussenegger/nvim-lint",
-    event = "BufReadPost",
-    config = function()
-      require("plugins.lint").config()
-    end,
-  },
+  -- {
+  --   "mfussenegger/nvim-lint",
+  --   event = "BufReadPost",
+  --   config = function()
+  --     require("plugins.lint").config()
+  --   end,
+  -- },
 
   {
     "Mr-LLLLL/interestingwords.nvim",
