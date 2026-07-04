@@ -14,7 +14,9 @@ sudo pacman -S \
     jq bat ripgrep fd eza hexyl lazygit yazi zoxide bottom starship atuin \
     cmake-language-server stylua clang tmux bear lua-language-server \
     neovim bun termusic
-cargo install flash_tmux tree-sitter-cli makefile-lsp
+cargo install flash_tmux tree-sitter-cli
+# cargo install makefile-lsp
+go install github.com/owenrumney/make-ls/cmd/make-ls@latest
 ```
 
 language-server, linter, formatter

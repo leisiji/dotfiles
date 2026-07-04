@@ -3,7 +3,7 @@ set -gx TERM xterm-256color
 set -gx TERM_ITALICS true
 set -gx MANPAGER 'nvim +Man!'
 set -gx EDITOR nvim
-set -gx PATH $PATH $HOME/.bun/bin $HOME/.cargo/bin
+set -gx PATH $PATH $HOME/.bun/bin $HOME/.cargo/bin $HOME/go/bin
 set -gx FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix'
 set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 set -gx FZF_ALT_C_COMMAND 'fd --type d --strip-cwd-prefix'

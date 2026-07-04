@@ -26,12 +26,12 @@ function M.lsp_config()
   local group = vim.api.nvim_create_augroup("my.lsp", { clear = true })
 
   vim.api.nvim_create_autocmd("FileType", {
-    group = group,
     pattern = "make",
     callback = function()
       vim.lsp.start({
-        name = "makefile-lsp",
-        cmd = { "makefile-lsp" },
+        name = "make-ls",
+        cmd = { "make-ls" },
+        root_dir = vim.fs.root(0, { "Makefile", "makefile", "GNUmakefile" }),
       })
     end,
   })
