@@ -159,7 +159,7 @@ local function init_nvim_keys()
     vim.keymap.set("n", v[1], v[2], keymap_opts)
   end
 
-  mapkey("t", "<M-e>", "<C-\\><C-n>", keymap_opts)
+  mapkey("t", "<M-w>", "<C-\\><C-n>", keymap_opts)
 end
 
 local function init_plugins_keymaps()
