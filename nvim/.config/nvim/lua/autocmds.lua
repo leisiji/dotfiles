@@ -8,7 +8,8 @@ local autocmds = {
     end
   end,
   TextYankPost = function()
-    vim.hl.hl_op({ higroup = "IncSearch", timeout = 500 })
+    local hl = vim.hl.hl_op or vim.highlight.on_yank
+    hl({ higroup = "IncSearch", timeout = 500 })
   end,
 }
 for key, value in pairs(autocmds) do

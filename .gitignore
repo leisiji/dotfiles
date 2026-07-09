@@ -3,3 +3,4 @@ packer_compiled.lua
 .luarc.json
 lazy-lock.json
 history.txt
+fish_variables*
