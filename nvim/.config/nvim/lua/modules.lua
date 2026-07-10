@@ -389,8 +389,19 @@ local m = {
       {
         "<leader><leader>p",
         function()
-          vim.cmd("Glance definitions")
-          vim.defer_fn(require("glance").actions.enter_win("preview"), 300)
+          local glance = require("glance")
+          glance.open("definitions", {
+            hooks = {
+              before_open = function(results, open_fn, jump_fn, method)
+                open_fn()
+                -- Trigger CursorMoved on the list buffer so Preview:update()
+                -- positions the cursor at the definition instead of file top
+                local list_buf = vim.api.nvim_get_current_buf()
+                vim.api.nvim_exec_autocmds("CursorMoved", { buffer = list_buf })
+                glance.actions.enter_win("preview")()
+              end,
+            },
+          })
         end,
       },
     },
