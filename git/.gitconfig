@@ -4,7 +4,7 @@
 [core]
 	editor = nvim --cmd 'let g:unception_block_while_host_edits=1'
 	excludesfile = ~/.gitignore_global
-    pager = DELTA_FEATURES=$([[ $COLUMNS >= 160 ]] && echo "side-by-side") delta
+    pager = DELTA_FEATURES=$([[ ${COLUMNS:-$(tput cols)} -gt 160 ]] && echo "+side-by-side" || echo "+") delta
 
 [color]
 	ui = true
@@ -15,8 +15,8 @@
     navigate = true  # use n and N to move between diff sections
     dark = true      # or light = true, or omit for auto-detection
     features = colibri
-[merge]
-    conflictStyle = zdiff3
+# [merge]
+#     conflictStyle = zdiff3
 # [pager]
 # 	show = git-split-diffs --color | less -+LFX
 # 	diff = git-split-diffs --color | less -+LFX
