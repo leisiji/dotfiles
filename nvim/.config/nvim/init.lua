@@ -203,6 +203,7 @@ local global_cfg = {
   -- jumpoptions = "stack",
   -- foldmethod = "expr",
   -- foldexpr = "nvim_treesitter#foldexpr()",
+  mouse = "nv"
 }
 local win_cfg = {
   signcolumn = "yes",
@@ -238,7 +239,6 @@ init_plugins_keymaps()
 -- vim.o.mouse not work: https://github.com/neovim/neovim/issues/28992
 vim.cmd([[
   set list lcs=tab:→\ ,trail:·
-  set mouse=""
 ]])
 
 require("vim._core.ui2").enable({})
