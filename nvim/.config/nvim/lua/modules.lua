@@ -238,7 +238,7 @@ local m = {
     "willothy/flatten.nvim",
     opts = {
       hooks = {
-        pipe_path = function ()
+        pipe_path = function()
           for _, arg in ipairs(vim.v.argv) do
             if arg:match("/tmp/fish") then
               return nil
@@ -248,7 +248,7 @@ local m = {
             return vim.env.NVIM
           end
           return nil
-        end
+        end,
       },
       window = {
         open = "tab",
