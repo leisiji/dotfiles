@@ -11,7 +11,7 @@ function M.blame_line()
           local buffer = vim.api.nvim_win_get_buf(win)
           local line = vim.api.nvim_buf_get_lines(buffer, 0, 1, false)
           local commit = string.sub(line[1], 1, 8)
-          vim.cmd(string.format("CodeDiff %s %s~1", commit, commit))
+          vim.cmd(string.format("CodeDiff %s~1 %s", commit, commit))
           break
         end
       end

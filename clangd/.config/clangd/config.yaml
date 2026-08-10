@@ -3,3 +3,5 @@ CompileFlags:
     - "-fno-ipa-sra"
     - "-fconserve-stack"
     - "-fno-allow-store-data-races"
+#   Add:
+#     - "--target=arm-unknown-linux-gnueabihf"
