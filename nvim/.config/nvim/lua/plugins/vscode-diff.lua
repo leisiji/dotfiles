@@ -2,6 +2,9 @@ local M = {}
 
 function M.config()
   require("codediff").setup({
+    diff = {
+      compact = true,
+    },
     keymaps = {
       view = {
         quit = "<leader>q",
