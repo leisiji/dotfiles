@@ -203,7 +203,7 @@ local global_cfg = {
   -- jumpoptions = "stack",
   -- foldmethod = "expr",
   -- foldexpr = "nvim_treesitter#foldexpr()",
-  mouse = "nv"
+  mouse = "nv",
 }
 local win_cfg = {
   signcolumn = "yes",
