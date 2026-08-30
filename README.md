@@ -51,6 +51,12 @@ git clone https://github.com/folke/lazy.nvim.git \
     ~/.local/share/nvim/lazy/lazy.nvim/
 ```
 
+herdr plugin
+
+```bash
+herdr plugin install hitaishi2222/herdr-fingers
+```
+
 software can also be downloaded from below links:
 
 - [fzf](https://github.com/junegunn/fzf/releases)

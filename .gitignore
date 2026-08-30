@@ -4,3 +4,4 @@ packer_compiled.lua
 lazy-lock.json
 history.txt
 fish_variables*
+herdr/.config/herdr/*

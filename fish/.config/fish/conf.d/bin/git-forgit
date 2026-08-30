@@ -100,8 +100,11 @@ _forgit_yank_stash_name() {
 _forgit_parse_array() {
     ${IFS+"false"} && unset old_IFS || old_IFS="$IFS"
     # read the value of the second argument
-    # into an array that has the name of the first argument
-    IFS=" " read -r -a "$1" <<<"$2"
+    # into an array that has the name of the first argument.
+    # Split on any whitespace (spaces, tabs, newlines) and use an empty
+    # delimiter so the whole value is consumed instead of stopping at the
+    # first line; leading/trailing whitespace is ignored.
+    IFS=$' \t\n' read -r -d '' -a "$1" <<<"$2"
     ${old_IFS+"false"} && unset IFS || IFS="$old_IFS"
 }
 
@@ -168,7 +171,7 @@ _forgit_get_pager() {
         ignore) echo -n "${FORGIT_IGNORE_PAGER:-$(hash bat &>/dev/null && echo 'bat -l gitignore --color=always' || echo 'cat')}" ;;
         attributes) echo -n "${FORGIT_ATTRIBUTES_PAGER:-$(hash bat &>/dev/null && echo 'bat -l gitattributes --color=always' || echo 'cat')}" ;;
         blame) echo -n "${FORGIT_BLAME_PAGER:-$(git config pager.blame || _forgit_get_pager)}" ;;
-        enter) echo -n "${FORGIT_ENTER_PAGER:-"LESS='-r' less"}" ;;
+        enter) echo -n "${FORGIT_ENTER_PAGER:-"less -R -+F -+E"}" ;;
         *) echo "pager not found: $1" >&2 ;;
     esac
 }
@@ -217,6 +220,67 @@ _forgit_list_files() {
     # With the -z flag, git also uses \0 line termination, so we
     # have to replace the terminators.
     git ls-files -z "$@" "$rootdir" | tr '\0' '\n' | uniq
+}
+
+_forgit_rewrite_repo_paths_for_cwd() {
+    local rootdir mode separator cwd
+    rootdir=$1
+    mode=${2:-paths}
+    separator=${3:-}
+    cwd=$(pwd -P)
+
+    perl -MCwd=realpath -MFile::Spec -e '
+        use strict;
+        use warnings;
+
+        my ($rootdir, $cwd, $mode, $separator) = @ARGV;
+        my $normalized_rootdir = realpath($rootdir);
+        my $normalized_cwd = realpath($cwd);
+
+        while (my $line = <STDIN>) {
+            chomp $line;
+
+            my ($status, $repo_path);
+            if ($mode eq q{status_entries}) {
+                next unless $line =~ /^(..[^[:space:]]*)( )(.*)$/;
+                ($status, $repo_path) = ($1, $3);
+            } else {
+                next if $line eq q{};
+                $repo_path = $line;
+            }
+
+            my $absolute_path = "$normalized_rootdir/$repo_path";
+            my $display_path = File::Spec->abs2rel(realpath($absolute_path) // $absolute_path, $normalized_cwd);
+            $display_path = q{.} if $display_path eq q{};
+
+            if ($mode eq q{status_entries}) {
+                print "[$status]  ${display_path}${separator}${normalized_rootdir}/${repo_path}\n";
+            } else {
+                print "$display_path\n";
+            }
+        }
+    ' "$rootdir" "$cwd" "$mode" "$separator"
+}
+
+_forgit_list_modified_files() {
+    # on large repos with many untracked files, git ls-files
+    # is substantially slower than git diff
+    # Wherever possible (when we don't care about untracked files)
+    # use this command over _forgit_list_files
+
+    # See note on _forgit_list_files() about -z and other options
+    local rootdir
+    rootdir=$(git rev-parse --show-toplevel)
+    git -C "$rootdir" diff --name-only -z |
+        tr '\0' '\n' |
+        uniq |
+        _forgit_rewrite_repo_paths_for_cwd "$rootdir"
+}
+
+_forgit_list_staged_files() {
+    local up
+    up="$(git rev-parse --show-cdup)"
+    git diff --name-only --cached -z | tr '\0' '\n' | awk -v up="$up" '{ print up $0 }'
 }
 
 # Print changed files in the worktree
@@ -282,32 +346,12 @@ _forgit_restore_untracked_color() {
 #     1. the human-readable status line shown in fzf
 #     2. the absolute-path payload used by preview/edit/add actions
 _forgit_build_status_entries() {
-    local cwd rootdir
+    local rootdir
     rootdir=$1
-    cwd=$(pwd -P)
 
     # Use a single Perl process so path normalization stays portable while the
     # full add-list transformation still runs as one batch pipeline stage.
-    perl -MCwd=realpath -MFile::Spec -e '
-        use strict;
-        use warnings;
-
-        my ($rootdir, $cwd, $separator) = @ARGV;
-        my $normalized_rootdir = realpath($rootdir);
-        my $normalized_cwd = realpath($cwd);
-
-        while (my $line = <STDIN>) {
-            chomp $line;
-            next unless $line =~ /^(..[^[:space:]]*)( )(.*)$/;
-
-            my ($status, $repo_path) = ($1, $3);
-            my $absolute_path = "$normalized_rootdir/$repo_path";
-            my $display_path = File::Spec->abs2rel(realpath($absolute_path) // $absolute_path, $normalized_cwd);
-            $display_path = "." if $display_path eq q{};
-
-            print "[$status]  ${display_path}${separator}${normalized_rootdir}/${repo_path}\n";
-        }
-    ' "$rootdir" "$cwd" "$_ffsep"
+    _forgit_rewrite_repo_paths_for_cwd "$rootdir" status_entries "$_ffsep"
 }
 
 _forgit_is_submodule() {
@@ -674,6 +718,74 @@ _forgit_reset_head() {
     git status --short
 }
 
+_forgit_restore_preview() {
+    git diff --color=always "$@" | _forgit_pager diff
+}
+
+_forgit_git_restore() {
+    _forgit_restore_git_opts=()
+    _forgit_parse_array _forgit_restore_git_opts "$FORGIT_RESTORE_GIT_OPTS"
+    git restore "${_forgit_restore_git_opts[@]}" "$@"
+}
+
+_forgit_parse_restore_flags() {
+    local staged worktree preview_arg
+    staged=false
+    worktree=false
+
+    for arg in "$@"; do
+        case "$arg" in
+            -S | --staged) staged=true ;;
+            -W | --worktree) worktree=true ;;
+        esac
+    done
+
+    if [[ $staged == true && $worktree != true ]]; then
+        preview_arg=--staged
+    elif [[ $staged == true && $worktree == true ]]; then
+        preview_arg=HEAD
+    fi
+
+    printf '%s\t%s\t%s' "$staged" "$worktree" "$preview_arg"
+}
+
+# git restore selector
+_forgit_restore() {
+    _forgit_inside_work_tree || return 1
+    _forgit_contains_non_flags "$@" && {
+        _forgit_git_restore "$@"
+        return $?
+    }
+    local files opts staged worktree candidates preview_arg
+    IFS=$'\t' read -r staged worktree preview_arg < <(_forgit_parse_restore_flags "$@")
+    opts="
+        $FORGIT_FZF_DEFAULT_OPTS
+        -m -0
+        --preview=\"$FORGIT preview restore_preview $preview_arg -- {}\"
+        $FORGIT_RESTORE_FZF_OPTS
+    "
+
+    candidates=()
+    if [[ $staged == true ]]; then
+        while IFS='' read -r file; do
+            candidates+=("$file")
+        done < <(_forgit_list_staged_files)
+    fi
+    if [[ $worktree == true || $staged != true ]]; then
+        while IFS='' read -r file; do
+            candidates+=("$file")
+        done < <(_forgit_list_modified_files)
+    fi
+
+    [[ ${#candidates[@]} -eq 0 ]] && echo "Nothing to restore." && return 1
+
+    files=()
+    while IFS='' read -r file; do
+        files+=("$file")
+    done < <(printf '%s\n' "${candidates[@]}" | sort -u | FZF_DEFAULT_OPTS="$opts" fzf)
+    [[ ${#files[@]} -gt 0 ]] && _forgit_git_restore "$@" -- "${files[@]}"
+}
+
 _forgit_stash_show_preview() {
     local stash
     stash=$(echo "$1" | _forgit_extract_stash_name)
@@ -1011,12 +1123,13 @@ _forgit_git_checkout_file() {
 # git checkout-file selector
 _forgit_checkout_file() {
     _forgit_inside_work_tree || return 1
-    local files opts
+    local files opts modified_files
     _forgit_contains_non_flags "$@" && {
         _forgit_git_checkout_file "$@"
         return $?
     }
-    [[ $(_forgit_list_files --modified | wc -l) -eq 0 ]] && echo 'Nothing to checkout.' && return 1
+    modified_files="$(_forgit_list_modified_files)"
+    [[ -z $modified_files ]] && echo 'Nothing to checkout.' && return 1
     opts="
         $FORGIT_FZF_DEFAULT_OPTS
         -m -0
@@ -1026,7 +1139,7 @@ _forgit_checkout_file() {
     files=()
     while IFS='' read -r file; do
         files+=("$file")
-    done < <(_forgit_list_files --modified |
+    done < <(printf '%s\n' "$modified_files" |
         FZF_DEFAULT_OPTS="$opts" fzf)
     [[ ${#files[@]} -gt 0 ]] && _forgit_git_checkout_file "$@" "${files[@]}"
 }
@@ -1737,6 +1850,7 @@ PUBLIC_COMMANDS=(
     "reflog"
     "rebase"
     "reset_head"
+    "restore"
     "revert_commit"
     "show"
     "stash_show"
