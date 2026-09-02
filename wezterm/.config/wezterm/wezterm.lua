@@ -1,5 +1,6 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
+local act = wezterm.action
 
 local is_windows = wezterm.target_triple:find("windows") ~= nil
 
@@ -23,10 +24,46 @@ local function has_executable(name)
   return false
 end
 
--- 1. Leader 键设置 (Ctrl + A)
 config.leader = { key = "n", mods = "ALT", timeout_milliseconds = 2000 }
+config.use_fancy_tab_bar = false
 
--- 基础外观与行为配置
+config.colors = {
+  tab_bar = {
+    background = "#0b0022",
+    active_tab = {
+      bg_color = "#2b2042",
+      fg_color = "#c0c0c0",
+      intensity = "Normal",
+      underline = "None",
+      italic = false,
+      strikethrough = false,
+    },
+    inactive_tab = {
+      bg_color = "#1b1032",
+      fg_color = "#808080",
+    },
+    inactive_tab_hover = {
+      bg_color = "#3b3052",
+      fg_color = "#909090",
+      italic = true,
+    },
+    new_tab = {
+      bg_color = "#1b1032",
+      fg_color = "#808080",
+    },
+    new_tab_hover = {
+      bg_color = "#3b3052",
+      fg_color = "#909090",
+      italic = true,
+    },
+  },
+}
+
+wezterm.on("update-right-status", function(window, _)
+  local date = wezterm.strftime("%Y-%m-%d %H:%M")
+  window:set_right_status(date)
+end)
+
 config.font = wezterm.font_with_fallback({ "Maple Mono NF CN" })
 config.font_size = 9.0
 config.color_scheme = "Kanagawa (Gogh)"
@@ -39,26 +76,23 @@ config.quick_select_patterns = {
   "[\\w./-]+",
 }
 
--- 鼠标绑定（已修正在 action 上的语法错误）
 config.mouse_bindings = {
   {
     event = { Up = { streak = 2, button = "Left" } },
     mods = "NONE",
-    action = wezterm.action.CopyTo("ClipboardAndPrimarySelection"),
+    action = act.CopyTo("ClipboardAndPrimarySelection"),
   },
   {
     event = { Up = { streak = 1, button = "Left" } },
     mods = "NONE",
-    action = wezterm.action.CompleteSelectionOrOpenLinkAtMouseCursor("Clipboard"),
+    action = act.CompleteSelectionOrOpenLinkAtMouseCursor("Clipboard"),
   },
 }
 
--- 仅当在 Windows 且能在 PATH 中找到 nu 时才设置 default_prog
 if is_windows and has_executable("nu") then
   config.default_prog = { "nu" }
 end
 
-local act = wezterm.action
 
 config.keys = {
   {
@@ -79,7 +113,7 @@ config.keys = {
   {
     key = ",",
     mods = "LEADER",
-    action = wezterm.action.PromptInputLine({
+    action = act.PromptInputLine({
       description = "enter new tab name：",
       action = wezterm.action_callback(function(window, _, line)
         if line then
@@ -142,7 +176,7 @@ config.keys = {
         local idx = tonumber(line)
         if idx and idx > 0 then
           -- MoveTab 接收从 0 开始的索引，故减 1
-          window:perform_action(wezterm.action.MoveTab(idx - 1), pane)
+          window:perform_action(act.MoveTab(idx - 1), pane)
         end
       end),
     }),
@@ -158,7 +192,7 @@ for i = 1, 9 do
   table.insert(config.keys, {
     key = tostring(i),
     mods = "LEADER",
-    action = wezterm.action.ActivateTab(i - 1),
+    action = act.ActivateTab(i - 1),
   })
 end
 

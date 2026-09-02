@@ -74,6 +74,9 @@ function __bind_git_status_fzf
     commandline -f repaint
 end
 
+function fish_title
+end
+
 # ========== Key Bindings ==========
 bind \ew backward-kill-bigword
 bind \e, accept-autosuggestion
