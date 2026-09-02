@@ -93,6 +93,12 @@ if is_windows and has_executable("nu") then
   config.default_prog = { "nu" }
 end
 
+local reize_keytable = act.ActivateKeyTable({
+  name = "resize_pane",
+  one_shot = false,
+  timeout_milliseconds = 1000,
+  -- timeout_action = act.PopKeyTable,
+})
 
 config.keys = {
   {
@@ -185,6 +191,16 @@ config.keys = {
     key = "i",
     mods = "ALT", -- 修改为你想要的组合键
     action = act.QuickSelectArgs,
+  },
+  { key = "r", mods = "LEADER", action = reize_keytable },
+}
+
+config.key_tables = {
+  resize_pane = {
+    { key = "h", action = act.AdjustPaneSize({ "Left", 5 }) },
+    { key = "j", action = act.AdjustPaneSize({ "Down", 5 }) },
+    { key = "k", action = act.AdjustPaneSize({ "Up", 5 }) },
+    { key = "l", action = act.AdjustPaneSize({ "Right", 5 }) },
   },
 }
 
