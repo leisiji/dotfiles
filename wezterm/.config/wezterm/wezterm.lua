@@ -190,13 +190,62 @@ config.keys = {
   },
   {
     key = "i",
-    mods = "ALT", -- 修改为你想要的组合键
+    mods = "ALT",
     action = act.QuickSelectArgs,
   },
   { key = "r", mods = "LEADER", action = reize_keytable },
+  { key = "x", mods = "ALT", action = act.ActivateCopyMode },
 }
 
+-- 将单个 CopyMode 动作重复 n 次（如 5w / 5b / 5e）
+local function repeat_copymode(action_name, n)
+  local actions = {}
+  for _ = 1, n do
+    table.insert(actions, act.CopyMode(action_name))
+  end
+  return act.Multiple(actions)
+end
+
 config.key_tables = {
+  copy_mode = {
+    { key = "h", mods = "NONE", action = act.CopyMode("MoveLeft") },
+    { key = "j", mods = "NONE", action = act.CopyMode("MoveDown") },
+    { key = "k", mods = "NONE", action = act.CopyMode("MoveUp") },
+    { key = "l", mods = "NONE", action = act.CopyMode("MoveRight") },
+    { key = "LeftArrow", mods = "NONE", action = act.CopyMode("MoveLeft") },
+    { key = "DownArrow", mods = "NONE", action = act.CopyMode("MoveDown") },
+    { key = "UpArrow", mods = "NONE", action = act.CopyMode("MoveUp") },
+    { key = "RightArrow", mods = "NONE", action = act.CopyMode("MoveRight") },
+    { key = "w", mods = "NONE", action = act.CopyMode("MoveForwardWord") },
+    { key = "b", mods = "NONE", action = act.CopyMode("MoveBackwardWord") },
+    { key = "e", mods = "NONE", action = act.CopyMode("MoveForwardWordEnd") },
+    { key = "w", mods = "ALT", action = repeat_copymode("MoveForwardWord", 5) },
+    { key = "b", mods = "ALT", action = repeat_copymode("MoveBackwardWord", 5) },
+    { key = "e", mods = "ALT", action = repeat_copymode("MoveForwardWordEnd", 5) },
+    { key = "H", mods = "SHIFT", action = act.CopyMode("MoveToStartOfLine") },
+    { key = "L", mods = "SHIFT", action = act.CopyMode("MoveToEndOfLineContent") },
+    { key = "^", mods = "SHIFT", action = act.CopyMode("MoveToStartOfLineContent") },
+    { key = "g", mods = "NONE", action = act.CopyMode("MoveToScrollbackTop") },
+    { key = "G", mods = "SHIFT", action = act.CopyMode("MoveToScrollbackBottom") },
+    { key = "u", mods = "CTRL", action = act.CopyMode("PageUp") },
+    { key = "d", mods = "CTRL", action = act.CopyMode("PageDown") },
+    { key = "v", mods = "NONE", action = act.CopyMode({ SetSelectionMode = "Cell" }) },
+    { key = "V", mods = "SHIFT", action = act.CopyMode({ SetSelectionMode = "Line" }) },
+    { key = "v", mods = "CTRL", action = act.CopyMode({ SetSelectionMode = "Block" }) },
+    {
+      key = "y",
+      mods = "NONE",
+      action = act.Multiple({
+        { CopyTo = "ClipboardAndPrimarySelection" },
+        { CopyMode = "Close" },
+      }),
+    },
+    { key = "q", mods = "NONE", action = act.CopyMode("Close") },
+    { key = "Escape", mods = "NONE", action = act.CopyMode("Close") },
+    { key = "/", mods = "NONE", action = act.Search("CurrentSelectionOrEmptyString") },
+    { key = "n", mods = "NONE", action = act.CopyMode("NextMatch") },
+    { key = "N", mods = "SHIFT", action = act.CopyMode("PriorMatch") },
+  },
   resize_pane = {
     { key = "h", action = act.AdjustPaneSize({ "Left", 5 }) },
     { key = "j", action = act.AdjustPaneSize({ "Down", 5 }) },
