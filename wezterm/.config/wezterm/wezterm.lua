@@ -26,6 +26,7 @@ end
 
 config.leader = { key = "n", mods = "ALT", timeout_milliseconds = 2000 }
 config.use_fancy_tab_bar = false
+config.tab_bar_at_bottom = true
 
 config.colors = {
   tab_bar = {
