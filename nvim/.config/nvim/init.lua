@@ -49,7 +49,6 @@ local function init_nvim_keys()
     { "<M-y>", "<C-r>" },
     { "<leader>p", '"*p' },
     { "<M-q>", "g<Tab>" },
-    { "<CR>", "<C-w>gF" },
   }
   local vn_maps = {
     { "H", "^" },
@@ -77,6 +76,12 @@ local function init_nvim_keys()
   local func_maps = {
     { "<leader>q", quit },
     { "K", show_documents },
+    {
+      "<CR>",
+      function()
+        require("utils.open_file_under_cursor").open()
+      end,
+    },
     { "<leader>rn", vim.lsp.buf.rename },
     { "<leader>ca", vim.lsp.buf.code_action },
     {
