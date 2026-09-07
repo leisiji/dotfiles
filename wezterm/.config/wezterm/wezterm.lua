@@ -66,7 +66,6 @@ wezterm.on("update-right-status", function(window, _)
 end)
 
 config.font = wezterm.font_with_fallback({ "Maple Mono NF CN" })
-config.font_size = 9.0
 config.color_scheme = "Kanagawa (Gogh)"
 config.enable_tab_bar = true
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
@@ -90,8 +89,13 @@ config.mouse_bindings = {
   },
 }
 
-if is_windows and has_executable("nu") then
-  config.default_prog = { "nu" }
+if is_windows then
+  config.font_size = 10.0
+  if has_executable("nu") then
+    config.default_prog = { "nu" }
+  end
+else
+  config.font_size = 9.0
 end
 
 local reize_keytable = act.ActivateKeyTable({
