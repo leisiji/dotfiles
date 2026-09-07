@@ -187,6 +187,13 @@ function M.open()
   if word == "" then
     return
   end
+  -- `KEY=value` assignments (e.g. PROJECT_DEFCONFIG=...): keep only the value
+  -- part after the first `=`. Skip when the prefix looks like a path (contains
+  -- `/`), so real filenames that happen to contain `=` are left untouched.
+  local eq = word:find("=", 1, true)
+  if eq and not word:sub(1, eq - 1):find("/", 1, true) then
+    word = word:sub(eq + 1)
+  end
   word = word:gsub("[,;)%]'\"%[%]]+$", "") -- drop trailing punctuation
   if word == "" then
     return
