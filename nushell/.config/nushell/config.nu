@@ -176,10 +176,6 @@ $env.config = {
       completer: null # check 'carapace_completer' above as an example
     }
   }
-  filesize: {
-    metric: true # true => KB, MB, GB (ISO standard), false => KiB, MiB, GiB (Windows standard)
-    format: "auto" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, zb, zib, auto
-  }
   cursor_shape: {
     emacs: line # block, underscore, line, blink_block, blink_underscore, blink_line (line is the default)
     vi_insert: block # block, underscore, line , blink_block, blink_underscore, blink_line (block is the default)
@@ -407,7 +403,7 @@ $env.config = {
         mode: [emacs, vi_normal, vi_insert]
         event: {
             send: executehostcommand
-            cmd: "eza -l --icons=always"
+            cmd: "ls -l"
         }
     }
     {
@@ -441,7 +437,7 @@ $env.config = {
         }
     }
     {
-        name: fuzzy_dir
+        name: fuzzy_file
         modifier: control
         keycode: char_t
         mode: [emacs, vi_normal, vi_insert]
@@ -473,5 +469,11 @@ $env.config = {
 }
 
 # extra
-source ~/.zoxide.nu
+# source ~/.zoxide.nu
+$env.EDITOR = ["nvim"]
+$env.RUSTUP_DIST_SERVER = "https://mirrors.tuna.tsinghua.edu.cn/rustup"
+$env.RUSTUP_UPDATE_ROOT = "https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup"
+$env.CARGO_HOME = "D:\\sdk\\.cargo"
+$env.RUSTUP_HOME = "D:\\sdk\\.rustup"
+$env.PATH = ($env.PATH | prepend "D:\\node-v24.18.0-win-x64")
 # source $env.default-config-dir/git-completions.nu
