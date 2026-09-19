@@ -274,7 +274,7 @@ layout {
 // See the binds section below for more spawn examples.
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
-spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "noctalia"
 spawn-at-startup "kanshi"
 
 hotkey-overlay {
@@ -372,9 +372,9 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal" { spawn "wezterm"; }
     // Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Mod+D hotkey-overlay-title="" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    Mod+D hotkey-overlay-title="" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
     Mod+E hotkey-overlay-title="Files" { spawn "dolphin"; }
-    Super+L hotkey-overlay-title="suspend" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "lockAndSuspend"; }
+    Super+L hotkey-overlay-title="suspend" { spawn "noctalia" "msg" "session" "lock-and-suspend"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
