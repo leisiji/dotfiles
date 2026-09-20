@@ -14,7 +14,8 @@ sudo pacman -S \
     jq bat ripgrep fd eza hexyl lazygit yazi zoxide bottom starship atuin \
     cmake-language-server stylua clang tmux bear lua-language-server \
     neovim bun termusic
-cargo install flash_tmux tree-sitter-cli
+cargo install flash_tmux tree-sitter-cli emmylua_ls emmylua_formatter \
+    emmylua_check emmylua_doc_cli
 # cargo install makefile-lsp
 go install github.com/owenrumney/make-ls/cmd/make-ls@latest
 ```

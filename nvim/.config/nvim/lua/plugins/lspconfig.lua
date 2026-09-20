@@ -12,7 +12,7 @@ function M.lsp_config()
     "ts_ls",
     "jsonls",
     "clangd",
-    "lua_ls",
+    "emmylua_ls",
     "dartls",
     "fish_lsp",
   }
