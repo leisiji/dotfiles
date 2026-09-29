@@ -135,6 +135,11 @@ config.keys = {
     }),
   },
   {
+    key = "Tab",
+    mods = "LEADER",
+    action = act.ActivateLastTab,
+  },
+  {
     key = "_",
     mods = "LEADER|SHIFT",
     action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
