@@ -1,0 +1,5 @@
+[mgr]
+prepend_keymap = [
+  { on = "<C-j>", run = "arrow 5", desc = "向下移动 5 行" },
+  { on = "<C-k>", run = "arrow -5", desc = "向上移动 5 行" },
+]
