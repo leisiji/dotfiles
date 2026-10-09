@@ -265,28 +265,61 @@ local m = {
     opts = {},
   },
 
+  -- {
+  --   "echasnovski/mini.files",
+  --   lazy = true,
+  --   config = function()
+  --     require("plugins.mini").config()
+  --   end,
+  --   keys = {
+  --     {
+  --       "<leader>tj",
+  --       function()
+  --         MiniFiles.open(vim.api.nvim_buf_get_name(0))
+  --       end,
+  --       mode = "n",
+  --     },
+  --     {
+  --       "<leader>tr",
+  --       function()
+  --         MiniFiles.open()
+  --       end,
+  --       mode = "n",
+  --     },
+  --   },
+  -- },
   {
-    "echasnovski/mini.files",
-    lazy = true,
-    config = function()
-      require("plugins.mini").config()
-    end,
+    "mikavilpas/yazi.nvim",
+    version = "*",
+    event = "VeryLazy",
     keys = {
       {
         "<leader>tj",
-        function()
-          MiniFiles.open(vim.api.nvim_buf_get_name(0))
-        end,
-        mode = "n",
+        mode = { "n", "v" },
+        "<cmd>Yazi<cr>",
+        desc = "Open yazi at the current file",
       },
       {
+        -- Open in the current working directory
         "<leader>tr",
-        function()
-          MiniFiles.open()
-        end,
-        mode = "n",
+        "<cmd>Yazi cwd<cr>",
+        desc = "Open the file manager in nvim's working directory",
+      },
+      {
+        "<c-up>",
+        "<cmd>Yazi toggle<cr>",
+        desc = "Resume the last yazi session",
       },
     },
+    opts = {
+      open_for_directories = true,
+      keymaps = {
+        show_help = "<f1>",
+      },
+    },
+    init = function()
+      vim.g.loaded_netrwPlugin = 1
+    end,
   },
 
   {
