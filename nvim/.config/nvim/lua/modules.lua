@@ -38,7 +38,6 @@ local m = {
       { "<leader>m", "<cmd>FzfCommand --mru<CR>" },
       { "<leader><leader>z", "<cmd>FzfCommand --zoxide<CR>" },
       { "<M-j>", "<cmd>FzfCommand --lsp jump_def edit<CR>" },
-      { "<M-t>", "<cmd>FzfCommand --lsp jump_def tab drop<CR>" },
       { "<M-v>", "<cmd>FzfCommand --lsp jump_def vsplit<CR>" },
       { "<leader><leader>r", "<cmd>FzfCommand --lsp ref<CR>" },
       {
@@ -306,9 +305,24 @@ local m = {
         desc = "Open the file manager in nvim's working directory",
       },
       {
-        "<c-up>",
-        "<cmd>Yazi toggle<cr>",
-        desc = "Resume the last yazi session",
+        "<M-t>",
+        mode = { "n" },
+        function()
+          local dir = vim.fn.expand("%:p:h")
+
+          local git_root =
+            vim.fn.systemlist("cd " .. vim.fn.shellescape(dir) .. " && git rev-parse --show-toplevel 2>/dev/null")[1]
+
+          local open_path = (git_root and git_root ~= "") and git_root or dir
+
+          require("yazi").yazi({
+            hooks = {
+              on_yazi_ready = function(_, _, api)
+                api:emit_to_yazi({ "plugin", "vcs-files" })
+              end,
+            },
+          }, open_path)
+        end,
       },
     },
     opts = {
