@@ -376,6 +376,13 @@ binds {
     Mod+E hotkey-overlay-title="Files" { spawn "dolphin"; }
     Super+L hotkey-overlay-title="suspend" { spawn "noctalia" "msg" "session" "lock-and-suspend"; }
 
+    // Toggle the AULA Hall-effect keyboard between onboard profile 0 and 1.
+    // `aula he-profile` prints "active config (profile): N"; read it, then write
+    // the other one. spawn-sh always runs `sh -c`, so $SHELL/fish is irrelevant.
+    Mod+M hotkey-overlay-title="Keyboard Profile" {
+        spawn-sh r#"out=$(aula he-profile 2>&1) || { notify-send "Keyboard profile" "$out"; exit 1; }; cur=$(printf '%s\n' "$out" | sed -n 's/^active config (profile): *//p'); next=0; [ "$cur" = 0 ] && next=1; aula he-profile "$next" 2>&1 || notify-send "Keyboard profile" "failed to switch to $next""#;
+    }
+
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
     // For example, this is a standard bind to toggle the screen reader (orca).
