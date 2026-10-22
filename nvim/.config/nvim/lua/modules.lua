@@ -20,7 +20,6 @@ local m = {
       { "<C-p>", "<cmd>FzfCommand --files<CR>" },
       { "<C-f>", "<cmd>FzfCommand --lines<CR>" },
       { "<leader>b", "<cmd>FzfCommand --buffers<CR>" },
-      { "<leader><leader>m", "<cmd>FzfCommand --man<CR>" },
       { "<leader><leader>h", "<cmd>FzfCommand --vim help<CR>" },
       { "<leader>ft", "<cmd>FzfCommand --vim filetypes<CR>" },
       {
