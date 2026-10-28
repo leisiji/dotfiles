@@ -1,3 +1,7 @@
 function ng --description 'Open nvim with MyGrugFar'
-    nvim +"bdelete $PWD/tmp_file | chdir $PWD | MyGrugFar --nogit=$argv[1]" tmp_file
+    if set -q NVIM
+        nvim +"chdir $PWD" +"MyGrugFar --nogit=$argv[1]"
+    else
+        nvim +"MyGrugFar --nogit=$argv[1]" +"tabonly"
+    end
 end
