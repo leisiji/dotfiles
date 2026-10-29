@@ -77,19 +77,6 @@ config.quick_select_patterns = {
   "[\\w./-]+",
 }
 
-config.mouse_bindings = {
-  {
-    event = { Up = { streak = 2, button = "Left" } },
-    mods = "NONE",
-    action = act.CopyTo("ClipboardAndPrimarySelection"),
-  },
-  {
-    event = { Up = { streak = 1, button = "Left" } },
-    mods = "NONE",
-    action = act.CompleteSelectionOrOpenLinkAtMouseCursor("Clipboard"),
-  },
-}
-
 if is_windows then
   config.font_size = 10.0
   if has_executable("nu") then
@@ -283,6 +270,16 @@ config.ssh_domains = domains
 
 config.mouse_bindings = {
   {
+    event = { Up = { streak = 2, button = "Left" } },
+    mods = "NONE",
+    action = act.CopyTo("ClipboardAndPrimarySelection"),
+  },
+  {
+    event = { Up = { streak = 1, button = "Left" } },
+    mods = "NONE",
+    action = act.CompleteSelectionOrOpenLinkAtMouseCursor("Clipboard"),
+  },
+  {
     event = { Down = { streak = 1, button = { WheelUp = 1 } } },
     mods = "NONE",
     action = act.ScrollByLine(-5),
@@ -291,6 +288,29 @@ config.mouse_bindings = {
     event = { Down = { streak = 1, button = { WheelDown = 1 } } },
     mods = "NONE",
     action = act.ScrollByLine(5),
+  },
+  {
+    event = { Up = { streak = 1, button = "Right" } },
+    mods = "NONE",
+    mouse_reporting = false,
+    alt_screen = false,
+    action = act.InputSelector({
+      title = "Pane actions",
+      choices = {
+        { label = "Zoom pane      (Leader z)", id = "zoom" },
+        { label = "Close pane     (Leader x)", id = "close" },
+      },
+      action = wezterm.action_callback(function(window, pane, id)
+        if not id then
+          return
+        end -- Esc / 取消
+        if id == "zoom" then
+          window:perform_action(act.TogglePaneZoomState, pane)
+        elseif id == "close" then
+          window:perform_action(act.CloseCurrentPane({ confirm = false }), pane)
+        end
+      end),
+    }),
   },
 }
 
