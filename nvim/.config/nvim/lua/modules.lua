@@ -345,14 +345,6 @@ local m = {
     end,
   },
 
-  -- {
-  --   "mfussenegger/nvim-lint",
-  --   event = "BufReadPost",
-  --   config = function()
-  --     require("plugins.lint").config()
-  --   end,
-  -- },
-
   {
     "Mr-LLLLL/interestingwords.nvim",
     lazy = true,
@@ -367,6 +359,8 @@ local m = {
     opts = {
       options = {
         mode = "tabs",
+        tab_size = 1,
+        trucate_names = false,
         numbers = function(opts)
           return string.format("%s", opts.ordinal)
         end,
