@@ -90,6 +90,7 @@ bind \ej repo_dir
 bind \eu repo_files
 bind \et __bind_git_status_fzf
 bind \cg edit_command_buffer
+bind \cy fish_clipboard_copy
 
 # ========== Hydro prompt ==========
 set -g hydro_symbol_prompt '➜'
