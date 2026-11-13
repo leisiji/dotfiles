@@ -1,0 +1,155 @@
+{
+  "font_family": "Maple Mono NF CN",
+  "font_fallbacks": [
+    "Maple Mono NF CN",
+    "DejaVu Sans Mono",
+    "Noto Sans CJK SC",
+    "Noto Color Emoji"
+  ],
+  "font_family_bold": null,
+  "font_family_italic": null,
+  "font_features": null,
+  "font_thicken": true,
+  "font_size": 12.0,
+  "line_height": 1.35,
+  "terminal_padding": 0.0,
+  "ui_font_size": 16.0,
+  "ui_font_family": null,
+  "theme": "light",
+  "theme_preset": "light",
+  "theme_follow_system": true,
+  "theme_preset_light": "light",
+  "theme_preset_dark": "dark",
+  "theme_legible_palette": true,
+  "window_opacity": null,
+  "window_blur": null,
+  "window_backdrop": "auto",
+  "dim_inactive_panes": true,
+  "auto_hide_titlebar_buttons": false,
+  "keybindings": {
+    "SplitDown": [
+      "alt-n _"
+    ],
+    "FocusNextPane": [
+      "alt-p"
+    ],
+    "ToggleEditorProblems": [],
+    "FindInTerminal": [
+      "alt-n /"
+    ],
+    "NextTab": [
+      "secondary-shift-m"
+    ],
+    "ToggleFullscreen": [
+      "alt-enter"
+    ],
+    "ActivateTab2": [
+      "alt-n 2"
+    ],
+    "FocusPaneLeft": [
+      "alt-n h"
+    ],
+    "RenameTab": [
+      "alt-n ,"
+    ],
+    "FocusPaneUp": [
+      "alt-n k"
+    ],
+    "CloseActiveTab": [
+      "alt-n x"
+    ],
+    "NewTab": [
+      "alt-n c"
+    ],
+    "FocusPaneDown": [
+      "alt-n j"
+    ],
+    "FocusPaneRight": [
+      "alt-n l"
+    ],
+    "SplitRight": [
+      "alt-n -"
+    ],
+    "ActivateTab1": [
+      "alt-n 1"
+    ],
+    "InsertNewline": []
+  },
+  "keybinding_preset": "tmux",
+  "prefix": "alt-n",
+  "shell": null,
+  "custom_shells": [],
+  "link_url": true,
+  "link_file_open": "internal",
+  "link_file_command": null,
+  "ssh_loopback_forward": true,
+  "cursor_blink": true,
+  "scrollback_limit": 10000,
+  "new_tab_position": "after-current",
+  "tab_bar_position": "bottom",
+  "tab_bar_style": "tmux",
+  "tab_bar_height": 16.0,
+  "sidebar_width": 260.0,
+  "sidebar_collapsed": true,
+  "right_panel_visible": false,
+  "right_panel_width": 280.0,
+  "right_panel_tab": "info",
+  "diff_view": "split",
+  "document_layout": "dock",
+  "document_ratio": 0.5,
+  "scm_graph_expanded": false,
+  "scm_changes_tree": false,
+  "editor_soft_wrap": false,
+  "editor_markdown_preview": false,
+  "editor_lsp": false,
+  "editor_git_gutter": false,
+  "sidebar_auto_grouping": true,
+  "notify_on_command_finish": "unfocused",
+  "check_for_updates": true,
+  "update_channel": "stable",
+  "auto_download_updates": true,
+  "mobile_access": false,
+  "install_cli_on_path": true,
+  "gui_language": "zh-CN",
+  "notify_threshold_secs": 10,
+  "restore_session": true,
+  "confirm_close": "when-busy",
+  "show_tray_icon": true,
+  "bell": "none",
+  "prompt_editor": false,
+  "tab_completion": false,
+  "history_search": false,
+  "cursor_style": "block",
+  "prompt_cursor_style": "follow",
+  "macos_option_as_alt": false,
+  "mouse_hide_while_typing": true,
+  "focus_follows_mouse": true,
+  "mouse_scroll_multiplier": 1.0,
+  "smooth_scroll": true,
+  "mouse_reporting": true,
+  "mouse_zoom_modifier": "none",
+  "clipboard_trim_trailing_spaces": false,
+  "copy_join_wrapped": false,
+  "copy_on_select": true,
+  "http_proxy": null,
+  "smart_select": true,
+  "word_separators": ",│`|:\"' ()[]{}<>\t",
+  "startup_mode": "normal",
+  "remember_window_size": true,
+  "working_directory": {
+    "strategy": "inherit",
+    "path": ""
+  },
+  "env": {},
+  "verify_host_keys": true,
+  "ssh_warn_on_close": false,
+  "shell_frecency": {},
+  "command_frecency": {},
+  "agent_commands": {},
+  "agent_launch": {},
+  "agent_frecency": {},
+  "worktree_setup_trust": {},
+  "hidden_agent_sessions": [],
+  "restore_agent_sessions": true,
+  "per_pane_history": false
+}

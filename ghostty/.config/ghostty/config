@@ -6,12 +6,59 @@ fullscreen = true
 window-decoration = false
 
 keybind = alt+enter=toggle_fullscreen
-keybind = alt+one=unbind
-keybind = alt+two=unbind
-keybind = alt+three=unbind
-keybind = alt+four=unbind
-keybind = alt+five=unbind
-keybind = alt+six=unbind
-keybind = alt+seven=unbind
-keybind = alt+eight=unbind
-keybind = alt+nine=unbind
+
+keybind = alt+digit_1=unbind
+keybind = alt+digit_2=unbind
+keybind = alt+digit_3=unbind
+keybind = alt+digit_4=unbind
+keybind = alt+digit_5=unbind
+keybind = alt+digit_6=unbind
+keybind = alt+digit_7=unbind
+keybind = alt+digit_8=unbind
+keybind = alt+digit_9=unbind
+keybind = alt+1=unbind
+keybind = alt+2=unbind
+keybind = alt+3=unbind
+keybind = alt+4=unbind
+keybind = alt+5=unbind
+keybind = alt+6=unbind
+keybind = alt+7=unbind
+keybind = alt+8=unbind
+keybind = alt+9=unbind
+
+# tab
+keybind = alt+n>c=new_tab
+keybind = alt+n>tab=last_tab
+keybind = alt+n>comma=prompt_tab_title
+keybind = alt+n>1=goto_tab:1
+keybind = alt+n>2=goto_tab:2
+keybind = alt+n>3=goto_tab:3
+keybind = alt+n>4=goto_tab:4
+keybind = alt+n>5=goto_tab:5
+keybind = alt+n>6=goto_tab:6
+keybind = alt+n>7=goto_tab:7
+keybind = alt+n>8=goto_tab:8
+keybind = alt+n>9=goto_tab:9
+
+# pane（split）
+keybind = alt+n>x=close_surface
+keybind = alt+n>minus=new_split:down
+keybind = alt+n>shift+minus=new_split:right
+keybind = alt+n>z=toggle_split_zoom
+keybind = alt+n>h=goto_split:left
+keybind = alt+n>j=goto_split:down
+keybind = alt+n>k=goto_split:up
+keybind = alt+n>l=goto_split:right
+
+keybind = alt+m=last_tab
+keybind = alt+p=goto_split:next
+
+keybind = alt+n>r=activate_key_table:resize
+keybind = resize/h=resize_split:left,5
+keybind = resize/j=resize_split:down,5
+keybind = resize/k=resize_split:up,5
+keybind = resize/l=resize_split:right,5
+keybind = resize/escape=deactivate_all_key_tables
+keybind = resize/q=deactivate_all_key_tables
+keybind = resize/enter=deactivate_all_key_tables
+keybind = resize/alt+n=deactivate_all_key_tables
