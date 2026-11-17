@@ -15,11 +15,8 @@
     navigate = true  # use n and N to move between diff sections
     dark = true      # or light = true, or omit for auto-detection
     features = colibri
-# [merge]
-#     conflictStyle = zdiff3
-# [pager]
-# 	show = git-split-diffs --color | less -+LFX
-# 	diff = git-split-diffs --color | less -+LFX
+    line-numbers = false
+
 [alias]
 	rg = !rg $(git rev-parse --show-toplevel) --column --smart-case -e
 	cma = commit --amend
