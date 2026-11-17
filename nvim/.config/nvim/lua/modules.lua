@@ -510,9 +510,30 @@ local m = {
     "esmuellert/codediff.nvim",
     cmd = "CodeDiff",
     build = "cmake -B build && cmake --build build",
-    config = function()
-      require("plugins.vscode-diff").config()
-    end,
+    opts = {
+      explorer = {
+        untracked = "no",
+      },
+      diff = {
+        compact = true,
+      },
+      keymaps = {
+        view = {
+          quit = "<leader>q",
+          toggle_explorer = "<C-b>",
+          next_hunk = "<leader><leader>n",
+          prev_hunk = "<leader><leader>N",
+          next_file = "<leader><leader>f",
+          prev_file = "<leader><leader>F",
+        },
+        explorer = {
+          select = "<CR>",
+          hover = "K",
+          refresh = "R",
+          toggle_view_mode = "i",
+        },
+      },
+    },
     keys = {
       { "<leader><leader>o", "<cmd>CodeDiff file HEAD<CR>" },
       { "<leader><leader>l", "<cmd>CodeDiff history %<CR>" },
